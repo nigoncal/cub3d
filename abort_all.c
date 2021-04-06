@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_cub.c                                        :+:      :+:    :+:   */
+/*   abort_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 13:47:23 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/06 16:50:46 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/04/06 17:17:45 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/06 17:22:44 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "header_cub3D.h"
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
-#include "cub3D.h"
 
-int		map_part(char *line)
+void	abort_all(char *line, cub_settings *settings, char *s)
 {
-	static int non_empty_lines = 0;
-	while (*line)
-	{
-		if (*line != ' ' && *line != '\n')
-		{
-			non_empty_lines++;
-			break ;
-		}
-		line++;
-	}
-	return (non_empty_lines);
+// si tu free &line, est-ce que ca free bien **line alors que tu prends *line en parametre ?
 }

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/05 11:41:18 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 17:57:58 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_map(char **line, map_settings *settings)
 		(*line)++;
 }
 
-void	ft_parse(char *line, map_settings *settings)
+void	parse_id(char *line, map_settings *settings)
 {
 	while (line)
 	{
@@ -78,12 +78,20 @@ void	ft_parse(char *line, map_settings *settings)
 			line++;
 		if (line == 'R')
 			resolution(line + 1, settings);
-		if ((line == 'N' || line == 'S' || line == 'W' || line == 'E')
-				&& line + 1 != '0' && line + 1 != '1' && line + 1 != '2')
+		if (line == 'N' || line == 'S' || line == 'W' || line == 'E')
 			texture(line + 1, settings);
 		if (line == 'F' || line == 'C')
 			color(line, settings);
-		if (ft_isalnum(line)
+		else
+			abort_all(line, settings, "Identifiers allowed : R, NO, SO, WE, EA, S, F, C");
+	}
+}
+
+void	pars_map(char *line, map_settings *settings)
+{
+	while (line)
+	{
+		if (ft_isalnum(line)) // map : peut commencer par et contenir |' '/1/0/2/N/S/W/E|.
 			ft_map(line, settings);
 	}
 }
