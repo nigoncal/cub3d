@@ -1,0 +1,10 @@
+focus sur resolution
+
+Reprends de texture.c
+Une fois que ce sera fait, fais tous les checkings d'erreur de chaque fichier, commences par resolution
+
+1 - *line dans toutes les fonctions a partir de l'appel de parser dans cub3D.c et plus de int lines nulle part ni de count_lines
+2 - Decouper toutes les parties de ton parser dans des fichiers singulier
+3 - Faire le makefile bien comme il faut tu es en train d'essayer de faire un makefile en t'inspirant de celui de ton printf. Donc vas voir ton dernier commit de printf sur github
+4 - testes
+5 - fais les check d'erreur avec Mohammed
