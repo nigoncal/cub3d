@@ -15,7 +15,7 @@
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
-void	color(char **line, map_settings *settings)
+void	color(char **line, cub_settings *settings)
 {
 	if (*(*line) == 'C')
 	{
@@ -31,7 +31,7 @@ void	color(char **line, map_settings *settings)
 	}
 }
 
-void	ft_add_line_map(char **line, map_settings *settings)
+void	ft_add_line_map(char **line, cub_settings *settings)
 {
 	int		size;
 	int		i;
@@ -55,7 +55,7 @@ void	ft_add_line_map(char **line, map_settings *settings)
 	settings->map = temp;
 }
 
-void	ft_map(char **line, map_settings *settings)
+void	ft_map(char **line, cub_settings *settings)
 {
 	if (settings->map == NULL)
 	{
@@ -70,7 +70,7 @@ void	ft_map(char **line, map_settings *settings)
 		(*line)++;
 }
 
-void	parse_id(char *line, map_settings *settings)
+void	parse_id(char *line, cub_settings *settings)
 {
 	while (line)
 	{
@@ -87,7 +87,7 @@ void	parse_id(char *line, map_settings *settings)
 	}
 }
 
-void	pars_map(char *line, map_settings *settings)
+void	pars_map(char *line, cub_settings *settings)
 {
 	while (line)
 	{

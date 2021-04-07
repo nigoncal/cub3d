@@ -17,9 +17,9 @@
 
 void	cub3D(int fd, char **line)
 {
-	map_settings	settings;
+	cub_settings	settings;
 
-	ft_bzero(&settings, sizeof(map_settings));
+	ft_bzero(&settings, sizeof(cub_settings));
 	while (get_next_line(fd, line))
 	{
 		if (map_start(line) <= 8)

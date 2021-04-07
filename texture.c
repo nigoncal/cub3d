@@ -15,13 +15,13 @@
 
 // tout d'abord listes toutes tes erreurs possibles et geres les au prealable avec des fonctions
 
-void 	check_path(char *line, map_settings *settings, char)
+void 	check_path(char *line, cub_settings *settings, char)
 {
 
 		settings->north_texture_path = ft_strdup(*line);
 }
 
-void	texture(char *line, map_settings *settings)
+void	texture(char *line, cub_settings *settings)
 {
 	if (line == 'N')
 		check_path(N)
@@ -40,7 +40,7 @@ void	texture(char *line, map_settings *settings)
 		line++;
 }
 
-/*void	texture(char *line, map_settings *settings)
+/*void	texture(char *line, cub_settings *settings)
 {
 	char type;
 

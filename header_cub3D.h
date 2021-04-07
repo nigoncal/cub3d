@@ -40,16 +40,16 @@ typedef struct	s_settings
 	int		ceiling_green;
 	int		ceiling_blue;
 	char	**map;
-}				map_settings;
+}				cub_settings;
 
 
 void			cub3D(int fd, char **line);
-void			ft_parse(char *line, map_settings *settings);
-void			resolution(char *line, map_settings *settings);
-void			ft_map(char *line, map_settings *settings);
-void			ft_add_line_map(char *line, map_settings *settings);
-void			texture(char *line, map_settings *settings);
-void			abort_prog(char *line, map_settings *settings, char *s);
+void			ft_parse(char *line, cub_settings *settings);
+void			resolution(char *line, cub_settings *settings);
+void			ft_map(char *line, cub_settings *settings);
+void			ft_add_line_map(char *line, cub_settings *settings);
+void			texture(char *line, cub_settings *settings);
+void			abort_prog(char *line, cub_settings *settings, char *s);
 
 int				map_part(char *line);
 
