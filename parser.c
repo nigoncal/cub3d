@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/06 17:57:58 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 10:21:35 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	parse_id(char *line, map_settings *settings)
 		while (line == ' ')
 			line++;
 		if (line == 'R')
-			resolution(line + 1, settings);
+			resolution(line, settings);
 		if (line == 'N' || line == 'S' || line == 'W' || line == 'E')
 			texture(line + 1, settings);
 		if (line == 'F' || line == 'C')

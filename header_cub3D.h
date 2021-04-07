@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:50:51 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/06 18:09:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 08:54:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			resolution(char *line, map_settings *settings);
 void			ft_map(char *line, map_settings *settings);
 void			ft_add_line_map(char *line, map_settings *settings);
 void			texture(char *line, map_settings *settings);
+void			abort_prog(char *line, map_settings *settings, char *s);
 
 int				map_part(char *line);
 

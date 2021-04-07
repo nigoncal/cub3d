@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/06 13:02:48 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 08:59:33 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 		}
 	else
 	{
-		// if --save traitement avec non lancement du jeu, comment faire l'appel ? 
+		//if --save traitement avec non lancement du jeu, comment faire l'appel ? 
 		fd = open(argv[2], O_RDONLY);
 		cub3D(fd, &line);
 		close(fd);
