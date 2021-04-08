@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:50:51 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/07 08:54:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/08 12:08:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdbool.h>
 #include <stdio.h> // a virer
+#include <mlx.h>
 
 typedef struct	s_settings
 {

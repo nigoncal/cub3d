@@ -6,24 +6,44 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/07 15:59:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/08 17:17:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minilibx/mlx.h" // a ajouter dans ton header
 //#include "header_cub3D.h"
 #include <stdbool.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
-// faire tous les checkings d'erreur
+// vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
+// fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
 
 typedef struct	s_settings
 {
 	bool	R;
 	int		width;
 	int		height;
+	void	*mlx; // si ca marche, a bien ajouter a ta structure dans le header
 }				cub_settings;
+
+void	too_big_for_screen(cub_settings *settings)
+{
+	int trigger;
+	int	*screen_width;
+	int	*screen_height;
+	
+	screen_width = malloc(sizeof(int));
+	screen_height = malloc(sizeof(int));
+	trigger = mlx_get_screen_size(settings->mlx, screen_width, screen_height);
+	if (settings->width > *screen_width)
+		settings->width = *screen_width;
+	if (settings->height > *screen_height)
+		settings->height = *screen_height;
+	free(screen_width);
+	free(screen_height);
+}
 
 int		check_elements(char **elements, cub_settings *settings)
 {
@@ -49,6 +69,7 @@ int		check_elements(char **elements, cub_settings *settings)
 	settings->height = ft_atoi(elements[2]);
 	if (settings->width <= 0 || settings->height <= 0)
 		return (0);
+	too_big_for_screen(settings);
 	return (1);
 }
 
@@ -69,13 +90,17 @@ void	resolution(char *line, cub_settings *settings)
 
 int main()
 {
-	char *line = "  Rgiuyg  50  20     ";
+//    void    *mlx; // a ajouter dans ton main a toi
+
+//    mlx = mlx_init(); // a ajouter dans ton main a toi
+	char *line = "  R  50555     20555     ";
 	cub_settings *settings;
 //	settings = NULL;
 	ft_bzero(settings, sizeof(cub_settings));
 	settings->R = false;
 	settings->width = 0;
 	settings->height = 0;
+	settings->mlx = mlx_init();
 	resolution(line, settings);
 	dprintf(1, "R = %d\n", settings->R);
 	dprintf(1, "width = %d\n", settings->width);

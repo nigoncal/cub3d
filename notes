@@ -1,4 +1,5 @@
 focus sur resolution
+cherche la fonction get_screen_size ou un truc comme ca et templaces width et height par cela si elles sont plus grandes que la screen size
 
 Reprends de texture.c
 Une fois que ce sera fait, fais tous les checkings d'erreur de chaque fichier, commences par resolution
@@ -9,4 +10,6 @@ Une fois que ce sera fait, fais tous les checkings d'erreur de chaque fichier, c
 4 - testes
 5 - fais les check d'erreur avec Mohammed
 
-renommer cub_settings en cub_settings
+vires le minilibx.tgz
+
+ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
