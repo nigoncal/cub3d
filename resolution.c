@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/08 17:17:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 10:04:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
+
+// gardes la comme ca jusqu'a ce que tu aies propose a Pauline, nicolas et Mohammed de la faire peter.
 // vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
 // fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
 

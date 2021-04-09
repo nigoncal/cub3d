@@ -1,8 +1,4 @@
-focus sur resolution
-cherche la fonction get_screen_size ou un truc comme ca et templaces width et height par cela si elles sont plus grandes que la screen size
-
-Reprends de texture.c
-Une fois que ce sera fait, fais tous les checkings d'erreur de chaque fichier, commences par resolution
+Commences par les commentaires de texture.c
 
 1 - *line dans toutes les fonctions a partir de l'appel de parser dans cub3D.c et plus de int lines nulle part ni de count_lines
 2 - Decouper toutes les parties de ton parser dans des fichiers singulier
@@ -11,5 +7,7 @@ Une fois que ce sera fait, fais tous les checkings d'erreur de chaque fichier, c
 5 - fais les check d'erreur avec Mohammed
 
 vires le minilibx.tgz
+
+ecoutes tes notes vocales
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)

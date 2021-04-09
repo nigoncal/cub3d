@@ -6,58 +6,82 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 11:24:57 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/02 12:04:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 16:22:23 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3D.h"
+#include "minilibx/mlx.h" // a ajouter dans ton header
+//#include "header_cub3D.h"
+#include <stdbool.h>
 #include "libft/libft.h"
+#include "get_next_line/get_next_line.h"
+#include <stdio.h> // a virer
 
-// tout d'abord listes toutes tes erreurs possibles et geres les au prealable avec des fonctions
+// reprends tout et fait une fonction par path (north, south...), donc les memes principes que tu utilises la mais pas regroupes en une fonction, divises en 5. Tu pourras plus facilement verifier les bool et les passer en true. Tu pourras aussi plus facilement envoyer les erreurs justes, reliees aux bonnes lignes.
 
-void 	check_path(char *line, cub_settings *settings, char)
+//	abort_prog(line, settings, "Identifiers should be used only once");
+
+// une mini fonction pour le type de texure qui renvoie a la grande N,S,E,W ou s
+	if (settings->R == true)
+
+static int	check_everything(cub_settings *settings, char **elements)
 {
-
-		settings->north_texture_path = ft_strdup(*line);
+	if (settings->path_id == 1)
+		return ((ft_strncmp(elements[0], "NO", ft_strlen(elements[0]))) +
+				(settings->north_fd = open(elements[1], O_RDONLY)));
+	if (settings->path_id == 2)
+		return ((ft_strncmp(elements[0]), "SO", ft_strlen(elements[0])) +
+				(settings->south_fd = open(elements[1], O_RDONLY)));
+	if (settings->path_id == 3)
+		return ((ft_strncmp(elements[0]), "WE", ft_strlen(elements[0])) +
+				(settings->west_fd = open(elements[1], O_RDONLY)));
+	if (settings->path_id == 4)
+		return ((ft_strncmp(elements[0]), "EA", ft_strlen(elements[0])) +
+				(settings->east_fd = open(elements[1], O_RDONLY)));
+	if (settings->path_id == 5)
+		return ((ft_strncmp(elements[0]), "S", ft_strlen(elements[0])) +
+				(settings->sprite_fd = open(elements[1], O_RDONLY)));
+	return (0);
 }
 
-void	texture(char *line, cub_settings *settings)
+static void	check_elements(char **elements, cub_settings *settings)
 {
-	if (line == 'N')
-		check_path(N)
-	if (line == 'S' && line + 1 == 'O')
-		settings->south_texture_path = ft_strdup(*line);
-	if (line == 'W')
-		settings->west_texture_path = ft_strdup(*line);
-	if (line == 'E')
-		settings->east_texture_path = ft_strdup(*line);
-	if (line == 'S' && line + 1 == ' ')
-		settings->sprite_texture_path = ft_strdup(*line);
-	while (line != '.')
-		line++;
-	if (type == 's')
-	while (line != '\0')
-		line++;
+	int	i;
+
+	i = 0;
+	while (elements[i])
+		i++;
+	if (i != 2)
+		return (1);
+	if (check_everything(settings, elements))
+		return (1);
+	set_bool_true(cub_settings *settings, char **elements);
+	return (0);
 }
 
-/*void	texture(char *line, cub_settings *settings)
+void		texture(char *line, cub_settings *settings)
 {
-	char type;
+	char	**elements;
 
-	type = 0;
-	if (line == 'N')
-		type = 'N';
-	if (line == 'S' && *(*line + 1) == 'O')
-		type = 'S';
-	if (line == 'W')
-		type = 'W';
-	if (line == 'E')
-		type = 'E';
-	if (line + 1 == ' ')
-		type = 's';
-	while (line != '.')
-		line++;
-	if (type == 'N')
+	if (*line == 'N' && settings->NO == false)
+		settings->path_id = 1;
+	if (*line == 'S' && *line + 1 == 'O' && settings->SO == false)
+		settings->path_id = 2;
+	if (*line == 'E' && settings->WE == false)
+		settings->path_id = 3;
+	if (*line == 'W' && settings->EA == false)
+		settings->path_id = 4;
+	if (*line == 'S' && settings->S == false)
+		settings->path_id = 5;
+	elements = ft_split(line, ' ');
+	if (check_elements(elements, settings))
+		abort_all(line, settings, "");
+	settings->path_id = 0;
+}
+
+-------------------------------------------------------------------------------
+
+	if (settings->id_path == 1) // modifies le reste avec ca
 		settings->north_texture_path = ft_strdup(*line);
 	if (type == 'S')
 		settings->south_texture_path = ft_strdup(*line);
@@ -67,6 +91,49 @@ void	texture(char *line, cub_settings *settings)
 		settings->east_texture_path = ft_strdup(*line);
 	if (type == 's')
 		settings->sprite_texture_path = ft_strdup(*line);
-	while (line != '\0')
-		line++;
-}*/
+
+-------------------------------------------------------------------------------
+	
+typedef struct	s_settings
+{
+	bool	R;
+	int		width;
+	int		height;
+	void	*mlx; // si ca marche, a bien ajouter a ta structure dans le header
+}				cub_settings;
+
+void	too_big_for_screen(cub_settings *settings)
+{
+	int trigger;
+	int	*screen_width;
+	int	*screen_height;
+	
+	screen_width = malloc(sizeof(int));
+	screen_height = malloc(sizeof(int));
+	trigger = mlx_get_screen_size(settings->mlx, screen_width, screen_height);
+	if (settings->width > *screen_width)
+		settings->width = *screen_width;
+	if (settings->height > *screen_height)
+		settings->height = *screen_height;
+	free(screen_width);
+	free(screen_height);
+}
+
+int main()
+{
+//    void    *mlx; // a ajouter dans ton main a toi
+
+//    mlx = mlx_init(); // a ajouter dans ton main a toi
+	char *line = "  R  50555     20555     ";
+	cub_settings *settings;
+//	settings = NULL;
+	ft_bzero(settings, sizeof(cub_settings));
+	settings->R = false;
+	settings->width = 0;
+	settings->height = 0;
+	settings->mlx = mlx_init();
+	resolution(line, settings);
+	dprintf(1, "R = %d\n", settings->R);
+	dprintf(1, "width = %d\n", settings->width);
+	dprintf(1, "height = %d\n", settings->height);
+}

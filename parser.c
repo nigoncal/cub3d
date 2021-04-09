@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/07 10:21:35 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:18:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	parse_id(char *line, cub_settings *settings)
 	}
 }
 
-void	pars_map(char *line, cub_settings *settings)
+void	parse_map(char *line, cub_settings *settings)
 {
 	while (line)
 	{

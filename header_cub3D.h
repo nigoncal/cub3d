@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_cub3D.h                                            :+:      :+:    :+:   */
+/*   header_cub3D.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 15:50:51 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/08 12:08:49 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/09 15:21:38 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdbool.h>
 #include <stdio.h> // a virer
 #include <mlx.h>
+
+// commentaire a laisser pour expliquer a quoi correspond chaque chiffre du path id
 
 typedef struct	s_settings
 {
@@ -29,11 +31,21 @@ typedef struct	s_settings
 	bool	C;
 	int		width;
 	int		height;
-	char	*north_texture_path;
+	int		path_id;
+/*
+  	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
 	char	*sprite_texture_path;
+
+toute cette partie je la emplace par justew les fd.
+*/
+	int		north_fd;
+	int		south_fd;
+	int		west_fd;
+	int		east_fd;
+	int		sprite_fd;
 	int		floor_red;
 	int		floor_green;
 	int		floor_blue;
