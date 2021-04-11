@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 10:40:49 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/11 10:40:53 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/11 16:06:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *source, size_t size);
 size_t			ft_strlen(const char *str);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
+int				format_check(char *file, char *format);
 int				ft_atoi(const char *str);
 int				ft_pf_atoi(char **str);
 int				ft_isalnum(int c);

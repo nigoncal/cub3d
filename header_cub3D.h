@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/09 15:21:38 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/11 15:07:37 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_settings
 	char	*east_texture_path;
 	char	*sprite_texture_path;
 
-toute cette partie je la emplace par justew les fd.
+toute cette partie je la emplace par juste les fd ?
 */
 	int		north_fd;
 	int		south_fd;

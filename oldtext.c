@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 11:24:57 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/09 16:22:23 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/11 15:53:44 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,27 @@ static void	check_elements(char **elements, cub_settings *settings)
 
 void		texture(char *line, cub_settings *settings)
 {
-	char	**elements;
-
-	if (*line == 'N' && settings->NO == false)
-		settings->path_id = 1;
-	if (*line == 'S' && *line + 1 == 'O' && settings->SO == false)
-		settings->path_id = 2;
-	if (*line == 'E' && settings->WE == false)
-		settings->path_id = 3;
-	if (*line == 'W' && settings->EA == false)
-		settings->path_id = 4;
-	if (*line == 'S' && settings->S == false)
-		settings->path_id = 5;
-	elements = ft_split(line, ' ');
-	if (check_elements(elements, settings))
+	if (*line == 'N')
+		if (north(elements, settings))
+			abort_all(line, settings, "Issue in north texture line. Usage : \
+					NO ./path.xpm OR .png");
+	if (*line == 'S' && *line + 1 == 'O')
+		if (south(elements, settings))
+			abort_all(line, settings, "Issue in south texture line. Usage : \
+					SO ./path.xpm OR .png");
+	if (*line == 'E')
+		if (east(elements, settings));
+			abort_all(line, settings, "Issue in east texture line. Usage : \
+					EA ./path.xpm OR .png");
+	if (*line == 'W')
+		if (west(elements, settings));
+			abort_all(line, settings, "Issue in west texture line. Usage : \
+					WE ./path.xpm OR .png");
+	if (*line == 'S')
+		if (sprite(elements, settings));
+			abort_all(line, settings, "Issue in sprite texture line. Usage : \
+					S ./path.xpm OR .png");
+	if (check_elements(elements, settings)) // tu en es la
 		abort_all(line, settings, "");
 	settings->path_id = 0;
 }

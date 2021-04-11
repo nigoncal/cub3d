@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/09 14:18:49 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/11 15:35:45 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ void	parse_id(char *line, cub_settings *settings)
 			line++;
 		if (line == 'R')
 			resolution(line, settings);
-		if (line == 'N' || line == 'S' || line == 'W' || line == 'E')
-			texture(line + 1, settings);
+		if (line == 'N' || line == 'S' || line == 'E' || line == 'W')
+			texture(line, settings);
+		// tu en es la
 		if (line == 'F' || line == 'C')
 			color(line, settings);
 		else
