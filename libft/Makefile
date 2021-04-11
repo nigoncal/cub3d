@@ -36,7 +36,8 @@ SRCS		=	ft_memset.c\
 				ft_putnbr_fd.c\
 				ft_putchar.c\
 				ft_putstr.c\
-				ft_putnbr.c
+				ft_putnbr.c\
+				ft_strstr.c
 
 BON_SRCS 	=	ft_lstnew_bonus.c\
 				ft_lstadd_front_bonus.c\
@@ -55,7 +56,7 @@ BON_OBJS	= 	$(BON_SRCS:.c=.o)
 NAME		= 	libft.a
 
 
-HEADER_FILE	=	/libft.h
+HEADER_FILE	=	/header_libft.h
 
 CC			= 	gcc
 

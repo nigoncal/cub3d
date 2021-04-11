@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header_libft.h"
 
 void	min_number(unsigned int min_n, int fd)
 {

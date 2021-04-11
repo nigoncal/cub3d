@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header_libft.h"
 
 static char		*strdup_split(char const *s, size_t s_len)
 {

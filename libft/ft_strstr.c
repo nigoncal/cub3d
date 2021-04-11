@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   calloc_main.c                                    .::    .:/ .      .::   */
+/*   ft_strstr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: sylducam <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/22 18:13:09 by sylducam     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/30 14:32:36 by sylducam    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/08 16:44:22 by sylducam     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/09 14:32:52 by sylducam    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "header_libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-int		main(void)
+char	*ft_strstr(char *str, char *to_find)
 {
-	size_t	i;
-	char	*mem;
+	int	i;
+	int	j;
+	int	track;
 
 	i = 0;
-	mem = ft_calloc(42 * 3, 4);
-	while (i <= 300)
+	j = 0;
+	if (to_find == 0)
+		return (str);
+	while (str[i] != '\0')
 	{
-		printf("%d ", mem[i]);
+		track = i;
+		while (str[i] == to_find[j] && str[i] != '\0' && to_find[j] != '\0')
+		{
+			if (to_find[j + 1] == '\0')
+				return (&str[track]);
+			i++;
+			j++;
+		}
+		i = track;
 		i++;
+		j = 0;
 	}
-	printf("\n");
 	return (0);
 }
