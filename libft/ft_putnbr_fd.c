@@ -3,46 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:03:10 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 14:03:16 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/30 12:45:36 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:13:37 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	min_number(unsigned int min_n, int fd)
-{
-	if (min_n > 0)
-	{
-		min_number(min_n / 10, fd);
-		ft_putchar_fd(min_n % 10 + '0', fd);
-	}
-}
-
-void	actual_putnbr(int n, int fd)
-{
-	unsigned int min_n;
-
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
-		min_n = n;
-		min_number(min_n, fd);
-	}
-	else if (n > 0)
-	{
-		actual_putnbr(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
-	}
-}
+#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == 0)
-		ft_putchar_fd(n + '0', fd);
+	int	s;
+
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+	}
 	else
-		actual_putnbr(n, fd);
+	{
+		if (n < 0)
+		{
+			n = -n;
+			write(fd, "-", 1);
+		}
+		s = n % 10 + 48;
+		if (n > 9)
+			ft_putnbr_fd(n / 10, fd);
+		write(fd, &s, 1);
+	}
 }

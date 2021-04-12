@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:08:40 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 14:08:44 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/25 17:31:16 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 10:17:12 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
 #include "libft.h"
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
+	if (!ft_isalpha(c))
+		return (c);
 	if (c >= 'a' && c <= 'z')
 		c -= 32;
 	return (c);

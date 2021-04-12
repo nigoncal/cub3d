@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:08:27 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 14:08:32 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/26 09:52:18 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 10:17:10 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
 #include "libft.h"
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
+	if (!ft_isalpha(c))
+		return (c);
 	if (c >= 'A' && c <= 'Z')
 		c += 32;
 	return (c);

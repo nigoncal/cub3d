@@ -3,29 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:59:32 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 13:59:38 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/23 16:26:55 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:13:17 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *source, size_t len)
+static void	*reverse_move(unsigned char *castdest, unsigned char *castsrc, \
+size_t n, size_t i)
 {
-	unsigned char	*dest;
-	unsigned char	*src;
-
-	if (!dst && !source)
-		return (NULL);
-	dest = (unsigned char *)dst;
-	src = (unsigned char *)source;
-	if (dest < src)
+	i = n;
+	while (i > 0)
 	{
-		return (ft_memcpy(dst, source, len));
+		i--;
+		castdest[i] = castsrc[i];
 	}
-	while (len--)
-		dest[len] = src[len];
-	return (dst);
+	return (castdest);
+}
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	size_t			i;
+	unsigned char	*castsrc;
+	unsigned char	*castdest;
+
+	castsrc = (unsigned char *)src;
+	castdest = (unsigned char *)dest;
+	i = 0;
+	if (castdest == NULL && castsrc == NULL)
+		return (NULL);
+	if (castdest < castsrc)
+	{
+		while (i < n)
+		{
+			castdest[i] = castsrc[i];
+			i++;
+		}
+	}
+	else
+		return (reverse_move(castdest, castsrc, n, i));
+	return (dest);
 }

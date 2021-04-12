@@ -3,38 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:05:37 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 14:05:41 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/26 08:48:04 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 10:15:35 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+static const char	*search_needle(const char *haystack, const char *needle, \
+size_t len, size_t i)
 {
-	size_t	i;
+	int		res;
 	size_t	j;
+	int		si;
 
-	i = 0;
-	j = 0;
-	if (s2[j] == '\0')
-		return ((char *)s1);
-	while (i < len && s1[i])
+	while (haystack[i] != '\0' && i < len)
 	{
-		if (s1[i] == s2[j])
-			j++;
-		else if (s2[j] == '\0')
-			return ((char *)&s1[i - j]);
-		else
+		while (haystack[i] == needle[0] && i < len)
 		{
-			i -= j;
-			j = 0;
+			res = i;
+			j = 1;
+			si = i;
+			i++;
+			while (haystack[i] == needle[j] && needle[j] != '\0' && i < len)
+			{
+				j++;
+				i++;
+			}
+			if (j == ft_strlen(needle))
+				return (&haystack[res]);
+			else
+				i = si + 1;
 		}
 		i++;
 	}
-	if (s2[j] == '\0')
-		return ((char *)&s1[i - j]);
-	return (0);
+	return ((const char *) NULL);
+}
+
+char	*ft_strnstr(const char *haystack, const char *needle, \
+size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	if (needle[i] == '\0')
+		return ((char *)haystack);
+	if ((int)len == 0)
+		return (NULL);
+	return ((char *)search_needle(&haystack[i], needle, len, i));
 }
