@@ -28,6 +28,8 @@ int	parse_resolution(char *line, t_setup *setup)
 	setup->res_w = 0;
 	setup->res_h = 0;
 	//tant quon est pas sur un chiffre on passe
+	//i += skip_non_digits(&line[i], 0);
+
 	i += skip_non_digits(&line[i], 0);
 	// 1er chiffre = go atoi
 	setup->res_w = ft_atoi (&line[i]);
@@ -64,8 +66,21 @@ int	parse_resolution(char *line, t_setup *setup)
 /* R NO SO WE EA S F C*/
 int	parse_line(char *line, t_setup *setup)
 {
-	while (*line == ' ')
+	int	skip;
+
+	skip = 0;
+	//if (setup->nb_parsed_values == 8)
+		// go to map parsing
+		
+	skip = skip_ws(line);
+	//printf("skip = %d\n", skip);
+	//printf("line avant skip ws [%s]\n", line);
+	while (skip > 0)
+	{
 		line++;
+		skip--;
+	}
+	//printf("line apres skip ws [%s]\n", line);
 	if (line[0] == 'R')
 	{
 		parse_resolution(line, setup);
@@ -158,7 +173,7 @@ int	parse_args(int argc, char **argv, t_setup *setup)
 	//printf("fd = %d\n", fd);
 	while (get_next_line(fd, &line) == 1)
 	{
-		//printf("ligne : %s\n", line);
+		printf("%s\n", line);
 		if (parse_line(line, setup) < 1)
 		{
 			free(line);

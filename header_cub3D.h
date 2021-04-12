@@ -31,14 +31,14 @@ typedef struct	s_settings
 	int		ceiling_green;
 	int		ceiling_blue;
 	char	**map;
-}				map_settings;
+}				t_setup;
 
 
 void			cub3D(int fd, char **line);
-void			ft_parse(char *line, map_settings *settings);
-void			resolution(char *line, map_settings *settings);
-void			ft_map(char *line, map_settings *settings);
-void			ft_add_line_map(char *line, map_settings *settings);
-void			texture(char *line, map_settings *settings);
+void			ft_parse(char *line, t_setup *settings);
+void			resolution(char *line, t_setup *settings);
+void			ft_map(char *line, t_setup *settings);
+void			ft_add_line_map(char *line, t_setup *settings);
+void			texture(char *line, t_setup *settings);
 
 #endif

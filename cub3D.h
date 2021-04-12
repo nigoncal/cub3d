@@ -41,6 +41,7 @@ typedef struct s_setup
 }				t_setup;
 
 int		parse_args(int argc, char **argv, t_setup *setup);
+int		skip_ws(char const *str);
 int		skip_non_digits(char const *str, int skip_what);
 int		parse_textures(char *line, t_setup *setup);
 

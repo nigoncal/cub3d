@@ -3,6 +3,26 @@
 // skip_what = 0 => skip les non digits MAIS pas les - suivis d'un chiffre
 // skip_what = 1 => skip les digits et les '-'
 
+int	skip_ws(char const *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\r' || str[i] == '\n'\
+		|| str[i] == '\v' || str[i] == '\f')
+		{
+			i++;
+		}
+		else
+			return (i);
+	}
+	return (i);
+}
+// skip_what = 0 => skip les non digits MAIS pas les - suivis d'un chiffre
+// skip_what = 1 => skip les digits et les '-'
+
 int	skip_non_digits(char const *str, int skip_what)
 {
 	int	i;
