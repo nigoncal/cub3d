@@ -10,8 +10,7 @@ int	skip_ws(char const *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\r' || str[i] == '\n'\
-		|| str[i] == '\v' || str[i] == '\f')
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\v')
 		{
 			i++;
 		}

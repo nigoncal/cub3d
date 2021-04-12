@@ -20,7 +20,57 @@ values, check your .cub file please <3\n", 0);
 	return (1);
 }
 
-int	parse_resolution(char *line, t_setup *setup)
+int	parse_resolution(char **tab, t_setup *setup)
+{
+	int	i;
+	int l;
+
+	i = 0;
+	l = 0;
+	setup->res_w = 0;
+	setup->res_h = 0;
+	
+	while (tab[l][0])
+		l++;
+	if (l != 2)
+		return (-1);
+	l = 0;
+	i += skip_ws(tab[0]);
+	// 1er chiffre = go atoi
+	setup->res_w = ft_atoi(tab[1]);
+	printf("res W = %d\n", setup->res_w);
+	// on passe tous les chiffres du 1er nombre
+	//while (line[i] && ft_isdigit(line[i]) == 1)
+	//	i++;
+	/*i += skip_non_digits(&line[i], 1);
+	// si il y a des espaces, on les passe
+	while (line[i] && line[i] == ' ')
+		i++;
+	// 2e chiffre = go atoi (fonciton a part ?)
+	//while (line[i] && ft_isdigit(line[i]) == 0)
+	//	i++;
+	i += skip_non_digits(&line[i], 0);
+	setup->res_h = ft_atoi (&line[i]);
+	// on passe tous les chiffres du 2e nombre
+	//while (line[i] && ft_isdigit(line[i]) == 1)
+	//	i++;
+	i += skip_non_digits(&line[i], 1);
+	if (!line[i])
+		return (1);
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] && line[i] != ' ')
+	{
+		ft_putstr_fd("Error \nResolution parsing failed, check your .cub file please <3\n", 0);
+		return (-1);
+	}
+	//printf("PARSED res WIDTH neg ? : %d\n", setup->res_w);
+	//printf("PARSED res HEIGHT neg ? : %d\n", setup->res_h);*/
+	return (1);
+}
+
+/*
+int	parse_resolution_old(char *line, t_setup *setup)
 {
 	int	i;
 
@@ -61,29 +111,30 @@ int	parse_resolution(char *line, t_setup *setup)
 	//printf("PARSED res WIDTH neg ? : %d\n", setup->res_w);
 	//printf("PARSED res HEIGHT neg ? : %d\n", setup->res_h);
 	return (1);
-}
+}*/
 
 /* R NO SO WE EA S F C*/
 int	parse_line(char *line, t_setup *setup)
 {
 	int	skip;
+	char **elements;
 
 	skip = 0;
 	//if (setup->nb_parsed_values == 8)
 		// go to map parsing
-		
-	skip = skip_ws(line);
-	//printf("skip = %d\n", skip);
-	//printf("line avant skip ws [%s]\n", line);
+	
+	dprintf(1, "blop\n");
+	elements = ft_split(line, ' ');
+	dprintf(1, "blip\n");
+	skip = skip_ws(elements[0]);
 	while (skip > 0)
 	{
 		line++;
 		skip--;
 	}
-	//printf("line apres skip ws [%s]\n", line);
-	if (line[0] == 'R')
+	if (elements[0][0] == 'R')
 	{
-		parse_resolution(line, setup);
+		parse_resolution(elements, setup);
 		if (cap_resolution(setup) < 0)
 			return (-1);
 		printf("PARSED and CAPPED res WIDTH : %d\n", setup->res_w);
