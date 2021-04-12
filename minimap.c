@@ -8,7 +8,7 @@ void create_mini_map(t_screen *sc)
 int count_x = 0;
 int count_y = 0;
 int ratio = 0;
-    int worldMap[mapWidth][mapHeight]=
+    int worldMap[mapWidth + 1][mapHeight + 1]=
   {
     {1,1,1,1,1},
     {1,0,0,0,1},
@@ -21,31 +21,31 @@ int ratio = 0;
   else
     sc->color = 0x000000;*/
 
-int i = 0;
-char tab[5] = "01011";
-while(i != 5)
-{
-    sc->i = sc->i + 50;
-    sc->j = 0;
-    put_square(50, sc);
-    i++;
-}
-}
 
-void    put_square(int lenght, t_screen *sc)
+int len = 50;
+
+sc->i = 500;
+sc->j = 500;
+      put_square(len, sc);
+  }
+
+void    put_square(int len, t_screen *sc)
 {
-while(sc->j < lenght)
-{
-    while(sc->i < lenght)
+  int tmp_2 = sc->i;
+  int tmp = sc->j;
+
+  while(sc->j < tmp + len)
+  {
+    while(sc->i < tmp_2 + len)
     {
       put_pixel(sc);
       sc->i++;
     }
-    sc->i = 0;
-    sc->j++;
+    sc->i = tmp_2;
+  sc->j++;
+  }
 }
-lenght = lenght *2;
-}
+
 
 
 

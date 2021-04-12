@@ -31,7 +31,7 @@ typedef struct s_screen
 	int		max_w;
 
 }	t_screen;
-void    put_square(int lenght, t_screen *sc);
+void    put_square( int lenght, t_screen *sc);
 void create_mini_map(t_screen *sc);
 void 	init(t_screen *screen);
 void    put_pixel(t_screen *screen);
