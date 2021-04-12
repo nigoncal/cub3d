@@ -6,13 +6,13 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:58:47 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 13:14:00 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 17:30:54 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_libft.h"
 
-//ok le probleme c'est que vu que tu fais avancer le pointeur, a la fin ca return une s sur le dernier char. Donc soit tu trouves comment faire, soit tu utilises un index
+// lis les comms des lignes
 
 char	*change_char(char *s, char a, char b)
 {
@@ -32,23 +32,6 @@ char	*change_char(char *s, char a, char b)
 //	free s ?
 	return (changed_s);
 }
-
-/*char	*change_char(char *s, char a, char b)
-{
-	char *changed_s;
-
-	if (!s || !*s || !a || !b) // test tes !a !b et poses toi la question de quels types de char tu acceptes. Tous ?
-		return (NULL);
-	changed_s = ft_strdup(s); // cette ligne je ne suis pas sur qu'elle soit utile
-	while (*changed_s)
-	{
-		if (*changed_s == a)
-			*changed_s = b;
-		changed_s++;
-	}
-//	free s ?
-	return (changed_s);
-}*/
 
 int main()
 {
