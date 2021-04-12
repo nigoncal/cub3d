@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/11 15:35:45 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 11:55:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	parse_id(char *line, cub_settings *settings)
 {
 	while (line)
 	{
-		while (line == ' ')
+		while (line == ' ' || line == '\t') // test depuis l'ajout du \t surtout le ||, plutot que le &&
 			line++;
 		if (line == 'R')
 			resolution(line, settings);

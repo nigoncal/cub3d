@@ -1,3 +1,14 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+fonctions autorisees
+- open, close, read, write,
+printf, malloc, free,       // PRINTF
+perror, strerror, exit      // perrer, strerror, exit ??? putain ca doit servir
+                            // pour la gestion d'erreur ca !!!
+- Toutes les fonctions de
+la lib math (-lm man man 3
+math)
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Commences par les commentaires de texture.c
 
 1 - *line dans toutes les fonctions a partir de l'appel de parser dans cub3D.c et plus de int lines nulle part ni de count_lines
@@ -16,4 +27,6 @@ renommer settings
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
 
-repush ta libft dans son repo.
+push ton cub3D sur ton propre git
+
+repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)

@@ -6,10 +6,12 @@
 /*   By: sylducam <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 16:44:22 by sylducam     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 14:32:52 by sylducam    ###    #+. /#+    ###.fr     */
+/*   Updated: 2021/04/12 12:24:18 by sylducam         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
+
+#include "header_libft.h"
 
 char	*ft_strstr(char *str, char *to_find)
 {

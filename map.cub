@@ -1,6 +1,6 @@
    %R 155 489
 
-R 1920 1080
+R \n  1920 \t    \r   \v 1080
 
 NO ./path_to_the_north_texture
 SO ./path_to_the_south_texture

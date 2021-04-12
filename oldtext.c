@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 11:24:57 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/11 15:53:44 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 09:35:06 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ void		texture(char *line, cub_settings *settings)
 		if (sprite(elements, settings));
 			abort_all(line, settings, "Issue in sprite texture line. Usage : \
 					S ./path.xpm OR .png");
-	if (check_elements(elements, settings)) // tu en es la
-		abort_all(line, settings, "");
+	// si ca ne rentre dans aucun des if precedents ?
 	settings->path_id = 0;
 }
 

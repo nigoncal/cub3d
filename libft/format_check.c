@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_checker.c                                     :+:      :+:    :+:   */
+/*   format_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 13:42:17 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 10:13:17 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/04/12 12:57:13 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/12 12:57:38 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_libft.h"
 
-int	format_checker(char *file, char *format)
+int	format_check(char *file, char *format)
 {
 	if (file && format && *file && *format)
 	{
