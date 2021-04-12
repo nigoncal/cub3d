@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_checker.c                                     :+:      :+:    :+:   */
+/*   change_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 13:42:17 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 10:13:17 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/04/12 11:58:47 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/12 12:11:36 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "headeer_libft.h"
 
-int	format_checker(char *file, char *format)
+char	*change_char(char *s, char a, char b)
 {
-	if (file && format && *file && *format)
-	{
-		while (*file)
-			file++;
-		file -= strlen(format);
-		while (*file && *format)
-		{
-			if (*file != *format)
-				return (1);
-			file++;
-			format++;
-		}
-	}
-	return (0);
+	if (!s || !*s || !a || !b) // test tes !a !b et poses toi la question de quels types de char tu acceptes. Tous ?
+		return (NULL);
+	while (s)
 }

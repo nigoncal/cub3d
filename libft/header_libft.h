@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 10:40:49 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/11 16:06:46 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 12:10:37 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			ft_bzero(void *s, size_t n);
 void			*ft_memccpy(void *dst, const void *source, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_calloc(size_t count, size_t size);
+char			*change_char(char *s, char a, char b);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(const char *haystack, const char *needle,
@@ -57,7 +58,7 @@ char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *source, size_t size);
 size_t			ft_strlen(const char *str);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
-int				format_check(char *file, char *format);
+int				format_checker(char *file, char *format);
 int				ft_atoi(const char *str);
 int				ft_pf_atoi(char **str);
 int				ft_isalnum(int c);
@@ -66,6 +67,7 @@ int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
+int				ft_strcmp(char *s1, char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_tolower(int c);
 int				ft_toupper(int c);

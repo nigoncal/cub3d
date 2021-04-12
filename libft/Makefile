@@ -1,4 +1,5 @@
-SRCS		=	format_check.c\
+SRCS		=	change_char.c\
+				format_checker.c\
 				ft_memset.c\
 				ft_bzero.c\
 				ft_memcpy.c\
@@ -17,6 +18,7 @@ SRCS		=	format_check.c\
 				ft_tolower.c\
 				ft_strchr.c\
 				ft_strrchr.c\
+				ft_strcmp.c\
 				ft_strncmp.c\
 				ft_strlcpy.c\
 				ft_strlcat.c\
