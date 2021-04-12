@@ -1,5 +1,5 @@
 SRCS		=	change_char.c\
-				format_checker.c\
+				format_check.c\
 				ft_memset.c\
 				ft_bzero.c\
 				ft_memcpy.c\
