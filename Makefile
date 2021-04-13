@@ -40,7 +40,9 @@ $(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
 	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 # Rules
-all:	init $(NAME)
+all:
+	$(MAKE) init
+	$(MAKE) $(NAME)
 	@echo "$(_SUCCESS) Compilation done"
 
 init:	$(MLX)
@@ -73,4 +75,6 @@ fclean: clean
 	$(RM) -rf ./$(PATH_MLX)/*.swiftmodule
 	$(RM) -rf ./$(PATH_MLX)/*.swiftdoc
 
-re: fclean all
+re: 
+	$(MAKE) fclean
+	$(MAKE) all

@@ -6,13 +6,13 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 09:28:46 by pmillet           #+#    #+#             */
-/*   Updated: 2021/01/04 12:19:53 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 11:56:10 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strjoin(char **s1, char const *s2, int limit)
+static int		ft_strjoin_gnl(char **s1, char const *s2, int limit)
 {
 	char	*res;
 	int		i;
@@ -20,7 +20,7 @@ int		ft_strjoin(char **s1, char const *s2, int limit)
 
 	i = 0;
 	j = 0;
-	if (!(res = malloc(sizeof(char) * (ft_strlen(*s1) + ft_strlen(s2) + 1))))
+	if (!(res = malloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1))))
 	{
 		return (-1);
 	}
@@ -39,7 +39,7 @@ int		ft_strjoin(char **s1, char const *s2, int limit)
 	return (1);
 }
 
-int		ft_substr(char **s, unsigned int start, size_t len)
+static int		ft_substr_gnl(char **s, unsigned int start, size_t len)
 {
 	char		*sub;
 	size_t		i;
@@ -48,8 +48,8 @@ int		ft_substr(char **s, unsigned int start, size_t len)
 	sub = NULL;
 	if (*s == NULL)
 		return (-1);
-	if (ft_strlen(*s) < len)
-		len = ft_strlen(*s);
+	if (ft_strlen_gnl(*s) < len)
+		len = ft_strlen_gnl(*s);
 	if (!(sub = malloc(sizeof(char) * (len + 1))))
 		return (-1);
 	while ((*s)[i + start] && i < len)
@@ -69,7 +69,7 @@ int		transfer_line(char **current, char **line)
 	int	len_rest;
 	int len_current;
 
-	len_current = ft_strlen(*current);
+	len_current = ft_strlen_gnl(*current);
 	if ((i_nl = find_nl(*current)) == -1)
 		i_nl = len_current;
 	if (!(*line = malloc(sizeof(char) * (i_nl + 1))))
@@ -86,7 +86,7 @@ int		transfer_line(char **current, char **line)
 	{
 		return (0);
 	}
-	return (ft_substr(current, (i_nl + 1), len_rest));
+	return (ft_substr_gnl(current, (i_nl + 1), len_rest));
 }
 
 int		read_fd(int fd, char **current, char **line)
@@ -100,7 +100,7 @@ int		read_fd(int fd, char **current, char **line)
 		if ((status = read(fd, buffer, BUFFER_SIZE)) > 0)
 		{
 			buffer[status] = '\0';
-			status = ft_strjoin(current, buffer, (status + 1));
+			status = ft_strjoin_gnl(current, buffer, (status + 1));
 			if (status == -1)
 				return (-1);
 		}

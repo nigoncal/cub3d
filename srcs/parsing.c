@@ -29,43 +29,18 @@ int	parse_resolution(char **tab, t_setup *setup)
 	l = 0;
 	setup->res_w = 0;
 	setup->res_h = 0;
-	
-	while (tab[l][0])
+	while (tab[l] != 0)
 		l++;
-	if (l != 2)
+	if (l != 3)
 		return (-1);
-	l = 0;
-	i += skip_ws(tab[0]);
-	// 1er chiffre = go atoi
-	setup->res_w = ft_atoi(tab[1]);
+	l = 1;
+	i += skip_ws(tab[l]);
+	setup->res_w = ft_atoi(tab[l]);
 	printf("res W = %d\n", setup->res_w);
-	// on passe tous les chiffres du 1er nombre
-	//while (line[i] && ft_isdigit(line[i]) == 1)
-	//	i++;
-	/*i += skip_non_digits(&line[i], 1);
-	// si il y a des espaces, on les passe
-	while (line[i] && line[i] == ' ')
-		i++;
-	// 2e chiffre = go atoi (fonciton a part ?)
-	//while (line[i] && ft_isdigit(line[i]) == 0)
-	//	i++;
-	i += skip_non_digits(&line[i], 0);
-	setup->res_h = ft_atoi (&line[i]);
-	// on passe tous les chiffres du 2e nombre
-	//while (line[i] && ft_isdigit(line[i]) == 1)
-	//	i++;
-	i += skip_non_digits(&line[i], 1);
-	if (!line[i])
-		return (1);
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (line[i] && line[i] != ' ')
-	{
-		ft_putstr_fd("Error \nResolution parsing failed, check your .cub file please <3\n", 0);
-		return (-1);
-	}
-	//printf("PARSED res WIDTH neg ? : %d\n", setup->res_w);
-	//printf("PARSED res HEIGHT neg ? : %d\n", setup->res_h);*/
+	l++;
+	i += skip_ws(tab[l]);
+	setup->res_h = ft_atoi(tab[l]);
+	printf("res H = %d\n", setup->res_h);
 	return (1);
 }
 
@@ -120,18 +95,21 @@ int	parse_line(char *line, t_setup *setup)
 	char **elements;
 
 	skip = 0;
-	//if (setup->nb_parsed_values == 8)
+	if (setup->nb_parsed_values == 8)
 		// go to map parsing
-	
-	dprintf(1, "blop\n");
-	elements = ft_split(line, ' ');
-	dprintf(1, "blip\n");
-	skip = skip_ws(elements[0]);
-	while (skip > 0)
+	printf("Ligne parsée : [%s]\n", line);
+	skip = skip_ws(line);
+	while (*line != '\0' && skip > 0)
 	{
 		line++;
 		skip--;
 	}
+	if (!*line)
+		return (1);
+	elements = ft_split(line, ' ');
+	//printf("premiere case du tab : [%s]\n", elements [0]);
+	//printf("Ligne parsée WS skip : [%s]\n", line);
+	//printf("premiere case du tab : [%c]\n", elements [0][0]);
 	if (elements[0][0] == 'R')
 	{
 		parse_resolution(elements, setup);
@@ -141,53 +119,28 @@ int	parse_line(char *line, t_setup *setup)
 		printf("PARSED and CAPPED res HEIGHT : %d\n", setup->res_h);
 		setup->nb_parsed_values++;
 	}
-	if (line[0] == 'N' || line[0] == 'W' || line[0] == 'E' || (line[0] == 'S' && line[1] == 'O'))
+	if ((elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
+	|| (elements[0][0] == 'S' && elements[0][1] == 'O')))
 	{
-		if (parse_textures(line, setup) < 0)
+		if (parse_textures(elements, setup) < 0)
 		{
-			ft_putstr_fd("Error \nTexture parsing failed, check your .cub file please <3\n", 0);
+			ft_putstr_fd("Error \nTexture files parsing failed, check your .cub file \
+			please <3\n", 0);
 			return (-1);
 		}
-		//if (check_ambLightValues(setup) < 0)
-		//	return (-1);
-		/*printf("PARSED ambLight intensity : %f\n", setup->ambLight.intensity);
-		printf("PARSED ambLight R : %d\n", setup->ambLight.color.R);
-		printf("PARSED ambLight G : %d\n", setup->ambLight.color.G);
-		printf("PARSED ambLight B : %d\n", setup->ambLight.color.B);*/
+		setup->nb_parsed_values++;
 	}
-	/*if (line[0] == 'c' && line[1] != 'y')
+	if (elements[0][0] == 'S')
 	{
-		parse_cam(&line[1], setup);
-		printf("PARSED cam Coordinate x : %f\n", setup->cam.camCoordo.x);
-		printf("PARSED cam Coordinate y : %f\n", setup->cam.camCoordo.y);
-		printf("PARSED cam Coordinate z : %f\n", setup->cam.camCoordo.z);
-		printf("PARSED cam Orientation x : %f\n", setup->cam.camOrientation.x);
-		printf("PARSED cam Orientation y : %f\n", setup->cam.camOrientation.y);
-		printf("PARSED cam Orientation z : %f\n", setup->cam.camOrientation.z);
-		printf("PARSED cam FOV : %d\n", setup->cam.FOV);
+		//parse_sprite(elements, setup);
+		// AJOUTER UN OPEN DIRECTORY pour verif qu'on essaie pas d'open un dossier !!!!!!
+		setup->nb_parsed_values++;
 	}
-	if (line[0] == 'l')
+	if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
-		parse_light(&line[1], setup);
-		printf("PARSED Light Coordinate x : %f\n", setup->light.lightCoordo.x);
-		printf("PARSED Light Coordinate y : %f\n", setup->light.lightCoordo.y);
-		printf("PARSED Light Coordinate z : %f\n", setup->light.lightCoordo.z);
-		printf("PARSED Light intensity : %f\n", setup->light.intensity);
-		printf("PARSED Light R : %d\n", setup->light.color.R);
-		printf("PARSED Light G : %d\n", setup->light.color.G);
-		printf("PARSED Light B : %d\n", setup->light.color.B);
+		//parse_color(elements, setup);
+		setup->nb_parsed_values++;
 	}
-	if (line[0] == 'p' && line[1] == 'l')
-	{
-		parse_plane(&line[1], setup);
-		printf("PARSED Plane Coordinate x : %f\n", setup->light.lightCoordo.x);
-		printf("PARSED Light Coordinate y : %f\n", setup->light.lightCoordo.y);
-		printf("PARSED Light Coordinate z : %f\n", setup->light.lightCoordo.z);
-		printf("PARSED Light intensity : %f\n", setup->light.intensity);
-		printf("PARSED Light R : %d\n", setup->light.color.R);
-		printf("PARSED Light G : %d\n", setup->light.color.G);
-		printf("PARSED Light B : %d\n", setup->light.color.B);
-	}*/
 	return (1);
 }
 

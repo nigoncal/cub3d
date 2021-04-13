@@ -6,13 +6,13 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:00:37 by pmillet           #+#    #+#             */
-/*   Updated: 2021/01/04 12:19:31 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 11:47:55 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t i;
 
