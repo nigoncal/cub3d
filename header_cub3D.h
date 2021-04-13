@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_cub3D.h                                     :+:      :+:    :+:   */
+/*   header_cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/11 15:07:37 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 13:31:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
-#include <stdbool.h>
-#include <stdio.h> // a virer
-#include <mlx.h>
+# include <stdbool.h>
+# include <stdio.h> // a virer
+# include <mlx.h>
 
 // commentaire a laisser pour expliquer a quoi correspond chaque chiffre du path id
 
@@ -56,7 +56,7 @@ toute cette partie je la emplace par juste les fd ?
 }				cub_settings;
 
 
-void			cub3D(int fd, char **line);
+void			cub3d(int fd, char **line);
 void			ft_parse(char *line, cub_settings *settings);
 void			resolution(char *line, cub_settings *settings);
 void			ft_map(char *line, cub_settings *settings);

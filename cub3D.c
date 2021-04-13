@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
-#include "header_cub3D.h"
+#include "header_cub3d.h"
 #include <stdio.h> // a virer
 
-void	cub3D(int fd, char **line)
+void	cub3d(int fd, char **line)
 {
 	cub_settings	settings;
 

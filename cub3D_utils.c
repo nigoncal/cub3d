@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D_utils.c                                      :+:      :+:    :+:   */
+/*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
-#include "header_cub3D.h"
+#include "header_cub3d.h"
 
 int		ft_count_lines(int fd, int lines)
 {

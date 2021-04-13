@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3D.h"
+#include "header_cub3d.h"
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 #include <fcntl.h>
@@ -27,20 +27,20 @@ int		main(int argc, char **argv)
 	i -= 4;
 	if ((argc < 2 && argc > 3) && ft_strncmp(argv[1] + i, ".cub", 5))
 	{
-		ft_putstr("Error\nUsage : ./cub3D file.cub --save(optionnal)\n");
+		ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 		return (0);
 	}
 	if (argc == 3)
 		if (ft_strncmp(argv[2], "--save", 7))
 		{
-			ft_putstr("Error\nUsage : ./cub3D file.cub --save(optionnal)\n");
+			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 			return (0);
 		}
 	else
 	{
 		//if --save traitement avec non lancement du jeu, comment faire l'appel ? 
 		fd = open(argv[2], O_RDONLY);
-		cub3D(fd, &line);
+		cub3d(fd, &line);
 		close(fd);
 	}
 	return (0);

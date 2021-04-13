@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 11:55:18 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 11:50:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3D.h"
+#include "header_cub3d.h"
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
@@ -72,9 +72,11 @@ void	ft_map(char **line, cub_settings *settings)
 
 void	parse_id(char *line, cub_settings *settings)
 {
+	change_char(line, ' ', '\t');
+	change_char(line, ' ', '\v');
 	while (line)
 	{
-		while (line == ' ' || line == '\t') // test depuis l'ajout du \t surtout le ||, plutot que le &&
+		while (line == ' ') // test depuis l'ajout du \t surtout le ||, plutot que le &&
 			line++;
 		if (line == 'R')
 			resolution(line, settings);

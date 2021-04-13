@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minilibx/mlx.h" // a ajouter dans ton header
-//#include "header_cub3D.h"
+//#include "header_cub3d.h"
 #include <stdbool.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"

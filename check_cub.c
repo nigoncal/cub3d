@@ -12,7 +12,7 @@
 
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
-#include "cub3D.h"
+#include "cub3d.h"
 
 int		map_part(char *line)
 {

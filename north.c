@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 12:01:29 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 11:50:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3D.h"
+#include "header_cub3d.h"
 #include <stdbool.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h" // en a-t-il besoin ?
@@ -66,7 +66,6 @@ int			north(char *line, cub_settings *settings)
 
 	if (settings->NO == true)
 		return (1);
-	change_char(line);
 	elements = ft_split(line, ' ');
 	if (right_amount(elements, settings)) // possibilite d'en mettre plusieurs sur une ligne ? au lieu d'avoir plusieurs ligne de return (1)
 		return (1);
