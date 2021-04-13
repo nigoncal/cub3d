@@ -6,19 +6,20 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:03:46 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/06 17:42:07 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 17:57:27 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_libft.h"
 
-static char		*strdup_split(char const *s, size_t s_len)
+static char	*strdup_split(char const *s, size_t s_len)
 {
 	size_t		i;
 	char		*str;
 
 	i = 0;
-	if ((str = (char*)malloc(sizeof(char) * (s_len + 1))) == NULL)
+	str = (char *)malloc(sizeof(char) * (s_len + 1));
+	if (str == NULL)
 		return (NULL);
 	while (i < s_len)
 	{
@@ -39,9 +40,9 @@ static size_t	count_char(const char *s, char c)
 	return (i);
 }
 
-static int		count_words(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
-	int i;
+	int	i;
 	int	count;
 
 	count = 0;
@@ -59,7 +60,7 @@ static int		count_words(char const *s, char c)
 	return (count);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		j;
@@ -67,8 +68,8 @@ char			**ft_split(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	if ((sentence = (char**)malloc(sizeof(char*)
-		* ((count_words(s, c) + 1)))) == NULL)
+	sentence = (char **)malloc(sizeof(char *)* ((count_words(s, c) + 1)));
+	if (sentence == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
