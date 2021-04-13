@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 11:50:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 17:10:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	ft_map(char **line, cub_settings *settings)
 
 void	parse_id(char *line, cub_settings *settings)
 {
-	change_char(line, ' ', '\t');
-	change_char(line, ' ', '\v');
+	line = change_char(line, ' ', '\t');
+	line = change_char(line, ' ', '\v');
 	while (line)
 	{
 		while (line == ' ') // test depuis l'ajout du \t surtout le ||, plutot que le &&

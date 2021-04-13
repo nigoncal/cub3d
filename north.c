@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 11:50:09 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 17:12:13 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int			north(char *line, cub_settings *settings)
 	if (right_amount(elements, settings)) // possibilite d'en mettre plusieurs sur une ligne ? au lieu d'avoir plusieurs ligne de return (1)
 		return (1);
 	settings->NO = true;
+	free(elements);
 	return (0);
 }
 

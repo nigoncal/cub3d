@@ -6,14 +6,14 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 09:52:16 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 17:14:11 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx/mlx.h" // a ajouter dans ton header
 //#include "header_cub3d.h"
 #include <stdbool.h>
-#include "libft/libft.h"
+#include "libft/header_libft.h"
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
@@ -88,6 +88,7 @@ void	resolution(char *line, cub_settings *settings)
 		dprintf(1, "Error\n");
 	//	abort_prog(line, settings, "Resolution line not well formated. Usage :\
 	//			\nR <width> <height>\nOnly positive values");
+	free(elements);
 }
 
 
