@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:04:07 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 13:41:43 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 17:06:04 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_strdup(const char *s)
 	if (!s)
 		return (NULL);
 	s_len = ft_strlen(s);
-	if ((str = (char*)malloc(sizeof(char) * ((s_len) + 1))) == NULL)
+	str = (char *)malloc(sizeof(char) * ((s_len) + 1));
+	if (str == NULL)
 		return (NULL);
 	while (i < s_len)
 	{
