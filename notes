@@ -8,6 +8,7 @@ la lib math (-lm man man 3
 math)
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
+commentaire de north.c
 
 1 - free elements a la fin de chaque fichier particulier de parsing de ligne
 2 - tu es en train de traiter les whitespaces dans resolution puis dans texture

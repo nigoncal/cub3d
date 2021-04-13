@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "../libft/header_libft.h"
 
 int				get_next_line(int fd, char **line);
 int				find_eol(char *s);
