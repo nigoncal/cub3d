@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 13:31:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/13 18:18:14 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 # include <stdio.h> // a virer
-# include <mlx.h>
+# include "minilibx/mlx.h" // attention
 
 // commentaire a laisser pour expliquer a quoi correspond chaque chiffre du path id
 
