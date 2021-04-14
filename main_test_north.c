@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:35:51 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/14 14:05:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/14 15:19:23 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_settings
 {
 	bool	NO;
 	int		north_fd;
+	char	*north_texture_path;
 	void	*mlx; // si ca marche, a bien ajouter a ta structure dans le header
 }				cub_settings;
 
@@ -42,53 +43,61 @@ int main()
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 2 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO    textures/grass.xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 3 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO    38     xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 4 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO   38   textures/stone.png   ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 5 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO   ./textures/stone.png   ./textures/grass.xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 6 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO    ./textures/file.txt    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 7 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO    ./textures./grass.xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 	dprintf(1, "--- test 8 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NO    ./textures.xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
-}
-	dprintf(1, "--- test 8 ---\n");
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
+	dprintf(1, "--- test 9 ---\n");
 	ft_bzero(&settings, sizeof(cub_settings));
 	ret = north_texture("NOrdine    ./textures/grass.xpm    ", &settings);
 	dprintf(1, "ret = %d\n", ret);
 	dprintf(1, "NO = %d\n", settings.NO);
 	dprintf(1, "north_texture_fd = %d\n", settings.north_fd);
+	dprintf(1, "north_texture_path = |%s|\n", settings.north_texture_path);
 }

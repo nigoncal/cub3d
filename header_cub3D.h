@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 18:18:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/14 15:17:04 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,16 @@ typedef struct	s_settings
 	int		width;
 	int		height;
 	int		path_id;
-/*
   	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
 	char	*sprite_texture_path;
-
-toute cette partie je la emplace par juste les fd ?
-*/
-	int		north_fd;
-	int		south_fd;
-	int		west_fd;
-	int		east_fd;
-	int		sprite_fd;
+	int		north_fd;  // a virer, juste pour les tests
+	int		south_fd;  // "
+	int		west_fd;   // "
+	int		east_fd;   // "
+	int		sprite_fd; // "
 	int		floor_red;
 	int		floor_green;
 	int		floor_blue;
