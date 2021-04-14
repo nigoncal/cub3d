@@ -36,16 +36,22 @@ typedef struct s_setup
 	int		ceiling_blue;
 	char	**map;
 	int		nb_parsed_values;
+	int		map_start_line;
+	int		map_size_known;
+	int		longest_map_line;
 	//pointeurs mlx etc
 	void	*mlx;
 }				t_setup;
 
-int		parse_args(int argc, char **argv, t_setup *setup);
+/* Parsing */
+
 int		skip_ws(char const *str);
 int		skip_non_digits(char const *str, int skip_what);
+char	*is_line_empty(char *line);
+int		parse_args(int argc, char **argv, t_setup *setup);
 int		parse_textures(char **tab, t_setup *setup);
 
-// GNL
+/* GNL */
 
 int		get_next_line(int fd, char **line);
 

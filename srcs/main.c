@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 12:53:06 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/14 13:12:00 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,16 @@
 
 int	main (int argc, char **argv)
 {
-	//t_sphere	sphere;
-	//t_vec		direction;
-	//t_miniRT	mini;
 	t_setup		setup;
 
+	/*init_struct(&setup);*/
+	ft_bzero(&setup, sizeof(t_setup));
 	if (parse_args(argc, argv, &setup) < 0)
 	{
 		ft_putstr_fd("Error \nParsing failed, please check your args and/or .cub file \
 and try again. Keep going !\n", 0);
 		return (-1);
 	}
-	//sphere.rayon = 20;
 	//init_windows(&mini);
 	//init_ray(&direction, mini);
 	//assigned_vector(&sphere.origine, 0, 0, -60);

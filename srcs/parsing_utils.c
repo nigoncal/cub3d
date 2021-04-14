@@ -1,67 +1,5 @@
 #include "../cub3D.h"
 
-// skip_what = 0 => skip les non digits MAIS pas les - suivis d'un chiffre
-// skip_what = 1 => skip les digits et les '-'
-
-int	skip_ws(char const *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\v')
-		{
-			i++;
-		}
-		else
-			return (i);
-	}
-	return (i);
-}
-// skip_what = 0 => skip les non digits MAIS pas les - suivis d'un chiffre
-// skip_what = 1 => skip les digits et les '-'
-
-int	skip_non_digits(char const *str, int skip_what)
-{
-	int	i;
-
-	i = 0;
-	if (skip_what == 1)
-	{
-		if (str[i] && str[i] == '-')
-			i++;
-	}
-	while (str[i])
-	{
-		if (skip_what == 0 && str[i] == '-' && str[i + 1] && \
-		ft_isdigit(str[i + 1]) == 1)
-			return (i);
-		else if (ft_isdigit(str[i]) == skip_what)
-		{
-			i++;
-		}
-		else
-			return (i);
-	}
-	return (i);
-}
-
-/*int	skip_non_digits(char const *str, int skip_what)
-{
-	int i;
-
-	i = 0;
-	if (skip_what == 1)
-	{
-		if (str[i] && str[i] == '-')
-			i++;
-	}
-	while (str[i] && ft_isdigit(str[i]) == skip_what)
-		i++;
-	return (i);
-}*/
-
 int	ft_nblen(double value)
 {
 	int	i;
@@ -122,7 +60,6 @@ double	ft_atof(char *str)
 	}
 	//on bouge le debut de str a la fin de l'unité
 	str += ft_atoi_len(str);
-	//printf("QQCH CLOCHE PAR LA : [%s]\n", str);
 	//si on tombe pas sur un '.', c'est qu'il n'y a pas de virgule
 	if (*str != '.')
 		return (ent);

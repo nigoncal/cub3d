@@ -16,16 +16,24 @@ int	parse_textures(char **tab, t_setup *setup)
 	//l = 1;
 	i += skip_ws(tab[1]);
 	printf("skip i = %d\n", i);
+	// verif qu'on essaie pas d'open un dossier
+	fd = 0;
+	fd = open(&tab[1][i], O_DIRECTORY);
+	if (fd != -1)
+		return (-1);
 	//verif validite fichier
 	fd = 0;
-	// AJOUTER UN OPEN DIRECTORY pour verif qu'on essaie pas d'open un dossier !!!!!!
 	fd = open(&tab[1][i], O_RDONLY);
-	//printf("fd = %d\n", fd);
-	printf("path opened = [%s]\n", tab[1]);
+	printf("fd = %d\n", fd);
+	//printf("path opened = [%s]\n", tab[1]);
 	if (fd == -1)
 		return (-1);
 	if (tab[0][0] == 'N' && tab[0][1] == 'O')
 	{
+		//i = 0;
+		//i += skip_ws(tab[1]);
+		setup->north_texture_path = &tab[1][i];
+		printf("chemin NO : [%s]\n", setup->north_texture_path);
 		// calcul len str du path
 		// malloc l'emplacement ?
 		// copier le path dans la struct pr l'utiliser + tard
@@ -42,7 +50,7 @@ int	parse_textures(char **tab, t_setup *setup)
 	{
 		//copier le path au bon endroit
 	}
-	setup->nb_parsed_values++;
+	//setup->nb_parsed_values++;
 	close(fd);
 	return (1);
 }

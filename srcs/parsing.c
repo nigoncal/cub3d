@@ -17,7 +17,7 @@ values, check your .cub file please <3\n", 0);
 		setup->res_h = setup->max_h;
 	else if (setup->max_h != setup->res_h)
 		setup->max_h = setup->res_h;
-	return (1);
+	return (0);
 }
 
 int	parse_resolution(char **tab, t_setup *setup)
@@ -41,7 +41,7 @@ int	parse_resolution(char **tab, t_setup *setup)
 	i += skip_ws(tab[l]);
 	setup->res_h = ft_atoi(tab[l]);
 	printf("res H = %d\n", setup->res_h);
-	return (1);
+	return (0);
 }
 
 /*
@@ -95,17 +95,27 @@ int	parse_line(char *line, t_setup *setup)
 	char **elements;
 
 	skip = 0;
-	if (setup->nb_parsed_values == 8)
-		// go to map parsing
 	printf("Ligne parsée : [%s]\n", line);
-	skip = skip_ws(line);
+	line = is_line_empty(line);
+	/*skip = skip_ws(line);
 	while (*line != '\0' && skip > 0)
 	{
 		line++;
 		skip--;
-	}
+	}*/
 	if (!*line)
-		return (1);
+	{
+		setup->map_start_line++;
+		return (0);
+	}
+	if (setup->nb_parsed_values == 8)
+	{	
+		//get_map_size(line, setup);
+		// go to map parsing
+		//if (setup->map_size_known)
+			//go to map_copy
+		return (0);
+	}
 	elements = ft_split(line, ' ');
 	//printf("premiere case du tab : [%s]\n", elements [0]);
 	//printf("Ligne parsée WS skip : [%s]\n", line);
@@ -118,9 +128,10 @@ int	parse_line(char *line, t_setup *setup)
 		printf("PARSED and CAPPED res WIDTH : %d\n", setup->res_w);
 		printf("PARSED and CAPPED res HEIGHT : %d\n", setup->res_h);
 		setup->nb_parsed_values++;
+		setup->map_start_line++;
 	}
-	if ((elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
-	|| (elements[0][0] == 'S' && elements[0][1] == 'O')))
+	else if ((elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
+	|| elements[0][0] == 'S'))
 	{
 		if (parse_textures(elements, setup) < 0)
 		{
@@ -129,19 +140,25 @@ int	parse_line(char *line, t_setup *setup)
 			return (-1);
 		}
 		setup->nb_parsed_values++;
+		setup->map_start_line++;
 	}
-	if (elements[0][0] == 'S')
+	else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{
 		//parse_sprite(elements, setup);
 		// AJOUTER UN OPEN DIRECTORY pour verif qu'on essaie pas d'open un dossier !!!!!!
 		setup->nb_parsed_values++;
+		setup->map_start_line++;
 	}
-	if (elements[0][0] == 'F' || elements[0][0] == 'C')
+	else if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
 		//parse_color(elements, setup);
 		setup->nb_parsed_values++;
+		setup->map_start_line++;
+		printf("normalement on passe a 3 = %d\n", setup->map_start_line);
 	}
-	return (1);
+	else
+		return (-1);
+	return (0);
 }
 
 // rtop long : lancer gnl ds autre fonction ?
@@ -178,16 +195,20 @@ int	parse_args(int argc, char **argv, t_setup *setup)
 	while (get_next_line(fd, &line) == 1)
 	{
 		printf("%s\n", line);
-		if (parse_line(line, setup) < 1)
+		if (parse_line(line, setup) < 0)
 		{
 			free(line);
 			close(fd);
 			return (-1);
 		}
+		printf("Nb infos parsed before map : %d\n", setup->nb_parsed_values);
+		printf("Ligne ou debute la map : %d\n", setup->map_start_line);
 		free(line);
 	}
-	//printf("ligne : %s\n", line);
 	free(line);
 	close(fd);
-	return (1);
+	//if (setup->map_size_known)
+		//open again and GNL map_start_line times so read is back to the map start
+		//go copy_map
+	return (0);
 }
