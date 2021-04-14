@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 18:02:56 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/14 10:45:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,14 @@ int main()
 
 //    mlx = mlx_init(); // a ajouter dans ton main a toi
 	char *line = "  R  50555     20555     ";
-	cub_settings *settings;
-//	settings = NULL;
-	ft_bzero(settings, sizeof(cub_settings));
-	settings->R = false;
-	settings->width = 0;
-	settings->height = 0;
-	settings->mlx = mlx_init();
-	resolution(line, settings);
-	dprintf(1, "R = %d\n", settings->R);
-	dprintf(1, "width = %d\n", settings->width);
-	dprintf(1, "height = %d\n", settings->height);
+	cub_settings settings;
+	ft_bzero(&settings, sizeof(settings));
+	settings.R = false;
+	settings.width = 0;
+	settings.height = 0;
+	settings.mlx = mlx_init();
+	resolution(line, &settings);
+	dprintf(1, "R = %d\n", settings.R);
+	dprintf(1, "width = %d\n", settings.width);
+	dprintf(1, "height = %d\n", settings.height);
 }

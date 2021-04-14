@@ -8,13 +8,13 @@ la lib math (-lm man man 3
 math)
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
-commentaire de north.c
+commentaire de north_texture.c
 
 1 - free elements a la fin de chaque fichier particulier de parsing de ligne
 2 - tu es en train de traiter les whitespaces dans resolution puis dans texture
 penses a bien checker si tu les traites tous individuellement correctement dans le parsing global
 3 - finis ta fonction change_char DONE
-4 - pour ensuite finir north.c
+4 - pour ensuite finir north_texture.c
 
 Commences par les commentaires de texture.c
 
