@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 17:16:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/14 12:50:23 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/15 14:12:06 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,31 @@
 
 // renomes encore ton fichier et refais le header
 
-void	cub3d(int fd, char **line)
+static int	id_part(char *line)
 {
-	cub_settings	settings;
+	static int	non_empty_lines = 0;
+	int			i;
 
-	ft_bzero(&settings, sizeof(cub_settings));
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t'
+			&& line[i] != '\v' && line[i] != '\n')
+		{
+			non_empty_lines++;
+			break ;
+		}
+		i++;
+	}
+	return (non_empty_lines);
+}
+
+void	start(int fd, char **line, cub_settings *settings)
+{
+	settings->mlx = mlx_init();
 	while (get_next_line(fd, line))
 	{
-		if (map_start(line) <= 8)
+		if (id_start(line) <= 8)
 			parse_id(*line, &settings); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
 		else
 			parse_map(*line, &settings);

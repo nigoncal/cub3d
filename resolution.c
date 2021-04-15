@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/14 16:48:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 11:34:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	too_big_for_screen(cub_settings *settings)
 	free(screen_height);
 }
 
-int		check_elements(char **elements, cub_settings *settings)
+static int	check_elements(char **elements, cub_settings *settings)
 {
 	int	i;
 

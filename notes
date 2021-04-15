@@ -8,7 +8,8 @@ la lib math (-lm man man 3
 math)
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
-commentaire de north_texture.c
+tu es en train de coder abort_all
+ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_all
 
 1 - free elements a la fin de chaque fichier particulier de parsing de ligne
 2 - tu es en train de traiter les whitespaces dans resolution puis dans texture

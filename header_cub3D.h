@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/14 15:17:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 14:12:23 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct	s_settings
 {
+	bool	screenshot;
 	bool	R;
 	bool	NO;
 	bool	SO;
@@ -29,9 +30,9 @@ typedef struct	s_settings
 	bool	S;
 	bool	F;
 	bool	C;
+	void	*mlx; // ou je lui fais mlx = mlx_init ? main plus trop de place, voir si j'en fait ou sinon start
 	int		width;
 	int		height;
-	int		path_id;
   	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
@@ -52,14 +53,14 @@ typedef struct	s_settings
 }				cub_settings;
 
 
-void			cub3d(int fd, char **line);
-void			ft_parse(char *line, cub_settings *settings);
+void			start(int fd, char **line);
+void			parse_id(char *line, cub_settings *settings);
+void			parse_map(char *line, cub_settings *settings);
 void			resolution(char *line, cub_settings *settings);
-void			ft_map(char *line, cub_settings *settings);
-void			ft_add_line_map(char *line, cub_settings *settings);
-void			texture(char *line, cub_settings *settings);
-void			abort_prog(char *line, cub_settings *settings, char *s);
+//void			ft_map(char *line, cub_settings *settings); // rename et vires le de parser.c
+//void			add_line_map(char *line, cub_settings *settings);
+//void			abort_prog(char *line, cub_settings *settings, char *s);
 
-int				map_part(char *line);
+int				north_texture(char *line, cub_settings *settings);
 
 #endif

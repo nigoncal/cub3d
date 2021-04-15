@@ -6,42 +6,44 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/07 08:59:33 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 14:07:51 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_cub3d.h"
-#include "libft/libft.h"
+#include "libft/header_libft.h"
 #include "get_next_line/get_next_line.h"
 #include <fcntl.h>
 //#include <stdio.h>
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		fd;
-	int		i;
-	char	*line;
+	int				fd;
+	int				format;
+	char			*line;
+	cub_settings	settings;
 
 	line = NULL;
-	i = ft_strlen(argv[1]);
-	i -= 4;
-	if ((argc < 2 && argc > 3) && ft_strncmp(argv[1] + i, ".cub", 5))
+	ft_bzero(&settings, sizeof(cub_settings));
+	format = format_check(argv[1], ".cub");
+	if (argc < 2 || argc > 3 || format == 1)
+
 	{
 		ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 		return (0);
 	}
 	if (argc == 3)
-		if (ft_strncmp(argv[2], "--save", 7))
+	{
+		format = ft_strcmp(argv[2], "--save");
+		if (format != 0)
 		{
 			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 			return (0);
 		}
-	else
-	{
-		//if --save traitement avec non lancement du jeu, comment faire l'appel ? 
-		fd = open(argv[2], O_RDONLY);
-		cub3d(fd, &line);
-		close(fd);
+		settings->screenshot = true;
 	}
+	fd = open(argv[2], O_RDONLY);
+	start(fd, &line);
+	close(fd);
 	return (0);
 }

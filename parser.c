@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 17:10:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 11:33:14 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
-void	color(char **line, cub_settings *settings)
+/*void	color(char **line, cub_settings *settings)
 {
 	if (*(*line) == 'C')
 	{
@@ -29,9 +29,9 @@ void	color(char **line, cub_settings *settings)
 		settings->floor_green = ft_pf_atoi(line);
 		settings->floor_blue = ft_pf_atoi(line);
 	}
-}
+}*/
 
-void	ft_add_line_map(char **line, cub_settings *settings)
+/*void	add_line_map(char **line, cub_settings *settings)
 {
 	int		size;
 	int		i;
@@ -53,9 +53,9 @@ void	ft_add_line_map(char **line, cub_settings *settings)
 	temp[i] = 0;
 	free(settings->map);
 	settings->map = temp;
-}
+}*/
 
-void	ft_map(char **line, cub_settings *settings)
+/*void	ft_map(char **line, cub_settings *settings)
 {
 	if (settings->map == NULL)
 	{
@@ -68,6 +68,15 @@ void	ft_map(char **line, cub_settings *settings)
 		ft_add_line_map(line, settings);
 	while (*(*line) != '\0')
 		(*line)++;
+}*/
+
+void	parse_map(char *line, cub_settings *settings)
+{
+	while (line)
+	{
+		if (ft_isalnum(line)) // map : peut commencer par et contenir |' '/1/0/2/N/S/W/E|.
+			ft_map(line, settings);
+	}
 }
 
 void	parse_id(char *line, cub_settings *settings)
@@ -87,14 +96,5 @@ void	parse_id(char *line, cub_settings *settings)
 			color(line, settings);
 		else
 			abort_all(line, settings, "Identifiers allowed : R, NO, SO, WE, EA, S, F, C");
-	}
-}
-
-void	parse_map(char *line, cub_settings *settings)
-{
-	while (line)
-	{
-		if (ft_isalnum(line)) // map : peut commencer par et contenir |' '/1/0/2/N/S/W/E|.
-			ft_map(line, settings);
 	}
 }
