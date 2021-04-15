@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/15 14:19:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 17:51:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define HEADER_H
 
 # include <stdbool.h>
-# include <stdio.h> // a virer
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/errno.h> // pour errno, je le garde ?
+# include <string.h>
 # include "minilibx/mlx.h" // attention
 
 // commentaire a laisser pour expliquer a quoi correspond chaque chiffre du path id
@@ -59,7 +63,7 @@ void			parse_map(char *line, cub_settings *settings);
 void			resolution(char *line, cub_settings *settings);
 //void			ft_map(char *line, cub_settings *settings); // rename et vires le de parser.c
 //void			add_line_map(char *line, cub_settings *settings);
-//void			abort_prog(char *line, cub_settings *settings, char *s);
+void			abort_prog(char *line, cub_settings *settings, char *s);
 
 int				north_texture(char *line, cub_settings *settings);
 

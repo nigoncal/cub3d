@@ -7,6 +7,13 @@ PERROR, STRERROR, EXIT      // go check les man
 la lib math (-lm man man 3
 math)
 !!!!!!!!!!!!!!!!!!!!!!!!!!
+la fonction exit permet de terminer un programme, je pense qu'elle est utile pour fermer la fenetre du jeu lorsque l'on appuie sur echap
+atexit permet d'enregistrer des fonctions a appeler dans l'ordre inverse de leur enregistrement au moment de terminer le programme, via la fonction exit. Donc tu peux stack des fonctions qui free, par expmple, via atexit
+
+les fonctions error, tu as pris des notes dans ton cahier.
+errnum interessants : 79, 84 ?, 85,
+voir comment set errnum toi meme
+en fait tu utilises fprintf pour print sur le stderr
 
 tu es en train de coder abort_all
 ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_all

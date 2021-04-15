@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/15 14:07:51 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/15 17:53:06 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	main(int argc, char **argv)
 {
-	int				fd;
+//	int				fd;
 	int				format;
 	char			*line;
 	cub_settings	settings;
@@ -27,11 +27,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&settings, sizeof(cub_settings));
 	format = format_check(argv[1], ".cub");
 	if (argc < 2 || argc > 3 || format == 1)
-
-	{
-		ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
-		return (0);
-	}
+		abort_prog(line, &settings, "./cub3d file.cub --save(optionnal)");
 	if (argc == 3)
 	{
 		format = ft_strcmp(argv[2], "--save");
@@ -40,10 +36,10 @@ int	main(int argc, char **argv)
 			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 			return (0);
 		}
-		settings->screenshot = true;
+		settings.screenshot = true;
 	}
-	fd = open(argv[2], O_RDONLY);
-	start(fd, &line);
-	close(fd);
+//	fd = open(argv[2], O_RDONLY);
+//	start(fd, &line);
+//	close(fd);
 	return (0);
 }
