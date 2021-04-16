@@ -16,9 +16,11 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct s_setup
 {
+	int		cub_fd;
 	int		res_w;
 	int		res_h;
 	int		max_w;
@@ -34,11 +36,14 @@ typedef struct s_setup
 	int		ceiling_red;
 	int		ceiling_green;
 	int		ceiling_blue;
-	char	**map;
 	int		nb_parsed_values;
+	char	**map;
 	int		map_start_line;
-	int		map_size_known;
-	int		longest_map_line;
+	bool	map_size_known;
+	int		map_longest_line;
+	int		map_nb_lines;
+	bool	map_malloced;
+	int		map_tab_line;
 	//pointeurs mlx etc
 	void	*mlx;
 }				t_setup;
@@ -50,10 +55,17 @@ int		skip_non_digits(char const *str, int skip_what);
 char	*is_line_empty(char *line);
 int		parse_args(int argc, char **argv, t_setup *setup);
 int		parse_textures(char **tab, t_setup *setup);
+int		get_map_size(char *line, t_setup *setup);
+int		open_file(t_setup *setup, int fd);
+int		parse_map(char *line, t_setup *setup);
 
 /* GNL */
 
 int		get_next_line(int fd, char **line);
+
+/* Exit */
+
+int		free_2d_tab(char **tab, int l);
 
 // from Sylducam
 

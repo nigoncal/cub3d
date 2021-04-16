@@ -15,7 +15,8 @@ PATH_LIBFT	=	libft
 
 # List of sources
 SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c parsing_utils.c parsing_textures.c main.c\
-get_next_line.c get_next_line_utils.c parsing_skip.c)
+parsing_skip.c parsing_map.c get_next_line.c get_next_line_utils.c\
+exit.c)
 OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
 INCS		=	cub3D.h
 

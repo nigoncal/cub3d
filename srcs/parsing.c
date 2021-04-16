@@ -36,11 +36,11 @@ int	parse_resolution(char **tab, t_setup *setup)
 	l = 1;
 	i += skip_ws(tab[l]);
 	setup->res_w = ft_atoi(tab[l]);
-	printf("res W = %d\n", setup->res_w);
+	//printf("res W = %d\n", setup->res_w);
 	l++;
 	i += skip_ws(tab[l]);
 	setup->res_h = ft_atoi(tab[l]);
-	printf("res H = %d\n", setup->res_h);
+	//printf("res H = %d\n", setup->res_h);
 	return (0);
 }
 
@@ -88,7 +88,6 @@ int	parse_resolution_old(char *line, t_setup *setup)
 	return (1);
 }*/
 
-/* R NO SO WE EA S F C*/
 int	parse_line(char *line, t_setup *setup)
 {
 	int	skip;
@@ -96,24 +95,18 @@ int	parse_line(char *line, t_setup *setup)
 
 	skip = 0;
 	printf("Ligne parsée : [%s]\n", line);
+	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ')
+	
+	if (setup->nb_parsed_values == 8)
+	{	
+		parse_map(line, setup);
+		return (0);
+	}
+	//on passe les whitespaces du debut puis on verif si il reste qqch dans la line
 	line = is_line_empty(line);
-	/*skip = skip_ws(line);
-	while (*line != '\0' && skip > 0)
-	{
-		line++;
-		skip--;
-	}*/
 	if (!*line)
 	{
 		setup->map_start_line++;
-		return (0);
-	}
-	if (setup->nb_parsed_values == 8)
-	{	
-		//get_map_size(line, setup);
-		// go to map parsing
-		//if (setup->map_size_known)
-			//go to map_copy
 		return (0);
 	}
 	elements = ft_split(line, ' ');
@@ -125,8 +118,8 @@ int	parse_line(char *line, t_setup *setup)
 		parse_resolution(elements, setup);
 		if (cap_resolution(setup) < 0)
 			return (-1);
-		printf("PARSED and CAPPED res WIDTH : %d\n", setup->res_w);
-		printf("PARSED and CAPPED res HEIGHT : %d\n", setup->res_h);
+		//printf("PARSED and CAPPED res WIDTH : %d\n", setup->res_w);
+		//printf("PARSED and CAPPED res HEIGHT : %d\n", setup->res_h);
 		setup->nb_parsed_values++;
 		setup->map_start_line++;
 	}
@@ -154,10 +147,48 @@ int	parse_line(char *line, t_setup *setup)
 		//parse_color(elements, setup);
 		setup->nb_parsed_values++;
 		setup->map_start_line++;
-		printf("normalement on passe a 3 = %d\n", setup->map_start_line);
 	}
 	else
 		return (-1);
+	return (0);
+}
+
+int	open_file(t_setup *setup, int fd)
+{
+	int 	skipped_lines;
+	char	*line;
+	//printf("nom fichier a ouvrir : %s\n", argv[argc - 1]);
+	//fd = open(argv[argc - 1], O_RDONLY);
+	//printf("fd = %d\n", fd);
+	skipped_lines = 0;
+	line = NULL;
+	if (setup->map_size_known)
+	{
+		//sauter les lines jusqu'a atteindre setup.map_start_line
+		while (get_next_line(fd, &line) == 1 \
+		&& skipped_lines < (setup->map_start_line - 1))
+		{
+			skipped_lines++;
+		}
+	}
+	while (get_next_line(fd, &line) == 1)
+	{
+		printf("%s\n", line);
+		if (parse_line(line, setup) < 0)
+		{
+			free(line);
+			close(fd);
+			return (-1);
+		}
+		//printf("Nb infos parsed before map : %d\n", setup->nb_parsed_values);
+		//printf("Ligne ou debute la map : %d\n", setup->map_start_line);
+		//free(line);
+	}
+	free(line);
+	close(fd);
+	//if (setup->map_size_known)
+		//open again and GNL map_start_line times so read is back to the map start
+		//go copy_map
 	return (0);
 }
 
@@ -166,10 +197,10 @@ int	parse_args(int argc, char **argv, t_setup *setup)
 {
 	int		fd;
 	int		i;
-	char	*line;
+	//char	*line;
 
 	i = 0;
-	line = NULL;
+	//line = NULL;
 	i = ft_strlen(argv[argc - 1]);
 	i -= 4;
 	if (argc > 3 || argc < 2)
@@ -186,13 +217,19 @@ int	parse_args(int argc, char **argv, t_setup *setup)
 	if (ft_strncmp(argv[argc - 1] + i, ".cub", 5))
 	{
 		ft_putstr_fd("Error\nArgument parsing failed. Usage : ./cub3D file.cub --save(optionnal)\n", 0);
-		return (0);
+		return (-1);
 	}
 	fd = 0;
-	printf("nom fichier a ouvrir : %s\n", argv[argc - 1]);
+	//printf("nom fichier a ouvrir : %s\n", argv[argc - 1]);
 	fd = open(argv[argc - 1], O_RDONLY);
+	if (fd < 2)
+		return (-1);
 	//printf("fd = %d\n", fd);
-	while (get_next_line(fd, &line) == 1)
+	setup->cub_fd = fd;
+	if (open_file(setup, fd) < 0)
+		return (-1);
+	
+	/*while (get_next_line(fd, &line) == 1)
 	{
 		printf("%s\n", line);
 		if (parse_line(line, setup) < 0)
@@ -201,14 +238,14 @@ int	parse_args(int argc, char **argv, t_setup *setup)
 			close(fd);
 			return (-1);
 		}
-		printf("Nb infos parsed before map : %d\n", setup->nb_parsed_values);
-		printf("Ligne ou debute la map : %d\n", setup->map_start_line);
+		//printf("Nb infos parsed before map : %d\n", setup->nb_parsed_values);
+		//printf("Ligne ou debute la map : %d\n", setup->map_start_line);
 		free(line);
 	}
 	free(line);
 	close(fd);
 	//if (setup->map_size_known)
 		//open again and GNL map_start_line times so read is back to the map start
-		//go copy_map
+		//go copy_map*/
 	return (0);
 }
