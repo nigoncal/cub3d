@@ -13,7 +13,7 @@ void create_mini_map(t_screen *sc)
           {1, 0, 0, 0, 1},
           {1, 0, 1, 1, 1},
           {1, 1, 1, 1, 1}};
-  int len = 4;
+  int len = 150;
   while (count_x != mapWidth)
   {
     while (count_y != mapHeight)

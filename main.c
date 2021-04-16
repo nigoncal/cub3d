@@ -10,21 +10,31 @@
 int main(void)
 {
   t_screen sc;
-  init(&sc);
+  t_ray ray;
+  init_screen(&sc);
+  init_ray(&ray);
 
-if (sc.pixel_bits != 32)
-    sc.color = mlx_get_color_value(sc.mlx, sc.color);
-
+	if (sc.pixel_bits != 32)
+    	sc.color = mlx_get_color_value(sc.mlx, sc.color);
   create_mini_map(&sc);
   mlx_put_image_to_window(sc.mlx, sc.win, sc.image, 0, 0);
   mlx_loop(sc.mlx);
   return (0);
 }
 
-
-void  init(t_screen *screen)
+void	init_ray(t_ray *ray)
 {
-  screen->i = 0;
+	 ray->posX = 22, 
+	 ray->posY = 12; 
+	 ray->dirX = -1;
+	 ray->dirY = 0;
+	 ray->planX = 0;
+	 ray->planY = 0.66;
+}
+
+void	init_screen(t_screen *screen)
+{
+	screen->i = 0;
 	screen->j = 0;
 	screen->max_h = 1000;
 	screen->max_w = 1000;
@@ -37,4 +47,11 @@ void  init(t_screen *screen)
 	screen->win = mlx_new_window(screen->mlx, screen->max_w, screen->max_h, "Fenetre de bg");
 	screen->buffer = mlx_get_data_addr(screen->image, &screen->pixel_bits, \
 	&screen->line_bytes, &screen->endian);
+}
+
+void cal_ray(t_vec *ray, t_screen sc, float FOV)
+{
+	ray->cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
+	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
+	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
 }

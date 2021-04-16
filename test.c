@@ -1,6 +1,40 @@
-#include <math.h>
-#include <string.h>
-#include "header.h"
+/*
+Copyright (c) 2004-2019, Lode Vandevenne
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+#include <cmath>
+#include <string>
+#include <vector>
+#include <iostream>
+
+#include "quickcg.h"
+using namespace QuickCG;
+
+/*
+g++ *.cpp -lSDL -O3 -W -Wall -ansi -pedantic
+g++ *.cpp -lSDL
+*/
+
+//place the example code below here:
 
 #define screenWidth 640
 #define screenHeight 480
@@ -35,7 +69,7 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-int main(int argc, char **argv)
+int main(int /*argc*/, char */*argv*/[])
 {
   double posX = 22, posY = 12;  //x and y start position
   double dirX = -1, dirY = 0; //initial direction vector
@@ -45,8 +79,6 @@ int main(int argc, char **argv)
   double oldTime = 0; //time of previous frame
 
   screen(screenWidth, screenHeight, 0, "Raycaster");
-  int w = 0;
-  int h = 0;
   while(!done())
   {
     for(int x = 0; x < w; x++)
@@ -56,16 +88,16 @@ int main(int argc, char **argv)
       double rayDirX = dirX + planeX * cameraX;
       double rayDirY = dirY + planeY * cameraX;
       //which box of the map we're in
-      int mapX = (int)posX;
-      int mapY = (int)posY;
+      int mapX = int(posX);
+      int mapY = int(posY);
 
       //length of ray from current position to next x or y-side
       double sideDistX;
       double sideDistY;
 
        //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-      double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+      double deltaDistX = std::abs(1 / rayDirX);
+      double deltaDistY = std::abs(1 / rayDirY);
       double perpWallDist;
 
       //what direction to step in x or y-direction (either +1 or -1)
@@ -112,40 +144,34 @@ int main(int argc, char **argv)
           side = 1;
         }
         //Check if ray has hit a wall
-        if(worldMap[mapX][mapY] > 0)
-             hit = 1;
+        if(worldMap[mapX][mapY] > 0) hit = 1;
       }
       //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-      if(side == 0) 
-        perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
-      else         
-         perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
+      if(side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
+      else          perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
       //Calculate height of line to draw on screen
       int lineHeight = (int)(h / perpWallDist);
 
       //calculate lowest and highest pixel to fill in current stripe
       int drawStart = -lineHeight / 2 + h / 2;
-      if(drawStart < 0)
-        drawStart = 0;
+      if(drawStart < 0)drawStart = 0;
       int drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd >= h)
-        drawEnd = h - 1;
+      if(drawEnd >= h)drawEnd = h - 1;
 
       //choose wall color
-        int color = 0x000000;
+      ColorRGB color;
       switch(worldMap[mapX][mapY])
       {
-        case 1:  color = 0xFF0000;  break; //red
-        case 2:  color = 0x00FF00;  break; //green
-        case 3:  color = 0x0078FF;  break; //blue
-        case 4:  color = 0xFFFFFF;  break; //white
-        default: color = 0xECFF00;  break; //yellow
+        case 1:  color = RGB_Red;    break; //red
+        case 2:  color = RGB_Green;  break; //green
+        case 3:  color = RGB_Blue;   break; //blue
+        case 4:  color = RGB_White;  break; //white
+        default: color = RGB_Yellow; break; //yellow
       }
 
       //give x and y sides different brightness
-      if(side == 1) 
-      color = color / 2;
+      if(side == 1) {color = color / 2;}
 
       //draw the pixels of the stripe as a vertical line
       verLine(x, drawStart, drawEnd, color);
@@ -163,20 +189,16 @@ int main(int argc, char **argv)
     double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
     readKeys();
     //move forward if no wall in front of you
-    /*if(keyDown(SDLK_UP))
+    if(keyDown(SDLK_UP))
     {
-      if(worldMap[(int)posX + dirX * moveSpeed][(int)posY] == 0) 
-            posX += dirX * moveSpeed;
-      if(worldMap[(int)posX][(int)posY + dirY * moveSpeed] == 0) 
-            posY += dirY * moveSpeed;
+      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
     }
     //move backwards if no wall behind you
     if(keyDown(SDLK_DOWN))
     {
-      if(worldMap[(int)posX - dirX * moveSpeed][(int)posY] == 0) 
-            posX -= dirX * moveSpeed;
-      if(worldMap[(int)posX][(int)posY - dirY * moveSpeed] == 0) 
-            posY -= dirY * moveSpeed;
+      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
     }
     //rotate to the right
     if(keyDown(SDLK_RIGHT))
@@ -199,6 +221,6 @@ int main(int argc, char **argv)
       double oldPlaneX = planeX;
       planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
       planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
-    }*/
+    }
   }
 }
