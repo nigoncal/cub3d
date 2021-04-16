@@ -16,14 +16,14 @@
 
 // faire un bzero de toute ta structure
 
-void	abort_prog(char *line, cub_settings *settings, char *s)
+void	abort_prog(char *line, t_settings *cub_sets, char *s)
 {
 	int	atexit_ret;
 
 	atexit_ret = 0;
 	fprintf(stderr, "%s\n", s);
 	atexit_ret += atexit((*free)(line));
-	atexit_ret += atexit((*free)(settings));
+	atexit_ret += atexit((*free)(cub_sets));
 	perror("Error\nUsage ");
 	exit(atexit_ret);
 }

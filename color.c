@@ -17,18 +17,18 @@
 
 // il te faut passer trois fois dedans avec un tableau d'int, donc i = 0 et tu check si tu n'as pas deja enregistre un C ou un F et si ca passe plus de 3 fois ca veut dire qu'il y a plus que rgb, donc erreur
 
-void	color(char **line, cub_settings *settings)
+void	color(char **line, t_settings *cub_sets)
 {
 	if (*(*line) == 'C')
 	{
-		settings->ceiling_red = ft_pf_atoi(line);
-		settings->ceiling_green = ft_pf_atoi(line);
-		settings->ceiling_blue = ft_pf_atoi(line);
+		cub_sets->ceiling_red = ft_pf_atoi(line);
+		cub_sets->ceiling_green = ft_pf_atoi(line);
+		cub_sets->ceiling_blue = ft_pf_atoi(line);
 	}
 	if (*(*line) == 'F')
 	{
-		settings->floor_red = ft_pf_atoi(line);
-		settings->floor_green = ft_pf_atoi(line);
-		settings->floor_blue = ft_pf_atoi(line);
+		cub_sets->floor_red = ft_pf_atoi(line);
+		cub_sets->floor_green = ft_pf_atoi(line);
+		cub_sets->floor_blue = ft_pf_atoi(line);
 	}
 }

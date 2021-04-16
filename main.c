@@ -21,13 +21,13 @@ int	main(int argc, char **argv)
 //	int				fd;
 	int				format;
 	char			*line;
-	cub_settings	settings;
+	t_settings	cub_sets;
 
 	line = NULL;
-	ft_bzero(&settings, sizeof(cub_settings));
+	ft_bzero(&cub_sets, sizeof(t_settings));
 	format = format_check(argv[1], ".cub");
 	if (argc < 2 || argc > 3 || format == 1)
-		abort_prog(line, &settings, "./cub3d file.cub --save(optionnal)");
+		abort_prog(line, &cub_sets, "./cub3d file.cub --save(optionnal)");
 	if (argc == 3)
 	{
 		format = ft_strcmp(argv[2], "--save");
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 			return (0);
 		}
-		settings.screenshot = true;
+		cub_sets.screenshot = true;
 	}
 //	fd = open(argv[2], O_RDONLY);
 //	start(fd, &line);

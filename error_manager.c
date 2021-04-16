@@ -17,7 +17,7 @@
 // tu ajouteras par la suite tous les free
 // a ajouter dans le header
 
-void	abort_prog(char *line, cub_settings *settings, char *s)
+void	abort_prog(char *line, t_settings *cub_sets, char *s)
 {
 // si tu free &line, est-ce que ca free bien **line alors que tu prends *line en parametre ?
 }

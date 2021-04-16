@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/15 17:51:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/16 09:52:32 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ typedef struct	s_settings
 	int		ceiling_green;
 	int		ceiling_blue;
 	char	**map;
-}				cub_settings;
+}				t_settings;
 
 
 void			start(int fd, char **line);
-void			parse_id(char *line, cub_settings *settings);
-void			parse_map(char *line, cub_settings *settings);
-void			resolution(char *line, cub_settings *settings);
-//void			ft_map(char *line, cub_settings *settings); // rename et vires le de parser.c
-//void			add_line_map(char *line, cub_settings *settings);
-void			abort_prog(char *line, cub_settings *settings, char *s);
+void			parse_id(char *line, t_settings *cub_sets);
+void			parse_map(char *line, t_settings *cub_sets);
+void			resolution(char *line, t_settings *cub_sets);
+//void			ft_map(char *line, t_settings *cub_sets); // rename et vires le de parser.c
+//void			add_line_map(char *line, t_settings *cub_sets);
+void			abort_prog(char *line, t_settings *cub_sets, char *s);
 
-int				north_texture(char *line, cub_settings *settings);
+int				north_texture(char *line, t_settings *cub_sets);
 
 #endif

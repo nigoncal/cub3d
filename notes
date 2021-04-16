@@ -32,6 +32,10 @@ Commences par les commentaires de texture.c
 4 - testes
 5 - fais les check d'erreur avec Mohammed
 
+norminette (y compris libft et get_next_line, tout tout tout)
+
+valgrind
+
 vires le minilibx.tgz
 
 ecoutes tes notes vocales
