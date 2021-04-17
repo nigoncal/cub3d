@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 17:52:37 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/15 17:53:15 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/17 18:50:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 
 void	abort_prog(char *line, t_settings *cub_sets, char *s)
 {
-	int	atexit_ret;
-
-	atexit_ret = 0;
-	fprintf(stderr, "%s\n", s);
-	atexit_ret += atexit((*free)(line));
-	atexit_ret += atexit((*free)(cub_sets));
-	perror("Error\nUsage ");
-	exit(atexit_ret);
+//	if (errno)
+	ft_putstr("Error\n");
+	ft_putstr(s);
+//	perror("Error\nUsage ");
+	free(line);
+	free(cub_sets);
+	exit(1);
 }

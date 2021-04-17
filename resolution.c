@@ -6,12 +6,12 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/16 13:01:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/17 19:02:29 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx/mlx.h" // a ajouter dans ton header
-//#include "header_cub3d.h"
+#include "header_cub3d.h"
 #include <stdbool.h>
 #include "libft/header_libft.h"
 #include "get_next_line/get_next_line.h"
@@ -113,15 +113,19 @@ void	resolution(char *line, t_settings *cub_sets)
 	char	**elements;
 
 	error = 0;
-	if (cub_sets->R == true)
+	if (cub_sets->R == true) // en vrai retournes voir guhernan et cherches a faire une version simplifiee de ses retours d'erreurs
+	{
 		dprintf(1, "R already true\n");
-	//	abort_prog(line, cub_sets, "Identifiers should be used only once");
+		abort_prog(line, cub_sets, "Identifiers should be used only once");
+	}
 	elements = ft_split(line, ' ');
 	error = right_amount(elements, cub_sets);
 	if (error == -1)
+	{
 		dprintf(1, "Error\n");
-	//	abort_prog(line, cub_sets, "Resolution line not well formated. Usage :\
-	//			\nR <width> <height>\nOnly positive values");
+		abort_prog(line, cub_sets, "Resolution line not well formated. Usage :\
+				\nR <width> <height>\nOnly positive values"); // ligne trop longue
+	}
 	cub_sets->R = true;
 	free(elements);
 }

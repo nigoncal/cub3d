@@ -11,9 +11,14 @@ la fonction exit permet de terminer un programme, je pense qu'elle est utile pou
 atexit permet d'enregistrer des fonctions a appeler dans l'ordre inverse de leur enregistrement au moment de terminer le programme, via la fonction exit. Donc tu peux stack des fonctions qui free, par expmple, via atexit
 
 les fonctions error, tu as pris des notes dans ton cahier.
-errnum interessants : 79, 84 ?, 85,
-voir comment set errnum toi meme
-en fait tu utilises fprintf pour print sur le stderr
+
+
+-----------------------------------------------------------------------------------------------
+POUR DIMANCHE 18 AVRIL 2021
+La tues es sur resolution et tu essayes de faire fonctionner abort_all quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_all soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
+
+avant ou en meme temps, va voir guhernan pour essayer de faire une version simplifiee, adaptee a ton code, de ses fonctions de tableau de pointeurs sur fonctions ou je sais pas quoi, car tu as des petits bouts de phrases a coller les unes aux autres poru chacune de tes erreurs et sa methode a l'air hyper adaptee pour cela. Sauf qu'elle est un peu longue donc a voir si tu peux en adadapter une version plus courte.
+-----------------------------------------------------------------------------------------------
 
 tu es en train de coder abort_all
 ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_all
@@ -34,7 +39,12 @@ Commences par les commentaires de texture.c
 
 norminette (y compris libft et get_next_line, tout tout tout)
 
-valgrind
+---valgrind--
+apparemment les
+possibly lost: 48 bytes in 2 blocks
+still reachable: 200 bytes in 6 blocks
+sont dus au mac, selon Arthur du bocal
+--------------
 
 vires le minilibx.tgz
 
