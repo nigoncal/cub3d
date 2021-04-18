@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_header_libft.h                                     :+:      :+:    :+:   */
+/*   header_libft.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 10:40:49 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/12 12:59:15 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/18 18:40:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ size_t			ft_strlcpy(char *dst, const char *source, size_t size);
 size_t			ft_strlen(const char *str);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 int				format_check(char *file, char *format);
+int				free_char_p2p(char **str);
 int				ft_atoi(const char *str);
 int				ft_pf_atoi(char **str);
 int				ft_isalnum(int c);

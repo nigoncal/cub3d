@@ -14,10 +14,12 @@ les fonctions error, tu as pris des notes dans ton cahier.
 
 
 -----------------------------------------------------------------------------------------------
-POUR DIMANCHE 18 AVRIL 2021
-La tues es sur resolution et tu essayes de faire fonctionner abort_all quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_all soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
+POUR LUNDI 19 AVRIL 2021
 
-avant ou en meme temps, va voir guhernan pour essayer de faire une version simplifiee, adaptee a ton code, de ses fonctions de tableau de pointeurs sur fonctions ou je sais pas quoi, car tu as des petits bouts de phrases a coller les unes aux autres poru chacune de tes erreurs et sa methode a l'air hyper adaptee pour cela. Sauf qu'elle est un peu longue donc a voir si tu peux en adadapter une version plus courte.
+Tu es en train de coder la fonction free_char_p2p dans ta libft
+
+Il te faut ton Makefile et ta fonction d'erreur
+La tu es sur resolution et tu essayes de faire fonctionner abort_all quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_all soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
 -----------------------------------------------------------------------------------------------
 
 tu es en train de coder abort_all

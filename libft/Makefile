@@ -1,4 +1,5 @@
 SRCS		=	change_char.c\
+				free_char_p2p.c\
 				format_check.c\
 				ft_memset.c\
 				ft_bzero.c\
