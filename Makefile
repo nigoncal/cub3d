@@ -7,7 +7,7 @@ PGM			=	cub3D
 LIBFT		=	libft.a
 
 # Name directory
-PATH_INC	=	includes
+PATH_INC	=	.
 PATH_SRC	=	srcs
 PATH_OBJ	=	obj
 PATH_MLX	=	minilibx
@@ -17,12 +17,10 @@ PATH_LIBFT	=	libft
 SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c parsing_utils.c parsing_textures.c main.c\
 parsing_skip.c parsing_map.c get_next_line.c get_next_line_utils.c\
 exit.c)
-#celle qui marche mais met les .o dans /srcs :
-OBJS		=	${SRCS:.c=.o}
+#celle de Dodo :
+#OBJS		=	${SRCS:$(PATH_SRC)/%.c=$(PATH_OBJ)/%.o}
 #celle de base :
-#OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
-#OBJS		=	${SRCS:%.c=$(PATH_OBJ)/%.o}
-#OBJS		=	${SRCS:.c=.o}
+OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
 INCS		=	cub3D.h
 
 # Commands of compilation
@@ -48,18 +46,15 @@ _SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
 #$(OBJS) : $(SRCS)
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-$(PATH_OBJ)/%.o : %.c $(PATH_INC)/cub3D.h
-	mkdir -p $(PATH_OBJ)
+# $(PATH_OBJ)/
+$(PATH_OBJ)/%.o: $(PATH_SRC)/%.c cub3D.h
+	$(shell mkdir -p $(PATH_OBJ))
 	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 # Rules
-all:
-	$(MAKE) init
+all: $(MLX)
 	$(MAKE) $(NAME)
 	@echo "$(_SUCCESS) Compilation done"
-
-init:	$(MLX)
-	$(shell mkdir -p $(PATH_OBJ))
 
 $(LIBFT) :
 	$(MAKE) -C ./$(PATH_LIBFT)
@@ -71,7 +66,8 @@ $(MLX): $(LIBFT)
 
 $(NAME): ${OBJS}
 	ar rcs $(NAME) ${OBJS}
-	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
+#	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
+	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) -o $(PGM)
 
 clean:
 	$(RM) -rf $(PATH_OBJ)
