@@ -14,9 +14,9 @@ les fonctions error, tu as pris des notes dans ton cahier.
 
 
 -----------------------------------------------------------------------------------------------
-POUR LUNDI 19 AVRIL 2021
+POUR MARDI 19 AVRIL 2021
 
-Tu es en train de coder la fonction free_char_p2p dans ta libft
+En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
 
 Il te faut ton Makefile et ta fonction d'erreur
 La tu es sur resolution et tu essayes de faire fonctionner abort_all quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_all soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
