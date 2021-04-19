@@ -17,7 +17,12 @@ PATH_LIBFT	=	libft
 SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c parsing_utils.c parsing_textures.c main.c\
 parsing_skip.c parsing_map.c get_next_line.c get_next_line_utils.c\
 exit.c)
-OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
+#celle qui marche mais met les .o dans /srcs :
+OBJS		=	${SRCS:.c=.o}
+#celle de base :
+#OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
+#OBJS		=	${SRCS:%.c=$(PATH_OBJ)/%.o}
+#OBJS		=	${SRCS:.c=.o}
 INCS		=	cub3D.h
 
 # Commands of compilation
@@ -36,8 +41,15 @@ _INFO		=	[$(_YELLOW)INFO$(_RESET)]
 _SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
 
 # Wildcard rule
+#rule d'origine :
+#$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
+#	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
+#$(OBJS) : $(SRCS)
+#	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
+
+$(PATH_OBJ)/%.o : %.c $(PATH_INC)/cub3D.h
+	mkdir -p $(PATH_OBJ)
 	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 # Rules
@@ -57,8 +69,8 @@ $(MLX): $(LIBFT)
 	$(MAKE) -C ./$(PATH_MLX)
 	cp ./$(PATH_MLX)/$(MLX) .
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): ${OBJS}
+	ar rcs $(NAME) ${OBJS}
 	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
 
 clean:

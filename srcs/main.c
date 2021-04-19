@@ -6,14 +6,14 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/16 15:35:40 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/19 09:14:23 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-#include "../libft/libft.h"
+//#include "../libft/libft.h"
 //#include "../get_next_line/get_next_line.h"
-#include <fcntl.h>
+//#include <fcntl.h>
 //#include <stdio.h>
 
 int	main (int argc, char **argv)
