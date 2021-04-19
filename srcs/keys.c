@@ -15,5 +15,5 @@ int	key_hook(int keycode)//, t_miniRT *mini)
 		//go left
 	if (keycode == 2)
 		//go right*/
-	return (0);
+	return (keycode);
 }

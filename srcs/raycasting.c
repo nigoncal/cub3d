@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 11:11:17 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/04/19 14:14:08 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/19 14:50:18 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,14 @@ void    ray_cast_test(t_screen *sc)
       //give x and y sides different brightness
       if(side == 1) {sc->color = sc->color / 2;}
       //draw the pixels of the stripe as a vertical line
+      sc->i = drawStart;
+      sc->j = drawEnd;
 
-      put_square(50, sc);
+  while (drawStart < drawEnd)
+	{
+		put_pixel(x, drawStart);
+		drawStart++;
+	}
     
 
     }
@@ -168,17 +174,19 @@ void    ray_cast_test(t_screen *sc)
     //double frameTime = time / 1000.0; //frameTime is the time this frame has taken, in seconds
 
     //speed modifiers
-   // double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
+   //double moveSpeed = 5.0; //the constant value is in squares/second
     //double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
-	mlx_key_hook(sc->win, key_hook, sc);
-	
+	//mlx_key_hook(sc->win, key_hook, sc);
     //move forward if no wall in front of you
-    /*if(keyDown(SDLK_UP))
+  
+	mlx_key_hook(sc->win, key_hook, sc);
+
+    /*if(a == 53)
     {
-      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
-    }
-    //move backwards if no wall behind you
+   if(worldMap[(int)posX + (int)dirX * (int)moveSpeed][(int)posY] == 0) posX += dirX * moveSpeed;
+      if(worldMap[(int)posX][(int)posY + (int)dirY * (int)moveSpeed] == 0) posY += dirY * moveSpeed;
+    }*/
+    /*//move backwards if no wall behind you
     if(keyDown(SDLK_DOWN))
     {
       if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
