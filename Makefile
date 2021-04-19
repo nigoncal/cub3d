@@ -1,22 +1,22 @@
 .PHONY: all clean fclean re
 
 # Names of files
-NAME		=	miniRT.a
+NAME		=	cub3d.a
 MLX			=	libmlx.dylib
-PGM			=	miniRT
+PGM			=	cub3D
 LIBFT		=	libft.a
 
 # Name directory
 PATH_INC	=	includes
 PATH_SRC	=	srcs
-PATH_OBJ	=	obj
-PATH_MLX	=	minilibx
+PATH_OBJ	=	objs
+PATH_MLX	=	mlx
 PATH_LIBFT	=	libft
 
 # List of sources
-SRCS		=	$(addprefix $(PATH_SRC)/, main.c)
+SRCS		=	$(addprefix $(PATH_SRC)/, main.c minimap.c)
 OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
-INCS		=	$(addprefix $(PATH_INC)/, header.h)
+INCS		=	cub3D.h
 
 # Commands of compilation
 COMP		=	clang
@@ -33,8 +33,15 @@ _RESET		=	\033[0m
 _INFO		=	[$(_YELLOW)INFO$(_RESET)]
 _SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
 
-# Functions
-all:	init $(NAME)
+# Wildcard rule
+
+$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
+	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
+
+# Rules
+all:
+	$(MAKE) init
+	$(MAKE) $(NAME)
 	@echo "$(_SUCCESS) Compilation done"
 
 init:	$(MLX)
@@ -48,12 +55,9 @@ $(MLX): $(LIBFT)
 	$(MAKE) -C ./$(PATH_MLX)
 	cp ./$(PATH_MLX)/$(MLX) .
 
-$(NAME): $(OBJS) $(INCS)
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
-
-$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c $(INCS)
-	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 clean:
 	$(RM) -rf $(PATH_OBJ)
@@ -64,9 +68,12 @@ fclean: clean
 	$(RM) -rf $(PGM)
 	$(RM) -rf $(NAME)
 	$(RM) -rf $(MLX)
+	$(RM) -rf $(LIBFT)
 	$(RM) -rf ./$(PATH_MLX)/$(MLX)
 	$(RM) -rf ./$(PATH_MLX)/*.o
 	$(RM) -rf ./$(PATH_MLX)/*.swiftmodule
 	$(RM) -rf ./$(PATH_MLX)/*.swiftdoc
 
-re: fclean all
+re: 
+	$(MAKE) fclean
+	$(MAKE) all

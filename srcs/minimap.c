@@ -1,6 +1,6 @@
 #define mapWidth 4
 #define mapHeight 5
-#include "header.h"
+#include "../cub3D.h"
 
 void create_mini_map(t_screen *sc)
 {

@@ -2,10 +2,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "mlx/mlx.h"
-
+# include"libft/libft.h"
 /* == GNL INCLUDES == */
 # include <fcntl.h>
-# include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
@@ -62,48 +61,9 @@ typedef struct s_screen
 
 }	t_screen;
 
-typedef struct s_color
-{
-	int		R;
-	int		G;
-	int		B;
-}	t_color;
-
-typedef struct s_vec
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vec;
-
-typedef struct s_light
-{
-	t_vec	lightCoordo;
-	float	intensity;
-	t_color	color;
-	struct s_light *next;
-}	t_light;
-
-typedef struct s_cam
-{
-	t_vec	camCoordo;
-	t_vec	camOrientation;
-	int		FOV;
-	struct s_cam *next;
-}	t_cam;
-
-typedef struct s_intersect
-{
-	float	a;
-	float	b;
-	float	c;
-	float	t1;
-	float	t2;
-	float	delta;
-}	t_intersect;
 
 void    put_square( int lenght, t_screen *sc);
-void create_mini_map(t_screen *sc);
-void 	init(t_screen *screen);
+void	create_mini_map(t_screen *sc);
+void	init_screen(t_screen *screen);
 void    put_pixel(t_screen *screen);
 void 	get_map();
