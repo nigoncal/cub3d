@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 11:11:17 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/04/19 14:03:45 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/04/19 14:14:08 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ void    ray_cast_test(t_screen *sc)
     //speed modifiers
    // double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
     //double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
-
+	mlx_key_hook(sc->win, key_hook, sc);
+	
     //move forward if no wall in front of you
     /*if(keyDown(SDLK_UP))
     {

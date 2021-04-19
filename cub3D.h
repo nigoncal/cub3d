@@ -68,3 +68,5 @@ void	create_mini_map(t_screen *sc);
 void	init_screen(t_screen *screen);
 void    put_pixel(t_screen *screen);
 void 	get_map();
+
+int		key_hook(int keycode);
