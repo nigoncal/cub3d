@@ -63,6 +63,7 @@ typedef struct s_screen
 
 
 void    put_square( int lenght, t_screen *sc);
+void    ray_cast_test(t_screen *sc);
 void	create_mini_map(t_screen *sc);
 void	init_screen(t_screen *screen);
 void    put_pixel(t_screen *screen);

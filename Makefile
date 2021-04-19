@@ -14,7 +14,7 @@ PATH_MLX	=	mlx
 PATH_LIBFT	=	libft
 
 # List of sources
-SRCS		=	$(addprefix $(PATH_SRC)/, main.c minimap.c)
+SRCS		=	$(addprefix $(PATH_SRC)/, main.c minimap.c raycasting.c)
 OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
 INCS		=	cub3D.h
 
