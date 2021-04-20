@@ -16,6 +16,11 @@ les fonctions error, tu as pris des notes dans ton cahier.
 -----------------------------------------------------------------------------------------------
 POUR MARDI 19 AVRIL 2021
 
+Tu peux remettre tes if(fonction qui return un int)
+Ce qui est interdit dans la norme ce sont les ASSIGNATIONS dans les strucutres de controle
+Exemple : if((int = fonction())). La tu assignes l'int et tu verifies sa valeur, tout ca en meme temps dans une structure de controle
+DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour remodif ca
+
 En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
 
 Il te faut ton Makefile et ta fonction d'erreur
@@ -63,3 +68,5 @@ push ton cub3D sur ton propre git
 repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)
 
 passes ta libft a la nouvelle norme
+
+si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c (dans ta libft)
