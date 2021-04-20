@@ -1,35 +1,50 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   resolution.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 15:11:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/05 11:41:16 by sylducam         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../cub3D.h"
 
-#include "header_cub3D.h"
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
-#include <stdio.h> // a virer
-
-// faire tous les checkings d'erreur
-
-void	resolution(char *line, t_setup *settings)
+int	cap_resolution(t_setup *setup)
 {
-	while (line++)
+	if (setup->res_w <= 0 || setup->res_h <= 0)
 	{
-
-		{
-			if (settings->width == 0)
-				settings->width = ft_atoi(line);
-			if (settings->width != 0 && settings->height == 0)
-				settings->height = ft_atoi(line);
-		}
-		while (line = ' ')
-			line++;
-		line++;
+		ft_putstr_fd("Error\nResolution parsing failed because of negative \
+values, check your .cub file please <3\n", 0);
+		return (-1);
 	}
+	mlx_get_screen_size(setup->mlx, &setup->max_w, &setup->max_h);
+	if (setup->max_w == 0 || setup->max_h == 0)
+	{
+		printf("Error\nMLX couldn't get your screen's size. Sorry bro.\n");
+		return (-1);
+	}
+	if (setup->res_w > setup->max_w)
+		setup->res_w = setup->max_w;
+	else if (setup->max_w != setup->res_w)
+		setup->max_w = setup->res_w;
+	if (setup->res_h > setup->max_h)
+		setup->res_h = setup->max_h;
+	else if (setup->max_h != setup->res_h)
+		setup->max_h = setup->res_h;
+	return (0);
+}
+
+int	parse_resolution(char **tab, t_setup *setup)
+{
+	int	i;
+	int l;
+
+	i = 0;
+	l = 0;
+	setup->res_w = 0;
+	setup->res_h = 0;
+	while (tab[l] != 0)
+		l++;
+	if (l != 3)
+		return (-1);
+	l = 1;
+	i += skip_ws(tab[l]);
+	setup->res_w = ft_atoi(tab[l]);
+	//printf("res W = %d\n", setup->res_w);
+	l++;
+	i += skip_ws(tab[l]);
+	setup->res_h = ft_atoi(tab[l]);
+	//printf("res H = %d\n", setup->res_h);
+	return (0);
 }

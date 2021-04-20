@@ -14,7 +14,7 @@ PATH_MLX	=	minilibx
 PATH_LIBFT	=	libft
 
 # List of sources
-SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c parsing_utils.c parsing_textures.c main.c\
+SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c resolution.c parsing_utils.c parsing_IDs.c parsing_textures.c main.c\
 parsing_skip.c parsing_map.c get_next_line.c get_next_line_utils.c\
 exit.c)
 #celle de Dodo :

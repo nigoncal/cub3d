@@ -1,17 +1,21 @@
 			R 			192000 					108000
 
 
-F 220,100,0
+
+Fl 220,100,0
 
 
+Sl ./textures/test.png
 
 
 C 225,30,0
-		NO 		./textures/test
-   			SO		       ./textures/test
-WE ./textures/test
-EA ./textures/test
-S ./textures/test
+		NO 		./textures/test.png
+   			SO		       ./textures/test.png
+EAs ./textures/test.png
+
+WE ./textures/test.png
+R 			192000 					108000
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000002000001

@@ -6,15 +6,11 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/19 13:33:31 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/20 13:28:43 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-//#include "../libft/libft.h"
-//#include "../get_next_line/get_next_line.h"
-//#include <fcntl.h>
-//#include <stdio.h>
 
 int	main (int argc, char **argv)
 {
@@ -24,9 +20,10 @@ int	main (int argc, char **argv)
 	fd = 0;
 	/*init_struct(&setup);*/
 	ft_bzero(&setup, sizeof(t_setup));
+	ft_bzero(&setup.IDs, sizeof(setup.IDs));
 	if (parse_args(argc, argv, &setup) < 0)
 	{
-		ft_putstr_fd("Error \nParsing failed, please check your args and/or .cub file \
+		ft_putstr_fd("Error\nParsing failed, please check your args and/or .cub file \
 and try again. Keep going !\n", 0);
 		return (-1);
 	}
@@ -36,8 +33,11 @@ and try again. Keep going !\n", 0);
 	{
 		setup.map_size_known = 1;
 		printf("\n\n EZEPARTI ok on lance le 2e GNL\n");
-		fd = open(argv[argc - 1], O_RDONLY);
-		open_file(&setup, fd);
+		fd = open(argv[1], O_RDONLY);
+		if (fd > 1)
+			open_file(&setup, fd);
+		else
+			printf("Error\nProblem with your .cub while working with it.\n");
 	}
 	//printf("normalement apres ca crash\n");
 	printf("La 1e ligne du tab malloqué : [%s]\n", setup.map[0]);
@@ -49,8 +49,10 @@ and try again. Keep going !\n", 0);
 	//mlx_put_image_to_window(mini.mlx, mini.win, mini.image, 0, 0);
 	//mlx_loop(mini.mlx);
 	if (setup.map_malloced == 1)
+	{
+		//free_2d_tab(setup.map, setup.map_nb_lines + 1);
 		free(setup.map);
-		//free_2d_tab(setup.map, setup.map_nb_lines);
+	}
 	return (0);
 }
 

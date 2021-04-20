@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 10:24:43 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/16 13:38:34 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/20 09:37:44 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ int	parse_map(char *line, t_setup *setup)
 	//static int	tab_line;
 	
 	if (setup->map_size_known != 1)
+	{
+		
 		get_map_size(line, setup);
 		// go to map parsing
+	}
 	else if (setup->map_malloced == 0)
 	{
 		//malloc le char ** de la struct pour stocker la map

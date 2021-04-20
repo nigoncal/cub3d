@@ -16,17 +16,9 @@ int	parse_textures(char **tab, t_setup *setup)
 	//l = 1;
 	i += skip_ws(tab[1]);
 	printf("skip i = %d\n", i);
-	// verif qu'on essaie pas d'open un dossier
 	fd = 0;
-	fd = open(&tab[1][i], O_DIRECTORY);
-	if (fd != -1)
-		return (-1);
-	//verif validite fichier
-	fd = 0;
-	fd = open(&tab[1][i], O_RDONLY);
-	printf("fd = %d\n", fd);
-	//printf("path opened = [%s]\n", tab[1]);
-	if (fd == -1)
+	fd = check_file(&tab[1][i], ".png");
+	if (fd < 2)
 		return (-1);
 	if (tab[0][0] == 'N' && tab[0][1] == 'O')
 	{
