@@ -63,10 +63,10 @@ typedef struct s_screen
 
 
 void    put_square( int lenght, t_screen *sc);
-void    ray_cast_test(t_screen *sc);
+void    ray_cast_test(t_ray *info, t_screen *sc);
 void	create_mini_map(t_screen *sc);
 void	init_screen(t_screen *screen);
 void    put_pixel(t_screen *screen);
 void 	get_map();
-
+void	verLine(t_screen *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);

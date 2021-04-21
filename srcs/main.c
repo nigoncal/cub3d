@@ -14,7 +14,7 @@ int main(void)
   init_screen(&sc);
   ft_bzero(&ray, sizeof(ray));
   //create_mini_map(&sc);
-  ray_cast_test(&sc);
+  ray_cast_test(&ray, &sc);
   mlx_put_image_to_window(sc.mlx, sc.win, sc.image, 0, 0);
   mlx_loop(sc.mlx);
   return (0);
