@@ -1,80 +1,90 @@
-.PHONY: all clean fclean re
+NAME				=	cub3d
+LIBCUB3D			=	libcub3d.a
+LIBFT				=	libft.a
+MINILIBX			=	libmlx.dylib
 
-# Names of files
-NAME		=	cub3d.a
-MLX			=	libmlx.dylib
-PGM			=	cub3D
-LIBFT		=	libft.a
+LIBRARIES			=	$(LIBCUB3D) $(LIBFT) $(MINILIBX)
 
-# Name directory
-PATH_INC	=	includes
-PATH_SRC	=	srcs
-PATH_OBJ	=	obj
-PATH_MLX	=	minilibx
-PATH_LIBFT	=	libft
+SRCS_PATH			=	/srcs/
+PARS_SRCS_PATH		=	/srcs/parsing/
+LIBFT_PATH			=	/srcs/libft/
+MINILIBX_PATH		=	/srcs/minilibx/
 
-# List of sources
-SRCS		=	$(addprefix $(PATH_SRC)/, parsing.c parsing_utils.c parsing_textures.c main.c\
-get_next_line.c get_next_line_utils.c)
-OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
-INCS		=	cub3D.h
+SRCS				=	start.c\
+						tools.c\
+						error_manager.c
+	
+PARS_SRCS			=	parser.c\
+						p_resolution.c\
+						p_textures.c\
+						p_north_texture.c\
+						p_south_texture.c\
+						p_east_texture.c\
+						p_west_texture.c\
+						p_sprite_texture.c\
+						p_colors.c\
+						p_map.c
 
-# Commands of compilation
-COMP		=	clang
-COMP_FLAG	=	-Wall -Werror -Wextra 
-COMP_ADD	=	-I$(PATH_INC)
 
-# Others Command
-RM			=	rm
 
-# Color Code and template code
-_YELLOW		=	\033[33;1m
-_GREEN		=	\033[32;1m
-_RESET		=	\033[0m
-_INFO		=	[$(_YELLOW)INFO$(_RESET)]
-_SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
+OBJS			=	$(addprefix $(SRCS_PATH), $(SRCS:.c=.o))\
+					$(addprefix $(PARS_SRCS_PATH), $(PARS_SRCS:.c=.o))
+
+CUB3D_HEADER	=	header_cub3d.h
+
+COMP_FLAGS		=	-Wall -Werror -Wextra 
+COMP_ADD		=	-I$(HEADER)
+
+RM				=	rm -rf
 
 # Wildcard rule
 
-$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
+$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-# Rules
-all:
-	$(MAKE) init
-	$(MAKE) $(NAME)
-	@echo "$(_SUCCESS) Compilation done"
+all:			$(NAME)
+				$(MAKE) init
+				$(MAKE) $(NAME)
 
-init:	$(MLX)
-	$(shell mkdir -p $(PATH_OBJ))
+%.o:			%.c $() $()
+				gcc -I $(HEADER) $(LIBRARIES)
+
+init:	$(MINILIBX)
+	$(shell mkdir -p $(PATH_OBJS))
+
+$(LIBCUB3D) :	$(OBJS)
+				ar rcs $(LIBCUB3D) $(OBJS) $(CUB3D_HEADER)
 
 $(LIBFT) :
 	$(MAKE) -C ./$(PATH_LIBFT)
 	cp libft/libft.a ./$(LIBFT)
 
-$(MLX): $(LIBFT)
-	$(MAKE) -C ./$(PATH_MLX)
-	cp ./$(PATH_MLX)/$(MLX) .
+$(MINILIBX): $(LIBFT)
+	$(MAKE) -C ./$(PATH_MINILIBX)
+	cp ./$(PATH_MINILIBX)/$(MINILIBX) .
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
+$(NAME):		$(LIBCUB3D)
+				make -C $(LIBFT_PATH)
+				make -C $(MINILIBX_PATH)
+				gcc $(FLAGS) $(LIBRARIES) main.c -o $(NAME)
 
 clean:
-	$(RM) -rf $(PATH_OBJ)
+	$(RM) -rf $(PATH_OBJS)
 
 fclean: clean
-	$(MAKE) clean -C ./$(PATH_MLX)
+	$(MAKE) clean -C ./$(PATH_MINILIBX)
 	$(MAKE) fclean -C ./$(PATH_LIBFT)
-	$(RM) -rf $(PGM)
+	$(RM) -rf $(EXE)
 	$(RM) -rf $(NAME)
-	$(RM) -rf $(MLX)
+	$(RM) -rf $(MINILIBX)
 	$(RM) -rf $(LIBFT)
-	$(RM) -rf ./$(PATH_MLX)/$(MLX)
-	$(RM) -rf ./$(PATH_MLX)/*.o
-	$(RM) -rf ./$(PATH_MLX)/*.swiftmodule
-	$(RM) -rf ./$(PATH_MLX)/*.swiftdoc
+	$(RM) -rf ./$(PATH_MINILIBX)/$(MINILIBX)
+	$(RM) -rf ./$(PATH_MINILIBX)/*.o
+	$(RM) -rf ./$(PATH_MINILIBX)/*.swiftmodule
+	$(RM) -rf ./$(PATH_MINILIBX)/*.swiftdoc
 
 re: 
 	$(MAKE) fclean
 	$(MAKE) all
+
+.PHONY: all clean fclean re
