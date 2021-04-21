@@ -1,15 +1,43 @@
 
-#include"../cub3D.h"
-#include "../key_macros.h"
+  
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   01_untextured_raycast.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohlee <yohlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/15 12:12:25 by yohan             #+#    #+#             */
+/*   Updated: 2020/07/21 08:08:19 by yohlee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "mlx/mlx.h"
+#include "key_macos.h"
+#include <math.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 #define mapWidth 24
 #define mapHeight 24
-#define width 2560
-#define height 1440
+#define width 640
+#define height 480
 
-
+typedef struct	s_info
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx;
+	void	*win;
+	double	moveSpeed;
+	double	rotSpeed;
+}				t_info;
 
 int	worldMap[24][24] = {
 							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -30,10 +58,10 @@ int	worldMap[24][24] = {
 							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+							{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,1},
+							{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 						};
@@ -43,127 +71,123 @@ void	verLine(t_info *info, int x, int y1, int y2, int color)
 	int	y;
 
 	y = y1;
-	char *dst;
 	while (y <= y2)
 	{
-    dst = info->buffer + (y * info->line_lenght + x * (info->BPP / 8));
-    *(unsigned int*)dst = color;	
+        info->buffer[info->lineHeight / 4 + x] = info->color;
 		y++;
 	}
 }
 
 void	calc(t_info *info)
 {
+	int	x;
 
- 	info->x = 0;
-	 	
-	  	
-		info->image = mlx_new_image(info->mlx, width, height);
-		info->buffer = mlx_get_data_addr(info->image, &info->BPP, &info->line_lenght, &info->endian);
-
-	while (info->x < width)
+	x = 0;
+	while (x < width)
 	{
-
-		info->cameraX = 2 * info->x / (double)width -1 ; //camera dans l'espace
-		info->raydirX = info->dirX + info->planeX *	info->cameraX;
-		info->raydirY = info->dirY + info->planeY * info->cameraX;
+		double cameraX = 2 * x / (double)width - 1;
+		double rayDirX = info->dirX + info->planeX * cameraX;
+		double rayDirY = info->dirY + info->planeY * cameraX;
 		
-		 info->mapX = (int)info->posX;
-		info->mapY = (int)info->posY;
+		int mapX = (int)info->posX;
+		int mapY = (int)info->posY;
 
 		//length of ray from current position to next x or y-side
-		info->sidedistX = 0;
-		info->sidedistY = 0;
+		double sideDistX;
+		double sideDistY;
 		
 		 //length of ray from one x or y-side to next x or y-side
-		info->deltadistX = fabs(1 / info->raydirX);
-		info->deltadistY = fabs(1 / info->raydirY);
-	
-		info->hit = 0;
+		double deltaDistX = fabs(1 / rayDirX);
+		double deltaDistY = fabs(1 / rayDirY);
+		double perpWallDist;
+		
+		//what direction to step in x or y-direction (either +1 or -1)
+		int stepX;
+		int stepY;
+		
+		int hit = 0; //was there a wall hit?
+		int side; //was a NS or a EW wall hit?
 
-		if (info->raydirX < 0)
+		if (rayDirX < 0)
 		{
-			info->stepX = -1;
-			info->sidedistX = (info->posX - info->mapX) *	info->deltadistX;
+			stepX = -1;
+			sideDistX = (info->posX - mapX) * deltaDistX;
 		}
 		else
 		{
-			info->stepX = 1;
-			info->sidedistX = (info->mapX + 1.0 - info->posX) * info->deltadistX;
+			stepX = 1;
+			sideDistX = (mapX + 1.0 - info->posX) * deltaDistX;
 		}
-		if (info->raydirY < 0)
+		if (rayDirY < 0)
 		{
-			info->stepY = -1;
-			info->sidedistY = (info->posY - info->mapY) * info->deltadistY;
+			stepY = -1;
+			sideDistY = (info->posY - mapY) * deltaDistY;
 		}
 		else
 		{
-			info->stepY = 1;
-			info->sidedistY = (info->mapY + 1.0 - info->posY) * info->deltadistY;
+			stepY = 1;
+			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
 		}
 
-		while (info->hit == 0)
+		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (info->sidedistX < info->sidedistY)
+			if (sideDistX < sideDistY)
 			{
-				info->sidedistX += info->deltadistX;
-				info->mapX += info->stepX;
-				info->side = 0;
+				sideDistX += deltaDistX;
+				mapX += stepX;
+				side = 0;
 			}
 			else
 			{
-				info->sidedistY += info->deltadistY;
-				info->mapY += info->stepY;
-				info->side = 1;
+				sideDistY += deltaDistY;
+				mapY += stepY;
+				side = 1;
 			}
 			//Check if ray has hit a wall
-			if (worldMap[info->mapX][info->mapY] > 0) info->hit = 1;
+			if (worldMap[mapX][mapY] > 0) hit = 1;
 		}
-		if (info->side == 0)
-			info->perpwalldist = (info->mapX - info->posX + (1 - info->stepX) / 2) / info->raydirX;
+		if (side == 0)
+			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
 		else
-			info->perpwalldist = (info->mapY - info->posY + (1 - info->stepY) / 2) / info->raydirY;
+			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
+
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(height / info->perpwalldist);
+		int lineHeight = (int)(height / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		info->drawstart = -lineHeight / 2 + height / 2;
-		if(info->drawstart < 0)
-			info->drawstart = 0;
-		info->drawend = lineHeight / 2 + height / 2;
-		if(info->drawend >= height)
-			info->drawend = height - 1;
+		int drawStart = -lineHeight / 2 + height / 2;
+		if(drawStart < 0)
+			drawStart = 0;
+		int drawEnd = lineHeight / 2 + height / 2;
+		if(drawEnd >= height)
+			drawEnd = height - 1;
 
-		info->color = 0;
-		if (worldMap[info->mapY][info->mapX] == 1)
-			info->color = 0xFF0000;
-		else if (worldMap[info->mapY][info->mapX] == 2)
-			info->color = 0x00FF00;
-		else if (worldMap[info->mapY][info->mapX] == 3)
-			info->color = 0x0000FF;
-		else if (worldMap[info->mapY][info->mapX] == 4)
-			info->color = 0xFFFFFF;
+		int	color;
+		if (worldMap[mapY][mapX] == 1)
+			color = 0xFF0000;
+		else if (worldMap[mapY][mapX] == 2)
+			color = 0x00FF00;
+		else if (worldMap[mapY][mapX] == 3)
+			color = 0x0000FF;
+		else if (worldMap[mapY][mapX] == 4)
+			color = 0xFFFFFF;
 		else
-			info->color = 0xFFFF00;
+			color = 0xFFFF00;
 		
-		if (info->side == 1)
-			info->color = info->color / 2;
-		
-	
-	verLine(info, info->x, info->drawstart, info->drawend, info->color);
+		if (side == 1)
+			color = color / 2;
 
-		info->x++;
+		verLine(info, x, drawStart, drawEnd, color);
+		
+		x++;
 	}
-
 }
 
 int	main_loop(t_info *info)
 {
 	calc(info);
-	    mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
-
-	//mlx_clear_window(info->mlx, info->win);
+	// mlx_put_image_to_window(info->mlx, info->win, &info->img, 0, 0);
 
 	return (0);
 }
@@ -223,20 +247,17 @@ int	main(void)
 	info.dirY = 0;
 	info.planeX = 0;
 	info.planeY = 0.66;
-	info.moveSpeed = 0.5;
+	info.moveSpeed = 0.05;
 	info.rotSpeed = 0.05;
-	info.BPP = 10;
-	info.endian = 0;
-	info.line_lenght = height;
-
-	info.win = mlx_new_window(info.mlx, width, height, "mlx");
+    info.bpp = 4;
 
 	
-
-
-
+	info.win = mlx_new_window(info.mlx, width, height, "mlx");
+    info.image = mlx_new_image(info.mlx, width, height);
+    info.buffer = mlx_get_data_addr(info.image, info.bpp, info.lineHeight, info.endian);
+    mlx_put_image_to_window(info.mlx, info.win, info.image, 0, 0);
 	mlx_loop_hook(info.mlx, &main_loop, &info);
-		
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+
 	mlx_loop(info.mlx);
 }
