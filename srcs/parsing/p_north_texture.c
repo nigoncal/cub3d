@@ -6,16 +6,16 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/16 09:36:50 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/21 17:32:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../header_cub3d.h"
 #include <stdbool.h>
-#include "libft/header_libft.h"
-#include "get_next_line/get_next_line.h" // en a-t-il besoin ?
+#include "../libft/header_libft.h"
+#include "../get_next_line/get_next_line.h" // en a-t-il besoin ?
 #include <strings.h>
-#include "minilibx/mlx.h" // a virer
+#include "../minilibx/mlx.h" // a virer
 
 /*
  * la fonction principale :
@@ -42,17 +42,13 @@ typedef struct	s_settings
 
 static int	right_file(char **elements, t_settings *cub_sets)
 {
-	int	error;
 	int	fd;
 
-	error = 0;
 	fd = 0;
-	error = ft_strcmp(elements[0], "NO");
-	if (error != 0)
+	if (ft_strcmp(elements[0], "NO") != 0)
 		return (-1);
-	error = format_check(elements[1], ".xpm");
-	error += format_check(elements[1], ".png");
-	if (error == -2) // - 2 veut dire que les deux formats ne correspondent pas (2 retours d'erreur). Si c'est -1 c'est ok car l'un deux match (-1 + 0).
+	if ((format_check(elements[1], ".xpm")) +
+			(format_check(elements[1], ".png")) == -2) // - 2 veut dire que les deux formats ne correspondent pas (2 retours d'erreur). Si c'est -1 c'est ok car l'un deux match (-1 + 0).
 		return (-1);
 	fd = open(elements[1], O_DIRECTORY);
 	cub_sets->north_fd = fd; // a virer, juste pour les test
@@ -67,30 +63,26 @@ static int	right_file(char **elements, t_settings *cub_sets)
 
 static int	right_amount(char **elements, t_settings *cub_sets)
 {
-	int	error;
+	int	i;
 
-	error = 0;
-	while (elements[error])
-		error++;
-	if (error != 2)
+	i = 0;
+	while (elements[i])
+		i++;
+	if (i != 2)
 		return (-1);
-	error = right_file(elements, cub_sets);
-	if (error == -1)
+	if (right_file(elements, cub_sets) == -1)
 		return (-1);
 	return (0);
 }
 
-int			north_texture(char *line, t_cub_sets *cub_sets)
+int			north_texture(char *line, t_settings *cub_sets)
 {
-	int		error;
 	char	**elements; // a free ?
 
-	error = 0;
 	if (cub_sets->NO == true)
 		return (-1);
 	elements = ft_split(line, ' ');
-	error = right_amount(elements, settings);
-	if (error == -1)
+	if (right_amount(elements, cub_sets) == -1)
 		return (-1);
 	cub_sets->north_texture_path = ft_strdup(elements[1]);
 	cub_sets->NO = true;

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 13:14:45 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/21 17:21:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_settings
 	bool	S;
 	bool	F;
 	bool	C;
-	void	*mlx; // ou je lui fais mlx = mlx_init ? main plus trop de place, voir si j'en fait ou sinon start
+	void	*mlx;
 	int		width;
 	int		height;
   	char	*north_texture_path;
