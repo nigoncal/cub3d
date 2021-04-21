@@ -1,10 +1,7 @@
 
-#include "../mlx/mlx.h"
+#include"../cub3D.h"
 #include "../key_macros.h"
-#include <math.h>
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 #define mapWidth 24
@@ -12,20 +9,7 @@
 #define width 1280
 #define height 720
 
-typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	void 	*image;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;
+
 
 int	worldMap[24][24] = {
 							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -46,12 +30,12 @@ int	worldMap[24][24] = {
 							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+							{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+							{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,1},
 							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1}
 						};
 
 void	verLine(t_info *info, int x, int y1, int y2, int color)
@@ -68,117 +52,105 @@ void	verLine(t_info *info, int x, int y1, int y2, int color)
 
 void	calc(t_info *info)
 {
-	int	x;
-
-	x = 0;
-	while (x < width)
+ 	info->x = 0;
+	while (info->x < width)
 	{
 		
 
-		double cameraX = 2 * x / (double)width - 1;
-		double rayDirX = info->dirX + info->planeX * cameraX;
-		double rayDirY = info->dirY + info->planeY * cameraX;
+		info->cameraX = 2 * info->x / (double)width -1 ; //camera dans l'espace
+		info->raydirX = info->dirX + info->planeX *	info->cameraX;
+		info->raydirY = info->dirY + info->planeY * info->cameraX;
 		
-		int mapX = (int)info->posX;
-		int mapY = (int)info->posY;
+		 info->mapX = (int)info->posX;
+		info->mapY = (int)info->posY;
 
 		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
+		info->sidedistX = 0;
+		info->sidedistY = 0;
 		
 		 //length of ray from one x or y-side to next x or y-side
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
-		double perpWallDist;
-		
-		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
-		
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+		info->deltadistX = fabs(1 / info->raydirX);
+		info->deltadistY = fabs(1 / info->raydirY);
+	
+		info->hit = 0;
 
-		if (rayDirX < 0)
+		if (info->raydirX < 0)
 		{
-			stepX = -1;
-			sideDistX = (info->posX - mapX) * deltaDistX;
+			info->stepX = -1;
+			info->sidedistX = (info->posX - info->mapX) *	info->deltadistX;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - info->posX) * deltaDistX;
+			info->stepX = 1;
+			info->sidedistX = (info->mapX + 1.0 - info->posX) * info->deltadistX;
 		}
-		if (rayDirY < 0)
+		if (info->raydirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (info->posY - mapY) * deltaDistY;
+			info->stepY = -1;
+			info->sidedistY = (info->posY - info->mapY) * info->deltadistY;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
+			info->stepY = 1;
+			info->sidedistY = (info->mapY + 1.0 - info->posY) * info->deltadistY;
 		}
 
-		while (hit == 0)
+		while (info->hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (sideDistX < sideDistY)
+			if (info->sidedistX < info->sidedistY)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				info->sidedistX += info->deltadistX;
+				info->mapX += info->stepX;
+				info->side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				info->sidedistY += info->deltadistY;
+				info->mapY += info->stepY;
+				info->side = 1;
 			}
 			//Check if ray has hit a wall
-			if (worldMap[mapX][mapY] > 0) hit = 1;
+			if (worldMap[info->mapX][info->mapY] > 0) info->hit = 1;
 		}
-		if (side == 0)
-			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
+		if (info->side == 0)
+			info->perpwalldist = (info->mapX - info->posX + (1 - info->stepX) / 2) / info->raydirX;
 		else
-			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
-
+			info->perpwalldist = (info->mapY - info->posY + (1 - info->stepY) / 2) / info->raydirY;
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(height / perpWallDist);
+		int lineHeight = (int)(height / info->perpwalldist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + height / 2;
-		if(drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + height / 2;
-		if(drawEnd >= height)
-			drawEnd = height - 1;
+		info->drawstart = -lineHeight / 2 + height / 2;
+		if(info->drawstart < 0)
+			info->drawstart = 0;
+		info->drawend = lineHeight / 2 + height / 2;
+		if(info->drawend >= height)
+			info->drawend = height - 1;
 
-		int	color;
-		if (worldMap[mapY][mapX] == 1)
-			color = 0xFF0000;
-		else if (worldMap[mapY][mapX] == 2)
-			color = 0x00FF00;
-		else if (worldMap[mapY][mapX] == 3)
-			color = 0x0000FF;
-		else if (worldMap[mapY][mapX] == 4)
-			color = 0xFFFFFF;
+		info->color = 0;
+		if (worldMap[info->mapY][info->mapX] == 1)
+			info->color = 0xFF0000;
+		else if (worldMap[info->mapY][info->mapX] == 2)
+			info->color = 0x00FF00;
+		else if (worldMap[info->mapY][info->mapX] == 3)
+			info->color = 0x0000FF;
+		else if (worldMap[info->mapY][info->mapX] == 4)
+			info->color = 0xFFFFFF;
 		else
-			color = 0xFFFF00;
+			info->color = 0xFFFF00;
 		
-		if (side == 1)
-			color = color / 2;
-//mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
+		if (info->side == 1)
+			info->color = info->color / 2;
+		verLine(info, info->x, info->drawstart, info->drawend, info->color);
 
-		verLine(info, x, drawStart, drawEnd, color);
-		
-		x++;
+		info->x++;
 	}
 }
 
 int	main_loop(t_info *info)
 {
-	calc(info);
-	 
+	calc(info);	 
 	mlx_clear_window(info->mlx, info->win);
 	return (0);
 }
@@ -238,7 +210,7 @@ int	main(void)
 	info.dirY = 0;
 	info.planeX = 0;
 	info.planeY = 0.66;
-	info.moveSpeed = 1;
+	info.moveSpeed = 0.5;
 	info.rotSpeed = 0.05;
 	info.win = mlx_new_window(info.mlx, width, height, "mlx");
 	mlx_loop_hook(info.mlx, &main_loop, &info);
