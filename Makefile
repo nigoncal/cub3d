@@ -3,14 +3,21 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MINILIBX			=	libmlx.dylib
 
+VPATH				=	srcs\
+						srcs/parsing\
+						srcs/libft\
+						srcs/minilibx\
+						srcs/get_next_line\
+
 LIBRARIES			=	$(addprefix $(SRCS_PATH), $(LIBCUB3D))\
 						$(addprefix $(LIBFT_PATH), $(LIBFT))\
 						$(addprefix $(MINILIBX_PATH), $(MINILIBX))
 
-SRCS_PATH			=	/srcs/
-PARS_SRCS_PATH		=	/srcs/parsing/
-LIBFT_PATH			=	/srcs/libft/
-MINILIBX_PATH		=	/srcs/minilibx/
+SRCS_PATH			=	srcs/
+PARS_SRCS_PATH		=	srcs/parsing/
+LIBFT_PATH			=	srcs/libft/
+MINILIBX_PATH		=	srcs/minilibx/
+OBJS_PATH			=	objs/
 
 SRCS				=	start.c\
 						tools.c\
@@ -27,7 +34,11 @@ PARS_SRCS			=	parser.c\
 						p_colors.c\
 						p_map.c
 
+HEADERS				=	$(SRCS_PATH)header_cub3d.h\
+						$(LIBFT_PATH)header_libft.h\
+						$(MINILIBX_PATH)
 
+INC_HEADERS			=	$(addprefix -I, $(HEADERS))
 
 OBJS				=	$(addprefix $(SRCS_PATH), $(SRCS:.c=.o))\
 						$(addprefix $(PARS_SRCS_PATH), $(PARS_SRCS:.c=.o))
@@ -39,33 +50,38 @@ CFLAGS				=	-Wall -Wextra -Werror
 #$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-%.o:			%.c $() $()
-				gcc -I $(HEADER) $(LIBRARIES)
+%.o:			%.c $(HEADERS)
+				gcc $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
+				gcc $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
-all:			$(NAME)
-#				$(MAKE) init
-#				$(MAKE) $(NAME)
+all:			
+				$(MAKE) init
+				$(MAKE) $(NAME)
 
-init:	$(MINILIBX)
-	$(shell mkdir -p $(PATH_OBJS))
+init:			$(MINILIBX)
+				$(shell mkdir -p $(PATH_OBJS))
 
 $(LIBCUB3D) :	$(OBJS)
 				ar rcs $(LIBCUB3D) $(OBJS)\
 					$(addprefix $(SRCS_PATH), $(CUB3D_HEADER))
 
+$(MINILIBX) :	
+				$(MAKE) -C $(MINILIBX_PATH)
+
 $(NAME):		$(LIBCUB3D)
-				make -C $(LIBFT_PATH)
-				make -C $(MINILIBX_PATH)
-				gcc $(CFLAGS) $(LIBRARIES) main.c -o $(NAME)
+				$(MAKE) -C $(LIBFT_PATH)
+#				$(MAKE) -C $(MINILIBX_PATH)
+				gcc $(CFLAGS) -framework OpenGL -framework AppKit\
+					-L $(MINILIBX_PATH) -l $(MINILIBX_PATH) $(LIBRARIES)\
+					-I $(MINILIBX_PATH) main.c -o $(NAME)
 
 clean:
 				rm -rf $(OBJS)
-				make clean -C $(LIBFT_PATH)
-				make clean -C $(MINILIBX_PATH)
+				$(MAKE) clean -C $(LIBFT_PATH)
+				$(MAKE) clean -C $(MINILIBX_PATH)
 
 fclean:			clean
 				rm -rf $(NAME)
-				rm -rf $(MINILIBX)
 				rm -rf $(LIBFT)
 				rm -rf ./$(PATH_MINILIBX)/$(MINILIBX)
 				rm -rf ./$(PATH_MINILIBX)/*.o

@@ -6,12 +6,12 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:58:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/17 18:58:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 11:53:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minilibx/mlx.h" // a ajouter dans ton header
-#include "../header_cub3d.h"
+//#include "../header_cub3d.h"
 #include <stdbool.h>
 #include "../libft/header_libft.h"
 #include "../get_next_line/get_next_line.h"

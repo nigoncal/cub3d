@@ -6,15 +6,15 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 13:06:23 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 11:54:14 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx/mlx.h" // a ajouter dans ton header
-#include "../header_cub3d.h"
+#include "../minilibx/mlx.h" // a ajouter dans ton header
+//#include "../header_cub3d.h"
 #include <stdbool.h>
-#include "libft/header_libft.h"
-#include "get_next_line/get_next_line.h"
+#include "../libft/header_libft.h"
+#include "../get_next_line/get_next_line.h"
 #include <stdio.h> // a virer
 
 /*
@@ -63,22 +63,17 @@ void	too_big_for_screen(t_settings *cub_sets)
 static int	right_content(char **elements, t_settings *cub_sets)
 {
 	int	i;
-	int	error;
 
 	i = 0;
-	error = 1;
 	while (elements[1][i])
 	{
-		error = ft_isdigit(elements[1][i++]);
-		if (error == 0)
+		if (ft_isdigit(elements[1][i++]) == 0)
 			return (-1);
 	}
 	i = 0;
-	error = 1;
 	while (elements[2][i])
 	{
-		error = ft_isdigit(elements[2][i++]);
-		if (error == 0)
+		if (ft_isdigit(elements[2][i++]) == 0)
 			return (-1);
 	}
 	cub_sets->width = ft_atoi(elements[1]);
@@ -88,18 +83,16 @@ static int	right_content(char **elements, t_settings *cub_sets)
 
 static int	right_amount(char **elements, t_settings *cub_sets)
 {
-	int	error;
+	int	i;
 
-	error = 0;
-	while (elements[error])
-		error++;
-	if (error != 3)
+	i = 0;
+	while (elements[i])
+		i++;
+	if (i != 3)
 		return (-1);
-	error = ft_strcmp(elements[0], "R");
-	if (error != 0)
+	if (ft_strcmp(elements[0], "R") != 0)
 		return (-1);
-	error = right_content(elements, cub_sets);
-	if (error == -1)
+	if (right_content(elements, cub_sets) == -1)
 		return (-1);
 	if (cub_sets->width <= 0 || cub_sets->height <= 0)
 		return (-1);
@@ -109,23 +102,19 @@ static int	right_amount(char **elements, t_settings *cub_sets)
 
 void	resolution(char *line, t_settings *cub_sets)
 {
-	int		error;
 	char	**elements;
 
-	error = 0;
 	if (cub_sets->R == true) // en vrai retournes voir guhernan et cherches a faire une version simplifiee de ses retours d'erreurs
 	{
 		dprintf(1, "R already true\n");
-		abort_prog(line, cub_sets, "Identifiers should be used only once");
+		//abort_prog(line, cub_sets, "Identifiers should be used only once");
 	}
 	elements = ft_split(line, ' ');
-	error = right_amount(elements, cub_sets);
-	if (error == -1)
+	if (right_amount(elements, cub_sets) == -1)
 	{
 		dprintf(1, "Error\n");
-		abort_prog(line, cub_sets, "Resolution line not well formated. Usage :\
-				\nR <width> <height>\nOnly positive values"); // ligne trop longue
+		//abort_prog(line, cub_sets, "Resolution line not well formated. Usage :\nR <width> <height>\nOnly positive values");
 	}
 	cub_sets->R = true;
-	free(elements);
+	free_char_p2p(elements);
 }

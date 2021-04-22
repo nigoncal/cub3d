@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 13:11:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 12:09:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft/header_libft.h"
 #include "get_next_line/get_next_line.h"
 #include "header_cub3d.h"
 #include <stdio.h> // a virer
