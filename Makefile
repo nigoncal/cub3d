@@ -47,19 +47,19 @@ CUB3D_HEADER		=	header_cub3d.h
 
 CFLAGS				=	-Wall -Wextra -Werror
 
-#$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
+#$(OBJS_PATH)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-%.o:			%.c $(HEADERS)
-				gcc $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
-				gcc $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
+$(OBJS_PATH)/%.o:	$(SRCS_PATH)%.c $(HEADERS)
+					gcc $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
+					gcc $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
 all:			
 				$(MAKE) init
 				$(MAKE) $(NAME)
 
 init:			$(MINILIBX)
-				$(shell mkdir -p $(PATH_OBJS))
+				$(shell mkdir -p $(OBJS_PATH))
 
 $(LIBCUB3D) :	$(OBJS)
 				ar rcs $(LIBCUB3D) $(OBJS)\

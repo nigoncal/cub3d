@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 13:13:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 17:31:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // faire un bzero de toute ta structure
 
-void	free_struct()
+/*void	free_struct()
 {
 	if (*north_texture_path)
 		free(north_texture_path);
@@ -30,7 +30,7 @@ void	free_struct()
 		free(sprite_texture_path);
 	if (**map)
 		fonction_a_coder_pour_free_tableau_de_chaine_de_char;
-}
+}*/
 
 void	abort_prog(char *line, t_settings *cub_sets, char *s)
 	// elle elle putstr
@@ -39,6 +39,7 @@ void	abort_prog(char *line, t_settings *cub_sets, char *s)
 	// puis elle appelle une fonction qui free toute la partie graphique, les images
 	// a la fin tu exit(0);
 {
+	(void)cub_sets;
 	ft_putstr("Error\n");
 	if (errno)
 		perror("");
@@ -47,7 +48,8 @@ void	abort_prog(char *line, t_settings *cub_sets, char *s)
 					  // 1 - "In resolution line" (e.g.)
 					  // 2 - "Usage : blablabla"
 //	perror("Error\nUsage ");
-	free_struct(cub_sets);
+//	free_struct(cub_sets);
 //	free_images(???);
+	free(line);
 	exit(1);
 }
