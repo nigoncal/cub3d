@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 12:22:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 14:56:50 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,16 @@
 int	main(int argc, char **argv)
 {
 	int			fd;
-	int			format;
+	char		*line;
 	t_settings	*cub_sets;
 
 	cub_sets = malloc(sizeof(cub_sets));
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	format = format_check(argv[1], ".cub");
-	if (argc < 2 || argc > 3 || format == 1)
+	if (argc < 2 || argc > 3 || (format_check(argv[1], ".cub")) == 1)
 		abort_prog(line, &cub_sets, "./cub3d file.cub --save(optionnal)");
 	if (argc == 3)
 	{
-		format = ft_strcmp(argv[2], "--save");
-		if (format != 0)
+		if (ft_strcmp(argv[2], "--save") != 0)
 		{
 			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n");
 			return (0);
@@ -38,7 +36,7 @@ int	main(int argc, char **argv)
 		cub_sets.screenshot = true;
 	}
 	fd = open(argv[2], O_RDONLY);
-	start(fd, cub_sets);
+	start(fd, &line, cub_sets);
 	close(fd);
 	return (0);
 }

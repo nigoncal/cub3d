@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 12:25:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 14:56:53 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <string.h>
 # include "minilibx/mlx.h" // attention
 
-// commentaire a laisser pour expliquer a quoi correspond chaque chiffre du path id
-
 typedef struct	s_settings
 {
 	bool	screenshot;
@@ -35,7 +33,6 @@ typedef struct	s_settings
 	bool	F;
 	bool	C;
 	void	*mlx;
-	char	*line;
 	int		width;
 	int		height;
   	char	*north_texture_path;
@@ -58,14 +55,17 @@ typedef struct	s_settings
 }				t_settings;
 
 
-void			start(int fd, t_settings *cub_sets);
-void			parse_id(t_settings *cub_sets);
-void			parse_map(t_settings *cub_sets);
-void			p_resolution(char *line, t_settings *cub_sets);
+void			start(int fd, char **line, t_settings *cub_sets);
+void			parse_id(char *line, t_settings *cub_sets);
+void			parse_map(char *line, t_settings *cub_sets);
 //void			ft_map(char *line, t_settings *cub_sets); // rename et vires le de parser.c
 //void			add_line_map(char *line, t_settings *cub_sets);
-void			abort_prog(char *line, t_settings *cub_sets, char *s);
-
+void			p_resolution(char *line, t_settings *cub_sets);
 int				p_north_texture(char *line, t_settings *cub_sets);
+int				p_south_texture(char *line, t_settings *cub_sets);
+int				p_west_texture(char *line, t_settings *cub_sets);
+int				p_east_texture(char *line, t_settings *cub_sets);
+int				p_sprite_texture(char *line, t_settings *cub_sets);
+void			abort_prog(char *line, t_settings *cub_sets, char *s);
 
 #endif
