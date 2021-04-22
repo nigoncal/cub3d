@@ -3,7 +3,9 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MINILIBX			=	libmlx.dylib
 
-LIBRARIES			=	$(LIBCUB3D) $(LIBFT) $(MINILIBX)
+LIBRARIES			=	$(addprefix $(SRCS_PATH), $(LIBCUB3D))\
+						$(addprefix $(LIBFT_PATH), $(LIBFT))\
+						$(addprefix $(MINILIBX_PATH), $(MINILIBX))
 
 SRCS_PATH			=	/srcs/
 PARS_SRCS_PATH		=	/srcs/parsing/
@@ -27,61 +29,48 @@ PARS_SRCS			=	parser.c\
 
 
 
-OBJS			=	$(addprefix $(SRCS_PATH), $(SRCS:.c=.o))\
-					$(addprefix $(PARS_SRCS_PATH), $(PARS_SRCS:.c=.o))
+OBJS				=	$(addprefix $(SRCS_PATH), $(SRCS:.c=.o))\
+						$(addprefix $(PARS_SRCS_PATH), $(PARS_SRCS:.c=.o))
 
-CUB3D_HEADER	=	header_cub3d.h
+CUB3D_HEADER		=	header_cub3d.h
 
-COMP_FLAGS		=	-Wall -Werror -Wextra 
-COMP_ADD		=	-I$(HEADER)
+CFLAGS				=	-Wall -Wextra -Werror
 
-RM				=	rm -rf
-
-# Wildcard rule
-
-$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
-	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
-
-all:			$(NAME)
-				$(MAKE) init
-				$(MAKE) $(NAME)
+#$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
+#	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 %.o:			%.c $() $()
 				gcc -I $(HEADER) $(LIBRARIES)
+
+all:			$(NAME)
+#				$(MAKE) init
+#				$(MAKE) $(NAME)
 
 init:	$(MINILIBX)
 	$(shell mkdir -p $(PATH_OBJS))
 
 $(LIBCUB3D) :	$(OBJS)
-				ar rcs $(LIBCUB3D) $(OBJS) $(CUB3D_HEADER)
-
-$(LIBFT) :
-	$(MAKE) -C ./$(PATH_LIBFT)
-	cp libft/libft.a ./$(LIBFT)
-
-$(MINILIBX): $(LIBFT)
-	$(MAKE) -C ./$(PATH_MINILIBX)
-	cp ./$(PATH_MINILIBX)/$(MINILIBX) .
+				ar rcs $(LIBCUB3D) $(OBJS)\
+					$(addprefix $(SRCS_PATH), $(CUB3D_HEADER))
 
 $(NAME):		$(LIBCUB3D)
 				make -C $(LIBFT_PATH)
 				make -C $(MINILIBX_PATH)
-				gcc $(FLAGS) $(LIBRARIES) main.c -o $(NAME)
+				gcc $(CFLAGS) $(LIBRARIES) main.c -o $(NAME)
 
 clean:
-	$(RM) -rf $(PATH_OBJS)
+				rm -rf $(OBJS)
+				make clean -C $(LIBFT_PATH)
+				make clean -C $(MINILIBX_PATH)
 
-fclean: clean
-	$(MAKE) clean -C ./$(PATH_MINILIBX)
-	$(MAKE) fclean -C ./$(PATH_LIBFT)
-	$(RM) -rf $(EXE)
-	$(RM) -rf $(NAME)
-	$(RM) -rf $(MINILIBX)
-	$(RM) -rf $(LIBFT)
-	$(RM) -rf ./$(PATH_MINILIBX)/$(MINILIBX)
-	$(RM) -rf ./$(PATH_MINILIBX)/*.o
-	$(RM) -rf ./$(PATH_MINILIBX)/*.swiftmodule
-	$(RM) -rf ./$(PATH_MINILIBX)/*.swiftdoc
+fclean:			clean
+				rm -rf $(NAME)
+				rm -rf $(MINILIBX)
+				rm -rf $(LIBFT)
+				rm -rf ./$(PATH_MINILIBX)/$(MINILIBX)
+				rm -rf ./$(PATH_MINILIBX)/*.o
+				rm -rf ./$(PATH_MINILIBX)/*.swiftmodule
+				rm -rf ./$(PATH_MINILIBX)/*.swiftdoc
 
 re: 
 	$(MAKE) fclean
