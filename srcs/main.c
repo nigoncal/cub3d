@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/15 17:53:06 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 12:22:04 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@
 
 int	main(int argc, char **argv)
 {
-//	int				fd;
-	int				format;
-	char			*line;
-	t_settings	cub_sets;
+	int			fd;
+	int			format;
+	t_settings	*cub_sets;
 
-	line = NULL;
-	ft_bzero(&cub_sets, sizeof(t_settings));
+	cub_sets = malloc(sizeof(cub_sets));
+	ft_bzero(cub_sets, sizeof(*cub_sets));
 	format = format_check(argv[1], ".cub");
 	if (argc < 2 || argc > 3 || format == 1)
 		abort_prog(line, &cub_sets, "./cub3d file.cub --save(optionnal)");
@@ -38,8 +37,8 @@ int	main(int argc, char **argv)
 		}
 		cub_sets.screenshot = true;
 	}
-//	fd = open(argv[2], O_RDONLY);
-//	start(fd, &line);
-//	close(fd);
+	fd = open(argv[2], O_RDONLY);
+	start(fd, cub_sets);
+	close(fd);
 	return (0);
 }

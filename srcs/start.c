@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 12:09:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/22 12:29:45 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ static int	id_part(char *line)
 	return (non_empty_lines);
 }
 
-void	start(int fd, char **line, t_settings *cub_sets)
+void	start(int fd, t_settings *cub_sets)
 {
 	cub_sets->mlx = mlx_init();
-	while (get_next_line(fd, line))
+	while (get_next_line(fd, cub_sets->&line))
 	{
-		if (id_start(line) <= 8)
-			parse_id(*line, &cub_sets); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
+		if (id_start(cub_sets->line) <= 8)
+			parse_id(cub_sets); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
 		else
-			parse_map(*line, &cub_sets);
+			parse_map(cub_sets);
 	}
 	free(line);
-	free(cub_sets);
+	free(cub_sets); // mieux
 	dprintf(1, "width = |%d|\n", cub_sets.width);
 	dprintf(1, "height = |%d|\n", cub_sets.height);
 	dprintf(1, "north = |%s|\n", cub_sets.north_texture_path);
