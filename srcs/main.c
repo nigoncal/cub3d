@@ -3,36 +3,38 @@
 #define screenHeight 480
 #define texWidth 64
 #define texHeight 64
+#define X_EVENT_KEY_PRESS	2
+#define X_EVENT_KEY_EXIT	17
 
 
 
 
-int main(void)
+int	main(void)
 {
-  t_screen sc;
-  t_ray ray;
-  init_screen(&sc);
-  ft_bzero(&ray, sizeof(ray));
-  //create_mini_map(&sc);
-  ray_cast_test(&ray, &sc);
-  mlx_put_image_to_window(sc.mlx, sc.win, sc.image, 0, 0);
-  mlx_loop(sc.mlx);
-  return (0);
+	t_info info;
+	init(&info);
+	info.mlx = mlx_init();
+	info.win = mlx_new_window(info.mlx, info.width, info.height, "mlx");
+	mlx_loop_hook(info.mlx, &main_loop, &info);		
+	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_loop(info.mlx);
 }
 
-void	init_screen(t_screen *screen)
+void	init(t_info *info)
 {
-	screen->i = 0;
-	screen->j = 0;
-	screen->max_h = 1000;
-	screen->max_w = 1000;
-	screen->pixel_bits = 0;
-	screen->line_bytes = 0;
-	screen->endian = 0;
-	screen->color = 0x66FFCC;
-	screen->mlx = mlx_init();
-	screen->image = mlx_new_image(screen->mlx, screen->max_w, screen->max_h);
-	screen->win = mlx_new_window(screen->mlx, screen->max_w, screen->max_h, "Fenetre de bg");
-	screen->buffer = mlx_get_data_addr(screen->image, &screen->pixel_bits, \
-	&screen->line_bytes, &screen->endian);
+	
+	info->height = 720;
+	info->width = 1280;
+	info->posX = 12;
+	info->posY = 5;
+	info->dirX = -1;
+	info->dirY = 0;
+	info->planeX = 0;
+	info->planeY = 0.66;
+	info->moveSpeed = 0.5;
+	info->rotSpeed = 0.05;
+	info->BPP = 3;
+	info->endian = 0;
+	info->line_lenght = 0;
+
 }

@@ -2,16 +2,15 @@
 #include"../cub3D.h"
 #include "../key_macros.h"
 #include <string.h>
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_EXIT	17
+#define texWidth 64
+#define texHeight 64
 #define mapWidth 24
 #define mapHeight 24
-#define width 2560
-#define height 1440
+#define X_EVENT_KEY_PRESS	2
+#define X_EVENT_KEY_EXIT	17
 
 
-
-int	worldMap[24][24] = {
+char	worldMap[24][24] = {
 							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -46,8 +45,8 @@ void	verLine(t_info *info, int x, int y1, int y2, int color)
 	char *dst;
 	while (y <= y2)
 	{
-    dst = info->buffer + (y * info->line_lenght + x * (info->BPP / 8));
-    *(unsigned int*)dst = color;	
+    	dst = info->buffer + (y * info->line_lenght + x * (info->BPP / 8));
+   		*(unsigned int*)dst = color;
 		y++;
 	}
 }
@@ -58,17 +57,17 @@ void	calc(t_info *info)
  	info->x = 0;
 	 	
 	  	
-		info->image = mlx_new_image(info->mlx, width, height);
+		info->image = mlx_new_image(info->mlx, info->width, info->height);
 		info->buffer = mlx_get_data_addr(info->image, &info->BPP, &info->line_lenght, &info->endian);
 
-	while (info->x < width)
+	while (info->x < info->width)
 	{
 
-		info->cameraX = 2 * info->x / (double)width -1 ; //camera dans l'espace
+		info->cameraX = 2 * info->x / (double)info->width -1 ; //camera dans l'espace
 		info->raydirX = info->dirX + info->planeX *	info->cameraX;
 		info->raydirY = info->dirY + info->planeY * info->cameraX;
 		
-		 info->mapX = (int)info->posX;
+		info->mapX = (int)info->posX;
 		info->mapY = (int)info->posY;
 
 		//length of ray from current position to next x or y-side
@@ -124,19 +123,19 @@ void	calc(t_info *info)
 			info->perpwalldist = (info->mapX - info->posX + (1 - info->stepX) / 2) / info->raydirX;
 		else
 			info->perpwalldist = (info->mapY - info->posY + (1 - info->stepY) / 2) / info->raydirY;
-		//Calculate height of line to draw on screen
-		int lineHeight = (int)(height / info->perpwalldist);
+		//Calculate info->height of line to draw on screen
+		int lineHeight = (int)(info->height / info->perpwalldist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		info->drawstart = -lineHeight / 2 + height / 2;
+		info->drawstart = -lineHeight / 2 + info->height / 2;
 		if(info->drawstart < 0)
 			info->drawstart = 0;
-		info->drawend = lineHeight / 2 + height / 2;
-		if(info->drawend >= height)
-			info->drawend = height - 1;
+		info->drawend = lineHeight / 2 + info->height / 2;
+		if(info->drawend >= info->height)
+			info->drawend = info->height - 1;
 
-		info->color = 0;
-		if (worldMap[info->mapY][info->mapX] == 1)
+		//info->color = 0;
+		/*if (worldMap[info->mapY][info->mapX] == 1)
 			info->color = 0xFF0000;
 		else if (worldMap[info->mapY][info->mapX] == 2)
 			info->color = 0x00FF00;
@@ -144,18 +143,15 @@ void	calc(t_info *info)
 			info->color = 0x0000FF;
 		else if (worldMap[info->mapY][info->mapX] == 4)
 			info->color = 0xFFFFFF;
-		else
+		else*/
 			info->color = 0xFFFF00;
 		
 		if (info->side == 1)
 			info->color = info->color / 2;
-		
-	
 	verLine(info, info->x, info->drawstart, info->drawend, info->color);
-
 		info->x++;
 	}
-
+	mlx_clear_window(info->mlx, info->win);
 }
 
 int	main_loop(t_info *info)
@@ -163,7 +159,7 @@ int	main_loop(t_info *info)
 	calc(info);
 	    mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
 
-	//mlx_clear_window(info->mlx, info->win);
+	
 
 	return (0);
 }
@@ -210,33 +206,4 @@ int	key_press(int key, t_info *info)
 	if (key == K_ESC)
 		exit(0);
 	return (0);
-}
-
-int	main(void)
-{
-	t_info info;
-	info.mlx = mlx_init();
-
-	info.posX = 12;
-	info.posY = 5;
-	info.dirX = -1;
-	info.dirY = 0;
-	info.planeX = 0;
-	info.planeY = 0.66;
-	info.moveSpeed = 0.5;
-	info.rotSpeed = 0.05;
-	info.BPP = 10;
-	info.endian = 0;
-	info.line_lenght = height;
-
-	info.win = mlx_new_window(info.mlx, width, height, "mlx");
-
-	
-
-
-
-	mlx_loop_hook(info.mlx, &main_loop, &info);
-		
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-	mlx_loop(info.mlx);
 }

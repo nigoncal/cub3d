@@ -3,12 +3,15 @@
 # include <unistd.h>
 # include "mlx/mlx.h"
 # include"libft/libft.h"
+# include "get_next_line/get_next_line.h"
+# include <stdbool.h>
 /* == GNL INCLUDES == */
 # include <fcntl.h>
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
 #include "mlx/mlx.h"
+
 
 
 	typedef struct	s_info
@@ -45,10 +48,42 @@
 	int 		lineHeight;
 	int			line_lenght;
 	int  		BPP;
+	int			height; //Hauteur
+	int 		width; //Largeur
 	void	*mlx;
 	void	*win;
 	void	*image;
 }				t_info;
+typedef struct	s_settings
+{
+	bool	screenshot;
+	bool	R;
+	bool	NO;
+	bool	SO;
+	bool	EA;
+	bool	WE;
+	bool	S;
+	bool	F;
+	bool	C;
+	void	*mlx;
+	int		width;
+	int		height;
+  	char	*north_texture_path;
+	char	*south_texture_path;
+	char	*west_texture_path;
+	char	*east_texture_path;
+	char	*sprite_texture_path;
+	int		floor_red;
+	int		floor_green;
+	int		floor_blue;
+	int		ceiling_red;
+	int		ceiling_green;
+	int		ceiling_blue;
+	char	**map;
+	char	map_char[8];
+	
+}				t_settings;
+
 
 typedef struct s_screen
 {
@@ -73,8 +108,11 @@ typedef struct s_screen
 
 void    put_square( int lenght, t_screen *sc);
 void	create_mini_map(t_screen *sc);
-void	init_screen(t_screen *screen);
+void	init(t_info *info);
 void    put_pixel(t_screen *screen);
 void 	get_map();
 void	verLine(t_info *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);
+int		main_loop(t_info *info);
+int		key_press(int key, t_info *info);
+void	add_line_map(char **line, t_settings *cub_sets);
