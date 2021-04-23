@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 17:46:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/23 11:13:52 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
 
 void	parse_map(char *line, t_settings *cub_sets)
 {
-	while (line)
-	{
-		if ((is_map(line)) == -1) // map : peut commencer par et contenir |' '/1/0/2/N/S/E/W|.
-			return (-1);
-			ft_map(line, cub_sets);
-	}
+	if ((is_map(line, cub_sets)) == -1)
+		return (-1);
+	store_map(line, cub_sets);
 }
 
 void	parse_id(char *line, t_settings *cub_sets)
