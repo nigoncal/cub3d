@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 15:04:38 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/23 09:09:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 		if (id_part(*line) <= 8)
 			parse_id(*line, cub_sets); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
 		else
+			init_map_char(cub_sets);
 			parse_map(*line, cub_sets);
 	}
 	free(cub_sets); // mieux

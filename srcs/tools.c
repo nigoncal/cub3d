@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:57:36 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 08:46:42 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/23 09:57:07 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,37 @@
 int	is_map(char *line, t_settings *cub_sets)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (line[i])
 	{
-		if (line[i] != )
+		while (cub_sets->map_char[j])
+		{
+			if (line[i] == cub_sets->map_char[j])
+				break ;
+			j++;
+			return (-1);
+		}
+		i++;
 	}
 	return (0);
+}
+
+void	init_map_char(t_settings *cub_sets)
+{
+	char	*set;
+	int		i;
+
+	i = 0;
+	set = " 102NSEW";
+	while (set[i])
+	{
+		cub_sets->map_char[i] = set[i];
+		i++;
+	}
+	cub_sets->map_char[i] = set[i];
 }
 
 int	ft_count_lines(int fd, int lines)
