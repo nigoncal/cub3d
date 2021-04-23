@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 14:56:53 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/23 08:59:20 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct	s_settings
 	int		ceiling_green;
 	int		ceiling_blue;
 	char	**map;
+	char	map_char[4];
+	map_char
 }				t_settings;
 
 
