@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 23:13:06 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 11:24:09 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2020/02/14 23:14:45 by sylducam          #+#    #+#             */
+/*   Updated: 2021/04/24 14:35:31 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
-# endif
+#include "libft.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
+int				find_eol(char *s)
+{
+	int	i;
 
-int				get_next_line(int fd, char **line);
-int				find_eol(char *s);
-int				count_eol(char *s);
-char			*ft_strdup(const char *s);
-char			*ft_strjoin(const char *s1, const char *s2);
+	i = 0;
+	if (s == NULL)
+		return (-1);
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
-#endif
+int				count_eol(char *s)
+{
+	int	i;
+	int	total;
+
+	i = 0;
+	total = 0;
+	if (s == NULL)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			total++;
+		i++;
+	}
+	return (total);
+}

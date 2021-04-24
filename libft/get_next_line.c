@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/03/13 16:40:42 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/24 14:39:10 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h> // a virer
+#include "libft.h"
+//#include <stdio.h> // a virer
 
 static int		update(char **line, char **buffer)
 {
@@ -35,7 +35,7 @@ static int		update(char **line, char **buffer)
 	*buffer = ft_strdup(&(*buffer)[eol + 1]);
 	free(temp);
 	temp = NULL;
-	dprintf(1, "gnl update\nline = |%s|\n", *line); // a virer
+	//dprintf(1, "gnl update\nline = |%s|\n", *line); // a virer
 	return (1);
 }
 
