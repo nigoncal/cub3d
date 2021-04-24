@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 09:51:15 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/24 15:30:04 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_settings
 	bool	F;
 	bool	C;
 	void	*mlx;
+	int		id_counter;
 	int		width;
 	int		height;
   	char	*north_texture_path;

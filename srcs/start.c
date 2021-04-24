@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 11:24:33 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/24 15:49:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,17 @@
 #include "header_cub3d.h"
 #include <stdio.h> // a virer
 
-static int	id_part(char *line)
-{
-	static int	non_empty_lines = 0;
-	int			i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t'
-			&& line[i] != '\v' && line[i] != '\n')
-		{
-			non_empty_lines++;
-			break ;
-		}
-		i++;
-	}
-	return (non_empty_lines);
-}
-
 void	start(int fd, char **line, t_settings *cub_sets)
 {
 	cub_sets->mlx = mlx_init();
 	init_map_char(cub_sets);
 	while (get_next_line(fd, line))
 	{
-		if (id_part(*line) <= 8)
+		if (cub_sets->id_counter < 8)
+		{
+			cub_sets->id_counter += non_empty_line(line);
 			parse_id(*line, cub_sets); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
+		}
 		else
 		{
 			parse_map(*line, cub_sets);
