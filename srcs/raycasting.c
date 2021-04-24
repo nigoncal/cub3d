@@ -158,9 +158,6 @@ int	main_loop(t_info *info)
 {
 	calc(info);
 	    mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
-
-	
-
 	return (0);
 }
 

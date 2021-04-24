@@ -2,8 +2,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "mlx/mlx.h"
-# include"libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 # include <stdbool.h>
 /* == GNL INCLUDES == */
 # include <fcntl.h>
@@ -79,7 +78,7 @@ typedef struct	s_settings
 	int		ceiling_red;
 	int		ceiling_green;
 	int		ceiling_blue;
-	char	**map;
+	char		**map;
 	char	map_char[8];
 	
 }				t_settings;
@@ -105,7 +104,7 @@ typedef struct s_screen
 
 }	t_screen;
 
-
+void	create_windows(t_info *info);
 void    put_square( int lenght, t_screen *sc);
 void	create_mini_map(t_screen *sc);
 void	init(t_info *info);
@@ -116,3 +115,4 @@ int		key_hook(int keycode);
 int		main_loop(t_info *info);
 int		key_press(int key, t_info *info);
 void	add_line_map(char **line, t_settings *cub_sets);
+void	ft_map(char **line, t_settings *cub_sets);

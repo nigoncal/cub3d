@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 11:21:36 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/04/24 10:23:18 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_map(char **line, t_settings *cub_sets)
 		cub_sets->map[1] = 0;
 	}
 	else
-		ft_add_line_map(line, cub_sets);
+		add_line_map(line, cub_sets);
 	while (*(*line) != '\0')
 		(*line)++;
 }

@@ -9,20 +9,44 @@
 
 
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	t_settings cub;
 	t_info info;
+	//ft_putstr_fd("salut", 1);	
+	char test[9];
+ 	ft_bzero(test, 9);
 	init(&info);
-	info.mlx = mlx_init();
-	info.win = mlx_new_window(info.mlx, info.width, info.height, "mlx");
-	mlx_loop_hook(info.mlx, &main_loop, &info);		
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-	mlx_loop(info.mlx);
+	if(argc == 2)
+	{
+		char *line = NULL;
+		int fd = open(argv[1], O_RDONLY);
+		int result = 1;
+	while(result == 1)
+	{
+			result = get_next_line(fd, &line);
+	}
+		ft_map(&line, &cub);
+
+		//ft_putstr_fd(info, 1);
+	}
+	else
+	{
+		printf("error\n fichier cub3D manquant");
+	}
+}
+
+void	create_windows(t_info *info)
+{
+	info->mlx = mlx_init();
+	info->win = mlx_new_window(info->mlx, info->width, info->height, "mlx");
+	mlx_loop_hook(info->mlx, &main_loop, &info);
+	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_loop(info->mlx);
 }
 
 void	init(t_info *info)
 {
-	
 	info->height = 720;
 	info->width = 1280;
 	info->posX = 12;
@@ -36,5 +60,4 @@ void	init(t_info *info)
 	info->BPP = 3;
 	info->endian = 0;
 	info->line_lenght = 0;
-
 }

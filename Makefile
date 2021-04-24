@@ -20,7 +20,7 @@ INCS		=	cub3D.h
 
 # Commands of compilation
 COMP		=	clang
-COMP_FLAG	=	-Wall -Werror -Wextra 
+COMP_FLAG	=	-Wall -Werror -Wextra -g3
 COMP_ADD	=	-I$(PATH_INC)
 
 # Others Command
