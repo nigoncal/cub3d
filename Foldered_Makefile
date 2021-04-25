@@ -3,27 +3,36 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MINILIBX			=	libmlx.dylib
 
+VPATH				=	srcs\
+						srcs/parsing\
+						srcs/libft\
+						srcs/minilibx\
+						srcs/get_next_line\
+
 LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
 						$(addprefix $(PATH_LIBFT), $(LIBFT))\
 						$(addprefix $(PATH_MINILIBX), $(MINILIBX))
 
+PATH_SRCS			=	srcs/
+PATH_PARS_SRCS		=	srcs/parsing/
 PATH_LIBFT			=	srcs/libft/
 PATH_MINILIBX		=	srcs/minilibx/
 #PATH_OBJS			=	objs/
 
 SRCS				=	start.c\
 						tools.c\
-						error_manager.c\
-						srcs/parsing/parser.c\
-						srcs/parsing/p_resolution.c\
-						srcs/parsing/p_textures.c\
-						srcs/parsing/p_north_texture.c\
-						srcs/parsing/p_south_texture.c\
-						srcs/parsing/p_east_texture.c\
-						srcs/parsing/p_west_texture.c\
-						srcs/parsing/p_sprite_texture.c\
-						srcs/parsing/p_colors.c\
-						srcs/parsing/p_map.c
+						error_manager.c
+	
+PARS_SRCS			=	parser.c\
+						p_resolution.c\
+						p_textures.c\
+						p_north_texture.c\
+						p_south_texture.c\
+						p_east_texture.c\
+						p_west_texture.c\
+						p_sprite_texture.c\
+						p_colors.c\
+						p_map.c
 
 HEADERS				=	$(PATH_SRCS)header_cub3d.h\
 						$(PATH_LIBFT)header_libft.h\
@@ -43,8 +52,11 @@ CFLAGS				=	-Wall -Wextra -Werror
 #$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-/%.o:				%.c $(HEADERS)
-					$(COMP) $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
+$(PATH_SRCS)/%.o:	$(PATH_SRCS)%.c $(HEADERS)
+					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
+
+$(PATH_PARS_SRCS)/%.o:
+					$(PATH_PARS_SRCS)%.c $(HEADERS)
 					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
 ################################################################################

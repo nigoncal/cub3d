@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 12:51:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 14:31:19 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/header_libft.h"
+#include "header_cub3d.h"
 
 void	start(int fd, char **line, t_settings *cub_sets)
 {
@@ -19,7 +19,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	{
 		if (cub_sets->id_counter < 8)
 		{
-			cub_sets->id_counter += non_empty_line(line);
+			cub_sets->id_counter += non_empty_line(*line);
 			parse_id(*line, cub_sets);
 		}
 		else

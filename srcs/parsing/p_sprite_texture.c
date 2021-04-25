@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 17:40:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 14:49:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@
  * a chaque fois s'il y a une erreur, 1 est renvoye, 0 si tout se passe bien
  * si tout s'est bien passe, le path est stocke dans cub_sets->sprite_texture_path et cub_sets->S est mis a true
 */
-
-typedef struct	s_settings
-{
-	bool	S;
-	int		sprite_fd;
-	char	*sprite_texture_path;
-	void	*mlx;
-}				t_settings;
 
 static int	right_file(char **elements, t_settings *cub_sets)
 {
