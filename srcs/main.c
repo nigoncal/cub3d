@@ -14,19 +14,20 @@ int	main(int argc, char **argv)
 	t_settings cub;
 	t_info info;
 	//ft_putstr_fd("salut", 1);	
-	char test[9];
- 	ft_bzero(test, 9);
+ 	ft_bzero(&cub, sizeof(cub));
 	init(&info);
 	if(argc == 2)
 	{
-		char *line = NULL;
+		char *line;
 		int fd = open(argv[1], O_RDONLY);
 		int result = 1;
-	while(result == 1)
+
+	while((result = get_next_line(fd, &line) == 1))
 	{
-			result = get_next_line(fd, &line);
+				//printf("%s", line);
 	}
-		ft_map(&line, &cub);
+			ft_map(line, &cub);
+			printf("%s\n", cub.map[0]);
 
 		//ft_putstr_fd(info, 1);
 	}

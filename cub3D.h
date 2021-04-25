@@ -114,5 +114,5 @@ void	verLine(t_info *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);
 int		main_loop(t_info *info);
 int		key_press(int key, t_info *info);
-void	add_line_map(char **line, t_settings *cub_sets);
-void	ft_map(char **line, t_settings *cub_sets);
+void	add_line_map(char *line, t_settings *cub_sets);
+void	ft_map(char *line, t_settings *cub_sets);

@@ -5,59 +5,65 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/24 14:39:10 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2019/11/30 17:53:15 by nigoncal          #+#    #+#             */
+/*   Updated: 2021/04/25 11:17:16 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-//#include <stdio.h> // a virer
 
-static int		update(char **line, char **buffer)
+#include "get_next_line.h"
+
+int		get_next_line(int fd, char **line)
 {
-	int		eol;
-	char	*temp;
+	static t_stat_var	s;
+	int					start;
 
-	eol = find_eol(*buffer);
-	if (eol == -1)
+	start = s.pos;
+	s.return_buff = 1;
+	if (!(BUFFER_SIZE > 0 && BUFFER_SIZE <= 2147483647) || read(fd, 0, 0) < 0)
+		return (-1);
+	if (s.buffer == NULL)
+		if (!(s.buffer = new_buffer(fd, &s.pos, &start, &s.return_buff)))
+		{
+			*line = ft_calloc(1, 1);
+			return (0);
+		}
+	while (s.buffer[s.pos] != '\n' && s.buffer[s.pos] != '\0')
+		s.pos++;
+	if (s.buffer[s.pos] == '\n')
 	{
-		if (*buffer != NULL)
-			*line = ft_strdup(*buffer);
-		else
-			*line = ft_strdup("");
-		free(*buffer);
-		*buffer = NULL;
-		return (0);
+		*line = s_tab(s.buffer, s.pos, start);
+		s.pos++;
+		return (s.return_buff);
 	}
-	(*buffer)[eol] = '\0';
-	*line = ft_strdup(*buffer);
-	temp = *buffer;
-	*buffer = ft_strdup(&(*buffer)[eol + 1]);
-	free(temp);
-	temp = NULL;
-	//dprintf(1, "gnl update\nline = |%s|\n", *line); // a virer
-	return (1);
+	*line = join_buff(start, fd, &s);
+	return (s.return_buff);
 }
 
-int				get_next_line(int fd, char **line)
+char	*join_buff(int start, int fd, t_stat_var *s)
 {
-	static char	*buffer;
-	char		*reader;
-	int			eoread;
+	char *r;
 
-	reader = NULL;
-	if (!line || fd < 0 || BUFFER_SIZE <= 0
-			|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
-		return (-1);
-	while (find_eol(buffer) == -1
-			&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
+	r = s_tab(s->buffer, s->pos, start);
+	while (s->buffer[s->pos] == '\0' && s->return_buff != 0)
 	{
-		reader[eoread] = '\0';
-		buffer = ft_strjoin(buffer, reader);
+		free(s->buffer);
+		s->buffer = new_buffer(fd, &s->pos, &start, &s->return_buff);
+		if (s->buffer == NULL)
+		{
+			free(s->buffer);
+			return (r);
+		}
+		while (s->buffer[s->pos] != '\n' && s->buffer[s->pos] != '\0')
+			s->pos++;
+		r = ft_strjoin_g(r, s_tab(s->buffer, s->pos, start), &s->return_buff);
+		if (s->return_buff == -1)
+			return (NULL);
+		if (s->buffer[s->pos] == '\n')
+		{
+			s->pos++;
+			return (r);
+		}
 	}
-	free(reader);
-	reader = NULL;
-	if (eoread == -1)
-		return (-1);
-	return (update(line, &buffer));
+	return (r);
 }
