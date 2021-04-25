@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 07:30:13 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 11:43:20 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 void	start(int fd, char **line, t_settings *cub_sets)
 {
 	cub_sets->mlx = mlx_init();
-	init_map_char(cub_sets);
 	while (get_next_line(fd, line))
 	{
 		if (cub_sets->id_counter < 8)
@@ -35,7 +34,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "width = |%d|\n", cub_sets->width);
 	dprintf(1, "height = |%d|\n", cub_sets->height);
 	dprintf(1, "north = |%s|\n", cub_sets->north_texture_path);
-	dprintf(1, "south = |%s|\n", cub_sets->south_texture_path);
+	dprintf(1, "south = |%s|\n", cub_sets->sout_texture_path);
 	dprintf(1, "west = |%s|\n", cub_sets->west_texture_path);
 	dprintf(1, "east = |%s|\n", cub_sets->east_texture_path);
 	dprintf(1, "sprite = |%s|\n", cub_sets->sprite_texture_path);

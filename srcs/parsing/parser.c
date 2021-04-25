@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 08:09:25 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 11:34:00 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 //		- Si la map n'a pas commence :
 //		a) Je rencontre une ligne non vide qui n'est pas de la map > erreur car
 //		trop d'id (ou autre chose qu'id mais erreur aussi) "There can only be 8
-//		identifier lines in you .cub file" (Si tu y arrives, si tu as le temps,
+//		identifier lines in your .cub file" (Si tu y arrives, si tu as le temps,
 //		precises si c'est un identifiant ou pas dans l'erreur. Donc seconde
 //		erreur : "Too many identifier lines and at least one is not even a
 //		proper identifier")
@@ -46,13 +46,38 @@
 
 void	continue_map(char *line, t_settings *cub_sets)
 {
-	if (cub_sets->map_over == true)
+	int	error;
+
+	error = 0;
+	if (cub_sets->map_over == false)
+	{
+		if (non_empty_line(line) == 1)
+		{
+			if (is_map(line) == 0)
+				store_map(line,  cub_sets);
+			else
+				error = -1;
+		}
+		else
+			cub_sets->map_over = true;
+	}
+	else
+		if (non_empty_line(line) == 1)
+			error = -1;
+	if (error == -1)
+		abort_prog(line, cub_sets, "Nothing else should be after the map");
 }
 
 void	start_map(char *line, t_settings *cub_sets)
 {
 	if (non_empty_line(line) == 1)
-		if (is_map(line))
+	{
+		if (is_map(line) == 0)
+			store_map(line, cub_sets);
+		else
+			abort_prog(line, cub_sets, "Too many identifier lines");
+	}
+	cub_sets->map_started = true;
 }
 
 void	parse_map(char *line, t_settings *cub_sets)
