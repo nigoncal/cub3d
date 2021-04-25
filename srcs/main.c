@@ -24,10 +24,16 @@ int	main(int argc, char **argv)
 
 	while((result = get_next_line(fd, &line) == 1))
 	{
-				//printf("%s", line);
-	}
+			printf("%s\n", line);
 			ft_map(line, &cub);
-			printf("%s\n", cub.map[0]);
+	}
+		printf("\n");
+		int j = 0;
+		while(cub.map[j])
+		{
+			printf("%s\n", cub.map[j]);
+			j++;	
+		}
 
 		//ft_putstr_fd(info, 1);
 	}
