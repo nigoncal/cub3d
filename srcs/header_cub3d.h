@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/24 15:30:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 08:06:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct	s_settings
 	bool	S;
 	bool	F;
 	bool	C;
+	bool	map_started;
+	bool	map_over;
 	void	*mlx;
 	int		id_counter;
 	int		width;
@@ -58,9 +60,11 @@ typedef struct	s_settings
 
 
 void			start(int fd, char **line, t_settings *cub_sets);
+int				non_empty_line(char *line);
 void			parse_id(char *line, t_settings *cub_sets);
 void			init_map_char(t_settings *cub_sets);
 void			parse_map(char *line, t_settings *cub_sets);
+int				is_map(char *line, t_settings *cub_sets);
 //void			ft_map(char *line, t_settings *cub_sets); // rename et vires le de parser.c
 //void			add_line_map(char *line, t_settings *cub_sets);
 void			p_resolution(char *line, t_settings *cub_sets);

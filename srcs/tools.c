@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:57:36 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/24 15:49:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 08:11:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int	is_map(char *line, t_settings *cub_sets)
 {
 	int	i;
 	int	j;
+	char *set;
 
 	i = 0;
 	j = 0;
+	set = " 102NSEW";
 	while (line[i])
 	{
-		while (cub_sets->map_char[j])
+		while (set[j])
 		{
-			if (line[i] == cub_sets->map_char[j])
+			if (line[i] == set[j])
 				break ;
 			j++;
 			return (-1);
@@ -36,7 +38,7 @@ int	is_map(char *line, t_settings *cub_sets)
 	return (0);
 }
 
-int	non_empty_line(char *line, t_settings *cub_sets)
+int	non_empty_line(char *line)
 {
 	int	i;
 

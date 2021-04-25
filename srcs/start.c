@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/24 15:49:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 07:30:13 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 		if (cub_sets->id_counter < 8)
 		{
 			cub_sets->id_counter += non_empty_line(line);
-			parse_id(*line, cub_sets); // continues de passer tout le reste ne simple pointeur dans les fonctions a venir, souviens toi des epxlications de Mohammed notees dans ton cahier
+			parse_id(*line, cub_sets);
 		}
 		else
 		{
@@ -60,5 +60,4 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[12]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[13]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[14]);
-//	check_cub(cub_sets);
 }
