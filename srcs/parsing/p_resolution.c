@@ -6,16 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 11:54:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 13:24:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minilibx/mlx.h" // a ajouter dans ton header
-//#include "../header_cub3d.h"
-#include <stdbool.h>
-#include "../libft/header_libft.h"
-#include "../get_next_line/get_next_line.h"
-#include <stdio.h> // a virer
+#include "../header_cub3d.h"
 
 /*
  * la fonction principale :
@@ -38,14 +33,6 @@
 
 // vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
 // fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
-
-typedef struct	s_settings
-{
-	bool	R;
-	int		width;
-	int		height;
-	void	*mlx;
-}				t_settings;
 
 void	too_big_for_screen(t_settings *cub_sets)
 {
@@ -104,17 +91,11 @@ void	resolution(char *line, t_settings *cub_sets)
 {
 	char	**elements;
 
-	if (cub_sets->R == true) // en vrai retournes voir guhernan et cherches a faire une version simplifiee de ses retours d'erreurs
-	{
-		dprintf(1, "R already true\n");
-		//abort_prog(line, cub_sets, "Identifiers should be used only once");
-	}
+	if (cub_sets->R == true)
+		abort_prog(line, cub_sets, "Identifiers should be used only once");
 	elements = ft_split(line, ' ');
 	if (right_amount(elements, cub_sets) == -1)
-	{
-		dprintf(1, "Error\n");
-		//abort_prog(line, cub_sets, "Resolution line not well formated. Usage :\nR <width> <height>\nOnly positive values");
-	}
+		abort_prog(line, cub_sets, "R line :\nR <width> <height>\nOnly > 0");
 	cub_sets->R = true;
 	free_char_p2p(elements);
 }

@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
-#include "../libft/header_libft.h"
-#include "../get_next_line/get_next_line.h"
-#include <stdio.h> // a virer
 
 static void	add_map_line(char **line, t_settings *cub_sets)
 {

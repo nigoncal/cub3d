@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../header_cub3d.h"
-#include <stdbool.h>
-#include "../libft/header_libft.h"
-#include "../get_next_line/get_next_line.h" // en a-t-il besoin ?
-#include <strings.h>
-#include "../minilibx/mlx.h" // a virer
+#include "../header_cub3d.h"
 
 // juste une copie de north_main_test pour l'instant
 

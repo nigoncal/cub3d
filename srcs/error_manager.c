@@ -6,13 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 17:31:46 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 13:40:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_cub3d.h"
-#include "libft/header_libft.h"
-#include "get_next_line/get_next_line.h"
 
 // faire un bzero de toute ta structure
 

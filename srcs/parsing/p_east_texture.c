@@ -6,16 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/21 17:35:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/25 13:30:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../header_cub3d.h"
-#include <stdbool.h>
-#include "../libft/header_libft.h"
-#include "../get_next_line/get_next_line.h" // en a-t-il besoin ?
-#include <strings.h>
-#include "../minilibx/mlx.h" // a virer
+#include "../header_cub3d.h"
 
 /*
  * la fonction principale :

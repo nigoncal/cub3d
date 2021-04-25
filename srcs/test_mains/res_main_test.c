@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minilibx/mlx.h" // a ajouter dans ton header
-//#include "../header_cub3d.h"
-#include <stdbool.h>
-#include "../libft/header_libft.h"
-#include "../get_next_line/get_next_line.h"
-#include <stdio.h> // a virer
+#include "../header_cub3d.h"
 
 typedef struct	s_settings
 {
