@@ -64,6 +64,9 @@ problemes de norme dans header_libft.h
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
 
+vires bien tous tes commentaires de ton Makefile (attention ils sont difficiles
+a voir)
+
 push ton cub3D sur ton propre git
 
 repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)
