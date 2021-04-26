@@ -9,7 +9,6 @@ LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
 
 PATH_LIBFT			=	srcs/libft/
 PATH_MINILIBX		=	srcs/minilibx/
-#PATH_OBJS			=	objs/
 
 SRCS				=	start.c\
 						tools.c\
@@ -31,8 +30,7 @@ HEADERS				=	$(PATH_SRCS)header_cub3d.h\
 
 INC_HEADERS			=	$(addprefix -I, $(HEADERS))
 
-OBJS				=	$(addprefix $(PATH_SRCS), $(SRCS:.c=.o))\
-						$(addprefix $(PATH_PARS_SRCS), $(PARS_SRCS:.c=.o))
+OBJS				=	$(addprefix $(SRCS:.c=.o))\
 
 CUB3D_HEADER		=	header_cub3d.h
 
@@ -43,7 +41,7 @@ CFLAGS				=	-Wall -Wextra -Werror
 #$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-/%.o:				%.c $(HEADERS)
+%.o:				%.c $(HEADERS)
 					$(COMP) $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
 					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
@@ -54,11 +52,8 @@ CFLAGS				=	-Wall -Wextra -Werror
 ################################################################################
 
 all:			
-#				$(MAKE) $(MINILIBX)
+				$(MINILIBX)
 				$(MAKE) $(NAME)
-
-#init:			$(MINILIBX)
-#				$(shell mkdir -p $(PATH_OBJS))
 
 $(LIBCUB3D) :	$(PATH_SCRS) $(PATH_PARS_SRCS)
 				ar rcs $(LIBCUB3D) $(PATH_SCRS) $(PATH_PARS_SRCS)\
