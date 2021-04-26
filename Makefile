@@ -1,14 +1,14 @@
 NAME				=	cub3d
 LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
-MINILIBX			=	libmlx.dylib
+MLXDYLIB			=	libmlx.dylib
 
 LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
 						$(addprefix $(PATH_LIBFT), $(LIBFT))\
-						$(addprefix $(PATH_MINILIBX), $(MINILIBX))
+						$(addprefix $(PATH_MLX), $(MLXDYLIB))
 
 PATH_LIBFT			=	srcs/libft/
-PATH_MINILIBX		=	srcs/minilibx/
+PATH_MLX			=	srcs/minilibx/
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
@@ -34,19 +34,21 @@ HEADERS				=	srcs/header_cub3d.h\
 
 #INC_HEADERS			=	$(addprefix -I, $(HEADERS))
 
-#OBJS				=	$(addprefix $(SRCS:.c=.o))\
+OBJS				=	$(SRCS:.c=.o)
 
-CUB3D_HEADER		=	header_cub3d.h
+CUB3D_HEADER		=	srcs/header_cub3d.h
+
+CFLAGS				=	-Wall -Wextra -Werror
 
 COMP				=	clang
 
-CFLAGS				=	-Wall -Wextra -Werror
+RM					=	rm -rf
 
 #$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 %.o:				%.c $(HEADERS)
-					$(COMP) $(CFLAGS) -I $(MINILIBX_PATH) -c $< -o $@
+					$(COMP) $(CFLAGS) -I $(MLX_PATH) -c $< -o $@
 					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
 ################################################################################
@@ -56,38 +58,36 @@ CFLAGS				=	-Wall -Wextra -Werror
 ################################################################################
 
 all:			
-				$(MINILIBX)
+				$(MAKE) -C $(PATH_MLX)
+				mv $(PATH_MLX)$(MLXDYLIB) .
 				$(MAKE) $(NAME)
 
 $(LIBCUB3D) :	$(PATH_SCRS) $(PATH_PARS_SRCS)
 				ar rcs $(LIBCUB3D) $(PATH_SCRS) $(PATH_PARS_SRCS)\
 					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
 
-$(MINILIBX) :	
-				$(MAKE) -C $(PATH_MINILIBX)
-
 $(NAME):		$(LIBCUB3D)
 				$(MAKE) -C $(PATH_LIBFT)
-#				$(MAKE) -C $(MINILIBX_PATH)
+#				$(MAKE) -C $(MLX_PATH)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
-					-L $(MINILIBX_PATH) -l $(MINILIBX_PATH) $(LIBRARIES)\
-					-I $(MINILIBX_PATH) main.c -o $(NAME)
+					-L $(MLX_PATH) -l $(MLX_PATH) $(LIBRARIES)\
+					-I $(MLX_PATH) main.c -o $(NAME)
 ################################################################################
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
 clean:
-				rm -rf $(OBJS)
-				$(MAKE) clean -C $(LIBFT_PATH)
-				$(MAKE) clean -C $(MINILIBX_PATH)
+				$(RM) $(OBJS)
+				$(MAKE) clean -C $(PATH_LIBFT)
+				$(MAKE) clean -C $(PATH_MLX)
 
 fclean:			clean
-				rm -rf $(NAME)
-				rm -rf $(LIBFT)
-				rm -rf ./$(PATH_MINILIBX)/$(MINILIBX)
-				rm -rf ./$(PATH_MINILIBX)/*.o
-				rm -rf ./$(PATH_MINILIBX)/*.swiftmodule
-				rm -rf ./$(PATH_MINILIBX)/*.swiftdoc
+#				$(RM) $(NAME)
+#				$(RM) $(LIBFT)
+				$(RM) ./$(PATH_MLX)/$(MLXDYLIB)
+				$(RM) ./$(PATH_MLX)/*.o
+				$(RM) ./$(PATH_MLX)/*.swiftmodule
+				$(RM) ./$(PATH_MLX)/*.swiftdoc
 
 re: 
 	$(MAKE) fclean
