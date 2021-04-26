@@ -59,7 +59,31 @@ RM					=	rm -rf
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:				
+all:			
+#				ici il te faut les dependances de all
+#				c'est a dire les choses dont tu as
+#				besoin pour crer les fichiers
+#				finaux que ton projet va utiliser pour
+#				s'executer.
+#				Regardes le Makefile de guhernan pour ca
+#				Tu as besoin de :
+#								  - cub3d (executable) > c'etait bien la
+#								  						 variable EXE
+#								  - ^ pour cela :
+#								  				   - je ne sais pas, j'ai
+#								  				     besoin d'en parler avec
+#								  				     Nicolas et Pauline, qui
+#								  				     connaissent mieux la
+#								  				     minilibx que moi
+#								  				   - c'est sur qu'il va me
+#								  				     falloir la libft et la
+#								  				     dylib de la minilibx
+#								  				   - gnl aussi, mais sous
+#								  				     quelle forme ? Dans la
+#								  				     libft ou seul a cote ? Moi
+#								  				     j'aurais dit seul a cote
+#								  				     maisje dois en parler avec
+#								  				     Nicolas
 				$(shell mkdir -p $(DIR_LIBRARIES))
 				$(MAKE) -C $(PATH_LIBFT) && mv $(PATH_LIBFT)$(LIBFT) $(DIR_LIBRARIES)
 				$(MAKE) -C $(PATH_MLX)
