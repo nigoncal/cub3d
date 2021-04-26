@@ -24,8 +24,20 @@ DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour rem
 
 En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
 
-Il te faut ton Makefile et ta fonction d'erreur
+----------------------------------Makefile-------------------------------------
+Fais en sorte
+				- que ca ne relink pas (nothing to bo done for 'all')
+				- que si tu touch un fichier dans n'importe lequel des projets
+				  dependances, ca reintegre les fichier touch en les refaisant
+				  en .o etc. etc. jusq'a avoir le resultat final. Testes bien
+				  ca dans tous tes projets dependances (lbft et mlx jusqu'ici)
+
+vires bien tous tes commentaires de ton Makefile (attention ils sont difficiles
+a voir)
+-------------------------------------------------------------------------------
+
 La tu es sur resolution et tu essayes de faire fonctionner abort_prog quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_prog soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
+
 -----------------------------------------------------------------------------------------------
 
 tu es en train de coder abort_prog
@@ -64,8 +76,7 @@ problemes de norme dans header_libft.h
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
 
-vires bien tous tes commentaires de ton Makefile (attention ils sont difficiles
-a voir)
+
 
 push ton cub3D sur ton propre git
 

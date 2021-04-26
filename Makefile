@@ -3,6 +3,8 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MLXDYLIB			=	libmlx.dylib
 
+DIR_LIBRARIES		=   srcs/libraries/
+
 LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
 						$(addprefix $(PATH_LIBFT), $(LIBFT))\
 						$(addprefix $(PATH_MLX), $(MLXDYLIB))
@@ -38,7 +40,7 @@ OBJS				=	$(SRCS:.c=.o)
 
 CUB3D_HEADER		=	srcs/header_cub3d.h
 
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -g3
 
 COMP				=	clang
 
@@ -57,9 +59,11 @@ RM					=	rm -rf
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:			
+all:				
+				$(shell mkdir -p $(DIR_LIBRARIES))
+				$(MAKE) -C $(PATH_LIBFT) && mv $(PATH_LIBFT)$(LIBFT) $(DIR_LIBRARIES)
 				$(MAKE) -C $(PATH_MLX)
-				mv $(PATH_MLX)$(MLXDYLIB) .
+				mv $(PATH_MLX)$(MLXDYLIB) $(DIR_LIBRARIES)
 				$(MAKE) $(NAME)
 
 $(LIBCUB3D) :	$(PATH_SCRS) $(PATH_PARS_SRCS)
@@ -67,7 +71,6 @@ $(LIBCUB3D) :	$(PATH_SCRS) $(PATH_PARS_SRCS)
 					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
 
 $(NAME):		$(LIBCUB3D)
-				$(MAKE) -C $(PATH_LIBFT)
 #				$(MAKE) -C $(MLX_PATH)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
 					-L $(MLX_PATH) -l $(MLX_PATH) $(LIBRARIES)\
@@ -84,10 +87,9 @@ clean:
 fclean:			clean
 #				$(RM) $(NAME)
 #				$(RM) $(LIBFT)
-				$(RM) ./$(PATH_MLX)/$(MLXDYLIB)
-				$(RM) ./$(PATH_MLX)/*.o
-				$(RM) ./$(PATH_MLX)/*.swiftmodule
-				$(RM) ./$(PATH_MLX)/*.swiftdoc
+				$(RM) ./$(PATH_MLX)/$(MLXDYLIB) ./$(PATH_MLX)/*.o\
+					./$(PATH_MLX)/*.swiftmodule ./$(PATH_MLX)/*.swiftdoc\
+					$(DIR_LIBRARIES)
 
 re: 
 	$(MAKE) fclean
