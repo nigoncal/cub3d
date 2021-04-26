@@ -10,9 +10,12 @@ LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
 PATH_LIBFT			=	srcs/libft/
 PATH_MINILIBX		=	srcs/minilibx/
 
-SRCS				=	start.c\
-						tools.c\
-						error_manager.c\
+SRCS				=	srcs/main.c\
+						srcs/start.c\
+						srcs/tools.c\
+						srcs/error_manager.c\
+						srcs/get_next_line/get_next_line.c\
+						srcs/get_next_line/get_next_line_utils.c\
 						srcs/parsing/parser.c\
 						srcs/parsing/p_resolution.c\
 						srcs/parsing/p_textures.c\
@@ -24,13 +27,14 @@ SRCS				=	start.c\
 						srcs/parsing/p_colors.c\
 						srcs/parsing/p_map.c
 
-HEADERS				=	$(PATH_SRCS)header_cub3d.h\
-						$(PATH_LIBFT)header_libft.h\
-						$(PATH_MINILIBX)
+HEADERS				=	srcs/header_cub3d.h\
+						srcs/libft/header_libft.h\
+						srcs/get_next_line/get_next_line.h\
+						srcs/minilibx/mlx.h
 
-INC_HEADERS			=	$(addprefix -I, $(HEADERS))
+#INC_HEADERS			=	$(addprefix -I, $(HEADERS))
 
-OBJS				=	$(addprefix $(SRCS:.c=.o))\
+#OBJS				=	$(addprefix $(SRCS:.c=.o))\
 
 CUB3D_HEADER		=	header_cub3d.h
 
