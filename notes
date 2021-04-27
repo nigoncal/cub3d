@@ -25,6 +25,8 @@ DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour rem
 En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
 
 ----------------------------------Makefile-------------------------------------
+Reprends de la derniere page de ton cahier bleu
+
 Fais en sorte
 				- que ca ne relink pas (nothing to bo done for 'all')
 				- que si tu touch un fichier dans n'importe lequel des projets
