@@ -13,8 +13,39 @@
 
 
 
+typedef struct	s_settings
+{
+	bool	screenshot;
+	bool	R;
+	bool	NO;
+	bool	SO;
+	bool	EA;
+	bool	WE;
+	bool	S;
+	bool	F;
+	bool	C;
+	void	*mlx;
+	int		width;
+	int		height;
+  	char	*north_texture_path;
+	char	*south_texture_path;
+	char	*west_texture_path;
+	char	*east_texture_path;
+	char	*sprite_texture_path;
+	int		floor_red;
+	int		floor_green;
+	int		floor_blue;
+	int		ceiling_red;
+	int		ceiling_green;
+	int		ceiling_blue;
+	char		**map;
+	char	map_char[8];
+	
+}				t_settings;
+
 	typedef struct	s_info
 {
+	t_settings ok;
 	double		posX; //position x du joueur
 	double		posY; //position y du joueur
 	double		dirX; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
@@ -53,36 +84,6 @@
 	void	*win;
 	void	*image;
 }				t_info;
-typedef struct	s_settings
-{
-	bool	screenshot;
-	bool	R;
-	bool	NO;
-	bool	SO;
-	bool	EA;
-	bool	WE;
-	bool	S;
-	bool	F;
-	bool	C;
-	void	*mlx;
-	int		width;
-	int		height;
-  	char	*north_texture_path;
-	char	*south_texture_path;
-	char	*west_texture_path;
-	char	*east_texture_path;
-	char	*sprite_texture_path;
-	int		floor_red;
-	int		floor_green;
-	int		floor_blue;
-	int		ceiling_red;
-	int		ceiling_green;
-	int		ceiling_blue;
-	char		**map;
-	char	map_char[8];
-	
-}				t_settings;
-
 
 typedef struct s_screen
 {
@@ -113,6 +114,7 @@ void 	get_map();
 void	verLine(t_info *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);
 int		main_loop(t_info *info);
-int		key_press(int key, t_info *info);
+int	key_press(int key, t_info *info);
 void	add_line_map(char *line, t_settings *cub_sets);
 void	ft_map(char *line, t_settings *cub_sets);
+void	calc(t_info *info);

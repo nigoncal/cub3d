@@ -35,6 +35,7 @@ void	add_line_map(char *line, t_settings *cub_sets)
 	temp[i + 1] = 0;
 	free(cub_sets->map);
 	cub_sets->map = temp;
+		
 }
 
 void	ft_map(char *line, t_settings *cub_sets)

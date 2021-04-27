@@ -10,33 +10,6 @@
 #define X_EVENT_KEY_EXIT	17
 
 
-char	worldMap[24][24] = {
-							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-							{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-							{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,1},
-							{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-							{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-						};
-
 void	verLine(t_info *info, int x, int y1, int y2, int color)
 {
 	int	y;
@@ -54,6 +27,7 @@ void	verLine(t_info *info, int x, int y1, int y2, int color)
 void	calc(t_info *info)
 {
 
+
  	info->x = 0;
 	 	
 	  	
@@ -62,7 +36,6 @@ void	calc(t_info *info)
 
 	while (info->x < info->width)
 	{
-
 		info->cameraX = 2 * info->x / (double)info->width -1 ; //camera dans l'espace
 		info->raydirX = info->dirX + info->planeX *	info->cameraX;
 		info->raydirY = info->dirY + info->planeY * info->cameraX;
@@ -116,8 +89,12 @@ void	calc(t_info *info)
 				info->mapY += info->stepY;
 				info->side = 1;
 			}
+
 			//Check if ray has hit a wall
-			if (worldMap[info->mapX][info->mapY] > 0) info->hit = 1;
+		
+			if (info->ok.map[info->mapX][info->mapY] == '1') 
+				info->hit = 1;
+		
 		}
 		if (info->side == 0)
 			info->perpwalldist = (info->mapX - info->posX + (1 - info->stepX) / 2) / info->raydirX;
@@ -135,15 +112,15 @@ void	calc(t_info *info)
 			info->drawend = info->height - 1;
 
 		//info->color = 0;
-		/*if (worldMap[info->mapY][info->mapX] == 1)
+		if (info->ok.map[info->mapY][info->mapX] == '1')
 			info->color = 0xFF0000;
-		else if (worldMap[info->mapY][info->mapX] == 2)
+		else if (info->ok.map[info->mapY][info->mapX] == '2')
 			info->color = 0x00FF00;
-		else if (worldMap[info->mapY][info->mapX] == 3)
+		else if (info->ok.map[info->mapY][info->mapX] == '3')
 			info->color = 0x0000FF;
-		else if (worldMap[info->mapY][info->mapX] == 4)
+		else if (info->ok.map[info->mapY][info->mapX] == '4')
 			info->color = 0xFFFFFF;
-		else*/
+		else
 			info->color = 0xFFFF00;
 		
 		if (info->side == 1)
@@ -156,26 +133,30 @@ void	calc(t_info *info)
 
 int	main_loop(t_info *info)
 {
+
+
 	calc(info);
-	    mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
+	   mlx_put_image_to_window(info->mlx, info->win, info->image, 0, 0);
 	return (0);
+
 }
 
 int	key_press(int key, t_info *info)
 {
+
 	if (key == K_W)
 	{
-		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
+		if (info->ok.map[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)] == '0')
 			info->posX += info->dirX * info->moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)])
+		if (info->ok.map[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)] == '0')
 			info->posY += info->dirY * info->moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (!worldMap[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)])
+		if (info->ok.map[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)] == '0')
 			info->posX -= info->dirX * info->moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)])
+		if (info->ok.map[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)] == '0')
 			info->posY -= info->dirY * info->moveSpeed;
 	}
 	//rotate to the right

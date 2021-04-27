@@ -11,10 +11,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_settings cub;
 	t_info info;
 	//ft_putstr_fd("salut", 1);	
- 	ft_bzero(&cub, sizeof(cub));
+ 	ft_bzero(&info, sizeof(info));
 	init(&info);
 	if(argc == 2)
 	{
@@ -24,18 +23,22 @@ int	main(int argc, char **argv)
 
 	while((result = get_next_line(fd, &line) == 1))
 	{
-			printf("%s\n", line);
-			ft_map(line, &cub);
+			ft_map(line, &info.ok); // recup map
 	}
+		ft_map(line, &info.ok); // recup map
 		printf("\n");
 		int j = 0;
-		while(cub.map[j])
+		while(info.ok.map[j])
 		{
-			printf("%s\n", cub.map[j]);
+			//printf("%s\n", info.ok.map[j]);
 			j++;	
 		}
 
-		//ft_putstr_fd(info, 1);
+	info.mlx = mlx_init();
+	info.win = mlx_new_window(info.mlx, info.width, info.height, "mlx");
+	mlx_loop_hook(info.mlx, &main_loop, &info);
+	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_loop(info.mlx);
 	}
 	else
 	{
@@ -43,20 +46,12 @@ int	main(int argc, char **argv)
 	}
 }
 
-void	create_windows(t_info *info)
-{
-	info->mlx = mlx_init();
-	info->win = mlx_new_window(info->mlx, info->width, info->height, "mlx");
-	mlx_loop_hook(info->mlx, &main_loop, &info);
-	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-	mlx_loop(info->mlx);
-}
 
 void	init(t_info *info)
 {
 	info->height = 720;
 	info->width = 1280;
-	info->posX = 12;
+	info->posX = 5;
 	info->posY = 5;
 	info->dirX = -1;
 	info->dirY = 0;
