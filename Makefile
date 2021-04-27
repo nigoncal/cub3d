@@ -3,13 +3,13 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MINILIBXDYLIB			=	libmlx.dylib
 
-DIR_LIBRARIES		=   srcs/libraries/
+DIR_LIBRARIES		=   srcs/libraries
 
 LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT) \
 						srcs/minilibx$(MINILIBXDYLIB))
 
-PATH_LIBFT			=	srcs/libft/
-PATH_MINILIBX		=	srcs/minilibx/
+PATH_LIBFT			=	srcs/libft
+PATH_MINILIBX		=	srcs/minilibx
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
@@ -59,8 +59,7 @@ RM					=	rm -rf
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:			libraries
-				$(NAME)	
+all:			$(NAME)	
 
 #				ici il te faut les dependances de all
 #				c'est a dire les choses dont tu as
@@ -94,7 +93,8 @@ $(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
 				ar rcs $(LIBCUB3D) $(OBJS)\
 					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
 
-$(NAME)		:	$(LIBCUB3D)
+$(NAME)		:	libraries
+				$(LIBCUB3D)
 #				$(MAKE) -C $(MINILIBX_PATH)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
 					-L $(MINILIBX_PATH) -l $(MINILIBX_PATH) $(LIBRARIES)\
@@ -103,10 +103,13 @@ $(NAME)		:	$(LIBCUB3D)
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
-libraries	:	$(shell mkdir -p $(DIR_LIBRARIES))
-				$(MAKE) -C $(PATH_LIBFT) && mv $(PATH_LIBFT)$(LIBFT) $(DIR_LIBRARIES)
+libraries	:	$(DIR_LIBRARIES)
+				$(shell mkdir -p $(DIR_LIBRARIES))
+				$(MAKE) -C $(PATH_LIBFT)
 				$(MAKE) -C $(PATH_MINILIBX)
-				mv $(PATH_MINILIBX)$(MINILIBXDYLIB) $(DIR_LIBRARIES)
+				mv $(PATH_MINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
+				mv $(PATH_LIBFT)/$(LIBFT) $(DIR_LIBRARIES)/
+
 
 
 clean		:
@@ -117,12 +120,12 @@ clean		:
 fclean		:	clean
 #				$(RM) $(NAME)
 #				$(RM) $(LIBFT)
-				$(RM) ./$(PATH_MINILIBX)/$(MINILIBXDYLIB) ./$(PATH_MINILIBX)/*.o\
-					./$(PATH_MINILIBX)/*.swiftmodule ./$(PATH_MINILIBX)/*.swiftdoc\
-					$(DIR_LIBRARIES)
+				$(RM) $(PATH_MINILIBX)/$(MINILIBXDYLIB)
+				$(RM) $(PATH_MINILIBX)/*.o
+				$(RM) $(PATH_MINILIBX)/*.swiftmodule
+				$(RM) $(PATH_MINILIBX)/*.swiftdoc
+				$(RM) $(DIR_LIBRARIES)
 
-re			: 
-				$(MAKE) fclean
-				$(MAKE) all
+re			: 	fclean all
 
 .PHONY: all clean fclean re
