@@ -1,16 +1,15 @@
 NAME				=	cub3d
 LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
-MLXDYLIB			=	libmlx.dylib
+MINILIBXDYLIB			=	libmlx.dylib
 
 DIR_LIBRARIES		=   srcs/libraries/
 
-LIBRARIES			=	$(addprefix $(PATH_SRCS), $(LIBCUB3D))\
-						$(addprefix $(PATH_LIBFT), $(LIBFT))\
-						$(addprefix $(PATH_MLX), $(MLXDYLIB))
+LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT) \
+						srcs/minilibx$(MINILIBXDYLIB))
 
 PATH_LIBFT			=	srcs/libft/
-PATH_MLX			=	srcs/minilibx/
+PATH_MINILIBX		=	srcs/minilibx/
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
@@ -29,16 +28,17 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_colors.c\
 						srcs/parsing/p_map.c
 
-HEADERS				=	srcs/header_cub3d.h\
-						srcs/libft/header_libft.h\
-						srcs/get_next_line/get_next_line.h\
-						srcs/minilibx/mlx.h
-
-#INC_HEADERS			=	$(addprefix -I, $(HEADERS))
-
 OBJS				=	$(SRCS:.c=.o)
 
-CUB3D_HEADER		=	srcs/header_cub3d.h
+HEADERS				=	$(H_CUB3D)\
+						$(H_LIBFT)\
+						$(H_GNL)\
+						$(H_MINILIBX)
+
+H_CUB3D				=	srcs/header_cub3d.h
+H_LIBFT				=	srcs/libft/header_libft.h
+H_GNL				=	srcs/get_next_line/get_next_line.h
+H_MINILIBX			=	srcs/minilibx/mlx.h
 
 CFLAGS				=	-Wall -Wextra -Werror -g3
 
@@ -50,16 +50,18 @@ RM					=	rm -rf
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 %.o:				%.c $(HEADERS)
-					$(COMP) $(CFLAGS) -I $(MLX_PATH) -c $< -o $@
 					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
+
 ################################################################################
-# compiler cc au lieu de $(COMP)
+# compiler clang au lieu de $(COMP)
 # si tu touch un fichier de la libft, il ne faut pas avoir besoin de faire
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:			
+all:			libraries
+				$(NAME)	
+
 #				ici il te faut les dependances de all
 #				c'est a dire les choses dont tu as
 #				besoin pour crer les fichiers
@@ -84,39 +86,43 @@ all:
 #								  				     j'aurais dit seul a cote
 #								  				     maisje dois en parler avec
 #								  				     Nicolas
-				$(shell mkdir -p $(DIR_LIBRARIES))
-				$(MAKE) -C $(PATH_LIBFT) && mv $(PATH_LIBFT)$(LIBFT) $(DIR_LIBRARIES)
-				$(MAKE) -C $(PATH_MLX)
-				mv $(PATH_MLX)$(MLXDYLIB) $(DIR_LIBRARIES)
-				$(MAKE) $(NAME)
 
-$(LIBCUB3D) :	$(PATH_SCRS) $(PATH_PARS_SRCS)
-				ar rcs $(LIBCUB3D) $(PATH_SCRS) $(PATH_PARS_SRCS)\
+
+
+
+$(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
+				ar rcs $(LIBCUB3D) $(OBJS)\
 					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
 
-$(NAME):		$(LIBCUB3D)
-#				$(MAKE) -C $(MLX_PATH)
+$(NAME)		:	$(LIBCUB3D)
+#				$(MAKE) -C $(MINILIBX_PATH)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
-					-L $(MLX_PATH) -l $(MLX_PATH) $(LIBRARIES)\
-					-I $(MLX_PATH) main.c -o $(NAME)
+					-L $(MINILIBX_PATH) -l $(MINILIBX_PATH) $(LIBRARIES)\
+					-I $(MINILIBX_PATH) main.c -o $(NAME)
 ################################################################################
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
-clean:
+libraries	:	$(shell mkdir -p $(DIR_LIBRARIES))
+				$(MAKE) -C $(PATH_LIBFT) && mv $(PATH_LIBFT)$(LIBFT) $(DIR_LIBRARIES)
+				$(MAKE) -C $(PATH_MINILIBX)
+				mv $(PATH_MINILIBX)$(MINILIBXDYLIB) $(DIR_LIBRARIES)
+
+
+clean		:
 				$(RM) $(OBJS)
 				$(MAKE) clean -C $(PATH_LIBFT)
-				$(MAKE) clean -C $(PATH_MLX)
+				$(MAKE) clean -C $(PATH_MINILIBX)
 
-fclean:			clean
+fclean		:	clean
 #				$(RM) $(NAME)
 #				$(RM) $(LIBFT)
-				$(RM) ./$(PATH_MLX)/$(MLXDYLIB) ./$(PATH_MLX)/*.o\
-					./$(PATH_MLX)/*.swiftmodule ./$(PATH_MLX)/*.swiftdoc\
+				$(RM) ./$(PATH_MINILIBX)/$(MINILIBXDYLIB) ./$(PATH_MINILIBX)/*.o\
+					./$(PATH_MINILIBX)/*.swiftmodule ./$(PATH_MINILIBX)/*.swiftdoc\
 					$(DIR_LIBRARIES)
 
-re: 
-	$(MAKE) fclean
-	$(MAKE) all
+re			: 
+				$(MAKE) fclean
+				$(MAKE) all
 
 .PHONY: all clean fclean re
