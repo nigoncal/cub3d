@@ -15,7 +15,7 @@ int	main(int argc, char **argv)
 	//ft_putstr_fd("salut", 1);	
  	ft_bzero(&info, sizeof(info));
 	init(&info);
-	if(argc == 2)
+	if (argc == 2)
 	{
 		char *line;
 		int fd = open(argv[1], O_RDONLY);
@@ -33,9 +33,9 @@ int	main(int argc, char **argv)
 			//printf("%s\n", info.ok.map[j]);
 			j++;	
 		}
-
 	info.mlx = mlx_init();
-	info.win = mlx_new_window(info.mlx, info.width, info.height, "mlx");
+	info.win = mlx_new_window(info.mlx, info.width, info.height, "Mais quel talent wow !");
+	//on appelle main_loop en passant un pointeur vers la fonction ci dessous
 	mlx_loop_hook(info.mlx, &main_loop, &info);
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 	mlx_loop(info.mlx);
@@ -51,8 +51,8 @@ void	init(t_info *info)
 {
 	info->height = 720;
 	info->width = 1280;
-	info->posX = 5;
-	info->posY = 5;
+	info->posX = 2;
+	info->posY = 2;
 	info->dirX = -1;
 	info->dirY = 0;
 	info->planeX = 0;
@@ -61,5 +61,5 @@ void	init(t_info *info)
 	info->rotSpeed = 0.05;
 	info->BPP = 3;
 	info->endian = 0;
-	info->line_lenght = 0;
+	info->line_length = 0;
 }

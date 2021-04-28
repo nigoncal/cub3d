@@ -38,9 +38,8 @@ typedef struct	s_settings
 	int		ceiling_red;
 	int		ceiling_green;
 	int		ceiling_blue;
-	char		**map;
+	char	**map;
 	char	map_char[8];
-	
 }				t_settings;
 
 	typedef struct	s_info
@@ -76,13 +75,13 @@ typedef struct	s_settings
 	int			endian;
 	char		*buffer;
 	int 		lineHeight;
-	int			line_lenght;
+	int			line_length;
 	int  		BPP;
 	int			height; //Hauteur
 	int 		width; //Largeur
-	void	*mlx;
-	void	*win;
-	void	*image;
+	void		*mlx;
+	void		*win;
+	void		*image;
 }				t_info;
 
 typedef struct s_screen
