@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:06:21 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 13:21:57 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 16:23:31 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ void	start_map(char *line, t_settings *cub_sets)
 	if (non_empty_line(line) == 1)
 	{
 		if (is_map(line) == 0)
+		{
 			store_map(line, cub_sets);
+			cub_sets->map_started = true;
+		}
 		else
 			abort_prog(line, cub_sets, "Too many identifier lines");
 	}
-	cub_sets->map_started = true;
 }
 
 void	parse_map(char *line, t_settings *cub_sets)

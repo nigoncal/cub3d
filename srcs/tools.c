@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:57:36 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 13:40:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 16:05:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	non_empty_line(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\t'
-			&& line[i] != '\v' && line[i] != '\n')
+			&& line[i] != '\v' && line[i] != '\n') //gnl vire le \ ond cinutile icin
 			return (1);
 		i++;
 	}

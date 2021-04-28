@@ -6,7 +6,7 @@
 #    By: guhernan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/05 10:59:24 by guhernan          #+#    #+#              #
-#    Updated: 2021/04/27 13:48:41 by sylducam         ###   ########lyon.fr    #
+#    Updated: 2021/04/28 16:28:00 by sylducam         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 NAME    = cubddd.a
@@ -85,7 +85,7 @@ $(NAME) :   $(OBJS) $(LAR) | $(OBJ_DIR)
 	cp $(VLIBFT)/$(LAR) ./
 	mv ./$(LAR) ./$(NAME)
 	$(AR) $(NAME) $(OBJSPATH)
-	$(EXEC) : $(NAME)
+$(EXEC) : $(NAME)
 	$(CC)  -I$(VMLX) main.c $(NAME) -o $(EXEC) -framework OpenGL -framework AppKit -Lmlx -lmlx $(CSAN)
 %.o:        %.c $(INCS)
 	$(CC) $(CFLAGS) $(CINCS) -o $(OBJ_DIR)/$@ -c $<

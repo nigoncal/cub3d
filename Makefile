@@ -1,5 +1,5 @@
-NAME				=	cub3d
-LIBCUB3D			=	libcub3d.a
+NAME				=	libcub3d.a
+EXE					=	cub3d
 #celui-ci n'est pas liste dans les libraries car il est cree, a la rigueur desplaces le apres
 LIBFT				=	libft.a
 MINILIBXDYLIB		=	libmlx.dylib
@@ -38,11 +38,13 @@ PARSING				=	parser.c\
 						p_sprite_texture.c\
 						p_colors.c\
 						p_map.c
+
+# tu vas certainement rajouter des fichiers pour toute la partie graphique
 						
 GNL					=	get_next_line.c\
 						get_next_line_utils.c\
 
-OBJS				=	$(SRCS:.c=.o)
+OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
 
 HEADERS				=	srcs/header_cub3d.h srcs/get_next_line/get_next_line.h\
 						srcs/minilibx/mlx.h
@@ -66,7 +68,7 @@ RM					=	rm -rf
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:			$(NAME)	
+all:			libraries $(NAME) $(EXE)	
 
 #				ici il te faut les dependances de all
 #				c'est a dire les choses dont tu as
@@ -99,9 +101,13 @@ all:			$(NAME)
 $(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
 				ar rcs $(LIBCUB3D) $(OBJS)\
 					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
+# attention a la cariabl LIBCUB3D qui est devenur NAME, regardes par rapport
+# au Makefile de guhernan et cherches partout dans ton code ou il y a LIBCUB3D
+# et qu'est-ce que ca fait a chaque fois.
 
-$(NAME)		:	libraries
-				$(LIBCUB3D)
+
+$(NAME)		:	$(OBJS) $(LIBFT)
+# ICI
 #				$(MAKE) -C $(VMINILIBX)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
 					-L $(VMINILIBX) -l $(VMINILIBX) $(LIBRARIES)\
@@ -110,7 +116,8 @@ $(NAME)		:	libraries
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
-VGNL				=	srcs/get_next_line
+$(EXE)		:	$(NAME)
+
 libraries	:	
 				mkdir -p $(VLIBRARIES)
 				$(MAKE) -C $(VLIBFT)

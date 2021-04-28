@@ -25,7 +25,7 @@ DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour rem
 En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
 
 ----------------------------------Makefile-------------------------------------
-Reprends de la derniere page de ton cahier bleu
+Regardes la deniere reponse de guhernan par rapport a lib et $(LAR)
 
 Fais en sorte
 				- que ca ne relink pas (nothing to bo done for 'all')
@@ -36,6 +36,10 @@ Fais en sorte
 
 vires bien tous tes commentaires de ton Makefile (attention ils sont difficiles
 a voir)
+
+Verifies bien que tout ce qui est cree par ton Makefile est rm -rf aved fclean
+
+Est-ce que je garde le flag -g3 ?
 -------------------------------------------------------------------------------
 
 La tu es sur resolution et tu essayes de faire fonctionner abort_prog quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_prog soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
@@ -82,8 +86,12 @@ ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DO
 
 push ton cub3D sur ton propre git
 
-repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)
-
 passes ta libft a la nouvelle norme
 
+repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)
+
+push ton gnl modifie (mis a la norme) et push le avec un main
+
 si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c (dans ta libft)
+
+penses a checker les headers de tous tes fichiers, car travail en commun
