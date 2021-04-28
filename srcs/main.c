@@ -59,7 +59,7 @@ void	init(t_info *info)
 	info->planeY = 0.66;
 	info->moveSpeed = 0.5;
 	info->rotSpeed = 0.05;
-	info->BPP = 3;
-	info->endian = 0;
+	info->BPP = 5;
+	info->endian = 1;
 	info->line_lenght = 0;
 }

@@ -2,6 +2,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "mlx/mlx.h"
+# include "key_macros.h"
 # include "libft/libft.h"
 # include <stdbool.h>
 /* == GNL INCLUDES == */
@@ -114,7 +115,11 @@ void 	get_map();
 void	verLine(t_info *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);
 int		main_loop(t_info *info);
-int	key_press(int key, t_info *info);
+int		key_press(int key, t_info *info);
 void	add_line_map(char *line, t_settings *cub_sets);
 void	ft_map(char *line, t_settings *cub_sets);
 void	calc(t_info *info);
+void	raycast_cal(t_info *info);
+void	raycast_calc_dir(t_info *info);
+void	raycast_calc_delta(t_info *info);
+void	raycast_calc_pos(t_info *info);

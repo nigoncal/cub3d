@@ -1,20 +1,22 @@
-#include"../cub3d.h"
+#include "../cub3D.h"
 
-int	key_press(int key, t_info *info, int worldmap[24][24])
+
+int	key_press(int key, t_info *info)
 {
+
 	if (key == K_W)
 	{
-		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
+		if (info->ok.map[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)] == '0')
 			info->posX += info->dirX * info->moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)])
+		if (info->ok.map[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)] == '0')
 			info->posY += info->dirY * info->moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (!worldMap[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)])
+		if (info->ok.map[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)] == '0')
 			info->posX -= info->dirX * info->moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)])
+		if (info->ok.map[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)] == '0')
 			info->posY -= info->dirY * info->moveSpeed;
 	}
 	//rotate to the right
