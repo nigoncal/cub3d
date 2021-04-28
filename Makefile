@@ -10,7 +10,7 @@ LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT)\
 
 VPATH				=	srcs parsing get_next_line libft minilibx textures\
 						libraries $(VSCRS) $(VLIBFT) $(VMINILIBX) $(VPARSING)\
-						$(VGNL) $(VLIBRARIES) $(VLIBFT)
+						$(VGNL) $(VLIBRARIES) $(VLIBFT) $(VTEXTURES)
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
 # crees dans ton Makefile. Je sais pas poruquoi je le sens mal. Testes et tu
 # verras
@@ -44,15 +44,8 @@ GNL					=	get_next_line.c\
 
 OBJS				=	$(SRCS:.c=.o)
 
-HEADERS				=	$(H_CUB3D)\
-						$(H_LIBFT)\
-						$(H_GNL)\
-						$(H_MINILIBX)
-
-H_CUB3D				=	srcs/header_cub3d.h
-H_LIBFT				=	srcs/libft/header_libft.h
-H_GNL				=	srcs/get_next_line/get_next_line.h
-H_MINILIBX			=	srcs/minilibx/mlx.h
+HEADERS				=	srcs/header_cub3d.h srcs/get_next_line/get_next_line.h\
+						srcs/minilibx/mlx.h
 
 CFLAGS				=	-Wall -Wextra -Werror -g3
 
@@ -109,10 +102,10 @@ $(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
 
 $(NAME)		:	libraries
 				$(LIBCUB3D)
-#				$(MAKE) -C $(MINILIBX_PATH)
+#				$(MAKE) -C $(VMINILIBX)
 				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
-					-L $(MINILIBX_PATH) -l $(MINILIBX_PATH) $(LIBRARIES)\
-					-I $(MINILIBX_PATH) main.c -o $(NAME)
+					-L $(VMINILIBX) -l $(VMINILIBX) $(LIBRARIES)\
+					-I $(VMINILIBX) main.c -o $(NAME)
 ################################################################################
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
@@ -121,9 +114,9 @@ VGNL				=	srcs/get_next_line
 libraries	:	
 				mkdir -p $(VLIBRARIES)
 				$(MAKE) -C $(VLIBFT)
+				mv $(VLIBFT)/$(LIBFT) $(VLIBRARIES)/
 				$(MAKE) -C $(VMINILIBX)
-				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
-				mv $(VLIBFT)/$(LIBFT) $(DIR_LIBRARIES)/
+				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(VLIBRARIES)/
 
 
 
@@ -139,7 +132,7 @@ fclean		:	clean
 				$(RM) $(VMINILIBX)/*.o
 				$(RM) $(VMINILIBX)/*.swiftmodule
 				$(RM) $(VMINILIBX)/*.swiftdoc
-				$(RM) $(DIR_LIBRARIES)
+				$(RM) $(VLIBRARIES)
 
 re			: 	fclean all
 
