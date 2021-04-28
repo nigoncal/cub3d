@@ -1,5 +1,6 @@
 NAME				=	cub3d
 LIBCUB3D			=	libcub3d.a
+#celui-ci n'est pas liste dans les libraries car il est cree, a la rigueur desplaces le apres
 LIBFT				=	libft.a
 MINILIBXDYLIB		=	libmlx.dylib
 
@@ -16,25 +17,26 @@ VLIBFT				=	srcs/libft
 VMINILIBX			=	srcs/minilibx
 VPARSING			=	srcs/parsing
 VGNL				=	srcs/get_next_line
+VLIBRARIES			=	srcs/libft 
 
-SRCS				=	srcs/main.c\
-						srcs/start.c\
-						srcs/tools.c\
-						srcs/error_manager.c\
+SRCS				=	main.c\
+						start.c\
+						tools.c\
+						error_manager.c\
 
-PASRING				=	srcs/parsing/parser.c\
-						srcs/parsing/p_resolution.c\
-						srcs/parsing/p_textures.c\
-						srcs/parsing/p_north_texture.c\
-						srcs/parsing/p_south_texture.c\
-						srcs/parsing/p_east_texture.c\
-						srcs/parsing/p_west_texture.c\
-						srcs/parsing/p_sprite_texture.c\
-						srcs/parsing/p_colors.c\
-						srcs/parsing/p_map.c
+PARSING				=	parser.c\
+						p_resolution.c\
+						p_textures.c\
+						p_north_texture.c\
+						p_south_texture.c\
+						p_east_texture.c\
+						p_west_texture.c\
+						p_sprite_texture.c\
+						p_colors.c\
+						p_map.c
 						
-GNL					=	srcs/get_next_line/get_next_line.c\
-						srcs/get_next_line/get_next_line_utils.c\
+GNL					=	get_next_line.c\
+						get_next_line_utils.c\
 
 OBJS				=	$(SRCS:.c=.o)
 
@@ -112,7 +114,7 @@ $(NAME)		:	libraries
 ################################################################################
 
 libraries	:	$(DIR_LIBRARIES)
-				$(shell mkdir -p $(DIR_LIBRARIES))
+				mkdir -p $(DIR_LIBRARIES)
 				$(MAKE) -C $(VLIBFT)
 				$(MAKE) -C $(VMINILIBX)
 				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
@@ -136,4 +138,5 @@ fclean		:	clean
 
 re			: 	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libraries
+# sert a definir ces mots comme des regles
