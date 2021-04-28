@@ -4,20 +4,24 @@ LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
 MINILIBXDYLIB		=	libmlx.dylib
 
-DIR_LIBRARIES		=   srcs/libraries
 
-LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT) \
+LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT)\
 						srcs/minilibx$(MINILIBXDYLIB))
 
-VPATH				=	srcs parsing get_next_line libft minilibx $(VSCRS)\
-						$(VLIBFT) $(VMINILIBX) $(VPARSING) $(VGNL)
+VPATH				=	srcs parsing get_next_line libft minilibx textures\
+						libraries $(VSCRS) $(VLIBFT) $(VMINILIBX) $(VPARSING)\
+						$(VGNL) $(VLIBRARIES) $(VLIBFT)
+# est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
+# crees dans ton Makefile. Je sais pas poruquoi je le sens mal. Testes et tu
+# verras
 
 VSRCS				=	srcs
+VLIBRARIES			=   srcs/libraries
 VLIBFT				=	srcs/libft
+VGNL				=	srcs/get_next_line
 VMINILIBX			=	srcs/minilibx
 VPARSING			=	srcs/parsing
-VGNL				=	srcs/get_next_line
-VLIBRARIES			=	srcs/libft 
+VTEXTURES			=	srcs/textures
 
 SRCS				=	main.c\
 						start.c\
@@ -113,8 +117,9 @@ $(NAME)		:	libraries
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
-libraries	:	$(DIR_LIBRARIES)
-				mkdir -p $(DIR_LIBRARIES)
+VGNL				=	srcs/get_next_line
+libraries	:	
+				mkdir -p $(VLIBRARIES)
 				$(MAKE) -C $(VLIBFT)
 				$(MAKE) -C $(VMINILIBX)
 				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
