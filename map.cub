@@ -1,11 +1,11 @@
-			R 			192000 					108000
+			R	 			192000 					108000
 
 
 
 Fl 220,100,0
 
 
-Sl ./textures/test.png
+	S			 ./textures/test.png
 
 
 C 225,30,0
@@ -14,7 +14,7 @@ C 225,30,0
 EAs ./textures/test.png
 
 WE ./textures/test.png
-R 			192000 					108000
+R	 			192000 					108000
 
         1111111111111111111111111
         1000000000110000000000001

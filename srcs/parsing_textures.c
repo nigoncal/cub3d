@@ -1,5 +1,7 @@
 #include "../cub3D.h"
 
+int	
+
 int	parse_textures(char **tab, t_setup *setup)
 {
 	int fd;
@@ -20,10 +22,10 @@ int	parse_textures(char **tab, t_setup *setup)
 	fd = check_file(&tab[1][i], ".png");
 	if (fd < 2)
 		return (-1);
+	
 	if (tab[0][0] == 'N' && tab[0][1] == 'O')
 	{
-		//i = 0;
-		//i += skip_ws(tab[1]);
+		//tester l'ID avec strncmp + donner le chemin de copie
 		setup->north_texture_path = &tab[1][i];
 		printf("chemin NO : [%s]\n", setup->north_texture_path);
 		// calcul len str du path

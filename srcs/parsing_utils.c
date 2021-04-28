@@ -1,5 +1,23 @@
 #include "../cub3D.h"
 
+char	*change_char(char *str, char new, char old)
+{
+	char	*changed_str;
+	int		i;
+	i = 0;
+	if (!str || !*str || !in || !out)
+		return (NULL);
+	changed_str = ft_strdup(str);
+	while (changed_str[i])
+	{
+		if (changed_str[i] == old)
+			changed_str[i] = new;
+		i++;
+	}
+	free(str);
+	return (changed_str);
+}
+
 int	ft_nblen(double value)
 {
 	int	i;

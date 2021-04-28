@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 10:30:06 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/14 10:33:18 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/21 09:36:40 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,9 @@ int	skip_non_digits(char const *str, int skip_what)
 		ft_isdigit(str[i + 1]) == 1)
 			return (i);
 		else if (ft_isdigit(str[i]) == skip_what)
-		{
 			i++;
-		}
 		else
 			return (i);
 	}
 	return (i);
 }
-
-/*int	skip_non_digits(char const *str, int skip_what)
-{
-	int i;
-
-	i = 0;
-	if (skip_what == 1)
-	{
-		if (str[i] && str[i] == '-')
-			i++;
-	}
-	while (str[i] && ft_isdigit(str[i]) == skip_what)
-		i++;
-	return (i);
-}*/
