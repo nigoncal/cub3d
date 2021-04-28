@@ -95,3 +95,5 @@ push ton gnl modifie (mis a la norme) et push le avec un main
 si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c (dans ta libft)
 
 penses a checker les headers de tous tes fichiers, car travail en commun
+
+vires la libft de ton gnl (repo de base de ton gnl, pas celui de cub3d)
