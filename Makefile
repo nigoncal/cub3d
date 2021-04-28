@@ -1,23 +1,28 @@
 NAME				=	cub3d
 LIBCUB3D			=	libcub3d.a
 LIBFT				=	libft.a
-MINILIBXDYLIB			=	libmlx.dylib
+MINILIBXDYLIB		=	libmlx.dylib
 
 DIR_LIBRARIES		=   srcs/libraries
 
 LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT) \
 						srcs/minilibx$(MINILIBXDYLIB))
 
-PATH_LIBFT			=	srcs/libft
-PATH_MINILIBX		=	srcs/minilibx
+VPATH				=	srcs parsing get_next_line libft minilibx $(VSCRS)\
+						$(VLIBFT) $(VMINILIBX) $(VPARSING) $(VGNL)
+
+VSRCS				=	srcs
+VLIBFT				=	srcs/libft
+VMINILIBX			=	srcs/minilibx
+VPARSING			=	srcs/parsing
+VGNL				=	srcs/get_next_line
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
 						srcs/tools.c\
 						srcs/error_manager.c\
-						srcs/get_next_line/get_next_line.c\
-						srcs/get_next_line/get_next_line_utils.c\
-						srcs/parsing/parser.c\
+
+PASRING				=	srcs/parsing/parser.c\
 						srcs/parsing/p_resolution.c\
 						srcs/parsing/p_textures.c\
 						srcs/parsing/p_north_texture.c\
@@ -27,6 +32,9 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_sprite_texture.c\
 						srcs/parsing/p_colors.c\
 						srcs/parsing/p_map.c
+						
+GNL					=	srcs/get_next_line/get_next_line.c\
+						srcs/get_next_line/get_next_line_utils.c\
 
 OBJS				=	$(SRCS:.c=.o)
 
@@ -105,25 +113,25 @@ $(NAME)		:	libraries
 
 libraries	:	$(DIR_LIBRARIES)
 				$(shell mkdir -p $(DIR_LIBRARIES))
-				$(MAKE) -C $(PATH_LIBFT)
-				$(MAKE) -C $(PATH_MINILIBX)
-				mv $(PATH_MINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
-				mv $(PATH_LIBFT)/$(LIBFT) $(DIR_LIBRARIES)/
+				$(MAKE) -C $(VLIBFT)
+				$(MAKE) -C $(VMINILIBX)
+				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(DIR_LIBRARIES)/
+				mv $(VLIBFT)/$(LIBFT) $(DIR_LIBRARIES)/
 
 
 
 clean		:
 				$(RM) $(OBJS)
-				$(MAKE) clean -C $(PATH_LIBFT)
-				$(MAKE) clean -C $(PATH_MINILIBX)
+				$(MAKE) clean -C $(VLIBFT)
+				$(MAKE) clean -C $(VMINILIBX)
 
 fclean		:	clean
 #				$(RM) $(NAME)
 #				$(RM) $(LIBFT)
-				$(RM) $(PATH_MINILIBX)/$(MINILIBXDYLIB)
-				$(RM) $(PATH_MINILIBX)/*.o
-				$(RM) $(PATH_MINILIBX)/*.swiftmodule
-				$(RM) $(PATH_MINILIBX)/*.swiftdoc
+				$(RM) $(VMINILIBX)/$(MINILIBXDYLIB)
+				$(RM) $(VMINILIBX)/*.o
+				$(RM) $(VMINILIBX)/*.swiftmodule
+				$(RM) $(VMINILIBX)/*.swiftdoc
 				$(RM) $(DIR_LIBRARIES)
 
 re			: 	fclean all
