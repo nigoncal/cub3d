@@ -9,10 +9,10 @@ int	parse_line(char *line, t_info *info)
 	printf("Ligne parsée : [%s]\n", line);
 	//printf("Values parsées : %d\n", setup->nb_parsed_values);
 	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ')
-	if (info->IDs.nb_parsed_IDs == 8)
+	if (info->ids.nb_parsed_ids == 8)
 	{	
 		//passer les lignes vides en incrementant setup->map_start_line
-		//verif qu'on ne retombe pas sur un ID deja rencontré !!!
+		//verif qu'on ne retombe pas sur un id deja rencontré !!!
 		//printf("on a nos 8 values\n");
 		parse_map(line, info);
 		return (0);
@@ -34,13 +34,14 @@ int	parse_line(char *line, t_info *info)
 	//printf("premiere case du tab : [%c]\n", elements [0][0]);
 	if (elements[0][0] == 'R')
 	{
-		if (parse_ID(elements[0], "R", 2))
+		if (parse_id(elements[0], "R", 2))
 			return (-1);
+		
 	}
 	else if (elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
 	|| elements[0][0] == 'S')
 	{
-		if (parse_tex_ID(elements, info))
+		if (parse_tex_id(elements, info))
 			return (-1);
 		/*if (parse_textures(elements, setup) < 0)
 		{
@@ -53,22 +54,22 @@ please <3\n", 0);
 	}
 	/*else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{
-		printf("hey ho Sprite line info. ID is : %d\n", setup->IDs.Sprite);
-		if (setup->IDs.Sprite == 1)
+		printf("hey ho sprite line info. id is : %d\n", setup->ids.sprite);
+		if (setup->ids.sprite == 1)
 		{
-			printf("Error\nSprite image file parsing failed : two lines with the\
-Sprite ID appear in your .cub. Only one is accepted.\n");
+			printf("Error\nsprite image file parsing failed : two lines with the\
+sprite id appear in your .cub. Only one is accepted.\n");
 			return (-1);
 		}
 		//parse_sprite(elements, setup);
-		setup->IDs.Sprite = 1;
+		setup->ids.sprite = 1;
 		setup->nb_parsed_values++;
 		setup->map_start_line++;
 	}*/
 	else if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
 		//parse_color(elements, setup);
-		info->IDs.nb_parsed_IDs++;
+		info->ids.nb_parsed_ids++;
 		info->map_info.map_start_line++;
 	}
 	else

@@ -34,8 +34,8 @@ and try again. Keep going !\n", 0);
 		else
 			printf("Error\nProblem with your .cub while working with it.\n");
 	}
-	printf("La 1e ligne du tab malloqué : [%s]\n", info.ok.map[0]);
-	printf("La 14e ligne du tab malloqué : [%s]\n", info.ok.map[13]);
+	printf("La 1e ligne du tab malloqué : [%s]\n", info.setup.map[0]);
+	printf("La 14e ligne du tab malloqué : [%s]\n", info.setup.map[13]);
 	//init_windows(&mini);
 	//init_ray(&direction, mini);
 	//assigned_vector(&sphere.origine, 0, 0, -60);
@@ -45,7 +45,7 @@ and try again. Keep going !\n", 0);
 	if (info.map_info.map_malloced == 1)
 	{
 		//free_2d_tab(setup.map, setup.map_nb_lines + 1);
-		free(info.ok.map);
+		free(info.setup.map);
 	}
 	/* fin de ma partie */
 
@@ -86,16 +86,16 @@ void	init(t_info *info)
 {
 	info->height = 720;
 	info->width = 1280;
-	info->posX = 5;
-	info->posY = 5;
-	info->dirX = -1;
-	info->dirY = 0;
-	/* garder l'init de planeX/Y, rot/moveSpeed ? */
-	info->planeX = 0;
-	info->planeY = 0.66;
-	info->moveSpeed = 0.5;
-	info->rotSpeed = 0.05;
-	info->BPP = 5;
+	info->pos_x = 5;
+	info->pos_y = 5;
+	info->dir_x = -1;
+	info->dir_y = 0;
+	/* garder l'init de plane_x/Y, rot/move_speed ? */
+	info->plane_x = 0;
+	info->plane_y = 0.66;
+	info->move_speed = 0.5;
+	info->rot_speed = 0.05;
+	info->bpp = 5;
 	info->endian = 1;
 	info->line_lenght = 0;
 }

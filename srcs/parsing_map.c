@@ -1,6 +1,6 @@
 #include "../cub3D.h"
 
-int	get_map_size(char *line, t_info *info))
+int	get_map_size(char *line, t_info *info)
 {
 	int	len;
 
@@ -26,9 +26,9 @@ int	parse_map(char *line, t_info *info)
 	else if (info->map_info.map_malloced == 0)
 	{
 		//malloc le char ** de la struct pour stocker la map
-		info->ok.map = malloc(sizeof(char *) * \
+		info->setup.map = malloc(sizeof(char *) * \
 	(info->map_info.map_nb_lines + 1));
-		if (info->ok.map == NULL)
+		if (info->setup.map == NULL)
 			return (-1);
 		else
 			info->map_info.map_malloced = 1;
@@ -38,10 +38,10 @@ int	parse_map(char *line, t_info *info)
 		//go to map_copy
 		if (info->map_info.map_nb_lines > 0)
 		{
-			info->ok.map[info->map_info.map_tab_line] = line;
-			if (info->ok.map[info->map_info.map_tab_line] == NULL)
+			info->setup.map[info->map_info.map_tab_line] = line;
+			if (info->setup.map[info->map_info.map_tab_line] == NULL)
 			{
-				free_2d_tab(info->map, info->map_info.map_tab_line);
+				free_2d_tab(info->setup.map, info->map_info.map_tab_line);
 				return (-1);
 			}
 			info->map_info.map_tab_line++;
@@ -49,7 +49,7 @@ int	parse_map(char *line, t_info *info)
 		}
 		else if (info->map_info.map_nb_lines == 0)
 		{
-			info->ok.map[info->map_info.map_tab_line] = 0;
+			info->setup.map[info->map_info.map_tab_line] = 0;
 		}
 	}
 	return (0);

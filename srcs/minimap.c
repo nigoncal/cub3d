@@ -7,7 +7,7 @@ void create_mini_map(t_screen *sc)
 
   int count_x = 0;
   int count_y = 0;
-  int worldMap[mapWidth][mapHeight] =
+  int worldmap[mapWidth][mapHeight] =
       {
           {1, 1, 1, 1, 1},
           {1, 0, 0, 0, 1},
@@ -18,7 +18,7 @@ void create_mini_map(t_screen *sc)
   {
     while (count_y != mapHeight)
     {
-      if (worldMap[count_x][count_y] == 1)
+      if (worldmap[count_x][count_y] == 1)
         sc->color = 0xFF0000;
       else
         sc->color = 0xFFFFFF;
@@ -65,9 +65,9 @@ void put_pixel(t_screen *screen)
 }
 /*while(count_x != 3)
 {
-    while(worldMap[count_x][count_y])
+    while(worldmap[count_x][count_y])
     {
-      if(worldMap[count_x][count_y] == '1')
+      if(worldmap[count_x][count_y] == '1')
         sc->color = 0xFFFFFF;
       else
         sc->color = 0x000009;
@@ -80,7 +80,7 @@ void put_pixel(t_screen *screen)
     sc->j += len;
 }*/
 
-/* if(worldMap[count_x][count_y] == 1)
+/* if(worldmap[count_x][count_y] == 1)
     sc->color = 0xFFFFFF;
   else
     sc->color = 0x000000;*/

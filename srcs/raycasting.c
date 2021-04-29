@@ -18,7 +18,7 @@ void	verLine(t_info *info, int x, int y1, int y2)
 	y = y1;
 	while (y <= y2)
 	{
-    	dst = info->buffer + (y * info->line_lenght + x * (info->BPP / 8));
+    	dst = info->buffer + (y * info->line_lenght + x * (info->bpp / 8));
    		*(unsigned int*)dst = info->color;
 		y++;
 	}
@@ -28,7 +28,7 @@ void	calc(t_info *info)
 {
 	info->x = 0;
 	info->image = mlx_new_image(info->mlx, info->width, info->height);
-	info->buffer = mlx_get_data_addr(info->image, &info->BPP, &info->line_lenght, &info->endian);
+	info->buffer = mlx_get_data_addr(info->image, &info->bpp, &info->line_lenght, &info->endian);
 
 	while (info->x < info->width)
 	{
@@ -37,7 +37,7 @@ void	calc(t_info *info)
 		raycast_calc_dir(info);
 		raycast_calc_delta(info);
 		raycast_calc_pos(info);
-		verLine(info, info->x, info->drawstart, info->drawend, info->color);
+		verLine(info, info->x, info->drawstart, info->drawend);
 		info->x++;
 	}
 	mlx_clear_window(info->mlx, info->win);
@@ -54,45 +54,45 @@ void	raycast_cal(t_info *info)
 {
 	//PEUT ETRE : on cherche a placer l'origine du point precis a partir duquel on lancera les rayons (son X dans la largeur car Y bouge ailleurs)
 	//camera dans l'espace
-	info->cameraX = 2 * info->x / (double)info->width -1 ;
+	info->camera_x = 2 * info->x / (double)info->width -1 ;
 	//get rays directions based on
-	info->raydirX = info->dirX + info->planeX * info->cameraX;
-	info->raydirY = info->dirY + info->planeY * info->cameraX;
+	info->raydir_x = info->dir_x + info->plane_x * info->camera_x;
+	info->raydir_y = info->dir_y + info->plane_y * info->camera_x;
 	//update what map box we work with based on player's position
-	info->mapX = (int)info->posX;
-	info->mapY = (int)info->posY;
+	info->map_x = (int)info->pos_x;
+	info->map_y = (int)info->pos_y;
 	//length of ray from current position to next x or y-side
-	info->sidedistX = 0;
-	info->sidedistY = 0;
+	info->sidedist_x = 0;
+	info->sidedist_y = 0;
 	 //length of ray from one x or y-side to next x or y-side
-	info->deltadistX = fabs(1 / info->raydirX);
-	info->deltadistY = fabs(1 / info->raydirY);
+	info->deltadist_x = fabs(1 / info->raydir_x);
+	info->deltadist_y = fabs(1 / info->raydir_y);
 	info->hit = 0;
 }
 
 void	raycast_calc_dir(t_info *info)
 {
-	if (info->raydirX < 0)
+	if (info->raydir_x < 0)
 	{
-		info->stepX = -1;
-		info->sidedistX = (info->posX - info->mapX) * info->deltadistX;
+		info->step_x = -1;
+		info->sidedist_x = (info->pos_x - info->map_x) * info->deltadist_x;
 	}
 	else
 	{
-		info->stepX = 1;
-		info->sidedistX = (info->mapX + 1.0 - info->posX) \
-	* info->deltadistX;
+		info->step_x = 1;
+		info->sidedist_x = (info->map_x + 1.0 - info->pos_x) \
+	* info->deltadist_x;
 	}
-	if (info->raydirY < 0)
+	if (info->raydir_y < 0)
 	{
-		info->stepY = -1;
-		info->sidedistY = (info->posY - info->mapY) * info->deltadistY;
+		info->step_y = -1;
+		info->sidedist_y = (info->pos_y - info->map_y) * info->deltadist_y;
 	}
 	else
 	{
-		info->stepY = 1;
-		info->sidedistY = (info->mapY + 1.0 - info->posY) \
-* info->deltadistY;
+		info->step_y = 1;
+		info->sidedist_y = (info->map_y + 1.0 - info->pos_y) \
+* info->deltadist_y;
 	}
 }
 
@@ -101,20 +101,20 @@ void	raycast_calc_delta(t_info *info)
 	while (info->hit == 0)
 	{
 		//jump to next map square, OR in x-direction, OR in y-direction : look for a wall
-		if (info->sidedistX < info->sidedistY)
+		if (info->sidedist_x < info->sidedist_y)
 		{
-			info->sidedistX += info->deltadistX;
-			info->mapX += info->stepX;
+			info->sidedist_x += info->deltadist_x;
+			info->map_x += info->step_x;
 			info->side = 0;
 		}
 		else
 		{
-			info->sidedistY += info->deltadistY;
-			info->mapY += info->stepY;
+			info->sidedist_y += info->deltadist_y;
+			info->map_y += info->step_y;
 			info->side = 1;
 		}
 		//If ray has hit a wall, we keep this info in info->hit
-		if (info->ok.map[info->mapX][info->mapY] == '1')
+		if (info->setup.map[info->map_x][info->map_y] == '1')
 			info->hit = 1;
 	}
 }
@@ -122,21 +122,21 @@ void	raycast_calc_delta(t_info *info)
 void	raycast_calc_pos(t_info *info)
 {
 	if (info->side == 0)
-	info->perpwalldist = (info->mapX - info->posX +\
-	(1 - info->stepX) / 2) / info->raydirX;
+	info->perpwalldist = (info->map_x - info->pos_x +\
+	(1 - info->step_x) / 2) / info->raydir_x;
 	else
-	info->perpwalldist = (info->mapY - info->posY +\
-	(1 - info->stepY) / 2) / info->raydirY;
+	info->perpwalldist = (info->map_y - info->pos_y +\
+	(1 - info->step_y) / 2) / info->raydir_y;
 	//Calculate info->height of line to draw on screen WTF IS THIS ???
-	 info->lineHeight = (int)(info->height / info->perpwalldist);
+	 info->line_height = (int)(info->height / info->perpwalldist);
 	//calculate lowest and highest pixel to fill in current stripe
-	info->drawstart = -info->lineHeight / 2 + info->height / 2;
+	info->drawstart = -info->line_height / 2 + info->height / 2;
 	if (info->drawstart < 0)
 		info->drawstart = 0;
-	info->drawend = info->lineHeight / 2 + info->height / 2;
+	info->drawend = info->line_height / 2 + info->height / 2;
 	if (info->drawend >= info->height)
 		info->drawend = info->height - 1;
-	if (info->ok.map[info->mapY][info->mapX] == '1')
+	if (info->setup.map[info->map_y][info->map_x] == '1')
 		info->color = 0xFF0000;
 	else
 		info->color = 0xFFFFFF;

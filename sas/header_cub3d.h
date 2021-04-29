@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/23 11:13:30 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 12:58:11 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct	s_map
 {
 	bool	screenshot;
 	bool	R;
-	bool	NO;
-	bool	SO;
-	bool	EA;
-	bool	WE;
+	bool	no;
+	bool	so;
+	bool	ea;
+	bool	we;
 	bool	S;
 	bool	F;
 	bool	C;
