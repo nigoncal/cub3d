@@ -1,11 +1,11 @@
 #include "../cub3D.h"
 
-char	*change_char(char *str, char new, char old)
+char	*change_char(char *str, char new, char old, bool do_free)
 {
 	char	*changed_str;
 	int		i;
 	i = 0;
-	if (!str || !*str || !in || !out)
+	if (!str || !*str || !old || !new)
 		return (NULL);
 	changed_str = ft_strdup(str);
 	while (changed_str[i])
@@ -14,7 +14,8 @@ char	*change_char(char *str, char new, char old)
 			changed_str[i] = new;
 		i++;
 	}
-	free(str);
+	if (do_free == 1)
+		free(str);
 	return (changed_str);
 }
 

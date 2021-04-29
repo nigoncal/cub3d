@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/20 13:28:43 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 14:28:52 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main (int argc, char **argv)
 	int		fd;
 
 	fd = 0;
-	/*init_struct(&setup);*/
 	ft_bzero(&setup, sizeof(t_setup));
 	ft_bzero(&setup.IDs, sizeof(setup.IDs));
 	if (parse_args(argc, argv, &setup) < 0)
@@ -55,36 +54,3 @@ and try again. Keep going !\n", 0);
 	}
 	return (0);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	line = NULL;
-	i = ft_strlen(argv[1]);
-	i -= 4;
-	if ((argc < 2 && argc > 3) && ft_strncmp(argv[1] + i, ".cub", 5))
-	{
-		ft_putstr("Error\nUsage : ./cub3D file.cub --save(optionnal)\n");
-		return (0);
-	}
-	if (argc == 3)
-	{
-		if (ft_strncmp(argv[2], "--save", 7))
-		{
-			ft_putstr("Error\nUsage : ./cub3D file.cub --save(optionnal)\n");
-			return (0);
-		}
-	}
-	else
-	{
-		// if --save
-		fd = open(argv[2], O_RDONLY);
-		cub3D(fd, &line);
-		close(fd);
-	}
-	return (0);
-}*/

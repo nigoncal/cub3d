@@ -25,13 +25,17 @@ int	parse_line(char *line, t_setup *setup)
 		setup->map_start_line++;
 		return (0);
 	}
+	//printf("pouet poue\n");
+	//modif la fonction ci dessous pour changer plusieurs char en 1 fonction
+	line = change_char(line, ' ', 9, 0);
+	line = change_char(line, ' ', 11, 0);
 	elements = ft_split(line, ' ');
 	//printf("premiere case du tab : [%s]\n", elements [0]);
 	//printf("Ligne parsée WS skip : [%s]\n", line);
 	//printf("premiere case du tab : [%c]\n", elements [0][0]);
 	if (elements[0][0] == 'R')
 	{
-		if (parse_res_ID(elements, setup))
+		if (parse_ID(elements[0], "R", 2))
 			return (-1);
 	}
 	else if (elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \

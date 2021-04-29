@@ -4,16 +4,16 @@
 
 Fl 220,100,0
 
+		NO 		./textures/test.png
+WE		 ./textures/test.png
+C 225,30,0
 
 	S			 ./textures/test.png
 
 
-C 225,30,0
-		NO 		./textures/test.png
    			SO		       ./textures/test.png
 EAs ./textures/test.png
 
-WE ./textures/test.png
 R	 			192000 					108000
 
         1111111111111111111111111

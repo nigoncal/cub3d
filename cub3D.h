@@ -67,19 +67,21 @@ typedef struct s_setup
 
 int		parse_args(int argc, char **argv, t_setup *setup);
 int		check_file(char *path, char *extension);
-int		parse_res_ID(char **elements, t_setup *setup);
+int		parse_ID(char *ID, char *expected, int max);
+//int		parse_res_ID(char **elements, t_setup *setup);
 int		parse_resolution(char **tab, t_setup *setup);
 int		cap_resolution(t_setup *setup);
 int		parse_tex_ID(char **elements, t_setup *setup);
 int		parse_textures(char **tab, t_setup *setup);
 
-/* Utils */
+/* Parsing utils */
 int		skip_ws(char const *str);
 int		skip_non_digits(char const *str, int skip_what);
 char	*is_line_empty(char *line);
 int		get_map_size(char *line, t_setup *setup);
 int		open_file(t_setup *setup, int fd);
 int		parse_map(char *line, t_setup *setup);
+char	*change_char(char *str, char new, char old, bool do_free);
 
 /* GNL */
 
