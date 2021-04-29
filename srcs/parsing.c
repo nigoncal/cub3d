@@ -24,33 +24,52 @@ int	parse_line(char *line, t_info *info)
 		info->map_info.map_start_line++;
 		return (0);
 	}
-	//printf("pouet poue\n");
-	//modif la fonction ci dessous pour changer plusieurs char en 1 fonction
+	//A FAIRE : modifier la fonction ci dessous pour changer plusieurs char en 1 fonction
 	line = change_char(line, ' ', 9, 0);
 	line = change_char(line, ' ', 11, 0);
 	elements = ft_split(line, ' ');
 	//printf("premiere case du tab : [%s]\n", elements [0]);
 	//printf("Ligne parsée WS skip : [%s]\n", line);
 	//printf("premiere case du tab : [%c]\n", elements [0][0]);
+
+	/* SEPARER LA FONCTION ICI !!!! */
 	if (elements[0][0] == 'R')
 	{
-		if (parse_id(elements[0], "R", 2))
+		if (parse_id(elements[0], "R", 2) || info->ids.res == 1)
+		{
+			if (info->ids.res == 1)
+			{
+				printf("Error\nResolution parsing failed because program found the \"R\" ID \
+More than once. Only one occurency of each ID is accepted.\n");
+			}
 			return (-1);
-		
+		}
+		if (parse_resolution(elements, info) < 0)
+		{
+			printf("Error\nResolution parsing failed, too many/few arguments. Expected \
+the \"R\" ID, a width and then a height.\n");
+			//checker remontee erreur + haut
+			return (-1);
+		}
+		if (cap_resolution(info) < 0)
+			return (-1);
+		info->ids.res = 1;
+		info->ids.nb_parsed_ids++;
 	}
+	/* SEPARER LA AUSSI */
 	else if (elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
 	|| elements[0][0] == 'S')
 	{
 		if (parse_tex_id(elements, info))
 			return (-1);
-		/*if (parse_textures(elements, setup) < 0)
+		if (parse_textures(elements, info) < 0)
 		{
 			ft_putstr_fd("Error\nTexture files parsing failed, check your .cub file \
 please <3\n", 0);
 			return (-1);
 		}
-		setup->nb_parsed_values++;
-		setup->map_start_line++;*/
+		info->ids.nb_parsed_ids++;
+		info->map_info.map_start_line++;
 	}
 	/*else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{
@@ -68,12 +87,20 @@ sprite id appear in your .cub. Only one is accepted.\n");
 	}*/
 	else if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
+		if (parse_color_id(elements))
+			return (-1);
+
+
 		//parse_color(elements, setup);
 		info->ids.nb_parsed_ids++;
 		info->map_info.map_start_line++;
 	}
 	else
+	{
+		printf("Error\nCouldn't find any correct ID in one of .cub file's lines : expected \"R\" for resolution, \"S\" for sprites, \"C\" for ceiling color and \"F\" for floor color, \"NO\", \
+\"SO\", \"EA\" or \"WE\" for wall textures.\n \"%s\" is invalid.\n", line);
 		return (-1);
+	}
 	return (0);
 }
 

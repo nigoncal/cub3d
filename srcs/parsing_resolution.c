@@ -8,10 +8,10 @@ int	cap_resolution(t_info *info)
 values, check your .cub file please <3\n", 0);
 		return (-1);
 	}
-	mlx_get_screen_size(info->mlx, &info->max_w, &info->setup.max_h);
+	mlx_get_screen_size(info->mlx, &info->setup.max_w, &info->setup.max_h);
 	if (info->setup.max_w == 0 || info->setup.max_h == 0)
 	{
-		printf("Error\nMLX couldn't get your screen's size. sorry bro.\n");
+		printf("Error\nMLX couldn't get your screen's size. Sorry buddy ...\n");
 		return (-1);
 	}
 	if (info->width > info->setup.max_w)
@@ -32,8 +32,8 @@ int	parse_resolution(char **tab, t_info *info)
 
 	i = 0;
 	l = 0;
-	info->width = 0;
-	info->height = 0;
+	//info->width = 0;
+	//info->height = 0;
 	while (tab[l] != 0)
 		l++;
 	if (l != 3)

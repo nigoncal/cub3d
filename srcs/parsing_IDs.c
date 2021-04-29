@@ -37,6 +37,19 @@ int	parse_tex_id(char **elements, t_info *info)
 	}
 	return (-1);
 }
+
+int	parse_color_id(char **elements)
+{
+	if (elements[0][0] == 'F')
+	{
+		return (parse_id(elements[0], "F", 2));
+	}
+	else if (elements[0][0] == 'C')
+	{
+		return (parse_id(elements[0], "C", 2));
+	}
+	return (-1);
+}
 /*
 int	parse_res_id(char **elements, t_setup *setup)
 {

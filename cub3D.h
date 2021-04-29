@@ -158,7 +158,11 @@ int		parse_map(char *line, t_info *info);
 int		open_file(t_info *info, int fd);
 int		parse_id(char *id, char *expected, int max);
 int		parse_tex_id(char **elements, t_info *info);
+int		parse_color_id(char **elements);
 int		parse_resolution(char **tab, t_info *info);
+int		cap_resolution(t_info *info);
+int		parse_textures(char **tab, t_info *info);
+int		check_file(char *path, char *extension);
 
 /* other parsing functions */
 void 	get_map();

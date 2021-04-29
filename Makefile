@@ -15,7 +15,7 @@ PATH_LIBFT	=	libft
 
 # List of sources
 SRCS		=	$(addprefix $(PATH_SRC)/, main.c parsing.c parsing_utils.c parsing_skip.c parsing_map.c\
-parsing_ids.c \
+parsing_ids.c parsing_resolution.c parsing_textures.c\
 minimap.c raycasting.c key_press.c get_map.c\
 exit.c)
 OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))

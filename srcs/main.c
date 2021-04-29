@@ -1,7 +1,7 @@
 #include "../cub3D.h"
 //defines a virer car infos qui doivent etre recup via parsing/a preciser dans le code des keys
-#define screenWidth 640
-#define screenHeight 480
+//#define screenWidth 640
+//#define screenHeight 480
 #define texWidth 64
 #define texHeight 64
 #define X_EVENT_KEY_PRESS	2
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	{
 		ft_putstr_fd("Error\nParsing failed, please check your args and/or .cub file \
 and try again. Keep going !\n", 0);
+		printf("Parsed+ capped WIDTH : %d\nParsed+ capped HEIGHT : %d\n",\
+info.width, info.height);
 		return (-1);
 	}
 	//printf("\nnb lines map : %d\n", setup.map_nb_lines);
@@ -79,6 +81,12 @@ and try again. Keep going !\n", 0);
 	{
 		printf("error\n fichier cub3D manquant");
 	}*/
+	if (info.map_info.map_malloced == 1)
+	{
+		//free_2d_tab(setup.map, setup.map_nb_lines + 1);
+		free(info.setup.map);
+	}
+	return (0);
 }
 
 
