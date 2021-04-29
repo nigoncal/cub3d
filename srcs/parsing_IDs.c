@@ -26,6 +26,15 @@ int	parse_tex_id(char **elements, t_info *info)
 	{
 		return (parse_id(elements[0], "EA", 3));
 	}
+	if (elements[0][0] == 'S' && elements[0][1] == 'O')
+	{
+		//if ((parse_id(elements[0], "SO", 3)) != 0)
+		return (parse_id(elements[0], "SO", 3));
+	}
+	if (elements[0][0] == 'S' && elements[0][1] != 'O')
+	{
+		return (parse_id(elements[0], "S", 2));
+	}
 	return (-1);
 }
 /*

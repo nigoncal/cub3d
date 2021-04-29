@@ -6,9 +6,11 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/29 12:58:11 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 13:05:33 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
+//je sais pas a quoi sert ce fichier
 
 #ifndef HEADER_CUB3D_H
 # define HEADER_CUB3D_H
