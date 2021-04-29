@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 14:54:42 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 16:20:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	store_map(char *line, t_settings *cub_sets)
 		cub_sets->map = (char**)malloc(sizeof(char*) + 1);
 		if (cub_sets->map == NULL)
 			abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
-		cub_sets->map[0] = ft_strdup(line);
+		cub_sets->map[0] = ft_strdup(line); // fais attention free de ft_strdup
 		cub_sets->map[1] = 0;
 	}
 	else

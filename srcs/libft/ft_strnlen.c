@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 
 int	ft_strnlen(const char *str, int len)
 {

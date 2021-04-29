@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 #include <stdio.h>
 
 char	f(unsigned int i, char c)

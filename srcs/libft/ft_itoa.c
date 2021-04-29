@@ -3,64 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:56:47 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 13:56:53 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/27 10:33:46 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:12:17 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include <stdlib.h>
+#include <limits.h>
+#include "libft.h"
 
-static int	size(int n)
+static int	char_count(int n)
 {
-	int i;
+	int	c;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	while (n != 0)
+	if (n < 0)
+		n = -n;
+	c = 1;
+	while (n > 9)
 	{
-		n /= 10;
-		i++;
+		c++;
+		n = n / 10;
 	}
-	return (i);
+	return (c);
 }
 
-char		*fill(unsigned int n, char *str, int size)
+static char	*fill_tab(char *res, int i, int n, int neg)
 {
-	str[size] = '\0';
-	while (--size + 1)
+	while (n >= 10)
 	{
-		str[size] = n % 10 + '0';
-		n /= 10;
+		res[i] = n % 10 + '0';
+		n = n / 10;
+		i--;
 	}
-	return (str);
+	res[i] = n + '0';
+	if (neg == 1)
+	{
+		i--;
+		res[i] = '-';
+	}
+	return (res);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	char			*str;
-	int				i;
-	int				len;
-	unsigned int	nb;
+	char	*res;
+	int		i;
+	int		neg;
+	int		c;
 
-	i = 0;
+	res = 0;
+	if (n == -2147483648)
+	{
+		return (ft_strdup("-2147483648"));
+	}
+	neg = 0;
+	c = char_count(n);
+	i = c;
 	if (n < 0)
 	{
-		len = size(n) + 1;
-		if ((str = malloc(sizeof(char) * (len + 1))) == NULL)
-			return (NULL);
-		nb = n * -1;
-		fill(nb, str, len);
-		str[0] = '-';
+		neg = 1;
+		n = -n;
 	}
-	else
-	{
-		len = size(n);
-		if ((str = malloc(sizeof(char) * (len + 1))) == NULL)
-			return (NULL);
-		fill(n, str, len);
-	}
-	return (str);
+	res = malloc((sizeof(char) * (c + 1 + neg)));
+	if (res == NULL)
+		return (NULL);
+	i += neg;
+	res[i] = '\0';
+	i--;
+	return (fill_tab(res, i, n, neg));
 }

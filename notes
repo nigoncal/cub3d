@@ -45,6 +45,10 @@ Est-ce que je garde le flag -g3 ?
 La tu es sur resolution et tu essayes de faire fonctionner abort_prog quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_prog soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
 
 -----------------------------------------------------------------------------------------------
+-------------------------------------parsing de la map--------------------------
+
+--------------------------------------------------------------------------------
+
 
 tu es en train de coder abort_prog
 ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_prog
@@ -63,7 +67,6 @@ Commences par les commentaires de texture.c
 4 - testes
 5 - fais les check d'erreur avec Mohammed
 
-norminette (y compris libft et get_next_line, tout tout tout)
 
 ---valgrind--
 apparemment les
@@ -82,18 +85,37 @@ problemes de norme dans header_libft.h
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
 
-
-
 push ton cub3D sur ton propre git
-
-passes ta libft a la nouvelle norme
-
-repush ta libft dans son repo (LIBFT QUI EST DANS LE DIRECTORY COMMUN DE NIGONCAL)
-
-push ton gnl modifie (mis a la norme) et push le avec un main
-
-si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c (dans ta libft)
 
 penses a checker les headers de tous tes fichiers, car travail en commun
 
+bien verifier que tous les noms de fichiers, fonctions etc. n'ont pas de
+majuscules (surtout cub3d et non cub3D)
+
+----------------------------------libft-----------------------------------------
+nettoies bien la libft, vires les mains
+
+la libft qui est ici n'est pas la tienne, c'est celle de Nicolas et Pauline
+Donc attention, si tu veux garder la tienne, il te faudra recopier toutes les
+fonctions ajoutees ici, dans la tienne, type le gnl ajoute (mais qui n'est pas
+le tiens, changement du Makefile). Gros travail en perspective mais il te faudra
+le faire.
+passes ta libft a la nouvelle norme
+ta libft a toi elle est danc cub3d. celle de cubcom, c'est celle de nigoncal
+si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c
+(dans ta libft)
+dans la libft du cubcom tu n'as plus ft_pf_atoi, donc attention si tu veux
+l'utiliser ailleurs, elle ne permettra pas de faire fonctionner printf
+--------------------------------------------------------------------------------
+-------------------------------gnl----------------------------------------------
 vires la libft de ton gnl (repo de base de ton gnl, pas celui de cub3d)
+On prend le gnl de nigoncal, le miens, si j'ai le temps un jour je le normerai
+et integrerai a ma libft
+Pour l'instant je le repush dans l'etat
+ton gnl a ete modifie dans son dossier de base, repush le avec les modif faites
+dans cub3d. push ton gnl modifie (mis a la norme) et push le avec un main
+--------------------------------------------------------------------------------
+
+changer tous les headers de touts les fichiers (header 42)
+
+norminette (y compris libft et get_next_line, tout tout tout)

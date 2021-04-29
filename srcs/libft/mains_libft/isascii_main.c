@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>

@@ -43,6 +43,7 @@ PARSING				=	parser.c\
 						
 GNL					=	get_next_line.c\
 						get_next_line_utils.c\
+# changer le path de ton gnl de partout car il est integre a te libft maintenant
 
 OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
 

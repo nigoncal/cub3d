@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:56:37 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 13:56:41 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/25 17:27:02 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:11:00 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include <ctype.h>
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (!(c >= 32 && c <= 126))
+	if (c < 32 || c > 126)
 		return (0);
-	else
-		return (1);
+	return (1);
 }

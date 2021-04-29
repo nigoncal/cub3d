@@ -6,12 +6,12 @@
 /*   By: sylducam <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/06 10:40:23 by sylducam     #+#   ##    ##    #+#       */
-/*   Updated: 2021/04/12 12:12:52 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 13:49:30 by sylducam         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 
 static int	ft_simplify(int result)
 {

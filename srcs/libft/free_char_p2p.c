@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 #include <stdlib.h>
 
 // This function frees char pointer to pointers

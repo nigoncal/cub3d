@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:04:07 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 17:06:04 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/26 12:32:37 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:23:16 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s1)
 {
-	int		i;
-	int		s_len;
-	char	*str;
+	char		*cpy;
+	size_t		i;
 
 	i = 0;
-	if (!s)
+	cpy = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (cpy == NULL)
 		return (NULL);
-	s_len = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) * ((s_len) + 1));
-	if (str == NULL)
-		return (NULL);
-	while (i < s_len)
+	while (s1[i])
 	{
-		str[i] = s[i];
+		cpy[i] = s1[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	cpy[i] = '\0';
+	return (cpy);
 }

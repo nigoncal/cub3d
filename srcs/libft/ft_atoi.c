@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:54:50 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 13:54:57 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/26 10:05:18 by pmillet           #+#    #+#             */
+/*   Updated: 2021/03/20 09:05:48 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	long long	res;
-	int			sign;
-	int			i;
+	int	i;
+	int	nb;
+	int	neg;
 
-	res = 0;
-	sign = 1;
 	i = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '+' || *str == '-')
+	nb = 0;
+	neg = 1;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
 	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
+		neg = -1;
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
+	else if (str[i] == '+')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (ft_isdigit(str[i]))
 	{
-		res = res * 10 + (*str - 48);
-		str++;
+		nb = (nb * 10) + (str[i] - '0');
+		i++;
 	}
-	return (res * sign);
+	return (nb * neg);
 }
