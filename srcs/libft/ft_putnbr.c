@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:02:58 by sylducam          #+#    #+#             */
-/*   Updated: 2020/12/04 14:03:02 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 15:55:59 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_min_number(unsigned int min_nb)
 
 void	ft_actual_putnbr(int nb)
 {
-	unsigned int min_nb;
+	unsigned int	min_nb;
 
 	if (nb < 0)
 	{

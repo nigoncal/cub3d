@@ -3,61 +3,131 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/03/13 16:40:42 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/12/15 09:28:46 by pmillet           #+#    #+#             */
+/*   Updated: 2021/04/13 11:56:10 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> // a virer
 
-static int		update(char **line, char **buffer)
+static int		ft_strjoin_gnl(char **s1, char const *s2, int limit)
 {
-	int		eol;
-	char	*temp;
+	char	*res;
+	int		i;
+	int		j;
 
-	eol = find_eol(*buffer);
-	if (eol == -1)
+	i = 0;
+	j = 0;
+	if (!(res = malloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1))))
 	{
-		if (*buffer != NULL)
-			*line = ft_strdup(*buffer);
-		else
-			*line = ft_strdup("");
-		free(*buffer);
-		*buffer = NULL;
-		return (0);
+		return (-1);
 	}
-	(*buffer)[eol] = '\0';
-	*line = ft_strdup(*buffer);
-	temp = *buffer;
-	*buffer = ft_strdup(&(*buffer)[eol + 1]);
-	free(temp);
-	temp = NULL;
-	dprintf(1, "gnl update\nline = |%s|\n", *line); // a virer
+	while (*s1 != 0 && (*s1)[i])
+	{
+		res[i] = (*s1)[i];
+		i++;
+	}
+	j = i;
+	i = 0;
+	while (s2 != 0 && s2[i] && i < limit)
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	free(*s1);
+	*s1 = res;
 	return (1);
 }
 
-int				get_next_line(int fd, char **line)
+static int		ft_substr_gnl(char **s, unsigned int start, size_t len)
 {
-	static char	*buffer;
-	char		*reader;
-	int			eoread;
+	char		*sub;
+	size_t		i;
 
-	reader = NULL;
-	if (!line || fd < 0 || BUFFER_SIZE <= 0
-			|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
+	i = 0;
+	sub = NULL;
+	if (*s == NULL)
 		return (-1);
-	while (find_eol(buffer) == -1
-			&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
+	if (ft_strlen_gnl(*s) < len)
+		len = ft_strlen_gnl(*s);
+	if (!(sub = malloc(sizeof(char) * (len + 1))))
+		return (-1);
+	while ((*s)[i + start] && i < len)
 	{
-		reader[eoread] = '\0';
-		buffer = ft_strjoin(buffer, reader);
+		sub[i] = (*s)[i + start];
+		i++;
 	}
-	free(reader);
-	reader = NULL;
-	if (eoread == -1)
+	sub[i] = 0;
+	free(*s);
+	*s = sub;
+	return (1);
+}
+
+int		transfer_line(char **current, char **line)
+{
+	int	i_nl;
+	int	len_rest;
+	int len_current;
+
+	len_current = ft_strlen_gnl(*current);
+	if ((i_nl = find_nl(*current)) == -1)
+		i_nl = len_current;
+	if (!(*line = malloc(sizeof(char) * (i_nl + 1))))
+	{
 		return (-1);
-	return (update(line, &buffer));
+	}
+	if (current == 0 || len_current == 0)
+	{
+		**line = 0;
+		return (0);
+	}
+	ft_strlcpy(*line, *current, (i_nl + 1));
+	if ((len_rest = len_current - i_nl) <= 0)
+	{
+		return (0);
+	}
+	return (ft_substr_gnl(current, (i_nl + 1), len_rest));
+}
+
+int		read_fd(int fd, char **current, char **line)
+{
+	int		status;
+	char	buffer[BUFFER_SIZE + 1];
+
+	status = 1;
+	while (find_nl(*current) == -1 && status > 0)
+	{
+		if ((status = read(fd, buffer, BUFFER_SIZE)) > 0)
+		{
+			buffer[status] = '\0';
+			status = ft_strjoin_gnl(current, buffer, (status + 1));
+			if (status == -1)
+				return (-1);
+		}
+	}
+	if (status == -1)
+		return (-1);
+	status = transfer_line(current, line);
+	return (status);
+}
+
+int		get_next_line(int fd, char **line)
+{
+	static char	*current;
+	int			status;
+
+	if (line == NULL)
+		return (-1);
+	if (check_args(fd) == 0)
+	{
+		*line = NULL;
+		return (-1);
+	}
+	status = read_fd(fd, &current, line);
+	if (status < 1 && current != NULL)
+	{
+		free(current);
+		current = NULL;
+	}
+	return (status);
 }

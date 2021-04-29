@@ -106,6 +106,8 @@ si tu as le temps, verifies tes conditions d'erreur au debut de free_char_p2p.c
 (dans ta libft)
 dans la libft du cubcom tu n'as plus ft_pf_atoi, donc attention si tu veux
 l'utiliser ailleurs, elle ne permettra pas de faire fonctionner printf
+
+la partie bonus du Makefile de la libft n'est pas bien faite
 --------------------------------------------------------------------------------
 -------------------------------gnl----------------------------------------------
 vires la libft de ton gnl (repo de base de ton gnl, pas celui de cub3d)

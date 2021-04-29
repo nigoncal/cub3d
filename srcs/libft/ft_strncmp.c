@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:12:11 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/23 08:56:41 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 16:07:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-
-char ref[8] = " 102nswe";

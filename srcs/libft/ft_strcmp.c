@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/06 10:40:23 by sylducam     #+#   ##    ##    #+#       */
-/*   Updated: 2021/04/29 13:49:30 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 16:01:53 by sylducam         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@ static int	ft_simplify(int result)
 		return (0);
 }
 
-int			ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int		index;
 	int		result;
