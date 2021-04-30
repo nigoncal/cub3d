@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 23:14:45 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/30 16:40:18 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2020/11/26 12:32:37 by pmillet           #+#    #+#             */
+/*   Updated: 2021/04/30 17:32:16 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "get_next_line.h"
 
-int				find_eol(char *s)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
+	char		*cpy;
+	size_t		i;
 
 	i = 0;
-	if (s == NULL)
-		return (-1);
-	while (s[i])
+	cpy = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (cpy == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		if (s[i] == '\n')
-			return (i);
+		cpy[i] = s1[i];
 		i++;
 	}
-	return (-1);
+	cpy[i] = '\0';
+	return (cpy);
 }

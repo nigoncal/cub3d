@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/29 14:05:42 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/30 16:57:00 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
 int				get_next_line(int fd, char **line);
-
 
 #endif

@@ -44,7 +44,7 @@ Est-ce que je garde le flag -g3 ?
 
 La tu es sur resolution et tu essayes de faire fonctionner abort_prog quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_prog soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
 
------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -------------------------------------parsing de la map--------------------------
 
 --------------------------------------------------------------------------------
@@ -110,6 +110,8 @@ l'utiliser ailleurs, elle ne permettra pas de faire fonctionner printf
 la partie bonus du Makefile de la libft n'est pas bien faite
 --------------------------------------------------------------------------------
 -------------------------------gnl----------------------------------------------
+vires bien main.c, file, file2 et file3 de la libft quand tu auras norme ton gnl
+et bien teste qu'il fonctionnait
 vires la libft de ton gnl (repo de base de ton gnl, pas celui de cub3d)
 On prend le gnl de nigoncal, le miens, si j'ai le temps un jour je le normerai
 et integrerai a ma libft

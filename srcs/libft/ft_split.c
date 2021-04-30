@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:03:46 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/29 15:58:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/30 16:38:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_libft.h"
+#include "libft.h"
 
 static char	*strdup_split(char const *s, size_t s_len)
 {

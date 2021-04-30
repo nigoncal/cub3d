@@ -6,28 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/30 17:22:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 10:30:06 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> // a virer
-
-static int	find_eol(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 static int	update(char **line, char **buffer)
 {
@@ -60,8 +43,8 @@ int	get_next_line(int fd, char **line)
 	char		*reader;
 	int			eoread;
 
-	if (!line || fd < 0 || BUFFER_SIZE <= 0
-			|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
+	reader = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!line || fd < 0 || BUFFER_SIZE <= 0 || reader  == NULL)
 		return (-1);
 	while (find_eol(buffer) == -1
 			&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
