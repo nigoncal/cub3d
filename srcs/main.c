@@ -24,11 +24,13 @@ and try again. Keep going !\n", 0);
 info.width, info.height);
 		return (-1);
 	}
-	//printf("\nnb lines map : %d\n", setup.map_nb_lines);
-	//printf("longueur line la plus longue de la map : %d\n", setup.map_longest_line);
-	if (info.map_info.map_nb_lines > 0 && info.map_info.map_longest_line > 0)
+	//printf("\nnb lines map : %d\n", setupnb_lines);
+	//printf("longueur line la plus longue de la map : %d\n", setuplongest_line);
+
+	// REMPLACER TOUT CA POUR TOUT FAIRE DANS LE 1ER GNL !!!!
+	if (info.map.nb_lines > 0 && info.map.longest_line > 0)
 	{
-		info.map_info.map_size_known = 1;
+		info.map.size_known = 1;
 		//printf("\n\n EZEPARTI ok on lance le 2e GNL\n");
 		fd = open(argv[1], O_RDONLY);
 		if (fd > 1)
@@ -44,9 +46,9 @@ info.width, info.height);
 	//gen_ray(&mini, &sphere);
 	//mlx_put_image_to_window(mini.mlx, mini.win, mini.image, 0, 0);
 	//mlx_loop(mini.mlx);
-	if (info.map_info.map_malloced == 1)
+	if (info.map.malloced == 1)
 	{
-		//free_2d_tab(setup.map, setup.map_nb_lines + 1);
+		//free_2d_tab(setup.map, setupnb_lines + 1);
 		free(info.setup.map);
 	}
 	/* fin de ma partie */
@@ -81,9 +83,9 @@ info.width, info.height);
 	{
 		printf("error\n fichier cub3D manquant");
 	}*/
-	if (info.map_info.map_malloced == 1)
+	if (info.map.malloced == 1)
 	{
-		//free_2d_tab(setup.map, setup.map_nb_lines + 1);
+		//free_2d_tab(setup.map, setupnb_lines + 1);
 		free(info.setup.map);
 	}
 	return (0);

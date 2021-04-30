@@ -6,14 +6,13 @@ int	parse_line(char *line, t_info *info)
 	char	**elements;
 
 	skip = 0;
-	printf("Ligne parsée : [%s]\n", line);
-	//printf("Values parsées : %d\n", setup->nb_parsed_values);
-	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ')
+	printf("Values parsées precedement: %d\n", info->ids.nb_parsed_ids);
+	printf("Ligne que l'on va parser ci-dessous : [%s]\n", line);
+	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ',NSEW)
 	if (info->ids.nb_parsed_ids == 8)
 	{	
-		//passer les lignes vides en incrementant setup->map_start_line
-		//verif qu'on ne retombe pas sur un id deja rencontré !!!
-		//printf("on a nos 8 values\n");
+		// AJOUTER un moyen de passer les lignes entierements vides AVANT la map
+		// Et ajouter un check pour ne pas accepter les lignes vides si on retrouve autre chose que des lignes vides a la fin
 		parse_map(line, info);
 		return (0);
 	}
@@ -21,7 +20,7 @@ int	parse_line(char *line, t_info *info)
 	line = is_line_empty(line);
 	if (!*line)
 	{
-		info->map_info.map_start_line++;
+		info->map.start_line++;
 		return (0);
 	}
 	//A FAIRE : modifier la fonction ci dessous pour changer plusieurs char en 1 fonction
@@ -69,7 +68,7 @@ please <3\n", 0);
 			return (-1);
 		}
 		info->ids.nb_parsed_ids++;
-		info->map_info.map_start_line++;
+		info->map.start_line++;
 	}
 	/*else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{
@@ -91,9 +90,9 @@ sprite id appear in your .cub. Only one is accepted.\n");
 			return (-1);
 
 
-		//parse_color(elements, setup);
+		//ajouter ici une fonction du genre parse_color(elements, setup);
 		info->ids.nb_parsed_ids++;
-		info->map_info.map_start_line++;
+		info->map.start_line++;
 	}
 	else
 	{
@@ -113,11 +112,11 @@ int	open_file(t_info *info, int fd)
 	//printf("fd = %d\n", fd);
 	skipped_lines = 0;
 	line = NULL;
-	if (info->map_info.map_size_known)
+	if (info->map.size_known)
 	{
-		//sauter les lines jusqu'a atteindre setup.map_start_line
+		//sauter les lines jusqu'a atteindre setup.start_line
 		while (get_next_line(fd, &line) == 1 \
-&& skipped_lines < (info->map_info.map_start_line - 1))
+&& skipped_lines < (info->map.start_line - 1))
 		{
 			skipped_lines++;
 		}
