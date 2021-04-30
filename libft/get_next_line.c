@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 17:53:15 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/04/25 11:17:16 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/04/30 15:51:50 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_next_line(int fd, char **line)
 
 char	*join_buff(int start, int fd, t_stat_var *s)
 {
-	char *r;
+	char	*r;
 
 	r = s_tab(s->buffer, s->pos, start);
 	while (s->buffer[s->pos] == '\0' && s->return_buff != 0)

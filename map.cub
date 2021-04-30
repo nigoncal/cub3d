@@ -2,7 +2,7 @@
 
 
 
-Fl 220,100,0
+F 220,100,0
 
 		NO 		./textures/test.png
 WE		 ./textures/test.png
@@ -14,7 +14,6 @@ C 225,30,0
    			SO		       ./textures/test.png
 EA ./textures/test.png
 
-R	 			192000 					108000
 
         1111111111111111111111111
         1000000000110000000000001
