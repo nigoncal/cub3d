@@ -67,6 +67,9 @@ Commences par les commentaires de texture.c
 4 - testes
 5 - fais les check d'erreur avec Mohammed
 
+free(line) a la fin de ton main
+close fd aussi
+
 
 ---valgrind--
 apparemment les
@@ -93,8 +96,6 @@ bien verifier que tous les noms de fichiers, fonctions etc. n'ont pas de
 majuscules (surtout cub3d et non cub3D)
 
 ----------------------------------libft-----------------------------------------
-nettoies bien la libft, vires les mains
-
 la libft qui est ici n'est pas la tienne, c'est celle de Nicolas et Pauline
 Donc attention, si tu veux garder la tienne, il te faudra recopier toutes les
 fonctions ajoutees ici, dans la tienne, type le gnl ajoute (mais qui n'est pas

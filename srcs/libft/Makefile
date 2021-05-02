@@ -6,7 +6,7 @@
 #    By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 09:59:12 by pmillet           #+#    #+#              #
-#    Updated: 2021/04/30 17:03:48 by sylducam         ###   ########lyon.fr    #
+#    Updated: 2021/05/02 10:36:29 by sylducam         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ SRCS	= ft_memccpy.c\
 		  change_char.c\
 		  format_check.c\
 		  free_char_p2p.c\
-		  get_next_line.c
+		  get_next_line.c\
+		  get_next_line_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 

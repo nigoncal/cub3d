@@ -6,28 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/30 17:22:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/02 10:07:04 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> // a virer
-
-static int	find_eol(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 static int	update(char **line, char **buffer)
 {
@@ -38,20 +21,26 @@ static int	update(char **line, char **buffer)
 	if (eol == -1)
 	{
 		if (*buffer != NULL)
-			*line = ft_strdup(*buffer);
+			*line = gnl_strdup(*buffer);
 		else
-			*line = ft_strdup("");
+			*line = gnl_strdup("");
 		free(*buffer);
 		*buffer = NULL;
 		return (0);
 	}
 	(*buffer)[eol] = '\0';
-	*line = ft_strdup(*buffer);
+	*line = gnl_strdup(*buffer);
 	temp = *buffer;
-	*buffer = ft_strdup(&(*buffer)[eol + 1]);
+	*buffer = gnl_strdup(&(*buffer)[eol + 1]);
 	free(temp);
 	temp = NULL;
 	return (1);
+}
+
+int	ft_condition(char *buffer, int *eoread, char *reader, int fd)
+{
+	*eoread = read(fd, reader, BUFFER_SIZE);
+	return (find_eol(buffer) && *eoread > 0);
 }
 
 int	get_next_line(int fd, char **line)
@@ -60,14 +49,13 @@ int	get_next_line(int fd, char **line)
 	char		*reader;
 	int			eoread;
 
-	if (!line || fd < 0 || BUFFER_SIZE <= 0
-			|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
+	reader = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!line || fd < 0 || BUFFER_SIZE <= 0 || reader == NULL)
 		return (-1);
-	while (find_eol(buffer) == -1
-			&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
+	while (ft_condition(buffer, &eoread, reader, fd))
 	{
 		reader[eoread] = '\0';
-		buffer = ft_strjoin(buffer, reader);
+		buffer = gnl_strjoin(buffer, reader);
 	}
 	free(reader);
 	reader = NULL;
