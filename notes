@@ -14,6 +14,11 @@ les fonctions error, tu as pris des notes dans ton cahier.
 
 prevoir un dossier pour tous les fichiers de le partie image/graphique
 
+ATTENTION
+Mon gnl ne fonctionne que quand le file que je teste est dans le meme dossier
+que les fichiers du gnl. Est-ce que ca peut poser probleme pour cub3d ?
+ca veut dire que le fichier .cub doit etre au meme endroit que l'executabe cub3d
+
 -----------------------------------------------------------------------------------------------
 POUR MARDI 19 AVRIL 2021
 
