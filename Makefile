@@ -1,26 +1,27 @@
+# Si tu touch le header de la libft, ca ne remake pas, ca devrait
+
 NAME				=	libcub3d.a
+# celui-ci n'est pas liste dans les libraries car il est cree, a la rigueur
+# deplaces le apres
 EXE					=	cub3d
-#celui-ci n'est pas liste dans les libraries car il est cree, a la rigueur desplaces le apres
 LIBFT				=	libft.a
-MINILIBXDYLIB		=	libmlx.dylib
+MLXDL				=	libmlx.dylib
 
 
-LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT)\
-						srcs/minilibx$(MINILIBXDYLIB))
+LIBRARIES			=	srcs/$(NAME) srcs/libft/$(LIBFT)\
+						srcs/minilibx/$(MLXDL)
 
 VPATH				=	srcs parsing libft minilibx textures libraries $(VSCRS)\
-						$(VLIBFT) $(VMINILIBX) $(VPARSING)\
-						$(VLIBRARIES) $(VLIBFT) $(VTEXTURES)
+						$(VLIBFT) $(VMLX) $(VPARSING) $(VLIBFT) $(VTEXTURES)
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
-# crees dans ton Makefile. Je sais pas poruquoi je le sens mal. Testes et tu
+# crees dans ton Makefile. Je sais pas pourquoi je le sens mal. Testes et tu
 # verras
 
-VSRCS				=	srcs
-VLIBRARIES			=   srcs/libraries
-VLIBFT				=	srcs/libft
-VMINILIBX			=	srcs/minilibx
-VPARSING			=	srcs/parsing
-VTEXTURES			=	srcs/textures
+VSRCS				=	srcs/
+VLIBFT				=	srcs/libft/
+VMLX				=	srcs/minilibx/
+VPARSING			=	srcs/parsing/
+VTEXTURES			=	srcs/textures/
 
 SRCS				=	main.c\
 						start.c\
@@ -90,19 +91,7 @@ all:			libraries $(NAME) $(EXE)
 #								  				     maisje dois en parler avec
 #								  				     Nicolas
 
-
-
-
-$(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
-				ar rcs $(LIBCUB3D) $(OBJS)\
-					$(addprefix $(PATH_SRCS), $(CUB3D_HEADER))
-# attention a la cariabl LIBCUB3D qui est devenur NAME, regardes par rapport
-# au Makefile de guhernan et cherches partout dans ton code ou il y a LIBCUB3D
-# et qu'est-ce que ca fait a chaque fois.
-
-
-$(NAME)		:
-				$(OBJS) $(LIBFT) $(HEADERS)
+$(NAME)		:	$(H_CUB3D) $(OBJS) $(LIBFT) $(MLXDL)
 				$(COMP) -I $(H_CUB3D) main.c -o $(NAME)
 
 ################################################################################
@@ -112,27 +101,30 @@ $(NAME)		:
 $(EXE)		:	$(NAME)
 				$(COMP) $(NAME) $(LIBRARIES) main.c -o $(EXE)
 
+#$(LIBFT)	:
+#				$(MAKE) -C $(VLIBFT)
+
+#$(MLXDL)	:
+#				$(MAKE) -C $(VMLX)
+
 libraries	:	
-				mkdir -p $(VLIBRARIES)
 				$(MAKE) -C $(VLIBFT)
-				mv $(VLIBFT)/$(LIBFT) $(VLIBRARIES)/
-				$(MAKE) -C $(VMINILIBX)
-				mv $(VMINILIBX)/$(MINILIBXDYLIB) $(VLIBRARIES)/
+				$(MAKE) -C $(VMLX)
 
-
+#libraries	:	$(LIBFT) $(MLXDL)
 
 clean		:
 				$(RM) $(OBJS)
 				$(MAKE) clean -C $(VLIBFT)
-				$(MAKE) clean -C $(VMINILIBX)
+				$(MAKE) clean -C $(VMLX)
 
 fclean		:	clean
 #				$(RM) $(NAME)
 #				$(RM) $(LIBFT)
-				$(RM) $(VMINILIBX)/$(MINILIBXDYLIB)
-				$(RM) $(VMINILIBX)/*.o
-				$(RM) $(VMINILIBX)/*.swiftmodule
-				$(RM) $(VMINILIBX)/*.swiftdoc
+				$(RM) $(VMLX)/$(MLXDL)
+				$(RM) $(VMLX)/*.o
+				$(RM) $(VMLX)/*.swiftmodule
+				$(RM) $(VMLX)/*.swiftdoc
 				$(RM) $(VLIBRARIES)
 
 re			: 	fclean all
