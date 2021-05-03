@@ -8,8 +8,8 @@ MINILIBXDYLIB		=	libmlx.dylib
 LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT)\
 						srcs/minilibx$(MINILIBXDYLIB))
 
-VPATH				=	srcs parsing get_next_line libft minilibx textures\
-						libraries $(VSCRS) $(VLIBFT) $(VMINILIBX) $(VPARSING)\
+VPATH				=	srcs parsing libft minilibx textures libraries $(VSCRS)\
+						$(VLIBFT) $(VMINILIBX) $(VPARSING)\
 						$(VLIBRARIES) $(VLIBFT) $(VTEXTURES)
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
 # crees dans ton Makefile. Je sais pas poruquoi je le sens mal. Testes et tu
@@ -42,13 +42,11 @@ PARSING				=	parser.c\
 
 OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
 
-HEADERS				=	srcs/header_cub3d.h srcs/get_next_line/get_next_line.h
+HEADERS				=	srcs/header_cub3d.h srcs/libft/libft.h
 
 H_CUB3D				=	srcs/header_cub3d.h
 
-CFLAGS				=	-Wall -Wextra -Werror -g3
-
-COMP				=	clang
+COMP				=	clang -Wall -Wextra -Werror
 
 RM					=	rm -rf
 
@@ -56,7 +54,7 @@ RM					=	rm -rf
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
 %.o:				%.c $(HEADERS)
-					$(COMP) $(CFLAGS) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
+					$(COMP) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
 
 
 ################################################################################
@@ -103,18 +101,16 @@ $(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
 # et qu'est-ce que ca fait a chaque fois.
 
 
-$(NAME)		:	$(OBJS) $(LIBFT) $(HEADERS)
-# ICI
-#				$(MAKE) -C $(VMINILIBX)
-				$(COMP) $(CFLAGS) $(LIBRARIES) -I $(H_CUB3D) main.c -o $(NAME)
-#				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
-					-L $(VMINILIBX) -l $(VMINILIBX) $(LIBRARIES)\
-					-I $(VMINILIBX) main.c -o $(NAME)
+$(NAME)		:
+				$(OBJS) $(LIBFT) $(HEADERS)
+				$(COMP) -I $(H_CUB3D) main.c -o $(NAME)
+
 ################################################################################
 # attention a OpenGL qui normalement correspond a la minilibx non beta
 ################################################################################
 
 $(EXE)		:	$(NAME)
+				$(COMP) $(NAME) $(LIBRARIES) main.c -o $(EXE)
 
 libraries	:	
 				mkdir -p $(VLIBRARIES)
