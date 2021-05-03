@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/03 08:09:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 09:02:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 # include <strings.h>
 # include "libft/libft.h"
-# include "minilibx/mlx.h" // attention
+# include "minilibx/mlx.h"
 
 typedef struct	s_settings
 {

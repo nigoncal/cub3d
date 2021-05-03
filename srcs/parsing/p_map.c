@@ -6,13 +6,13 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/28 16:20:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 09:51:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-static void	add_map_line(char *line, t_settings *cub_sets)
+static void	add_line_map(char *line, t_settings *cub_sets)
 {
 	int		size;
 	int		i;
@@ -24,17 +24,18 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 		size++;
 	size++;
 	temp = (char**)malloc(sizeof(char*) * size + 1);
-	if (temp == NULL)
-		abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
-	while (size--)
+	if (temp  == NULL)
+		return ; // error message
+	while (cub_sets->map[i])
 	{
 		temp[i] = ft_strdup(cub_sets->map[i]);
 		i++;
 	}
-	temp[i - 1] = ft_strdup(line);
-	temp[i] = 0;
+	temp[i] = ft_strdup(line);
+	temp[i + 1] = 0;
 	free(cub_sets->map);
 	cub_sets->map = temp;
+		
 }
 
 void	store_map(char *line, t_settings *cub_sets)

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/03 08:18:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 08:58:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	char		*line;
 	t_settings	*cub_sets;
 
+	line = NULL;
 	cub_sets = malloc(sizeof(cub_sets));
 	ft_bzero(cub_sets, sizeof(*cub_sets));
 	if (argc < 2 || argc > 3 || (format_check(argv[1], ".cub")) == 1)
