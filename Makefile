@@ -47,8 +47,9 @@ GNL					=	get_next_line.c\
 
 OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
 
-HEADERS				=	srcs/header_cub3d.h srcs/get_next_line/get_next_line.h\
-						srcs/minilibx/mlx.h
+HEADERS				=	srcs/header_cub3d.h srcs/get_next_line/get_next_line.h
+
+H_CUB3D				=	srcs/header_cub3d.h
 
 CFLAGS				=	-Wall -Wextra -Werror -g3
 
@@ -107,10 +108,11 @@ $(LIBCUB3D)	:	$(H_CUB3D) $(OBJS)
 # et qu'est-ce que ca fait a chaque fois.
 
 
-$(NAME)		:	$(OBJS) $(LIBFT)
+$(NAME)		:	$(OBJS) $(LIBFT) $(HEADERS)
 # ICI
 #				$(MAKE) -C $(VMINILIBX)
-				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
+				$(COMP) $(CFLAGS) $(LIBRARIES) -I $(H_CUB3D) main.c -o $(NAME)
+#				$(COMP) $(CFLAGS) -framework OpenGL -framework AppKit\
 					-L $(VMINILIBX) -l $(VMINILIBX) $(LIBRARIES)\
 					-I $(VMINILIBX) main.c -o $(NAME)
 ################################################################################
