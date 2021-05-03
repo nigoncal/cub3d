@@ -8,8 +8,8 @@ LIBFT				=	libft.a
 MLXDL				=	libmlx.dylib
 
 
-LIBRARIES			=	srcs/$(NAME) srcs/libft/$(LIBFT)\
-						srcs/minilibx/$(MLXDL)
+LIBRARIES			=	srcs/libft/$(LIBFT) srcs/minilibx/$(MLXDL)
+# il faut que tu regles ce probleme de libraries ^^
 
 VPATH				=	srcs parsing libft minilibx textures libraries $(VSCRS)\
 						$(VLIBFT) $(VMLX) $(VPARSING) $(VLIBFT) $(VTEXTURES)
@@ -17,45 +17,40 @@ VPATH				=	srcs parsing libft minilibx textures libraries $(VSCRS)\
 # crees dans ton Makefile. Je sais pas pourquoi je le sens mal. Testes et tu
 # verras
 
-VSRCS				=	srcs/
 VLIBFT				=	srcs/libft/
 VMLX				=	srcs/minilibx/
-VPARSING			=	srcs/parsing/
 VTEXTURES			=	srcs/textures/
 
-SRCS				=	main.c\
-						start.c\
-						tools.c\
-						error_manager.c\
-
-PARSING				=	parser.c\
-						p_resolution.c\
-						p_textures.c\
-						p_north_texture.c\
-						p_south_texture.c\
-						p_east_texture.c\
-						p_west_texture.c\
-						p_sprite_texture.c\
-						p_colors.c\
-						p_map.c
+SRCS				=	srcs/main.c\
+						srcs/start.c\
+						srcs/tools.c\
+						srcs/error_manager.c\
+						srcs/parsing/parser.c\
+						srcs/parsing/p_resolution.c\
+						srcs/parsing/p_textures.c\
+						srcs/parsing/p_north_texture.c\
+						srcs/parsing/p_south_texture.c\
+						srcs/parsing/p_east_texture.c\
+						srcs/parsing/p_west_texture.c\
+						srcs/parsing/p_sprite_texture.c\
+						srcs/parsing/p_colors.c\
+						srcs/parsing/p_map.c
 
 # tu vas certainement rajouter des fichiers pour toute la partie graphique
 
-OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
-
-HEADERS				=	srcs/header_cub3d.h srcs/libft/libft.h
+OBJS				=	$(SRCS:.c=.o)
 
 H_CUB3D				=	srcs/header_cub3d.h
 
-COMP				=	clang -Wall -Wextra -Werror
+COMP				=	clang -Wall -Wextra -Werror -g3
 
 RM					=	rm -rf
 
 #$(PATH_OBJS)/%.o : $(PATH_SRCS)/%.c
 #	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
 
-%.o:				%.c $(HEADERS)
-					$(COMP) -I $(HEADERS) $(LIBRARIES) -c $< -o $@
+%.o:				%.c $(H_CUB3D)
+					$(COMP) -I$(H_CUB3D) -c $< -o $@
 
 
 ################################################################################
@@ -64,7 +59,7 @@ RM					=	rm -rf
 # make re, pour l'instant ce serait le cas selon Nico
 ################################################################################
 
-all:			libraries $(NAME) $(EXE)	
+all:			$(NAME) $(EXE)	
 
 #				ici il te faut les dependances de all
 #				c'est a dire les choses dont tu as
@@ -91,8 +86,11 @@ all:			libraries $(NAME) $(EXE)
 #								  				     maisje dois en parler avec
 #								  				     Nicolas
 
-$(NAME)		:	$(H_CUB3D) $(OBJS) $(LIBFT) $(MLXDL)
-				$(COMP) -I $(H_CUB3D) main.c -o $(NAME)
+$(NAME)		:	$(OBJS)
+				$(MAKE) -C $(VLIBFT)
+				$(MAKE) -C $(VMLX)
+				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT) $(VMLX)$(MLXDL)
+				$(COMP) -I$(H_CUB3D) main.c -o $(NAME)
 
 ################################################################################
 # attention a OpenGL qui normalement correspond a la minilibx non beta
@@ -107,9 +105,7 @@ $(EXE)		:	$(NAME)
 #$(MLXDL)	:
 #				$(MAKE) -C $(VMLX)
 
-libraries	:	
-				$(MAKE) -C $(VLIBFT)
-				$(MAKE) -C $(VMLX)
+
 
 #libraries	:	$(LIBFT) $(MLXDL)
 
