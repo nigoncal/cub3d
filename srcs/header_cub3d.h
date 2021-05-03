@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/03 09:02:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 16:16:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void			p_textures(char *line, t_settings *cub_sets);
 void			parse_map(char *line, t_settings *cub_sets);
 int				is_map(char *line);
 void			store_map(char *line, t_settings *cub_sets);
-void			add_line_map(char *line, t_settings *cub_sets);
 void			p_resolution(char *line, t_settings *cub_sets);
 int				p_north_texture(char *line, t_settings *cub_sets);
 int				p_south_texture(char *line, t_settings *cub_sets);
