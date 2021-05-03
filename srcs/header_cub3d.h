@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 13:34:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 08:09:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 # include <sys/errno.h> // pour errno, je le garde ?
 # include <string.h>
 # include <strings.h>
-# include "libft/header_libft.h"
-# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 # include "minilibx/mlx.h" // attention
 
 typedef struct	s_settings
