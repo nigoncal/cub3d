@@ -10,7 +10,7 @@ LIBRARIES			=	srcs/$(LIBCUB3D) srcs/libft/$(LIBFT)\
 
 VPATH				=	srcs parsing get_next_line libft minilibx textures\
 						libraries $(VSCRS) $(VLIBFT) $(VMINILIBX) $(VPARSING)\
-						$(VGNL) $(VLIBRARIES) $(VLIBFT) $(VTEXTURES)
+						$(VLIBRARIES) $(VLIBFT) $(VTEXTURES)
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
 # crees dans ton Makefile. Je sais pas poruquoi je le sens mal. Testes et tu
 # verras
@@ -18,7 +18,6 @@ VPATH				=	srcs parsing get_next_line libft minilibx textures\
 VSRCS				=	srcs
 VLIBRARIES			=   srcs/libraries
 VLIBFT				=	srcs/libft
-VGNL				=	srcs/get_next_line
 VMINILIBX			=	srcs/minilibx
 VPARSING			=	srcs/parsing
 VTEXTURES			=	srcs/textures
@@ -40,10 +39,6 @@ PARSING				=	parser.c\
 						p_map.c
 
 # tu vas certainement rajouter des fichiers pour toute la partie graphique
-						
-GNL					=	get_next_line.c\
-						get_next_line_utils.c\
-# changer le path de ton gnl de partout car il est integre a te libft maintenant
 
 OBJS				=	$(SRCS:.c=.o) $(PARSING:.c=.o)
 
