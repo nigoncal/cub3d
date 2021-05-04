@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 13:40:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 11:15:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,18 @@
 		fonction_a_coder_pour_free_tableau_de_chaine_de_char;
 }*/
 
-void	abort_prog(char *line, t_settings *cub_sets, char *s)
+void	abort_prog(char *line, t_settings *cub_sets, char *error)
 	// elle elle putstr
 	// elle en appelle une qui free cub_sets mais element par element, s'il s'agit de pointeurs
 	// et a la fin elle se free elle-mem, je veux dire la structure
 	// puis elle appelle une fonction qui free toute la partie graphique, les images
 	// a la fin tu exit(0);
 {
-	(void)cub_sets;
 	ft_putstr("Error\n");
 	if (errno)
 		perror("");
 	else
-		ft_putstr(s); // passes par des enum pour renvoyer 
-					  // 1 - "In resolution line" (e.g.)
-					  // 2 - "Usage : blablabla"
+		ft_putstr(error);
 //	perror("Error\nUsage ");
 //	free_struct(cub_sets);
 //	free_images(???);
