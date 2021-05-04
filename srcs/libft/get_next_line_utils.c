@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:14:45 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/02 09:43:44 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 08:52:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*gnl_strdup(char *s)
 {
 	char	*str;
 	size_t	i;
-
+	
+	str = NULL;
 	if (!s)
 		return (NULL);
 	str = (char *)malloc(sizeof(char) * (gnl_strlen(s) + 1));
@@ -46,12 +47,13 @@ char	*gnl_strdup(char *s)
 
 char	*gnl_strjoin(char *s1, char *s2)
 {
-	char	*str;
 	size_t	i;
 	size_t	j;
+	char	*str;
 
 	i = 0;
 	j = 0;
+	str = NULL;
 	if (s1 == NULL)
 		return (gnl_strdup(s2));
 	str = (char *)malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
