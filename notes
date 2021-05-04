@@ -27,8 +27,6 @@ Ce qui est interdit dans la norme ce sont les ASSIGNATIONS dans les strucutres d
 Exemple : if((int = fonction())). La tu assignes l'int et tu verifies sa valeur, tout ca en meme temps dans une structure de controle
 DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour remodif ca
 
-En fait free_char_p2p fonctionne, il fallait faire un valgrind au lieu de print les adresses. Maintenant verifies bien ta securisation et puis continues sur abort_prog
-
 ----------------------------------Makefile-------------------------------------
 Regardes la deniere reponse de guhernan par rapport a lib et $(LAR)
 
@@ -45,19 +43,12 @@ a voir)
 Verifies bien que tout ce qui est cree par ton Makefile est rm -rf aved fclean
 
 Est-ce que je garde le flag -g3 ?
--------------------------------------------------------------------------------
-
-La tu es sur resolution et tu essayes de faire fonctionner abort_prog quand elle est appelee dans resolution. Pour cela tu as besoin qu'abort_prog soit correctement appelee via le header mais pour cela il faut que ton header fonctionne correctement et donc que la structure que tu utilises soit celle du header et non celle des mains de test
-
--------------------------------------------------------------------------------
 -------------------------------------parsing de la map--------------------------
 
---------------------------------------------------------------------------------
-
-
+-------------------------------abort_prog---------------------------------------
 tu es en train de coder abort_prog
 ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_prog
-
+--------------------------------------------------------------------------------
 1 - free elements a la fin de chaque fichier particulier de parsing de ligne
 2 - tu es en train de traiter les whitespaces dans resolution puis dans texture
 penses a bien checker si tu les traites tous individuellement correctement dans le parsing global

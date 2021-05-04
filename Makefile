@@ -9,24 +9,24 @@ MLXDL				=	libmlx.dylib
 
 
 LIBRARIES			=	srcs/libft/$(LIBFT)\
-						srcs/minilibx/$(MLXDL)
+						srcs/mlx/$(MLXDL)
 # il faut que tu regles ce probleme de libraries ^^
 
-VPATH				=	srcs parsing libft minilibx textures libraries $(VSCRS)\
+VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
 						$(VLIBFT) $(VMLX) $(VPARSING) $(VLIBFT) $(VTEXTURES)
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
 # crees dans ton Makefile. Je sais pas pourquoi je le sens mal. Testes et tu
 # verras
 
 VLIBFT				=	srcs/libft/
-VMLX				=	srcs/minilibx/
+VMLX				=	srcs/mlx/
 VTEXTURES			=	srcs/textures/
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
 						srcs/tools.c\
 						srcs/error_manager.c\
-						srcs/parsing/parser.c\
+						srcs/parsing/parse_id.c\
 						srcs/parsing/p_resolution.c\
 						srcs/parsing/p_textures.c\
 						srcs/parsing/p_north_texture.c\
@@ -35,7 +35,8 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_west_texture.c\
 						srcs/parsing/p_sprite_texture.c\
 						srcs/parsing/p_colors.c\
-						srcs/parsing/p_map.c
+						srcs/parsing/p_map.c\
+						srcs/parsing/store_map.c
 
 # tu vas certainement rajouter des fichiers pour toute la partie graphique
 
@@ -76,10 +77,10 @@ all:			$(NAME) $(EXE)
 #								  				     besoin d'en parler avec
 #								  				     Nicolas et Pauline, qui
 #								  				     connaissent mieux la
-#								  				     minilibx que moi
+#								  				     mlx que moi
 #								  				   - c'est sur qu'il va me
 #								  				     falloir la libft et la
-#								  				     dylib de la minilibx
+#								  				     dylib de la mlx
 #								  				   - gnl aussi, mais sous
 #								  				     quelle forme ? Dans la
 #								  				     libft ou seul a cote ? Moi
@@ -90,11 +91,12 @@ all:			$(NAME) $(EXE)
 $(NAME)		:	$(OBJS)
 				$(MAKE) -C $(VLIBFT)
 				$(MAKE) -C $(VMLX)
-				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT) $(VMLX)$(MLXDL)
+#				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT) $(VMLX)$(MLXDL)
+				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT)
 				$(COMP) -I$(H_CUB3D) -o $(NAME)
 
 ################################################################################
-# attention a OpenGL qui normalement correspond a la minilibx non beta
+# attention a OpenGL qui normalement correspond a la mlx non beta
 ################################################################################
 
 $(EXE)		:	$(NAME)
