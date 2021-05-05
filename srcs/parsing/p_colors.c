@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:13:32 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/22 17:45:50 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/05 14:34:13 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // il te faut passer trois fois dedans avec un tableau d'int, donc i = 0 et tu check si tu n'as pas deja enregistre un C ou un F et si ca passe plus de 3 fois ca veut dire qu'il y a plus que rgb, donc erreur
 
-void	color(char **line, t_settings *cub_sets)
+void	p_colors(char **line, t_settings *cub_sets)
 {
 	if (*(*line) == 'C')
 	{

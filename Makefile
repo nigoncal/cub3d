@@ -8,8 +8,8 @@ LIBFT				=	libft.a
 MLXDL				=	libmlx.dylib
 
 
-LIBRARIES			=	srcs/libft/$(LIBFT)\
-						srcs/mlx/$(MLXDL)\
+LIBRARIES			=	libft.a\
+						libmlx.dylib\
 						libcub3d.a
 # il faut que tu regles ce probleme de libraries ^^
 
@@ -18,6 +18,9 @@ VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
 # est-ce que libraries est a ajouter ici, vu que c'est un nouveau dir que tu
 # crees dans ton Makefile. Je sais pas pourquoi je le sens mal. Testes et tu
 # verras
+
+VLIBRARIES			=	$(VLIBFT)libft.a\
+						$(VMLX)libmlx.dylib
 
 VLIBFT				=	srcs/libft/
 VMLX				=	srcs/mlx/
@@ -88,18 +91,19 @@ all:			$(NAME) $(EXE)
 #								  				     maisje dois en parler avec
 #								  				     Nicolas
 
-$(NAME)		:	$(OBJS)
+$(NAME)		:	$(OBJS)	
 				$(MAKE) -C $(VLIBFT)
+				ln -sf $(VLIBFT)$(LIBFT) .
 				$(MAKE) -C $(VMLX)
+				ln -sf $(VMLX)$(MLXDL) .
 #				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT) $(VMLX)$(MLXDL)
-				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT)
+				ar rcs $(NAME) $(OBJS)
 
 ################################################################################
 # attention a OpenGL qui normalement correspond a la mlx non beta
 ################################################################################
 
 $(EXE)		:	$(NAME)
-	echo X
 				$(COMP) $(LIBRARIES) -o $(EXE)
 
 #$(LIBFT)	:
@@ -117,14 +121,10 @@ clean		:
 				$(MAKE) clean -C $(VLIBFT)
 				$(MAKE) clean -C $(VMLX)
 
-fclean		:	clean
-#				$(RM) $(NAME)
-#				$(RM) $(LIBFT)
-				$(RM) $(VMLX)/$(MLXDL)
-				$(RM) $(VMLX)/*.o
-				$(RM) $(VMLX)/*.swiftmodule
-				$(RM) $(VMLX)/*.swiftdoc
-				$(RM) $(VLIBRARIES)
+fclean		:	
+				$(RM) $(OBJS) $(LIBRARIES) $(EXE)
+				$(MAKE) fclean -C $(VLIBFT)
+				$(MAKE) clean -C $(VMLX)
 
 re			: 	fclean all
 

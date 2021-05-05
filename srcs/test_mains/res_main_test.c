@@ -20,7 +20,7 @@ typedef struct	s_settings
 	void	*mlx; // si ca marche, a bien ajouter a ta structure dans le header
 }				t_settings;
 
-void	resolution(char *line, t_settings *cub_sets);
+void	p_resolution(char *line, t_settings *cub_sets);
 
 int main()
 {
@@ -32,49 +32,49 @@ int main()
 	cub_sets->mlx = mlx_init();
 	dprintf(1, "--- test 1 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("R  138 145   ", cub_sets);
+	p_resolution("R  138 145   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 2 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("     RS   ", cub_sets);
+	p_resolution("     RS   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 3 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("148   ", cub_sets);
+	p_resolution("148   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 4 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("R  148   13  14   ", cub_sets);
+	p_resolution("R  148   13  14   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 5 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("R -148   13   ", cub_sets);
+	p_resolution("R -148   13   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 6 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("R  #   148  +39   ", cub_sets);
+	p_resolution("R  #   148  +39   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 7 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("Rouge     148  39   ", cub_sets);
+	p_resolution("Rouge     148  39   ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);
 	dprintf(1, "--- test 8 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));
-	resolution("R  50555     20555     ", cub_sets);
+	p_resolution("R  50555     20555     ", cub_sets);
 	dprintf(1, "R = %d\n", cub_sets->R);
 	dprintf(1, "width = %d\n", cub_sets->width);
 	dprintf(1, "height = %d\n", cub_sets->height);

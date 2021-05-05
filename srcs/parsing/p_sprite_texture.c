@@ -62,7 +62,7 @@ static int	right_amount(char **elements, t_settings *cub_sets)
 	return (0);
 }
 
-int			sprite_texture(char *line, t_settings *cub_sets)
+int			p_sprite_texture(char *line, t_settings *cub_sets)
 {
 	char	**elements; // a free ?
 

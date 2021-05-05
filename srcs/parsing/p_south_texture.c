@@ -62,7 +62,7 @@ static int	right_amount(char **elements, t_settings *cub_sets)
 	return (0);
 }
 
-int			south_texture(char *line, t_settings *cub_sets)
+int			p_south_texture(char *line, t_settings *cub_sets)
 {
 	char	**elements; // a free ?
 

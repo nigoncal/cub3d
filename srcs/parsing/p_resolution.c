@@ -87,7 +87,7 @@ static int	right_amount(char **elements, t_settings *cub_sets)
 	return (0);
 }
 
-void	resolution(char *line, t_settings *cub_sets)
+void	p_resolution(char *line, t_settings *cub_sets)
 {
 	char	**elements;
 
