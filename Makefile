@@ -93,14 +93,14 @@ $(NAME)		:	$(OBJS)
 				$(MAKE) -C $(VMLX)
 #				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT) $(VMLX)$(MLXDL)
 				ar rcs $(NAME) $(OBJS) $(VLIBFT)$(LIBFT)
-				$(COMP) -I$(H_CUB3D) -o $(NAME)
 
 ################################################################################
 # attention a OpenGL qui normalement correspond a la mlx non beta
 ################################################################################
 
 $(EXE)		:	$(NAME)
-				$(COMP) -I$(H_CUB3D) $(LIBRARIES) -o $(EXE)
+	echo X
+				$(COMP) $(LIBRARIES) -o $(EXE)
 
 #$(LIBFT)	:
 #				$(MAKE) -C $(VLIBFT)
