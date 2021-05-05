@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/04 17:25:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/05 14:04:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3d.h"
+#include "../header_cub3d.h"
 
 static void	add_map_line(char *line, t_settings *cub_sets)
 {

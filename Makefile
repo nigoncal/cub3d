@@ -9,7 +9,8 @@ MLXDL				=	libmlx.dylib
 
 
 LIBRARIES			=	srcs/libft/$(LIBFT)\
-						srcs/mlx/$(MLXDL)
+						srcs/mlx/$(MLXDL)\
+						libcub3d.a
 # il faut que tu regles ce probleme de libraries ^^
 
 VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
@@ -99,7 +100,7 @@ $(NAME)		:	$(OBJS)
 ################################################################################
 
 $(EXE)		:	$(NAME)
-				$(COMP) $(NAME) $(LIBRARIES) -o $(EXE)
+				$(COMP) -I$(H_CUB3D) $(LIBRARIES) -o $(EXE)
 
 #$(LIBFT)	:
 #				$(MAKE) -C $(VLIBFT)
