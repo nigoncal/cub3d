@@ -26,7 +26,6 @@ SRCS				=	srcs/main.c\
 						srcs/error_manager.c\
 						srcs/start.c\
 						srcs/parsing/parse_id.c\
-#						srcs/tools.c\#
 						srcs/parsing/p_resolution.c\
 						srcs/parsing/p_textures.c\
 						srcs/parsing/p_north_texture.c\
@@ -37,7 +36,7 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_colors.c\
 						srcs/parsing/p_map.c\
 						srcs/parsing/store_map.c
-
+#						srcs/tools.c\#
 # tu vas certainement rajouter des fichiers pour toute la partie graphique
 
 OBJS				=	$(SRCS:.c=.o)
