@@ -34,7 +34,7 @@
 // vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
 // fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
 
-void	too_big_for_screen(t_settings *cub_sets)
+static void	too_big_for_screen(t_settings *cub_sets)
 {
 	int trigger;
 	int	screen_width;

@@ -10,19 +10,5 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3d.h"
+//#include "header_cub3d.h"
 
-int	non_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t'
-			&& line[i] != '\v' && line[i] != '\n') //gnl vire le \ ond cinutile icin
-			return (1);
-		i++;
-	}
-	return (0);
-}

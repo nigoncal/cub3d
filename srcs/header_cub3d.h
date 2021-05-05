@@ -107,19 +107,20 @@ typedef struct	s_settings
 	char	**map;
 }				t_settings;
 
+void			abort_prog(char *line, t_settings *cub_sets, char *s);
 void			start(int fd, char **line, t_settings *cub_sets);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_settings *cub_sets);
-void			p_textures(char *line, t_settings *cub_sets);
-void			parse_map(char *line, t_settings *cub_sets);
-void			store_map(char *line, t_settings *cub_sets);
 void			p_resolution(char *line, t_settings *cub_sets);
+void			p_textures(char *line, t_settings *cub_sets);
 int				p_north_texture(char *line, t_settings *cub_sets);
 int				p_south_texture(char *line, t_settings *cub_sets);
-int				p_west_texture(char *line, t_settings *cub_sets);
 int				p_east_texture(char *line, t_settings *cub_sets);
+int				p_west_texture(char *line, t_settings *cub_sets);
 int				p_sprite_texture(char *line, t_settings *cub_sets);
-void			abort_prog(char *line, t_settings *cub_sets, char *s);
+void			parse_map(char *line, t_settings *cub_sets);
+void			store_map(char *line, t_settings *cub_sets);
+void			colors(char **line, t_settings *cub_sets);
 /*void			create_windows(t_info *info);
 void			put_square( int lenght, t_screen *sc);
 void			create_mini_map(t_screen *sc);
