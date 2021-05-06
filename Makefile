@@ -45,19 +45,20 @@ RM					=	rm -rf
 %.o			:	%.c $(H_CUB3D)
 				$(COMP) -I$(H_CUB3D) -c $< -o $@
 
-all			:	$(NAME) $(EXE)	
+all			:	libs $(NAME) $(EXE)	
 
-$(LIBS)		:	
+libs		:	
 				$(MAKE) -C $(VLIBFT)
 				ln -sf $(VLIBFT)$(LIBFT) .
 				$(MAKE) -C $(VMLX)
 				ln -sf $(VMLX)$(MLXDL) .
 
-$(NAME)		:	$(LIBS)	$(OBJS)
+$(NAME)		:	$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 
 $(EXE)		:	
 				$(COMP) $(LIBS) -o $(EXE)
+
 clean		:
 				$(RM) $(OBJS)
 				$(MAKE) clean -C $(VLIBFT)
@@ -70,4 +71,4 @@ fclean		:
 
 re			: 	fclean all
 
-.PHONY: all clean fclean re libraries
+.PHONY: all libs clean fclean re libraries

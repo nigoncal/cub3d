@@ -83,7 +83,7 @@ CFLAGS		= 	-Wall -Wextra -Werror -g3
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				ar rc $(NAME) $(OBJS)
+				ar rcs $(NAME) $(OBJS)
 
 clean:
 				$(RM) $(OBJS) $(BON_OBJS)
@@ -94,6 +94,6 @@ fclean:			clean
 re:				fclean all
 
 bonus:			$(BON_OBJS) $(OBJS)
-				ar rc $(NAME) $(OBJS) $(BON_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BON_OBJS)
 
 .PHONY:			all clean fclean re
