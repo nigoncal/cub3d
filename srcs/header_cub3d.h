@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/04 17:27:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/08 16:43:27 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,45 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
+
+typedef struct	s_settings
+{
+	bool	screenshot;
+	bool	res;
+	bool	north;
+	bool	south;
+	bool	east;
+	bool	west;
+	bool	sprite;
+	bool	b_floor;
+	bool	b_ceiling;
+	bool	map_started;
+	bool	player;
+	bool	map_over;
+	void	*mlx;
+	int		id_counter;
+	int		width;
+	int		height;
+	char	*north_texture_path;
+	char	*south_texture_path;
+	char	*west_texture_path;
+	char	*east_texture_path;
+	char	*sprite_texture_path;
+	int		north_fd;  // a virer, juste pour les tests
+	int		south_fd;  // "
+	int		west_fd;   // "
+	int		east_fd;   // "
+	int		sprite_fd; // "
+	int		f_red;
+	int		f_green;
+	int		f_blue;
+	int		c_red;
+	int		c_green;
+	int		c_blue;
+	int		f_hexa;
+	int		c_hexa;
+	char	**map;
+}				t_settings;
 
 /*typedef struct	s_info
 
@@ -70,43 +109,6 @@
 	// MALLOC D'AUTRES CHOSES QUE NICO EST EN TRAIN DE CODER
 }				t_info;*/
 
-typedef struct	s_settings
-{
-	bool	screenshot;
-	bool	R;
-	bool	NO;
-	bool	SO;
-	bool	EA;
-	bool	WE;
-	bool	S;
-	bool	F;
-	bool	C;
-	bool	map_started;
-	bool	player;
-	bool	map_over;
-	void	*mlx;
-	int		id_counter;
-	int		width;
-	int		height;
-	char	*north_texture_path;
-	char	*south_texture_path;
-	char	*west_texture_path;
-	char	*east_texture_path;
-	char	*sprite_texture_path;
-	int		north_fd;  // a virer, juste pour les tests
-	int		south_fd;  // "
-	int		west_fd;   // "
-	int		east_fd;   // "
-	int		sprite_fd; // "
-	int		floor_red;
-	int		floor_green;
-	int		floor_blue;
-	int		ceiling_red;
-	int		ceiling_green;
-	int		ceiling_blue;
-	char	**map;
-}				t_settings;
-
 void			abort_prog(char *line, t_settings *cub_sets, char *s);
 void			start(int fd, char **line, t_settings *cub_sets);
 int				non_empty_line(char *line);
@@ -120,7 +122,8 @@ int				p_west_texture(char *line, t_settings *cub_sets);
 int				p_sprite_texture(char *line, t_settings *cub_sets);
 void			parse_map(char *line, t_settings *cub_sets);
 void			store_map(char *line, t_settings *cub_sets);
-void			colors(char **line, t_settings *cub_sets);
+void			p_floor(char **line, t_settings *cub_sets);
+void			p_ceiling(char **line, t_settings *cub_sets);
 /*void			create_windows(t_info *info);
 void			put_square( int lenght, t_screen *sc);
 void			create_mini_map(t_screen *sc);

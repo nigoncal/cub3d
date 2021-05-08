@@ -14,7 +14,7 @@
 
 /*
  * la fonction principale :
- * verifie que la ligne resolution n'a pas deja ete rencontree avec le bool cub_sets->R
+ * verifie que la ligne resolution n'a pas deja ete rencontree avec le bool cub_sets->res
  * split en utilisant les espaces
  * appelle check_elements
  *
@@ -24,7 +24,7 @@
  * verifie que les deux autre elements sont bien des digits avec ft_isdigit
  * qu'ils sont superieurs a 0
  * appelle too_big_for_screen
- * passe le bool cub_sets->R a true si aucune erreur n'a ete rencontree
+ * passe le bool cub_sets->res a true si aucune erreur n'a ete rencontree
  *
  * too_big_for_screen :
  * verifie si width et hieght sont superieurs a la taille de l'ecran et les bloque a la taille de l'ecran si c'est le cas
@@ -91,11 +91,11 @@ void	p_resolution(char *line, t_settings *cub_sets)
 {
 	char	**elements;
 
-	if (cub_sets->R == true)
+	if (cub_sets->res == true)
 		abort_prog(line, cub_sets, "Identifiers should be used only once");
 	elements = ft_split(line, ' ');
 	if (right_amount(elements, cub_sets) == -1)
 		abort_prog(line, cub_sets, "R line :\nR <width> <height>\nOnly > 0");
-	cub_sets->R = true;
+	cub_sets->res = true;
 	free_char_p2p(elements);
 }

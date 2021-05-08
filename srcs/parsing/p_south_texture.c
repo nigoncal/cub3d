@@ -15,7 +15,7 @@
 /*
  * la fonction principale :
  *
- * verifie d'abord que l'identifiant n'a pas deja ete rencontre avec le booleen cub_sets->SO
+ * verifie d'abord que l'identifiant n'a pas deja ete rencontre avec le booleen cub_sets->south
  * split la line avec espace comme separateur
  * elle appelle right_amount qui verifie qu'il y a bien 2 elements (l'identifiant et le path)
  *
@@ -24,7 +24,7 @@
  * 										   - que le path soit bon, que ce ne soit pas un directory que l'on essaye d'ouvrir comme fichier et que le fichier soit ouvrable, grace a deux appels d'open, un avec flag O_DIRECTORY, l'autre avec O_RDOSLY
  *
  * a chaque fois s'il y a une erreur, 1 est renvoye, 0 si tout se passe bien
- * si tout s'est bien passe, le path est stocke dans cub_sets->south_texture_path et cub_sets->SO est mis a true
+ * si tout s'est bien passe, le path est stocke dans cub_sets->south_texture_path et cub_sets->south est mis a true
 */
 
 static int	right_file(char **elements, t_settings *cub_sets)
@@ -66,13 +66,13 @@ int			p_south_texture(char *line, t_settings *cub_sets)
 {
 	char	**elements; // a free ?
 
-	if (cub_sets->SO == true)
+	if (cub_sets->south == true)
 		return (-1);
 	elements = ft_split(line, ' ');
 	if (right_amount(elements, cub_sets) == -1)
 		return (-1);
 	cub_sets->south_texture_path = ft_strdup(elements[1]);
-	cub_sets->SO = true;
+	cub_sets->south = true;
 	free(elements);
 	return (0);
 }
