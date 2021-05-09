@@ -6,16 +6,43 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 14:07:31 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 14:33:44 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-void	square_map(char **map)
+int	square_map(char **map)
 {
-	char	**s_map;
+	char	**squared_map;
+	int		x;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
+	squared_map = malloc(sizeof(char *) * line_amount(map) + 1);
+	if (squared_map == NULL)
+		return (-1);
+	x = longest_line(map);
+	while (map[i])
+	{
+		squared_map[i] = malloc(sizeof(char) * x + 1);
+		if (squared_map[i] == NULL)
+			return (-1);
+		while (map[i][j])
+			squared_map[i][j] = map[i][j];
+		while (j <= x)
+			squared_map[i][j++] = ' ';
+		squared_map[i][j] = '\0';
+		j = 0;
+		i++;
+	}
+	squared_map[i] = 0;
+	map = squared_map;
+	free_char_p2p(squared_map);
+	
+	return (0);
 }
 
 static void	add_map_line(char *line, t_settings *cub_sets)
