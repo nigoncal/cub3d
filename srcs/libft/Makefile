@@ -1,4 +1,5 @@
 SRCS	=		change_char.c\
+				find_longest_line.c\
 				format_check.c\
 				free_char_p2p.c\
 				get_next_line.c\

@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/09 10:54:35 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 14:00:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_split_next
 }	t_split_next;
 
 char			*change_char(char *s, char a, char b);
+int				find_longest_line(char **tab);
 int				format_check(char *file, char *format);
 int				free_char_p2p(char **str);
 int				get_next_line(int fd, char **line);
