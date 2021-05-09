@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/09 14:00:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 14:13:51 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char			*change_char(char *s, char a, char b);
 int				find_longest_line(char **tab);
 int				format_check(char *file, char *format);
 int				free_char_p2p(char **str);
-int				get_next_line(int fd, char **line);
-int				is_tab_digit(char **tab);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_pf_atoi(char **str);
 char			*ft_strstr(char *str, char *to_find);
@@ -85,5 +83,8 @@ int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
+int				get_next_line(int fd, char **line);
+int				is_tab_digit(char **tab);
+int				line_amount(char **tab);
 
 #endif

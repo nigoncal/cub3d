@@ -5,6 +5,7 @@ SRCS	=		change_char.c\
 				get_next_line.c\
 		  		get_next_line_utils.c\
 				is_tab_digit.c\
+				line_amount.c\
 				ft_memccpy.c\
 				ft_memset.c\
 				ft_strncmp.c\
