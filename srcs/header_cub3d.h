@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/08 16:43:27 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 13:28:56 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,8 @@ typedef struct	s_settings
 	int		west_fd;   // "
 	int		east_fd;   // "
 	int		sprite_fd; // "
-	int		f_red;
-	int		f_green;
-	int		f_blue;
-	int		c_red;
-	int		c_green;
-	int		c_blue;
-	int		f_hexa;
-	int		c_hexa;
+	int		f_color;
+	int		c_color;
 	char	**map;
 }				t_settings;
 

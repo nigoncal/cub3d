@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 11:18:51 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 13:28:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static int	store_rgb(char **t_rgb, t_settings *cub_sets)
 			return (-1);
 		i++;
 	}
-	cub_sets->f_red = rgb[0];
-	cub_sets->f_green = rgb[1];
-	cub_sets->f_blue = rgb[2];
+	cub_sets->f_color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[3]);
 }
 
 static int	right_content(char **elements, t_settings *cub_sets)

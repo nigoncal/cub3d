@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/04 17:34:36 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 12:02:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ static void	continue_map(char *line, t_settings *cub_sets)
 				error = -1;
 		}
 		else
+		{
 			cub_sets->map_over = true;
+			square_map(cub_sets->map);
+		}
 	}
 	else
 		if (non_empty_line(line) == 1)
