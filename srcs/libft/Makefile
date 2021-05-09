@@ -1,11 +1,6 @@
 SRCS	=		change_char.c\
-				find_longest_line.c\
 				format_check.c\
 				free_char_p2p.c\
-				get_next_line.c\
-		  		get_next_line_utils.c\
-				is_tab_digit.c\
-				line_amount.c\
 				ft_memccpy.c\
 				ft_memset.c\
 				ft_strncmp.c\
@@ -54,7 +49,12 @@ SRCS	=		change_char.c\
 				ft_strstr.c\
 				ft_putnbr.c\
 				ft_putstr.c\
-				ft_putchar.c
+				ft_putchar.c\
+				get_next_line.c\
+		  		get_next_line_utils.c\
+				is_tab_digit.c\
+				line_amount.c\
+				longest_line.c
 
 BON_SRCS 	=	ft_lstnew.c\
 				ft_lstadd_front.c\

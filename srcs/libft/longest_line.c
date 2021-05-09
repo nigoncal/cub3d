@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_longest_line.c                                :+:      :+:    :+:   */
+/*   longest_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 13:52:40 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 13:57:04 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/05/09 14:20:24 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/09 14:20:31 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	find_longest_line(char **tab)
+int	longest_line(char **tab)
 {
 	int	i;
 	int	j;
