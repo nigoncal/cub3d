@@ -57,7 +57,7 @@ libs		:
 $(NAME)		:	$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 
-$(EXE)		:	
+$(EXE)		:	$(OBJS) $(LIBS)
 				$(COMP) $(LIBS) -o $(EXE)
 
 clean		:

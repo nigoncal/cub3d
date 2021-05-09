@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/02 10:07:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 16:45:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	update(char **line, char **buffer)
 int	ft_condition(char *buffer, int *eoread, char *reader, int fd)
 {
 	*eoread = read(fd, reader, BUFFER_SIZE);
-	return (find_eol(buffer) && *eoread > 0);
+	return (find_eol(buffer) > 0 && *eoread > 0);
 }
 
 int	get_next_line(int fd, char **line)

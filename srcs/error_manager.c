@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/04 17:11:15 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 15:55:51 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	abort_prog(char *line, t_settings *cub_sets, char *error)
 	// puis elle appelle une fonction qui free toute la partie graphique, les images
 	// a la fin tu exit(0);
 {
+	dprintf(1, "W\n");
 	ft_putstr("Error\n");
 	if (errno)
 		perror("");

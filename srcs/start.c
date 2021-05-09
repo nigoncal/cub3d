@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 13:35:46 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 16:47:59 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	non_empty_line(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\t'
-			&& line[i] != '\v' && line[i] != '\n') //gnl vire le \ ond cinutile icin
+			&& line[i] != '\v' && line[i] != '\n') //gnl vire le \n donc inutile ici ?
+		dprintf(1, "L\n"); // a virer
 			return (1);
 		i++;
 	}
@@ -29,11 +30,15 @@ int	non_empty_line(char *line)
 
 void	start(int fd, char **line, t_settings *cub_sets)
 {
-	cub_sets->mlx = mlx_init();
+	dprintf(1, "P\n"); // a virer
+//	cub_sets->mlx = mlx_init();
+	dprintf(1, "R\n"); // a virer
 	while (get_next_line(fd, line))
 	{
+		dprintf(1, "G\n"); // a virer
 		if (cub_sets->id_counter < 8)
 		{
+			dprintf(1, "B\n"); // a virer
 			cub_sets->id_counter += non_empty_line(*line);
 			parse_id(*line, cub_sets);
 		}
@@ -42,7 +47,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 			parse_map(*line, cub_sets);
 		}
 	}
-	free(cub_sets); // mieux
+//	free(cub_sets); // mieux
 	dprintf(1, "width = |%d|\n", cub_sets->width);
 	dprintf(1, "height = |%d|\n", cub_sets->height);
 	dprintf(1, "north = |%s|\n", cub_sets->north_texture_path);
@@ -52,7 +57,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "sprite = |%s|\n", cub_sets->sprite_texture_path);
 	dprintf(1, "f_color = |%d|\n", cub_sets->f_color);
 	dprintf(1, "c_color = |%d|\n", cub_sets->c_color);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
+/*	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[1]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[2]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[3]);
@@ -66,5 +71,5 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[11]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[12]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[13]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[14]);
+	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[14]);*/
 }
