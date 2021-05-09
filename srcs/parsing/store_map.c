@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 14:33:44 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 14:47:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	square_map(char **map)
 		if (squared_map[i] == NULL)
 			return (-1);
 		while (map[i][j])
+		{
 			squared_map[i][j] = map[i][j];
+			j++;
+		}
 		while (j <= x)
 			squared_map[i][j++] = ' ';
 		squared_map[i][j] = '\0';
@@ -41,7 +44,6 @@ int	square_map(char **map)
 	squared_map[i] = 0;
 	map = squared_map;
 	free_char_p2p(squared_map);
-	
 	return (0);
 }
 
