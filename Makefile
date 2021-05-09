@@ -28,7 +28,8 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_east_texture.c\
 						srcs/parsing/p_west_texture.c\
 						srcs/parsing/p_sprite_texture.c\
-						srcs/parsing/p_colors.c\
+						srcs/parsing/p_floor.c\
+						srcs/parsing/p_ceiling.c\
 						srcs/parsing/p_map.c\
 						srcs/parsing/store_map.c
 #						srcs/tools.c\#
