@@ -1,4 +1,10 @@
-SRCS	=		ft_memccpy.c\
+SRCS	=		change_char.c\
+				format_check.c\
+				free_char_p2p.c\
+				get_next_line.c\
+		  		get_next_line_utils.c\
+				is_tab_digit.c\
+				ft_memccpy.c\
 				ft_memset.c\
 				ft_strncmp.c\
 				ft_bzero.c\
@@ -46,12 +52,7 @@ SRCS	=		ft_memccpy.c\
 				ft_strstr.c\
 				ft_putnbr.c\
 				ft_putstr.c\
-				ft_putchar.c\
-				change_char.c\
-				format_check.c\
-				free_char_p2p.c\
-				get_next_line.c\
-		  		get_next_line_utils.c
+				ft_putchar.c
 
 BON_SRCS 	=	ft_lstnew.c\
 				ft_lstadd_front.c\

@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/02 10:39:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 10:54:35 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ typedef struct s_split_next
 	size_t	length;
 }	t_split_next;
 
+char			*change_char(char *s, char a, char b);
+int				format_check(char *file, char *format);
+int				free_char_p2p(char **str);
+int				get_next_line(int fd, char **line);
+int				is_tab_digit(char **tab);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_pf_atoi(char **str);
 char			*ft_strstr(char *str, char *to_find);
 void			ft_putnbr(int nb);
 void			ft_putstr(char *str);
 void			ft_putchar(char c);
-char			*change_char(char *s, char a, char b);
-int				format_check(char *file, char *format);
-int				free_char_p2p(char **str);
 void			*ft_memset(void *s, int c, size_t n);
 void			*ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
@@ -82,6 +84,5 @@ int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
-int				get_next_line(int fd, char **line);
 
 #endif
