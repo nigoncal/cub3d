@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 14:31:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 13:35:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,8 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "west = |%s|\n", cub_sets->west_texture_path);
 	dprintf(1, "east = |%s|\n", cub_sets->east_texture_path);
 	dprintf(1, "sprite = |%s|\n", cub_sets->sprite_texture_path);
-	dprintf(1, "floor_red = |%d|\n", cub_sets->floor_red);
-	dprintf(1, "floor_green = |%d|\n", cub_sets->floor_green);
-	dprintf(1, "floor_blue = |%d|\n", cub_sets->floor_blue);
-	dprintf(1, "ceiling_red = |%d|\n", cub_sets->ceiling_red);
-	dprintf(1, "ceiling_green = |%d|\n", cub_sets->ceiling_green);
-	dprintf(1, "ceiling_blue = |%d|\n", cub_sets->ceiling_blue);
+	dprintf(1, "f_color = |%d|\n", cub_sets->f_color);
+	dprintf(1, "c_color = |%d|\n", cub_sets->c_color);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[1]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[2]);

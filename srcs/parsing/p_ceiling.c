@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:41 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 13:30:52 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 13:44:27 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 static int	store_rgb(char **t_rgb, t_settings *cub_sets)
 {
-	int	rbg[3];
+	int	i;
+	int	j;
+	int	rgb[3];
 
+	i = 0;
+	j = 0;
 	while (t_rgb[i])
 	{
 		while (t_rgb[i][j])
-			rgb[i] = ft_atoi(t_rgb[i][j++]);
+			rgb[i] = ft_atoi(&t_rgb[i][j++]); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
 		j = 0;
 		i++;
 	}
@@ -30,7 +34,8 @@ static int	store_rgb(char **t_rgb, t_settings *cub_sets)
 			return (-1);
 		i++;
 	}
-	cub_sets->c_color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[3]);
+	cub_sets->c_color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2]);
+	return (0);
 }
 
 static int	right_content(char **elements, t_settings *cub_sets)
@@ -39,7 +44,7 @@ static int	right_content(char **elements, t_settings *cub_sets)
 	char	**t_rgb;
 
 	i = 0;
-	rgb = NULL;
+	t_rgb = NULL;
 	while (elements[i])
 		i++;
 	if (i != 2)
@@ -47,12 +52,12 @@ static int	right_content(char **elements, t_settings *cub_sets)
 	i = 0;
 	if (ft_strcmp(elements[0], "C") != 0)
 		return (-1);
-	rgb = ft_split(elements[1], ',');
+	t_rgb = ft_split(elements[1], ',');
 	while (elements[i])
 		i++;
 	if (i != 3)
 		return (-1);
-	if (is_tab_digit(t_rbg) == -1)
+	if (is_tab_digit(t_rgb) == -1)
 		return (-1);
 	if (store_rgb(t_rgb, cub_sets) == -1)
 		return (-1);

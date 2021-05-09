@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 12:03:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 14:07:31 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	square_map(char **map)
 {
-	char	**s_map
+	char	**s_map;
+
 }
 
 static void	add_map_line(char *line, t_settings *cub_sets)
@@ -30,7 +31,7 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 	size++;
 	temp = (char**)malloc(sizeof(char*) * size + 1);
 	if (temp == NULL)
-		abort_prog(line, cub_sets, "Failed to malloc cub_sets->map")
+		abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
 	while (cub_sets->map[i])
 	{
 		temp[i] = ft_strdup(cub_sets->map[i]);

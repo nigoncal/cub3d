@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/04 15:35:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/09 13:36:39 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	right_file(char **elements, t_settings *cub_sets)
 	if (fd >= 0)
 		return (-1);
 	fd = open(elements[1], O_RDONLY);
-	cub_sets->northrth_fd = fd; // a virer, juste pour les test
+	cub_sets->north_fd = fd; // a virer, juste pour les test
 	if (fd < 0)
 		return (-1);
 	return (0);
