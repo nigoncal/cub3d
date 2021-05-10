@@ -1,9 +1,29 @@
 #include "../cub3D.h"
 
+char is_this_line_empty(char *line)
+{
+	if (*line == '\0')
+	{
+		printf("There's nothing in this line\n");
+		return (*line);
+	}
+	while (*line != '\0' && (*line == ' ' || *line == '\t' || *line == '\v'))
+	{
+		line++;
+	}
+	printf("On trouve ce char apres avoir skip ws %c\n", *line);
+	return (*line);
+}
+
 char *is_line_empty(char *line)
 {
 	int skip;
 
+	if (*line == '\0')
+	{
+		printf("yep that's empty\n");
+		return (line);
+	}
 	skip = 0;
 	skip = skip_ws(line);
 	while (*line != '\0' && skip > 0)

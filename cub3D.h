@@ -1,5 +1,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define ERROR -1
+# define RAS 0
+
 # define BUFFER_SIZE 64
 
 /* HeaDERS */
@@ -37,13 +41,14 @@ typedef	struct	s_parsed_ids
 
 typedef	struct	s_map
 {
-	int		map_start_line;
-	bool	map_size_known;
-	int		map_longest_line;
-	int		map_nb_lines;
-	bool	map_malloced;
-	int		map_tab_line;
-	int		map_player_orientation;
+	int		start_line;
+	bool	size_known;
+	int		longest_line;
+	int		nb_lines;
+	bool	malloced;
+	int		tab_line;
+	int		player_orientation;
+	bool	begun;
 }				t_map;
 
 /* Nigoncal's structs */
@@ -88,7 +93,7 @@ typedef struct	s_info
 	t_settings		setup;
 	/* Paulicorne's structs */
 	t_parsed_ids	ids;
-	t_map			map_info;
+	t_map			map;
 	/* adding stuff to implement Paulicorne's parsing */
 	int				cub_fd;
 	/* Game info */
@@ -129,6 +134,7 @@ typedef struct	s_info
 	void			*mlx;
 	void			*win;
 	void			*image;
+	t_list			tmp_map;
 }				t_info;
 
 /* on garde ou pas ? (utilisé pour la minimap, put_square et put_pixel) */
@@ -177,6 +183,7 @@ void	ft_map(char *line, t_settings *cub_sets);
 char	*is_line_empty(char *line);
 char	*change_char(char *str, char new, char old, bool do_free);
 int		skip_ws(char const *str);
+char 	is_this_line_empty(char *line);
 
 /* === GRAPHIC === */
 

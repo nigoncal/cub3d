@@ -4,24 +4,44 @@ int	parse_line(char *line, t_info *info)
 {
 	int		skip;
 	char	**elements;
+	char	content;
 
 	skip = 0;
 	printf("Values parsées precedement: %d\n", info->ids.nb_parsed_ids);
 	printf("Ligne que l'on va parser ci-dessous : [%s]\n", line);
-	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ',NSEW)
+	// attention a traiter si la map est separee par une ligne vide ! + verif validite ligne de map (only 0;1;' ',NSEW)
 	if (info->ids.nb_parsed_ids == 8)
 	{	
+		if (info->map.begun) // attention a la remontee d'erreurs
+		{
+			parse_map(line, info);
+			return (RAS);
+		}
 		// AJOUTER un moyen de passer les lignes entierements vides AVANT la map
+		content = is_this_line_empty(line);
+		if (content == '\0')
+			return (RAS);
+		if (content == '1' || content == '0' || content == '2')
+		{
+			//info->map.begun = 1;
+			parse_map(line, info);
+			return (RAS);
+			//return (RAS);
+		}
+		else
+		{
+			printf("Error\nInvalid line after classic IDs/before map\n");
+			return (ERROR);
+		}
 		// Et ajouter un check pour ne pas accepter les lignes vides si on retrouve autre chose que des lignes vides a la fin
-		parse_map(line, info);
-		return (0);
 	}
 	//on passe les whitespaces du debut de ligne, puis on verif si il reste qqch dans la line
 	line = is_line_empty(line);
 	if (!*line)
 	{
-		info->map.start_line++;
-		return (0);
+		//plus besoin vu qu'on va malloc le tab a la fin
+		//info->map.start_line++;
+		return (RAS);
 	}
 	//A FAIRE : modifier la fonction ci dessous pour changer plusieurs char en 1 fonction
 	line = change_char(line, ' ', 9, 0);
@@ -41,7 +61,7 @@ int	parse_line(char *line, t_info *info)
 				printf("Error\nResolution parsing failed because program found the \"R\" ID \
 More than once. Only one occurency of each ID is accepted.\n");
 			}
-			return (-1);
+			return (ERROR);
 		}
 		if (parse_resolution(elements, info) < 0)
 		{
@@ -51,7 +71,7 @@ the \"R\" ID, a width and then a height.\n");
 			return (-1);
 		}
 		if (cap_resolution(info) < 0)
-			return (-1);
+			return (ERROR);
 		info->ids.res = 1;
 		info->ids.nb_parsed_ids++;
 	}
@@ -65,7 +85,7 @@ the \"R\" ID, a width and then a height.\n");
 		{
 			ft_putstr_fd("Error\nTexture files parsing failed, check your .cub file \
 please <3\n", 0);
-			return (-1);
+			return (ERROR);
 		}
 		info->ids.nb_parsed_ids++;
 		info->map.start_line++;
@@ -87,7 +107,7 @@ sprite id appear in your .cub. Only one is accepted.\n");
 	else if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
 		if (parse_color_id(elements))
-			return (-1);
+			return (ERROR);
 
 
 		//ajouter ici une fonction du genre parse_color(elements, setup);
@@ -98,7 +118,7 @@ sprite id appear in your .cub. Only one is accepted.\n");
 	{
 		printf("Error\nCouldn't find any correct ID in one of .cub file's lines : expected \"R\" for resolution, \"S\" for sprites, \"C\" for ceiling color and \"F\" for floor color, \"NO\", \
 \"SO\", \"EA\" or \"WE\" for wall textures.\n \"%s\" is invalid.\n", line);
-		return (-1);
+		return (ERROR);
 	}
 	return (0);
 }
@@ -128,7 +148,7 @@ int	open_file(t_info *info, int fd)
 		{
 			free(line);
 			close(fd);
-			return (-1);
+			return (ERROR);
 		}
 		//printf("Nb infos parsed before map : %d\n", setup->nb_parsed_values);
 		//printf("Ligne ou debute la map : %d\n", setup->map_start_line);
@@ -139,7 +159,7 @@ int	open_file(t_info *info, int fd)
 	//if (setup->map_size_known)
 		//open again and GNL map_start_line times so read is back to the map start
 		//go copy_map
-	return (0);
+	return (RAS);
 }
 
 int	check_file(char *path, char *extension)
@@ -155,14 +175,14 @@ int	check_file(char *path, char *extension)
 	{
 		printf("Error\nInvalid file : %s doesn't have the right extension.\n\
 Expected a %s file.\n", path, extension);
-		return (-1);
+		return (ERROR);
 	}
 	//printf("nom fichier a ouvrir : %s\n", path);
 	fd = open(path, O_DIRECTORY);
 	if (fd != -1)
 	{
 		printf("Error\nInvalid file : %s is a directory\n", path);
-		return (-1);
+		return (ERROR);
 	}
 	fd = 0;
 	fd = open(path, O_RDONLY);
@@ -175,7 +195,7 @@ int	parse_args(int argc, char **argv, t_info *info)
 	int		fd;
 
 	if (argc > 3 || argc < 2)
-		return (-1);
+		return (ERROR);
 	if (argc == 3)
 	{
 		//strncmp renvoie 0 si identique, autre chose si trouve une diff
@@ -183,7 +203,7 @@ int	parse_args(int argc, char **argv, t_info *info)
 		{
 			printf("Error\nProgram arguments are invalid. Usage : \
 ./cub3D *.cub --save(optionnal)\n");
-			return (-1);
+			return (ERROR);
 		}
 		//don't open window just save .bmp
 		//do not cap resolution !! (set setup->max_w/max_h à INTMAX par exemple ?)
@@ -193,11 +213,11 @@ int	parse_args(int argc, char **argv, t_info *info)
 	fd = 0;
 	fd = check_file(argv[1], ".cub");
 	if (fd < 2)
-		return (-1);
+		return (ERROR);
 	info->cub_fd = fd;
 	if (open_file(info, fd) < 0)
 	{
-		return (-1);
+		return (ERROR);
 	}
-	return (0);
+	return (RAS);
 }

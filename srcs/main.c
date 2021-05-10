@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&info, sizeof(info));
 	init(&info);
 	/* my part : */
-	if (parse_args(argc, argv, &info) < 0)
+	/*if (parse_args(argc, argv, &info) < 0)
 	{
 		ft_putstr_fd("Error\nParsing failed, please check your args and/or .cub file \
 and try again. Keep going !\n", 0);
@@ -39,18 +39,7 @@ info.width, info.height);
 			printf("Error\nProblem with your .cub while working with it.\n");
 	}
 	printf("La 1e ligne du tab malloqué : [%s]\n", info.setup.map[0]);
-	printf("La 14e ligne du tab malloqué : [%s]\n", info.setup.map[13]);
-	//init_windows(&mini);
-	//init_ray(&direction, mini);
-	//assigned_vector(&sphere.origine, 0, 0, -60);
-	//gen_ray(&mini, &sphere);
-	//mlx_put_image_to_window(mini.mlx, mini.win, mini.image, 0, 0);
-	//mlx_loop(mini.mlx);
-	if (info.map.malloced == 1)
-	{
-		//free_2d_tab(setup.map, setupnb_lines + 1);
-		free(info.setup.map);
-	}
+	printf("La 14e ligne du tab malloqué : [%s]\n", info.setup.map[13]);*/
 	/* fin de ma partie */
 
 	/*ajouter parsing ici*/
@@ -74,6 +63,8 @@ info.width, info.height);
 			j++;	
 		}
 */
+	(void)argc;
+	(void)argv;
 	info.mlx = mlx_init();
 	info.win = mlx_new_window(info.mlx, info.width, info.height, "mlx");
 	mlx_loop_hook(info.mlx, &main_loop, &info);

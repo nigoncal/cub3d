@@ -34,6 +34,8 @@ int	parse_map(char *line, t_info *info)
 		}
 		printf("chained list creation SUCCEDED\n");
 		info->map.begun = 1;
+		info->tmp_map.content = line;
+		printf("1er maillon de la list : %s\n", info->tmp_map.content);
 		//malloc le char ** de la struct pour stocker la map
 		/*info->setup.map = malloc(sizeof(char *) * \
 	(info->map.nb_lines + 1));
@@ -61,6 +63,7 @@ int	parse_map(char *line, t_info *info)
 		{
 			info->setup.map[info->map.tab_line] = 0;
 		}*/
+
 	}
 	return (0);
 }
