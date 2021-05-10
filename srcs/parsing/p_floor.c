@@ -6,13 +6,13 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 13:42:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 15:58:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-static int	store_rgb(char **t_rgb, t_settings *cub_sets)
+static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 {
 	int	i;
 	int	j;
@@ -20,10 +20,10 @@ static int	store_rgb(char **t_rgb, t_settings *cub_sets)
 
 	i = 0;
 	j = 0;
-	while (t_rgb[i])
+	while (tab_rgb[i])
 	{
-		while (t_rgb[i][j])
-			rgb[i] = ft_atoi(&t_rgb[i][j++]); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
+		while (tab_rgb[i][j])
+			rgb[i] = ft_atoi(&tab_rgb[i][j++]); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
 		j = 0;
 		i++;
 	}
@@ -41,10 +41,10 @@ static int	store_rgb(char **t_rgb, t_settings *cub_sets)
 static int	right_content(char **elements, t_settings *cub_sets)
 {
 	int		i;
-	char	**t_rgb;
+	char	**tab_rgb;
 
 	i = 0;
-	t_rgb = NULL;
+	tab_rgb = NULL;
 	while (elements[i])
 		i++;
 	if (i != 2)
@@ -52,14 +52,14 @@ static int	right_content(char **elements, t_settings *cub_sets)
 	i = 0;
 	if (ft_strcmp(elements[0], "F") != 0)
 		return (-1);
-	t_rgb = ft_split(elements[1], ',');
+	tab_rgb = ft_split(elements[1], ',');
 	while (elements[i])
 		i++;
 	if (i != 3)
 		return (-1);
-	if (is_tab_digit(t_rgb) == -1)
+	if (is_tab_digit(tab_rgb) == -1)
 		return (-1);
-	if (store_rgb(t_rgb, cub_sets) == -1)
+	if (store_rgb(tab_rgb, cub_sets) == -1)
 		return (-1);
 	return (0);
 }

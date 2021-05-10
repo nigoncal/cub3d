@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 16:47:59 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 14:45:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int	non_empty_line(char *line)
 
 void	start(int fd, char **line, t_settings *cub_sets)
 {
-	dprintf(1, "P\n"); // a virer
-//	cub_sets->mlx = mlx_init();
-	dprintf(1, "R\n"); // a virer
+	cub_sets->mlx = malloc(sizeof(void));
+	if (cub_sets->mlx == NULL)
+		abort_prog(*line, cub_sets, "Failed to malloc cub_sets->mlx");
+	cub_sets->mlx = mlx_init();
+	dprintf(1, "G\n"); // a virer
 	while (get_next_line(fd, line))
 	{
-		dprintf(1, "G\n"); // a virer
 		if (cub_sets->id_counter < 8)
 		{
 			dprintf(1, "B\n"); // a virer
