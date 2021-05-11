@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:58:47 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/13 17:03:07 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 13:22:15 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*change_char(char *str, char in, char out)
 
 	i = 0;
 	if (!str || !*str || !in || !out)
-		return (NULL);
+		return (str);
 	changed_str = ft_strdup(str);
 	while (changed_str[i])
 	{

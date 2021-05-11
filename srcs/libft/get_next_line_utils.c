@@ -6,72 +6,27 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:14:45 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/05 11:40:53 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 13:07:12 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	gnl_strlen(char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
-	i = 0;
 	if (!s)
-		return (i);
+		return (0);
+	i = 0;
 	while (s[i])
 		i++;
 	return (i);
 }
 
-char	*gnl_strdup(char *s)
-{
-	char	*str;
-	size_t	i;
-
-	str = NULL;
-	if (!s)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * gnl_strlen(s) + 1);
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*gnl_strjoin(char *s1, char *s2)
+int	find_nl(const char *s)
 {
 	size_t	i;
-	size_t	j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	str = NULL;
-	if (s1 == NULL)
-		return (gnl_strdup(s2));
-	str = (char *)malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2)) + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[j])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
-}
-
-int	find_eol(char *s)
-{
-	int	i;
 
 	i = 0;
 	if (s == NULL)
@@ -83,4 +38,31 @@ int	find_eol(char *s)
 		i++;
 	}
 	return (-1);
+}
+
+size_t	ft_strlcpy_gnl(char *dest, const char *src, size_t dstsize)
+{
+	size_t	i;
+
+	if (src == NULL || dest == NULL || dstsize <= 0)
+		return (0);
+	i = 0;
+	while (i < dstsize - 1 && src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (dest[i])
+		dest[i] = '\0';
+	return (1);
+}
+
+int	check_args(int fd)
+{
+	char	*buffer;
+
+	buffer = NULL;
+	if (fd < 0 || fd > OPEN_MAX || read(fd, buffer, 0) < 0 || BUFFER_SIZE < 1)
+		return (0);
+	return (1);
 }

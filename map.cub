@@ -1,11 +1,11 @@
 R 1920 1080
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./srcs/textures/grass.xpm
+SO ./srcs/textures/grass.xpm
+WE ./srcs/textures/grass.xpm
+EA ./srcs/textures/grass.xpm
 
-S ./path_to_the_sprite_texture
+S ./srcs/textures/grass.xpm
 F 220,100,0
 C 225,30,0
 

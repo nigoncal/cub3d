@@ -120,3 +120,5 @@ dans cub3d. push ton gnl modifie (mis a la norme) et push le avec un main
 changer tous les headers de touts les fichiers (header 42)
 
 norminette (y compris libft et get_next_line, tout tout tout)
+
+virer tous les dprintf

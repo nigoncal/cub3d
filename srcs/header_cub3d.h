@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 15:56:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 14:13:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_settings
 	bool	map_over;
 	void	*mlx;
 	int		id_counter;
+	char	**elements;
 	int		width;
 	int		height;
 	char	*north_texture_path;
@@ -50,11 +51,6 @@ typedef struct	s_settings
 	char	*west_texture_path;
 	char	*east_texture_path;
 	char	*sprite_texture_path;
-	int		north_fd;  // a virer, juste pour les tests
-	int		south_fd;  // "
-	int		west_fd;   // "
-	int		east_fd;   // "
-	int		sprite_fd; // "
 	int		f_color;
 	int		c_color;
 	char	**map;

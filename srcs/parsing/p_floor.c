@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/10 15:58:10 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 14:20:22 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	return (0);
 }
 
-static int	right_content(char **elements, t_settings *cub_sets)
+static int	right_content(t_settings *cub_sets)
 {
 	int		i;
 	char	**tab_rgb;
 
 	i = 0;
 	tab_rgb = NULL;
-	while (elements[i])
+	while (cub_sets->elements[i])
 		i++;
 	if (i != 2)
 		return (-1);
 	i = 0;
-	if (ft_strcmp(elements[0], "F") != 0)
+	if (ft_strcmp(cub_sets->elements[0], "F") != 0)
 		return (-1);
-	tab_rgb = ft_split(elements[1], ',');
-	while (elements[i])
+	tab_rgb = ft_split(cub_sets->elements[1], ',');
+	while (cub_sets->elements[i])
 		i++;
 	if (i != 3)
 		return (-1);
@@ -66,16 +66,11 @@ static int	right_content(char **elements, t_settings *cub_sets)
 
 void	p_floor(char *line, t_settings *cub_sets)
 {
-	char	**elements;
-
 	if (cub_sets->b_floor == true)
 		abort_prog(line, cub_sets, "Identifiers should be used only once");
-	elements = ft_split(line, ' ');
-	if (right_content(elements, cub_sets) == -1)
-	{
-		free_char_p2p(elements);
+	cub_sets->elements = ft_split(line, ' ');
+	if (right_content(cub_sets) == -1)
 		abort_prog(line, cub_sets, "F line :\nF r,g,b\n 0 >= r/g/b <= 255");
-	}
 	cub_sets->b_floor = true;
-	free_char_p2p(elements);
+	free_char_p2p(cub_sets->elements);
 }

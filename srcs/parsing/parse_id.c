@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:20:23 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 12:02:58 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 13:33:33 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	parse_id(char *line, t_settings *cub_sets)
 		p_floor(line, cub_sets);
 	else if (*line == 'C')
 		p_ceiling(line, cub_sets);
+	else if (*line == '\0')
+		return ;
 	else
 		abort_prog(line, cub_sets, "Ids allowed : R/NO/SO/WE/EA/S/F/C");
 }

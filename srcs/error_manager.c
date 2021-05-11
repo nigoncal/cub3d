@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 11:25:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 14:02:07 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_struct(t_settings *cub_sets) // a tester
 {
 	if (cub_sets->mlx)
 		free(cub_sets->mlx);
+	if (cub_sets->elements)
+		free_char_p2p(cub_sets->elements);
 	if (cub_sets->north_texture_path)
 		free(cub_sets->north_texture_path);
 	if (cub_sets->south_texture_path)

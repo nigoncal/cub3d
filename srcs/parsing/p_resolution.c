@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/25 13:24:09 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 14:27:32 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,39 @@ static void	too_big_for_screen(t_settings *cub_sets)
 		cub_sets->height = screen_height;
 }
 
-static int	right_content(char **elements, t_settings *cub_sets)
+static int	right_content(t_settings *cub_sets)
 {
 	int	i;
 
 	i = 0;
-	while (elements[1][i])
+	while (cub_sets->elements[1][i])
 	{
-		if (ft_isdigit(elements[1][i++]) == 0)
+		if (ft_isdigit(cub_sets->elements[1][i++]) == 0)
 			return (-1);
 	}
 	i = 0;
-	while (elements[2][i])
+	while (cub_sets->elements[2][i])
 	{
-		if (ft_isdigit(elements[2][i++]) == 0)
+		if (ft_isdigit(cub_sets->elements[2][i++]) == 0)
 			return (-1);
 	}
-	cub_sets->width = ft_atoi(elements[1]);
-	cub_sets->height = ft_atoi(elements[2]);
+	cub_sets->width = ft_atoi(cub_sets->elements[1]);
+	cub_sets->height = ft_atoi(cub_sets->elements[2]);
 	return (0);
 }
 
-static int	right_amount(char **elements, t_settings *cub_sets)
+static int	right_amount(t_settings *cub_sets)
 {
 	int	i;
 
 	i = 0;
-	while (elements[i])
+	while (cub_sets->elements[i])
 		i++;
 	if (i != 3)
 		return (-1);
-	if (ft_strcmp(elements[0], "R") != 0)
+	if (ft_strcmp(cub_sets->elements[0], "R") != 0)
 		return (-1);
-	if (right_content(elements, cub_sets) == -1)
+	if (right_content(cub_sets) == -1)
 		return (-1);
 	if (cub_sets->width <= 0 || cub_sets->height <= 0)
 		return (-1);
@@ -89,13 +89,12 @@ static int	right_amount(char **elements, t_settings *cub_sets)
 
 void	p_resolution(char *line, t_settings *cub_sets)
 {
-	char	**elements;
-
 	if (cub_sets->res == true)
 		abort_prog(line, cub_sets, "Identifiers should be used only once");
-	elements = ft_split(line, ' ');
-	if (right_amount(elements, cub_sets) == -1)
+	cub_sets->elements = ft_split(line, ' ');
+	if (right_amount(cub_sets) == -1)
 		abort_prog(line, cub_sets, "R line :\nR <width> <height>\nOnly > 0");
 	cub_sets->res = true;
-	free_char_p2p(elements);
+	free_char_p2p(cub_sets->elements);
+	dprintf(1, "res\n"); // del
 }
