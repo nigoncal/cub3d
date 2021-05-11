@@ -7,14 +7,19 @@ int	parse_line(char *line, t_setup *setup)
 
 	skip = 0;
 	printf("Ligne parsée : [%s]\n", line);
-	printf("Values parsées : %d\n", setup->nb_parsed_values);
+	printf("Values parsées : %d\n", setup->ids.nb_encountered);
 	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ')
 	
-	if (setup->nb_parsed_values == 8)
+	if (setup->ids.nb_encountered == 8)
 	{	
 		//passer les lignes vides en incrementant setup->map_start_line
 		//verif qu'on ne retombe pas sur un ID deja rencontré !!!
 		//printf("on a nos 8 values\n");
+		if (setup->map.start_found == 0)
+		{
+			setup->map.start_line += 8;
+			setup->map.start_found = 1;
+		}
 		parse_map(line, setup);
 		return (0);
 	}
@@ -22,7 +27,7 @@ int	parse_line(char *line, t_setup *setup)
 	line = is_line_empty(line);
 	if (!*line)
 	{
-		setup->map_start_line++;
+		setup->map.start_line++;
 		return (0);
 	}
 	//printf("pouet poue\n");
@@ -69,8 +74,8 @@ the \"R\" ID, a width and then a height.\n");
 please <3\n", 0);
 			return (-1);
 		}
-		setup->nb_parsed_values++;
-		setup->map_start_line++;
+		setup->ids.nb_encountered++;
+		//setup->map_start_line++;
 	}
 	/*else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{
@@ -88,12 +93,18 @@ Sprite ID appear in your .cub. Only one is accepted.\n");
 	}*/
 	else if (elements[0][0] == 'F' || elements[0][0] == 'C')
 	{
+		if (parse_color_id(elements))
+			return (ERROR);
 		//parse_color(elements, setup);
-		setup->nb_parsed_values++;
-		setup->map_start_line++;
+		setup->ids.nb_encountered++;
+		//setup->map_start_line++;
 	}
 	else
-		return (-1);
+	{
+		printf("Error\nCouldn't find any correct ID in one of .cub file's lines : expected \"R\" for resolution, \"S\" for sprites, \"C\" for ceiling color and \"F\" for floor color, \"NO\", \
+\"SO\", \"EA\" or \"WE\" for wall textures.\n \"%s\" is invalid.\n", line);
+		return (ERROR);
+	}
 	return (0);
 }
 
@@ -106,11 +117,11 @@ int	open_file(t_setup *setup, int fd)
 	//printf("fd = %d\n", fd);
 	skipped_lines = 0;
 	line = NULL;
-	if (setup->map_size_known)
+	if (setup->map.size_known)
 	{
 		//sauter les lines jusqu'a atteindre setup.map_start_line
 		while (get_next_line(fd, &line) == 1 \
-		&& skipped_lines < (setup->map_start_line - 1))
+		&& skipped_lines < (setup->map.start_line - 1))
 		{
 			skipped_lines++;
 		}

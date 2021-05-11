@@ -1,13 +1,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+
 # define ERROR -1
 # define RAS 0
 # define BUFFER_SIZE 64
 
+/* HEADERS */
 # include "../libft/libft.h"
 # include "minilibx/mlx.h"
 # include "srcs/get_next_line.h"
 
+/* LIBRARIES */
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h> // a virer
@@ -34,9 +37,24 @@ typedef	struct	s_parsed_ids
 	int		nb_encountered;
 }				t_parsed_ids;
 
+typedef	struct	s_map
+{
+	bool	size_known;
+	bool	malloced;
+	bool	begun;
+	bool	start_found;
+	int		start_line;
+	int		nb_lines;
+	int		tab_line;
+	int		player_orientation;
+	int		longest_line;
+	char	**map;
+}				t_map;
+
 typedef struct s_setup
 {
-	struct s_parsed_ids	ids;
+	t_parsed_ids		ids;
+	t_map				map;
 	int					cub_fd;
 	int					res_w;
 	int					res_h;
@@ -53,16 +71,7 @@ typedef struct s_setup
 	int					ceiling_red;
 	int					ceiling_green;
 	int					ceiling_blue;
-	int					nb_parsed_values;
-	char				**map;
-	int					map_start_line;
-	bool				map_size_known;
-	int					map_longest_line;
-	int					map_nb_lines;
-	bool				map_malloced;
-	int					map_tab_line;
-	int					map_player_orientation;
-	/*pointeurs mlx etc*/
+	/* pointeurs mlx etc */
 	void				*mlx;
 }				t_setup;
 
@@ -76,6 +85,7 @@ int		parse_resolution(char **tab, t_setup *setup);
 int		cap_resolution(t_setup *setup);
 int		parse_tex_id(char **elements, t_setup *setup);
 int		parse_textures(char **tab, t_setup *setup);
+int		parse_color_id(char **elements);
 
 /* Parsing utils */
 int		skip_ws(char const *str);
