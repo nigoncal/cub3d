@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:13:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 16:16:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,22 @@ typedef struct	s_settings
 	char	*west_texture_path;
 	char	*east_texture_path;
 	char	*sprite_texture_path;
-	int		f_color;
-	int		c_color;
+	t_col	f_color;
+	t_col	c_color;
 	char	**map;
 }				t_settings;
+
+typedef union	u_color
+{
+	struct components
+	{
+		uint_8t	transp;
+		uint_8t	red;
+		uint_8t	green;
+		uint_8t	blue;
+	}
+	uint_32t color;
+}
 
 /*typedef struct	s_info
 

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:20:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 16:04:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	right_content(t_settings *cub_sets)
 	if (ft_strcmp(cub_sets->elements[0], "F") != 0)
 		return (-1);
 	tab_rgb = ft_split(cub_sets->elements[1], ',');
-	while (cub_sets->elements[i])
+	while (tab_rgb[i])
 		i++;
 	if (i != 3)
 		return (-1);
