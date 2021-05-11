@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:00:37 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/13 11:47:55 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:49:04 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen_gnl(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	if (!s)
 		return (0);
@@ -24,7 +24,7 @@ size_t	ft_strlen_gnl(const char *s)
 	return (i);
 }
 
-int		find_nl(const char *s)
+int	find_nl(const char *s)
 {
 	size_t	i;
 
@@ -42,7 +42,7 @@ int		find_nl(const char *s)
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
-	size_t i;
+	size_t	i;
 
 	if (src == NULL || dest == NULL || dstsize <= 0)
 		return (0);
@@ -57,7 +57,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	return (1);
 }
 
-int		check_args(int fd)
+int	check_args(int fd)
 {
 	char	*buffer;
 

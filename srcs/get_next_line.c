@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 09:28:46 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/11 11:23:31 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:48:42 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_strjoin_gnl(char **s1, char const *s2, int limit)
 	return (1);
 }
 
-static int		ft_substr_gnl(char **s, unsigned int start, size_t len)
+static int	ft_substr_gnl(char **s, unsigned int start, size_t len)
 {
 	char		*sub;
 	size_t		i;
@@ -49,7 +49,8 @@ static int		ft_substr_gnl(char **s, unsigned int start, size_t len)
 		return (-1);
 	if (ft_strlen_gnl(*s) < len)
 		len = ft_strlen_gnl(*s);
-	if (!(sub = malloc(sizeof(char) * (len + 1))))
+	sub = malloc(sizeof(char) * (len + 1));
+	if (sub == 0)
 		return (-1);
 	while ((*s)[i + start] && i < len)
 	{
@@ -62,33 +63,32 @@ static int		ft_substr_gnl(char **s, unsigned int start, size_t len)
 	return (1);
 }
 
-int		transfer_line(char **current, char **line)
+int	transfer_line(char **current, char **line)
 {
 	int	i_nl;
 	int	len_rest;
-	int len_current;
+	int	len_current;
 
 	len_current = ft_strlen_gnl(*current);
-	if ((i_nl = find_nl(*current)) == -1)
+	i_nl = find_nl(*current);
+	if (i_nl == -1)
 		i_nl = len_current;
-	if (!(*line = malloc(sizeof(char) * (i_nl + 1))))
-	{
+	*line = malloc(sizeof(char) * (i_nl + 1));
+	if (*line == 0)
 		return (-1);
-	}
 	if (current == 0 || len_current == 0)
 	{
 		**line = 0;
 		return (0);
 	}
 	ft_strlcpy(*line, *current, (i_nl + 1));
-	if ((len_rest = len_current - i_nl) <= 0)
-	{
+	len_rest = len_current - i_nl;
+	if (len_rest <= 0)
 		return (0);
-	}
 	return (ft_substr_gnl(current, (i_nl + 1), len_rest));
 }
 
-int		read_fd(int fd, char **current, char **line)
+int	read_fd(int fd, char **current, char **line)
 {
 	int		status;
 	char	buffer[BUFFER_SIZE + 1];
@@ -96,7 +96,8 @@ int		read_fd(int fd, char **current, char **line)
 	status = 1;
 	while (find_nl(*current) == -1 && status > 0)
 	{
-		if ((status = read(fd, buffer, BUFFER_SIZE)) > 0)
+		status = read(fd, buffer, BUFFER_SIZE);
+		if (status > 0)
 		{
 			buffer[status] = '\0';
 			status = ft_strjoin_gnl(current, buffer, (status + 1));
@@ -110,7 +111,7 @@ int		read_fd(int fd, char **current, char **line)
 	return (status);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*current;
 	int			status;
