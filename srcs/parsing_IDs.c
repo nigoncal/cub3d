@@ -1,6 +1,6 @@
 #include "../cub3D.h"
 
-int	parse_ID(char *ID, char *expected, int max)
+int	parse_id(char *ID, char *expected, int max)
 {
 	if (ft_strncmp(ID, expected, max) != 0)
 	{
@@ -12,30 +12,52 @@ int	parse_ID(char *ID, char *expected, int max)
 }
 
 
-int	parse_tex_ID(char **elements, t_setup *setup)
+int	parse_tex_id(char **elements, t_setup *setup)
 {
 	(void)setup;
 	if (elements[0][0] == 'N')
 	{
-		return (parse_ID(elements[0], "NO", 3));
+		return (parse_id(elements[0], "NO", 3));
 	}
 	if (elements[0][0] == 'W')
 	{
-		return (parse_ID(elements[0], "WE", 3));
+		return (parse_id(elements[0], "WE", 3));
 	}
 	if (elements[0][0] == 'E')
 	{
-		return (parse_ID(elements[0], "EA", 3));
+		return (parse_id(elements[0], "EA", 3));
+	}
+	if (elements[0][0] == 'S' && elements[0][1] == 'O')
+	{
+		//if ((parse_id(elements[0], "SO", 3)) != 0)
+		return (parse_id(elements[0], "SO", 3));
+	}
+	if (elements[0][0] == 'S' && elements[0][1] != 'O')
+	{
+		return (parse_id(elements[0], "S", 2));
+	}
+	return (-1);
+}
+
+int	parse_color_id(char **elements)
+{
+	if (elements[0][0] == 'F')
+	{
+		return (parse_id(elements[0], "F", 2));
+	}
+	else if (elements[0][0] == 'C')
+	{
+		return (parse_id(elements[0], "C", 2));
 	}
 	return (-1);
 }
 /*
-int	parse_res_ID(char **elements, t_setup *setup)
+int	parse_res_id(char **elements, t_setup *setup)
 {
 	(void)setup;
 	if (ft_strncmp(elements[0], "R", 2) != 0)
 		{
-			printf("Error\nWrong ID in .cub file : try with \"R\"\n");
+			printf("Error\nWrong id in .cub file : try with \"R\"\n");
 			return (-1);
 		}
 	return (0);

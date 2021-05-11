@@ -7,7 +7,7 @@ int	parse_line(char *line, t_setup *setup)
 
 	skip = 0;
 	printf("Ligne parsée : [%s]\n", line);
-	//printf("Values parsées : %d\n", setup->nb_parsed_values);
+	printf("Values parsées : %d\n", setup->nb_parsed_values);
 	// attention a traiter si la map est separee par une ligne vide ! + verif vilidite ligne de map (only 0;1;' ')
 	
 	if (setup->nb_parsed_values == 8)
@@ -33,24 +33,44 @@ int	parse_line(char *line, t_setup *setup)
 	//printf("premiere case du tab : [%s]\n", elements [0]);
 	//printf("Ligne parsée WS skip : [%s]\n", line);
 	//printf("premiere case du tab : [%c]\n", elements [0][0]);
+
+	/* SEPARER ICI, voire meme avant le change char + split */
 	if (elements[0][0] == 'R')
 	{
-		if (parse_id(elements[0], "R", 2))
-			return (-1);
+		if (parse_id(elements[0], "R", 2) || setup->ids.res == 1)
+		{
+			if (setup->ids.res == 1)
+			{
+				printf("Error\nResolution parsing failed because program found the \"R\" ID \
+More than once. Only one occurency of each ID is accepted.\n");
+			}
+			return (ERROR);
+		}
+		if (parse_resolution(elements, setup) < 0)
+		{
+			printf("Error\nResolution parsing failed, too many/few arguments. Expected \
+the \"R\" ID, a width and then a height.\n");
+			//checker remontee erreur + haut
+			return (ERROR);
+		}
+		if (cap_resolution(setup) < 0)
+			return (ERROR);
+		setup->ids.res = 1;
+		setup->ids.nb_encountered++;
 	}
 	else if (elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
 	|| elements[0][0] == 'S')
 	{
 		if (parse_tex_id(elements, setup))
-			return (-1);
-		/*if (parse_textures(elements, setup) < 0)
+			return (ERROR);
+		if (parse_textures(elements, setup) < 0)
 		{
 			ft_putstr_fd("Error\nTexture files parsing failed, check your .cub file \
 please <3\n", 0);
 			return (-1);
 		}
 		setup->nb_parsed_values++;
-		setup->map_start_line++;*/
+		setup->map_start_line++;
 	}
 	/*else if (elements[0][0] == 'S' && elements[0][1] != 'O')
 	{

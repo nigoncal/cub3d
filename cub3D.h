@@ -31,6 +31,7 @@ typedef	struct	s_parsed_ids
 	bool	floor;
 	bool	ceiling;
 	bool	map;
+	int		nb_encountered;
 }				t_parsed_ids;
 
 typedef struct s_setup
