@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 16:45:49 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:32:42 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,36 @@ static int	update(char **line, char **buffer)
 	return (1);
 }
 
-int	ft_condition(char *buffer, int *eoread, char *reader, int fd)
+/*int				get_next_line(int fd, char **line)
+{
+	static char	*buffer;
+	char		*reader;
+	int			eoread;
+
+	reader = NULL;
+	if (!line || fd < 0 || BUFFER_SIZE <= 0
+			|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
+		return (-1);
+	while (find_eol(buffer) == -1
+			&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
+	{
+		reader[eoread] = '\0';
+		buffer = gnl_strjoin(buffer, reader);
+	}
+	free(reader);
+	reader = NULL;
+	if (eoread == -1)
+		return (-1);
+	return (update(line, &buffer));
+}*/
+
+static 	int	still_line(char *buffer, int *eoread, char *reader, int fd)
 {
 	*eoread = read(fd, reader, BUFFER_SIZE);
-	return (find_eol(buffer) > 0 && *eoread > 0);
+	if (find_eol(buffer) == -1)
+		if (*eoread > 0)
+			return (0);
+	return (-1);
 }
 
 int	get_next_line(int fd, char **line)
@@ -52,7 +78,7 @@ int	get_next_line(int fd, char **line)
 	reader = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!line || fd < 0 || BUFFER_SIZE <= 0 || reader == NULL)
 		return (-1);
-	while (ft_condition(buffer, &eoread, reader, fd))
+	while (still_line(buffer, &eoread, reader, fd) == 0)
 	{
 		reader[eoread] = '\0';
 		buffer = gnl_strjoin(buffer, reader);

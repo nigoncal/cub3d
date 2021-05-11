@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/10 15:21:40 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:25:39 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ void	abort_prog(char *line, t_settings *cub_sets, char *error)
 	if (errno)
 		perror("");
 	else
+	{
 		ft_putstr(error);
+		write (1, "\n", 1);
+	}
+	if (line)
+		free(line);
 	free_struct(cub_sets);
 //	free_graph(t_info *info);
 //	si appelee dans le main, line n'a pas encore ete malloc, donc fais un if

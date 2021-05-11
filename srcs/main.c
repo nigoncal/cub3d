@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/10 15:24:38 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:26:30 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	main(int argc, char **argv)
 	{
 		if (ft_strcmp(argv[2], "--save") != 0)
 		{
-			ft_putstr("Error\nUsage : ./cub3d file.cub --save(optionnal)\n"); // abort_prog, non ?
+			abort_prog(line, cub_sets, "./cub3d file.cub --save(optionnal)");
 			return (0);
 		}
 		cub_sets->screenshot = true;
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
-//		abort_prog
+		abort_prog(line, cub_sets, "Error while opening the .cub file");
 	start(fd, &line, cub_sets);
 	close(fd);
 	return (0);
