@@ -1,5 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+# define ERROR -1
+# define RAS 0
 # define BUFFER_SIZE 64
 
 # include "../libft/libft.h"
@@ -18,22 +20,22 @@
 # include <limits.h>
 # include <stdbool.h>
 
-typedef	struct	s_parsed_IDs
+typedef	struct	s_parsed_ids
 {
 	bool	res;
-	bool	NO_tex;
-	bool	SO_tex;
-	bool	WE_tex;
-	bool	EA_tex;
-	bool	Sprite;
-	bool	Floor;
-	bool	Ceiling;
-	bool	Map;
-}				t_parsed_IDs;
+	bool	no_tex;
+	bool	so_tex;
+	bool	we_tex;
+	bool	ea_tex;
+	bool	sprite;
+	bool	floor;
+	bool	ceiling;
+	bool	map;
+}				t_parsed_ids;
 
 typedef struct s_setup
 {
-	struct s_parsed_IDs	IDs;
+	struct s_parsed_ids	ids;
 	int					cub_fd;
 	int					res_w;
 	int					res_h;
@@ -67,11 +69,11 @@ typedef struct s_setup
 
 int		parse_args(int argc, char **argv, t_setup *setup);
 int		check_file(char *path, char *extension);
-int		parse_ID(char *ID, char *expected, int max);
+int		parse_id(char *id, char *expected, int max);
 //int		parse_res_ID(char **elements, t_setup *setup);
 int		parse_resolution(char **tab, t_setup *setup);
 int		cap_resolution(t_setup *setup);
-int		parse_tex_ID(char **elements, t_setup *setup);
+int		parse_tex_id(char **elements, t_setup *setup);
 int		parse_textures(char **tab, t_setup *setup);
 
 /* Parsing utils */

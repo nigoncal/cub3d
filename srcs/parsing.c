@@ -35,13 +35,13 @@ int	parse_line(char *line, t_setup *setup)
 	//printf("premiere case du tab : [%c]\n", elements [0][0]);
 	if (elements[0][0] == 'R')
 	{
-		if (parse_ID(elements[0], "R", 2))
+		if (parse_id(elements[0], "R", 2))
 			return (-1);
 	}
 	else if (elements[0][0] == 'N' || elements[0][0] == 'W' || elements[0][0] == 'E' \
 	|| elements[0][0] == 'S')
 	{
-		if (parse_tex_ID(elements, setup))
+		if (parse_tex_id(elements, setup))
 			return (-1);
 		/*if (parse_textures(elements, setup) < 0)
 		{

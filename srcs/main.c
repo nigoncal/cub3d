@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/28 14:28:52 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:25:32 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main (int argc, char **argv)
 
 	fd = 0;
 	ft_bzero(&setup, sizeof(t_setup));
-	ft_bzero(&setup.IDs, sizeof(setup.IDs));
+	ft_bzero(&setup.ids, sizeof(setup.ids));
 	if (parse_args(argc, argv, &setup) < 0)
 	{
 		ft_putstr_fd("Error\nParsing failed, please check your args and/or .cub file \

@@ -12,7 +12,7 @@ C 225,30,0
 
 
    			SO		       ./textures/test.png
-EAs ./textures/test.png
+EA ./textures/test.png
 
 R	 			192000 					108000
 

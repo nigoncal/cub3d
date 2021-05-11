@@ -6,13 +6,13 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 09:28:46 by pmillet           #+#    #+#             */
-/*   Updated: 2021/04/13 11:56:10 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 11:23:31 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		ft_strjoin_gnl(char **s1, char const *s2, int limit)
+static int	ft_strjoin_gnl(char **s1, char const *s2, int limit)
 {
 	char	*res;
 	int		i;
@@ -20,10 +20,9 @@ static int		ft_strjoin_gnl(char **s1, char const *s2, int limit)
 
 	i = 0;
 	j = 0;
-	if (!(res = malloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1))))
-	{
+	res = malloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1));
+	if (res == 0)
 		return (-1);
-	}
 	while (*s1 != 0 && (*s1)[i])
 	{
 		res[i] = (*s1)[i];
