@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_floor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 16:04:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 10:28:06 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	int	i;
 	int	j;
 	int	rgb[3];
+	//int debog;
 
 	i = 0;
 	j = 0;
 	while (tab_rgb[i])
 	{
-		while (tab_rgb[i][j])
-			rgb[i] = ft_atoi(&tab_rgb[i][j++]); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
-		j = 0;
+		rgb[i] = ft_atoi(&(*tab_rgb[i])); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
 		i++;
 	}
 	i = 0;
@@ -34,7 +33,17 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 			return (-1);
 		i++;
 	}
-	cub_sets->f_color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2]);
+	//cub_sets->f_color.color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2]);
+	/*debog*/
+	/*debog = 0;
+	while (debog < 3)
+	{
+		printf("canal %d = %d\n", debog, rgb[debog]);
+		debog++;
+	}*/
+	cub_sets->f_color.chan.red = rgb[0];
+	cub_sets->f_color.chan.green = rgb[1];
+	cub_sets->f_color.chan.blue = rgb[2];
 	return (0);
 }
 

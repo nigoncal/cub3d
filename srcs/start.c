@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:25:21 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 11:12:21 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	start(int fd, char **line, t_settings *cub_sets)
 		}
 	}
 //	free(cub_sets); // mieux
+	int i_map;
+	i_map = 0;
 	dprintf(1, "width = |%d|\n", cub_sets->width);
 	dprintf(1, "height = |%d|\n", cub_sets->height);
 	dprintf(1, "north = |%s|\n", cub_sets->north_texture_path);
@@ -53,9 +55,23 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "west = |%s|\n", cub_sets->west_texture_path);
 	dprintf(1, "east = |%s|\n", cub_sets->east_texture_path);
 	dprintf(1, "sprite = |%s|\n", cub_sets->sprite_texture_path);
-	dprintf(1, "f_color = |%d|\n", cub_sets->f_color);
-	dprintf(1, "c_color = |%d|\n", cub_sets->c_color);
-/*	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
+	//dprintf(1, "f_color = |%x|\n", cub_sets->f_color.color);
+	//dprintf(1, "c_color = |%x|\n", cub_sets->c_color.color);
+	dprintf(1, "f_color = |%x|\n", cub_sets->f_color.color);
+	dprintf(1, "f_color RED = |%d|\n", cub_sets->f_color.chan.red);
+	dprintf(1, "f_color GREEN = |%d|\n", cub_sets->f_color.chan.green);
+	dprintf(1, "f_color BLUE = |%d|\n", cub_sets->f_color.chan.blue);
+	dprintf(1, "c_color = |%x|\n", cub_sets->c_color.color);
+	dprintf(1, "c_color RED = |%d|\n", cub_sets->c_color.chan.red);
+	dprintf(1, "c_color GREEN = |%d|\n", cub_sets->c_color.chan.green);
+	dprintf(1, "c_color BLUE = |%d|\n", cub_sets->c_color.chan.blue);
+	dprintf(1, "cub_sets->map 1ere LIGNE = |%s|\n", cub_sets->map[0]);
+	while (cub_sets->map[i_map])
+	{
+		dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[i_map]);	
+		i_map++;
+	}
+	/*dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[1]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[2]);
 	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[3]);

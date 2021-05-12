@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 16:16:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 11:19:10 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,19 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef struct	s_settings
+typedef union u_color
+{
+	struct s_chan
+	{
+		uint8_t	alpha;
+		uint8_t	red;
+		uint8_t	green;
+		uint8_t	blue;
+	}		chan;
+	uint32_t	color;
+}				t_col;
+
+typedef struct s_settings
 {
 	bool	screenshot;
 	bool	res;
@@ -56,21 +68,10 @@ typedef struct	s_settings
 	char	**map;
 }				t_settings;
 
-typedef union	u_color
+
+typedef struct	s_info
 {
-	struct components
-	{
-		uint_8t	transp;
-		uint_8t	red;
-		uint_8t	green;
-		uint_8t	blue;
-	}
-	uint_32t color;
-}
-
-/*typedef struct	s_info
-
-	t_settings ok;
+	t_settings 	ok;
 	double		posX; //position x du joueur
 	double		posY; //position y du joueur
 	double		dirX; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
@@ -105,15 +106,18 @@ typedef union	u_color
 	int  		BPP;
 	int			height; //Hauteur
 	int 		width; //Largeur
-	void	*mlx; // MALLOC
-	void	*win; // MALLOC
-	void	*image; // MALLOC
+	void		*mlx; // MALLOC
+	void		*win; // MALLOC
+	void		*image; // MALLOC
 	// MALLOC D'AUTRES CHOSES QUE NICO EST EN TRAIN DE CODER
-}				t_info;*/
+}				t_info;
 
-void			abort_prog(char *line, t_settings *cub_sets, char *s);
 void			start(int fd, char **line, t_settings *cub_sets);
+
+/* UTILS */
 int				non_empty_line(char *line);
+
+/* PARSING */
 void			parse_id(char *line, t_settings *cub_sets);
 void			p_resolution(char *line, t_settings *cub_sets);
 void			p_textures(char *line, t_settings *cub_sets);
@@ -124,9 +128,14 @@ int				p_west_texture(char *line, t_settings *cub_sets);
 int				p_sprite_texture(char *line, t_settings *cub_sets);
 void			parse_map(char *line, t_settings *cub_sets);
 void			store_map(char *line, t_settings *cub_sets);
-int				square_map(char **map);
+int				square_map(t_settings *cub_sets);
 void			p_floor(char *line, t_settings *cub_sets);
 void			p_ceiling(char *line, t_settings *cub_sets);
+
+/* EXIT */
+void			abort_prog(char *line, t_settings *cub_sets, char *s);
+
+/* ENGINE */
 /*void			create_windows(t_info *info);
 void			put_square( int lenght, t_screen *sc);
 void			create_mini_map(t_screen *sc);

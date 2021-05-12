@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/10 16:50:13 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 15:08:00 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-int	square_map(char **map)
+int	square_map(t_settings *cub_sets)
 {
 	char	**squared_map;
 	int		x;
@@ -21,29 +21,32 @@ int	square_map(char **map)
 
 	i = 0;
 	j = 0;
-	squared_map = malloc(sizeof(char *) * line_amount(map) + 1);
+	squared_map = malloc(sizeof(char *) * line_amount(cub_sets->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
-	x = longest_line(map);
-	while (map[i])
+	x = longest_line(cub_sets->map);
+	printf("NB lignes = %d \n", line_amount(cub_sets->map));
+	printf("Ligne la + longue = %d \n", x);
+	while (cub_sets->map[i])
 	{
 		squared_map[i] = malloc(sizeof(char) * x + 1);
 		if (squared_map[i] == NULL)
 			return (-1);
-		while (map[i][j])
+		while (cub_sets->map[i][j])
 		{
-			squared_map[i][j] = map[i][j];
+			squared_map[i][j] = cub_sets->map[i][j];
 			j++;
 		}
-		while (j <= x)
+		while (j < x)
 			squared_map[i][j++] = ' ';
 		squared_map[i][j] = '\0';
 		j = 0;
 		i++;
 	}
 	squared_map[i] = 0;
-	free_char_p2p(map);
-	map = squared_map;
+	free_char_p2p(cub_sets->map);
+	cub_sets->map = squared_map;
+	
 	return (0);
 }
 
@@ -70,7 +73,6 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 	temp[i + 1] = 0;
 	free_char_p2p(cub_sets->map);
 	cub_sets->map = temp;
-
 }
 
 void	store_map(char *line, t_settings *cub_sets)

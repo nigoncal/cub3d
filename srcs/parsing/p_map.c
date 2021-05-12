@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 14:47:27 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 11:17:43 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	continue_map(char *line, t_settings *cub_sets)
 	int	error;
 
 	error = 0;
+	/* c'est ici que ca foire */
 	if (cub_sets->map_over == false)
 	{
 		if (non_empty_line(line) == 1)
@@ -79,16 +80,19 @@ static void	continue_map(char *line, t_settings *cub_sets)
 			else
 				error = -1;
 		}
-		else
+		else if (non_empty_line(line) == 0) // on n'entre pas dans ce else si il y a rien ou ligne vide apres la map ...
 		{
+			printf("blib blop\n");
 			cub_sets->map_over = true;
-			if (square_map(cub_sets->map) == -1)
+			if (square_map(cub_sets) == -1)
 				abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
 		}
 	}
 	else
+	{
 		if (non_empty_line(line) == 1)
 			error = -1;
+	}
 	if (error == -1)
 		abort_prog(line, cub_sets, "Nothing else should be after the map");
 }
