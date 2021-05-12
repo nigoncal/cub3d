@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:41 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 16:04:53 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 10:24:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,12 @@
 static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 {
 	int	i;
-	int	j;
 	int	rgb[3];
 
 	i = 0;
-	j = 0;
 	while (tab_rgb[i])
 	{
-		while (tab_rgb[i][j])
-			rgb[i] = ft_atoi(&tab_rgb[i][j++]); // j'ai mis & car il attend un const char mais c'est l'erreur de compil qui me conseillait ca, testes si ca marche
-		j = 0;
+		rgb[i] = ft_atoi(&(*tab_rgb[i]));
 		i++;
 	}
 	i = 0;
@@ -34,7 +30,9 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 			return (-1);
 		i++;
 	}
-	cub_sets->c_color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2]);
+	cub_sets->c_color.chan.red = rgb[0];
+	cub_sets->c_color.chan.green = rgb[1];
+	cub_sets->c_color.chan.blue = rgb[2];
 	return (0);
 }
 
