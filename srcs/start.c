@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 10:30:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 16:39:37 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	start(int fd, char **line, t_settings *cub_sets)
 			parse_map(*line, cub_sets);
 		}
 	}
+	if (square_map(&cub_sets->map) == -1)
+		abort_prog(*line, cub_sets, "Failed to malloc cub_sets->map");
 //	free(cub_sets); // mieux
 	dprintf(1, "width = |%d|\n", cub_sets->width);
 	dprintf(1, "height = |%d|\n", cub_sets->height);

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 14:47:27 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 16:23:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,7 @@ static void	continue_map(char *line, t_settings *cub_sets)
 				error = -1;
 		}
 		else
-		{
 			cub_sets->map_over = true;
-			if (square_map(cub_sets->map) == -1)
-				abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
-		}
 	}
 	else
 		if (non_empty_line(line) == 1)
