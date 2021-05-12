@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 10:15:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 10:30:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,9 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.red);
 	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.green);
 	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.blue);
-	dprintf(1, "map = |%d|\n", cub_sets->c_color.chan.blue);
-/*	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[0]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[1]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[2]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[3]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[4]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[5]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[6]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[7]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[8]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[9]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[10]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[11]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[12]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[13]);
-	dprintf(1, "cub_sets->map = |%s|\n", cub_sets->map[14]);*/
+	int c = 0;
+	while (cub_sets->map[c])
+	{
+		dprintf(1, "cub_sets->map[c] = |%s|\n", cub_sets->map[c++]);
+	}
 }
