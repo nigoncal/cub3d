@@ -6,13 +6,13 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 16:40:55 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:06:35 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-int	square_map(char ***map)
+int	square_map(t_settings *cub_sets)
 {
 	char	**squared_map;
 	int		x;
@@ -21,18 +21,18 @@ int	square_map(char ***map)
 
 	i = 0;
 	j = 0;
-	squared_map = malloc(sizeof(char *) * line_amount(*map) + 1); // verifies le retour de line_amount, il a l'air d'es compter trop
+	squared_map = malloc(sizeof(char *) * line_amount(cub_sets->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
-	x = longest_line(*map);
-	while (*map[i])
+	x = longest_line(cub_sets->map);
+	while (cub_sets->map[i])
 	{
 		squared_map[i] = malloc(sizeof(char) * x + 1);
 		if (squared_map[i] == NULL)
 			return (-1);
-		while (*map[i][j])
+		while (cub_sets->map[i][j])
 		{
-			squared_map[i][j] = *map[i][j];
+			squared_map[i][j] = cub_sets->map[i][j];
 			j++;
 		}
 		while (j < x)
@@ -42,8 +42,8 @@ int	square_map(char ***map)
 		i++;
 	}
 	squared_map[i] = 0;
-	free_char_p2p(*map);
-	*map = squared_map;
+	free_char_p2p(cub_sets->map);
+	cub_sets->map = squared_map;
 	return (0);
 }
 
