@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:28:43 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:39:38 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int			p_west_texture(char *line, t_settings *cub_sets)
 	cub_sets->west_texture_path = ft_strdup(cub_sets->elements[1]);
 	cub_sets->west = true;
 	free(cub_sets->elements);
-	dprintf(1, "west\n"); // a virer
 	return (0);
 }

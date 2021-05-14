@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:04:39 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:40:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	cub_sets->mlx = mlx_init();
 	while (get_next_line(fd, line))
 	{
-		dprintf(1, "X\n");
 		if (cub_sets->id_counter < 8)
 		{
 			cub_sets->id_counter += non_empty_line(*line);

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:30:50 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:31:56 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static int	right_amount(t_settings *cub_sets)
 		return (-1);
 	if (right_file(cub_sets) == -1)
 		return (-1);
-	dprintf(1, "north\n"); // a virer
 	return (0);
 }
 

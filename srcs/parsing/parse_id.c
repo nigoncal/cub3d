@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:20:23 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 13:33:33 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:29:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	parse_id(char *line, t_settings *cub_sets)
 {
-	line = change_char(line, ' ', '\t'); // line est malloc a la base ? change_char ft_strdup une nouvelle ligne. Quid de l'adresse de line ? ecrasee ? faut-il free les deux ? check les leaks
-	line = change_char(line, ' ', '\v'); // pareil
+	line = change_char(line, ' ', '\t');
+	line = change_char(line, ' ', '\v');
 	while (*line == ' ')
 		line++;
 	if (*line == 'R')

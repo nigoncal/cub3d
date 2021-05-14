@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:27:32 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 17:08:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ void	p_resolution(char *line, t_settings *cub_sets)
 		abort_prog(line, cub_sets, "Identifiers should be used only once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_amount(cub_sets) == -1)
-		abort_prog(line, cub_sets, "R line :\nR <width> <height>\nOnly > 0");
+		abort_prog(line, cub_sets, "R <width> <height> (both > 0)");
 	cub_sets->res = true;
 	free_char_p2p(cub_sets->elements);
-	dprintf(1, "res\n"); // del
 }

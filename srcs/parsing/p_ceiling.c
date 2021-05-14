@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:41 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 10:24:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 17:06:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	p_ceiling(char *line, t_settings *cub_sets)
 		abort_prog(line, cub_sets, "Identifiers should be used only once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_content(cub_sets) == -1)
-		abort_prog(line, cub_sets, "C line :\nF r,g,b\n 0 >= r/g/b <= 255");
+		abort_prog(line, cub_sets, "C r,g,b (0 >= r/g/b <= 255)");
 	cub_sets->b_ceiling = true;
 	free_char_p2p(cub_sets->elements);
 }

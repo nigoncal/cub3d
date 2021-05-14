@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 14:02:07 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 16:45:45 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,25 @@ void	free_struct(t_settings *cub_sets) // a tester
 	free(info);
 }*/
 
-void	abort_prog(char *line, t_settings *cub_sets, char *error)
+void	abort_prog(char *line, t_settings *cub_sets, char *error_msg)
 	// elle elle putstr
 	// elle en appelle une qui free cub_sets mais element par element, s'il s'agit de pointeurs
 	// et a la fin elle se free elle-mem, je veux dire la structure
 	// puis elle appelle une fonction qui free toute la partie graphique, les images
 	// a la fin tu exit(0);
 {
-	dprintf(1, "W\n"); // a virer
 	ft_putstr("Error\n");
-	if (errno)
-		perror("");
-	else
-	{
-		ft_putstr(error);
+//	if (errno)
+//		perror("");
+//	else
+//	{
+		ft_putstr(error_msg);
 		write (1, "\n", 1);
-	}
+//	}
 	if (line)
 		free(line);
 	free_struct(cub_sets);
 //	free_graph(t_info *info);
 //	si appelee dans le main, line n'a pas encore ete malloc, donc fais un if
-	free(line); // tu peux la free dans chaque fonction plutot qu'ici
 	exit(1);
 }

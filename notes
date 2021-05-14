@@ -122,3 +122,8 @@ changer tous les headers de touts les fichiers (header 42)
 norminette (y compris libft et get_next_line, tout tout tout)
 
 virer tous les dprintf
+
+free elements a la fin de ton programme lorsque tout a bien fonctionne
+
+utilises wrmalloc mais pour ton prochain projet car la ca te demanderait de
+modifier toute ta libft
