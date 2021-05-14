@@ -54,7 +54,8 @@ SRCS	=		change_char.c\
 		  		get_next_line_utils.c\
 				is_tab_digit.c\
 				line_amount.c\
-				longest_line.c
+				longest_line.c\
+				wrmalloc.c
 
 BON_SRCS 	=	ft_lstnew.c\
 				ft_lstadd_front.c\
