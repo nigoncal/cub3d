@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	t_settings	*cub_sets;
 
 	line = NULL;
-	cub_sets = malloc(sizeof(*cub_sets));
+	cub_sets = wrmalloc(sizeof(*cub_sets));
 	if (cub_sets == NULL)
 		abort_prog(line, cub_sets, "Failed to malloc cub_sets structure");
 	ft_bzero(cub_sets, sizeof(*cub_sets));

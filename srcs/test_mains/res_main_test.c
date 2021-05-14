@@ -28,7 +28,7 @@ int main()
 
 //    mlx = mlx_init(); // a ajouter dans ton main a toi
 	t_settings *cub_sets;
-	cub_sets = malloc(sizeof(*cub_sets));
+	cub_sets = wrmalloc(sizeof(*cub_sets));
 	cub_sets->mlx = mlx_init();
 	dprintf(1, "--- test 1 ---\n");
 	ft_bzero(cub_sets, sizeof(*cub_sets));

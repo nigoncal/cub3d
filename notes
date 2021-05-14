@@ -125,5 +125,7 @@ virer tous les dprintf
 
 free elements a la fin de ton programme lorsque tout a bien fonctionne
 
-utilises wrmalloc mais pour ton prochain projet car la ca te demanderait de
-modifier toute ta libft
+remplacer les free par wrfree
+"" free de toute ta structure par le wrfree general
+
+virer tous les mains de test

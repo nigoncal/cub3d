@@ -18,7 +18,7 @@ static char	*strdup_split(char const *s, size_t s_len)
 	char		*str;
 
 	i = 0;
-	str = (char *)malloc(sizeof(char) * (s_len + 1));
+	str = (char *)wrmalloc(sizeof(char) * (s_len + 1));
 	if (str == NULL)
 		return (NULL);
 	while (i < s_len)
@@ -68,7 +68,7 @@ char	**ft_split(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	sentence = (char **)malloc(sizeof(char *) * ((count_words(s, c) + 1)));
+	sentence = (char **)wrmalloc(sizeof(char *) * ((count_words(s, c) + 1)));
 	if (sentence == NULL)
 		return (NULL);
 	i = 0;

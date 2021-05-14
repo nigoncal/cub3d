@@ -79,7 +79,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	max = ft_strlen(s1) - te;
 	i = 0;
 	res = "\0";
-	res = malloc((sizeof(char)) * (max - j + 1));
+	res = wrmalloc((sizeof(char)) * (max - j + 1));
 	if (res == NULL)
 		return (NULL);
 	while (j < max)

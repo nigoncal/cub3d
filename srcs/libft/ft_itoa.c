@@ -66,7 +66,7 @@ char	*ft_itoa(int n)
 		neg = 1;
 		n = -n;
 	}
-	res = malloc((sizeof(char) * (c + 1 + neg)));
+	res = wrmalloc((sizeof(char) * (c + 1 + neg)));
 	if (res == NULL)
 		return (NULL);
 	i += neg;

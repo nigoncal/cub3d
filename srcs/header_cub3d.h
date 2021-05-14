@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:03:55 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 17:34:08 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void			store_map(char *line, t_settings *cub_sets);
 int				square_map(t_settings *cub_sets);
 void			p_floor(char *line, t_settings *cub_sets);
 void			p_ceiling(char *line, t_settings *cub_sets);
+void			free_struct(t_settings *cub_sets);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);

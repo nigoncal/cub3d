@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:12:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:23:23 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 17:46:07 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static int	ft_strjoin_gnl(char **s1, char const *s2, int limit)
 {
@@ -20,7 +20,7 @@ static int	ft_strjoin_gnl(char **s1, char const *s2, int limit)
 
 	i = 0;
 	j = 0;
-	res = malloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1));
+	res = wrmalloc(sizeof(char) * (ft_strlen_gnl(*s1) + ft_strlen_gnl(s2) + 1));
 	if (res == 0)
 		return (-1);
 	while (*s1 != 0 && (*s1)[i])
@@ -49,7 +49,7 @@ static int	ft_substr_gnl(char **s, unsigned int start, size_t len)
 		return (-1);
 	if (ft_strlen_gnl(*s) < len)
 		len = ft_strlen_gnl(*s);
-	sub = malloc(sizeof(char) * (len + 1));
+	sub = wrmalloc(sizeof(char) * (len + 1));
 	if (sub == 0)
 		return (-1);
 	while ((*s)[i + start] && i < len)
@@ -73,7 +73,7 @@ int	transfer_line(char **current, char **line)
 	i_nl = find_nl(*current);
 	if (i_nl == -1)
 		i_nl = len_current;
-	*line = malloc(sizeof(char) * (i_nl + 1));
+	*line = wrmalloc(sizeof(char) * (i_nl + 1));
 	if (*line == 0)
 		return (-1);
 	if (current == 0 || len_current == 0)

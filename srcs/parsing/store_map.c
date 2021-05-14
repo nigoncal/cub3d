@@ -21,13 +21,13 @@ int	square_map(t_settings *cub_sets)
 
 	i = 0;
 	j = 0;
-	squared_map = malloc(sizeof(char *) * line_amount(cub_sets->map) + 1);
+	squared_map = wrmalloc(sizeof(char *) * line_amount(cub_sets->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
 	x = longest_line(cub_sets->map);
 	while (cub_sets->map[i])
 	{
-		squared_map[i] = malloc(sizeof(char) * x + 1);
+		squared_map[i] = wrmalloc(sizeof(char) * x + 1);
 		if (squared_map[i] == NULL)
 			return (-1);
 		while (cub_sets->map[i][j])
@@ -58,7 +58,7 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 	while (cub_sets->map[size])
 		size++;
 	size++;
-	temp = (char**)malloc(sizeof(char*) * size + 1);
+	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
 	if (temp == NULL)
 		abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
 	while (cub_sets->map[i])
@@ -77,7 +77,7 @@ void	store_map(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->map == NULL)
 	{
-		cub_sets->map = (char **)malloc(sizeof(char *) + 1);
+		cub_sets->map = (char **)wrmalloc(sizeof(char *) + 1);
 		if (cub_sets->map == NULL)
 			abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
 		cub_sets->map[0] = ft_strdup(line);
