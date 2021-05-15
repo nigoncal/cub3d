@@ -33,7 +33,7 @@ static int	ft_strjoin_gnl(char **s1, char const *s2, int limit)
 	while (s2 != 0 && s2[i] && i < limit)
 		res[j++] = s2[i++];
 	res[j] = '\0';
-	free(*s1);
+	wrfree(*s1);
 	*s1 = res;
 	return (1);
 }
@@ -58,7 +58,7 @@ static int	ft_substr_gnl(char **s, unsigned int start, size_t len)
 		i++;
 	}
 	sub[i] = 0;
-	free(*s);
+	wrfree(*s);
 	*s = sub;
 	return (1);
 }
@@ -126,7 +126,7 @@ int	get_next_line(int fd, char **line)
 	status = read_fd(fd, &current, line);
 	if (status < 1 && current != NULL)
 	{
-		free(current);
+		wrfree(current);
 		current = NULL;
 	}
 	return (status);

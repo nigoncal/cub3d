@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:08:18 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/15 16:04:25 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int	right_content(t_settings *cub_sets)
 		if (ft_isdigit(cub_sets->elements[2][i++]) == 0)
 			return (-1);
 	}
-	cub_sets->width = ft_atoi(cub_sets->elements[1]);
-	cub_sets->height = ft_atoi(cub_sets->elements[2]);
+	cub_sets->width = atoi_limit(cub_sets->elements[1], WIDTH_LIMIT);
+	cub_sets->height = atoi_limit(cub_sets->elements[2], HEIGHT_LIMIT);
 	return (0);
 }
 
@@ -90,10 +90,10 @@ static int	right_amount(t_settings *cub_sets)
 void	p_resolution(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->res == true)
-		abort_prog(line, cub_sets, "Identifiers should be used only once");
+		abort_prog("R identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_amount(cub_sets) == -1)
-		abort_prog(line, cub_sets, "R <width> <height> (both > 0)");
+		abort_prog("Usage : R <width> <height> (both > 0)");
 	cub_sets->res = true;
 	free_char_p2p(cub_sets->elements);
 }

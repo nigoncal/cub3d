@@ -60,7 +60,7 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 	size++;
 	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
 	if (temp == NULL)
-		abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
+		abort_prog("Failed to malloc cub_sets->map");
 	while (cub_sets->map[i])
 	{
 		temp[i] = ft_strdup(cub_sets->map[i]);
@@ -79,7 +79,7 @@ void	store_map(char *line, t_settings *cub_sets)
 	{
 		cub_sets->map = (char **)wrmalloc(sizeof(char *) + 1);
 		if (cub_sets->map == NULL)
-			abort_prog(line, cub_sets, "Failed to malloc cub_sets->map");
+			abort_prog("Failed to malloc cub_sets->map");
 		cub_sets->map[0] = ft_strdup(line);
 		cub_sets->map[1] = 0;
 	}

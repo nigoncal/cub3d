@@ -27,6 +27,6 @@ char	*change_char(char *str, char in, char out)
 			changed_str[i] = in;
 		i++;
 	}
-	free(str);
+	wrfree(str);
 	return (changed_str);
 }

@@ -77,10 +77,10 @@ static int	right_content(t_settings *cub_sets)
 void	p_floor(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->b_floor == true)
-		abort_prog(line, cub_sets, "Identifiers should be used only once");
+		abort_prog("F identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_content(cub_sets) == -1)
-		abort_prog(line, cub_sets, "F r,g,b (with 0 >= r/g/b <= 255)");
+		abort_prog("F r,g,b (with 0 >= r/g/b <= 255)");
 	cub_sets->b_floor = true;
 	free_char_p2p(cub_sets->elements);
 }

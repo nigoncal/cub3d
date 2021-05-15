@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:27:23 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/15 14:49:00 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	right_amount(t_settings *cub_sets)
 	return (0);
 }
 
-int			p_north_texture(char *line, t_settings *cub_sets)
+int	p_north_texture(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->north == true)
 		return (-1);

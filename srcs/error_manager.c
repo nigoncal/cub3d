@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:32:48 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/15 13:57:12 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // penses a free elements aussi, dans le parsing des textures (free_char_p2p)
 // > free le juste avant d'appeler abort_prog
 
-void	free_struct(t_settings *cub_sets) // a tester
+/*void	free_struct(t_settings *cub_sets) // a tester
 {
 	if (cub_sets->mlx)
 		free(cub_sets->mlx);
@@ -35,7 +35,7 @@ void	free_struct(t_settings *cub_sets) // a tester
 	if (cub_sets->map)
 		free_char_p2p(cub_sets->map);
 	free(cub_sets);
-}
+}*/
 
 /*void	free_graph(t_info *info)
 {
@@ -50,7 +50,7 @@ void	free_struct(t_settings *cub_sets) // a tester
 	free(info);
 }*/
 
-void	abort_prog(char *line, t_settings *cub_sets, char *error_msg)
+void	abort_prog(char *error_msg)
 	// elle elle putstr
 	// elle en appelle une qui free cub_sets mais element par element, s'il s'agit de pointeurs
 	// et a la fin elle se free elle-mem, je veux dire la structure
@@ -65,9 +65,9 @@ void	abort_prog(char *line, t_settings *cub_sets, char *error_msg)
 		ft_putstr(error_msg);
 		write (1, "\n", 1);
 //	}
-	if (line)
-		free(line);
-	free_struct(cub_sets);
+//	if (line)
+//		wrfree(line);
+	wrdestroy();
 //	free_graph(t_info *info);
 //	si appelee dans le main, line n'a pas encore ete malloc, donc fais un if
 	exit(1);

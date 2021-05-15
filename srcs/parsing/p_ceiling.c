@@ -65,10 +65,10 @@ static int	right_content(t_settings *cub_sets)
 void	p_ceiling(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->b_ceiling == true)
-		abort_prog(line, cub_sets, "Identifiers should be used only once");
+		abort_prog("C identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_content(cub_sets) == -1)
-		abort_prog(line, cub_sets, "C r,g,b (0 >= r/g/b <= 255)");
+		abort_prog("C r,g,b (0 >= r/g/b <= 255)");
 	cub_sets->b_ceiling = true;
 	free_char_p2p(cub_sets->elements);
 }

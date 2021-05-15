@@ -86,7 +86,7 @@ static void	continue_map(char *line, t_settings *cub_sets)
 		if (non_empty_line(line) == 1)
 			error = -1;
 	if (error == -1)
-		abort_prog(line, cub_sets, "Nothing else should be after the map");
+		abort_prog("Nothing else should be after the map");
 }
 
 static void	start_map(char *line, t_settings *cub_sets)
@@ -99,7 +99,7 @@ static void	start_map(char *line, t_settings *cub_sets)
 			cub_sets->map_started = true;
 		}
 		else
-			abort_prog(line, cub_sets, "Too many identifier lines");
+			abort_prog("There should be only 8 identifier lines");
 	}
 }
 

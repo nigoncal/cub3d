@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:20:23 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:29:46 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/15 14:46:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	parse_id(char *line, t_settings *cub_sets)
 	else if (*line == '\0')
 		return ;
 	else
-		abort_prog(line, cub_sets, "Ids allowed : R/NO/SO/WE/EA/S/F/C");
+		abort_prog("Identifiers allowed : R/NO/SO/WE/EA/S/F/C");
 }

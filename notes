@@ -128,4 +128,18 @@ free elements a la fin de ton programme lorsque tout a bien fonctionne
 remplacer les free par wrfree
 "" free de toute ta structure par le wrfree general
 
+
+-----------------------ICI------------------------------------------------------
+geres si la resolution envoyee est au dela de l'int max. Ca veut dire que
+d'abord tu recuperes la taille de l'ecran et puis tu fais un atoi et tu check si
+ca depasse la taille de l'ecran, si ca la depasse, tu mets la taille de l'ecran.
+Tu vas devoir faire un atoi et parcourir. Bref, tu verras ca avec Jean-Michel
+et Astrid
+
+Il te faut repartir de atoi_limit (tu ne l'as pas ajoutee dans libft.h ni le
+Makefile. Repars des commentaires et crees des define dans ton header_cub3d.h
+qui recuperent la width et height de l'ecran et d'autres pour les couleurs,
+enfin 1 quoi, une couleur max
+
+--------------------------------------------------------------------------------
 virer tous les mains de test

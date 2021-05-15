@@ -1,4 +1,4 @@
-R 1920 255
+R 0 0
 
 NO ./srcs/textures/grass.xpm
 SO ./srcs/textures/grass.xpm

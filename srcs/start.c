@@ -30,7 +30,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 {
 	cub_sets->mlx = malloc(sizeof(void));
 	if (cub_sets->mlx == NULL)
-		abort_prog(*line, cub_sets, "Failed to malloc cub_sets->mlx");
+		abort_prog("Failed to malloc cub_sets->mlx");
 	cub_sets->mlx = mlx_init();
 	while (get_next_line(fd, line))
 	{
@@ -45,7 +45,7 @@ void	start(int fd, char **line, t_settings *cub_sets)
 		}
 	}
 	if (square_map(cub_sets) == -1)
-		abort_prog(*line, cub_sets, "Failed to malloc cub_sets->map");
+		abort_prog("Failed to malloc cub_sets->map");
 	dprintf(1, "width = |%d|\n", cub_sets->width);
 	dprintf(1, "height = |%d|\n", cub_sets->height);
 	dprintf(1, "north = |%s|\n", cub_sets->north_texture_path);

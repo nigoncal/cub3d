@@ -21,11 +21,11 @@ int	free_char_p2p(char **tab)
 		return (-1);
 	while (tab[i])
 	{
-		free(tab[i]);
+		wrfree(tab[i]);
 		tab[i] = NULL;
 		i++;
 	}
-	free(tab);
+	wrfree(tab);
 	tab = NULL;
 	return (0);
 }
