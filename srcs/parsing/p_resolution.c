@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/15 16:04:25 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:27:48 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,15 @@
 // vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
 // fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
 
-static void	too_big_for_screen(t_settings *cub_sets)
+static int	right_content(t_settings *cub_sets)
 {
+	int	i;
 	int trigger;
 	int	screen_width;
 	int	screen_height;
 	
-	trigger = mlx_get_screen_size(cub_sets->mlx, &screen_width, &screen_height);
-	if (cub_sets->width > screen_width)
-		cub_sets->width = screen_width;
-	if (cub_sets->height > screen_height)
-		cub_sets->height = screen_height;
-}
-
-static int	right_content(t_settings *cub_sets)
-{
-	int	i;
-
 	i = 0;
+	trigger = mlx_get_screen_size(cub_sets->mlx, &screen_width, &screen_height);
 	while (cub_sets->elements[1][i])
 	{
 		if (ft_isdigit(cub_sets->elements[1][i++]) == 0)
@@ -63,8 +54,8 @@ static int	right_content(t_settings *cub_sets)
 		if (ft_isdigit(cub_sets->elements[2][i++]) == 0)
 			return (-1);
 	}
-	cub_sets->width = atoi_limit(cub_sets->elements[1], WIDTH_LIMIT);
-	cub_sets->height = atoi_limit(cub_sets->elements[2], HEIGHT_LIMIT);
+	cub_sets->width = atoi_limit(cub_sets->elements[1], screen_width);
+	cub_sets->height = atoi_limit(cub_sets->elements[2], screen_height);
 	return (0);
 }
 
@@ -83,7 +74,6 @@ static int	right_amount(t_settings *cub_sets)
 		return (-1);
 	if (cub_sets->width <= 0 || cub_sets->height <= 0)
 		return (-1);
-	too_big_for_screen(cub_sets);
 	return (0);
 }
 

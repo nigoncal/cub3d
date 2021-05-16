@@ -1,4 +1,5 @@
-SRCS	=		change_char.c\
+SRCS	=		atoi_limit.c\
+				change_char.c\
 				format_check.c\
 				free_char_p2p.c\
 				ft_memccpy.c\

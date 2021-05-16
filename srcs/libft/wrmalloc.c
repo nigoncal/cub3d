@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:04:32 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 14:04:55 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:13:30 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,23 @@ static t_list	**wrgetter(void)
 
 void			*wrmalloc(unsigned long size)
 {
-	char	*buffer;
 	t_list	*new_elem;
 
-	if (!(buffer = malloc(size)))
+	new_elem = malloc(sizeof(t_list));
+	if (new_elem == NULL)
 	{
 		wrdestroy();
 		return (0);
 	}
-	if (!(new_elem = malloc(sizeof(t_list))))
+	new_elem->content = malloc(size);
+	if (new_elem == NULL)
 	{
-		free(buffer);
 		wrdestroy();
 		return (0);
 	}
-	new_elem->content = buffer;
 	new_elem->next = 0;
-	ft_lstadd_back(wrgetter(), new_elem);
-	return (buffer);
+	ft_lstadd_front(wrgetter(), new_elem);
+	return (new_elem->content);
 }
 
 int				wrfree(void *ptr)
@@ -76,7 +75,7 @@ int				wrfree(void *ptr)
 			return (1);
 		}
 		prev = current;
-		current = current->next;
+		current = next;
 	}
 	return (0);
 }

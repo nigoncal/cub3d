@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:45:54 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/15 16:11:09 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:27:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@
 // TESTES LA avec toutes tes valeurs et surtout l'int max + 1 et puis des
 // valeurs bien plus grandes
 
-int	atoi_limit(const char *str, long limit)
+/*
+ * This function is kind of an atoi except you have to ensure you are sneding
+ * a string of only digits to it
+ * It will return the string converted into integers, as long as it doesn't
+ * reach the limit. If it does, it will return the limit.
+*/
+
+int	atoi_limit(const char *str, int limit)
 {
 	int	i;
 	int	nb;

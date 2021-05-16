@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/14 17:46:59 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:25:58 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_split_next
 	size_t	length;
 }	t_split_next;
 
+int				atoi_limit(const char *str, int limit);	
 char			*change_char(char *s, char a, char b);
 int				format_check(char *file, char *format);
 int				free_char_p2p(char **str);
