@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 13:27:48 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 15:03:16 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 
 // vires tous les bouts de code d'autres fichiers pour ne garder que les fonctions de ce fichier. Ils t'ont servi a tester
 // fais bien attention a ce que tout fonctionne avec ton main normal et header normal (parametres des fonctions)
+
+// utilises atoi_limit de deux manieres differentes. pour resolution, tu
+// recuperes son retour
+// pour couleur, s'il a depasse la limite, tu dis faux
+//
+// je ne comprends rien
 
 static int	right_content(t_settings *cub_sets)
 {

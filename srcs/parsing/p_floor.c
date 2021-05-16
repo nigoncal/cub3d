@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:18:53 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:01:40 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:46:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	i = 0;
 	while (tab_rgb[i])
 	{
-		rgb[i] = ft_atoi(&(*tab_rgb[i]));
+		rgb[i] = atoi_limit(tab_rgb[i], COLOR_MAX);
 		i++;
 	}
 	i = 0;
@@ -80,7 +80,7 @@ void	p_floor(char *line, t_settings *cub_sets)
 		abort_prog("F identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_content(cub_sets) == -1)
-		abort_prog("F r,g,b (with 0 >= r/g/b <= 255)");
+		abort_prog("Usage : F r,g,b (with 0 >= r/g/b <= 255)");
 	cub_sets->b_floor = true;
 	free_char_p2p(cub_sets->elements);
 }

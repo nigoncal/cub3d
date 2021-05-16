@@ -6,13 +6,13 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 12:00:31 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 13:45:29 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_CUB3D_H
 # define HEADER_CUB3D_H
-# define COLOR_LIMIT 255
+# define COLOR_MAX 255
 // check tous les includes et vires si pas besoin
 # include "mlx/mlx.h"
 # include "libft/libft.h"

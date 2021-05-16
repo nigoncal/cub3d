@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:45:54 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 13:27:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/16 15:03:32 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // valeurs bien plus grandes
 
 /*
- * This function is kind of an atoi except you have to ensure you are sneding
+ * This function is kind of an atoi except you have to ensure you are sending
  * a string of only digits to it
  * It will return the string converted into integers, as long as it doesn't
  * reach the limit. If it does, it will return the limit.
@@ -44,7 +44,7 @@ int	atoi_limit(const char *str, int limit)
 	neg = 1;
 	while (str[i])
 	{
-		if (nb < limit)
+		if (nb <= limit)
 			nb = (nb * 10) + (str[i] - '0');
 		else
 			return (limit);
