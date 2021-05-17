@@ -6,9 +6,22 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:04:32 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 13:13:30 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 17:46:50 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
+/*
+**	Small wrapper for malloc purpose
+**	4 functions
+**	-wrgetter : protect list malloc from extern files
+**	-wrmalloc : create a malloc, return ptr of the malloc.
+**				fail to create malloc : destoy all malloc and return 0
+**	-wrfree : free a malloc, return 1.
+**				fail to find the element: return 0
+**	-wrdestroy : free all malloc created by wrmalloc
+*/
 
 #include "libft.h"
 
@@ -32,23 +45,24 @@ static t_list	**wrgetter(void)
 
 void			*wrmalloc(unsigned long size)
 {
+	char	*buffer;
 	t_list	*new_elem;
 
-	new_elem = malloc(sizeof(t_list));
-	if (new_elem == NULL)
+	if (!(buffer = malloc(size)))
 	{
 		wrdestroy();
 		return (0);
 	}
-	new_elem->content = malloc(size);
-	if (new_elem == NULL)
+	if (!(new_elem = malloc(sizeof(t_list))))
 	{
+		free(buffer);
 		wrdestroy();
 		return (0);
 	}
+	new_elem->content = buffer;
 	new_elem->next = 0;
-	ft_lstadd_front(wrgetter(), new_elem);
-	return (new_elem->content);
+	ft_lstadd_back(wrgetter(), new_elem);
+	return (buffer);
 }
 
 int				wrfree(void *ptr)
@@ -75,7 +89,7 @@ int				wrfree(void *ptr)
 			return (1);
 		}
 		prev = current;
-		current = next;
+		current = current->next;
 	}
 	return (0);
 }

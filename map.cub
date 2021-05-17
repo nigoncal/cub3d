@@ -1,4 +1,4 @@
-R 9999999 595959595
+R 2880 5
 
 NO ./srcs/textures/grass.xpm
 SO ./srcs/textures/grass.xpm
@@ -6,8 +6,8 @@ WE ./srcs/textures/grass.xpm
 EA ./srcs/textures/grass.xpm
 
 S ./srcs/textures/grass.xpm
-F 4294967297,100,0
-C 225,30,0
+F 255,100,0
+C 225,30,256
 
         1111111111111111111111111
         1000000000110000000000001

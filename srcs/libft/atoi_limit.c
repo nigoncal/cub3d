@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 15:45:54 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 15:03:32 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 16:05:58 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ int	atoi_limit(const char *str, int limit)
 {
 	int	i;
 	int	nb;
-	int	neg;
 
 	i = 0;
 	nb = 0;
-	neg = 1;
 	while (str[i])
 	{
-		if (nb <= limit)
+		if (nb < limit)
 			nb = (nb * 10) + (str[i] - '0');
 		else
 			return (limit);
 	i++;
 	}
-	return (nb * neg);
+	if (nb > limit)
+		return (limit);
+	return (nb);
 }

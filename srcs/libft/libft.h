@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/16 13:25:58 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 16:37:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				get_next_line(int fd, char **line);
 int				is_tab_digit(char **tab);
 int				line_amount(char **tab);
 int				longest_line(char **tab);
+int				str_isdigit(char *str);
 void			wrdestroy(void);
 int				wrfree(void *ptr);
 void			*wrmalloc(unsigned long size);

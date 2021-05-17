@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 15:03:16 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 17:23:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,30 @@
 // recuperes son retour
 // pour couleur, s'il a depasse la limite, tu dis faux
 //
-// je ne comprends rien
+
+static void	screen_size(t_settings *cub_sets)
+{
+	int trigger;
+	int	screen_width;
+	int	screen_height;
+
+	trigger = mlx_get_screen_size(cub_sets->mlx, &screen_width, &screen_height);
+	cub_sets->width = atoi_limit(cub_sets->elements[1], screen_width + 1);
+	cub_sets->height = atoi_limit(cub_sets->elements[2], screen_height + 1);
+	if (cub_sets->width == screen_width + 1)
+		cub_sets->width = screen_width;
+	if (cub_sets->height == screen_height + 1)
+		cub_sets->height = screen_height;
+}
 
 static int	right_content(t_settings *cub_sets)
 {
 	int	i;
-	int trigger;
-	int	screen_width;
-	int	screen_height;
 	
 	i = 0;
-	trigger = mlx_get_screen_size(cub_sets->mlx, &screen_width, &screen_height);
 	while (cub_sets->elements[1][i])
 	{
-		if (ft_isdigit(cub_sets->elements[1][i++]) == 0)
+		if (ft_isdigit(cub_sets->elements[1][i++]) == 0) // fais une fonction qui check la str entiere
 			return (-1);
 	}
 	i = 0;
@@ -60,8 +70,7 @@ static int	right_content(t_settings *cub_sets)
 		if (ft_isdigit(cub_sets->elements[2][i++]) == 0)
 			return (-1);
 	}
-	cub_sets->width = atoi_limit(cub_sets->elements[1], screen_width);
-	cub_sets->height = atoi_limit(cub_sets->elements[2], screen_height);
+	screen_size(cub_sets);
 	return (0);
 }
 

@@ -56,6 +56,7 @@ SRCS	=		atoi_limit.c\
 				is_tab_digit.c\
 				line_amount.c\
 				longest_line.c\
+				str_isdigit.c\
 				wrmalloc.c
 
 BON_SRCS 	=	ft_lstnew.c\

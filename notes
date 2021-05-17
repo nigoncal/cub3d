@@ -129,3 +129,5 @@ remplacer les free par wrfree
 "" free de toute ta structure par le wrfree general
 
 virer tous les mains de test
+
+deplacer la libft a la racine du projet, donc modifier le Makefile

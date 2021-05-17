@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:18:53 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 13:46:43 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 17:25:56 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	i = 0;
 	while (tab_rgb[i])
 	{
-		rgb[i] = atoi_limit(tab_rgb[i], COLOR_MAX);
-		i++;
-	}
-	i = 0;
-	while (rgb[i])
-	{
-		if (rgb[i] < 0 || rgb[i] > 255)
+		if (str_isdigit(tab_rgb[i]) == -1)
+			return (-1);
+		rgb[i] = atoi_limit(tab_rgb[i], COLOR_MAX + 1);
+		if (rgb[i] == COLOR_MAX + 1)
 			return (-1);
 		i++;
 	}
@@ -65,11 +62,8 @@ static int	right_content(t_settings *cub_sets)
 	tab_rgb = ft_split(cub_sets->elements[1], ',');
 	while (tab_rgb[i])
 		i++;
-	if (i != 3)
-		return (-1);
-	if (is_tab_digit(tab_rgb) == -1)
-		return (-1);
-	if (store_rgb(tab_rgb, cub_sets) == -1)
+	if (i != 3 || is_tab_digit(tab_rgb) == -1
+		|| store_rgb(tab_rgb, cub_sets) == -1)
 		return (-1);
 	return (0);
 }

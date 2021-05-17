@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:41 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:06:18 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 17:33:24 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	i = 0;
 	while (tab_rgb[i])
 	{
-		rgb[i] = ft_atoi(&(*tab_rgb[i]));
-		i++;
-	}
-	i = 0;
-	while (rgb[i])
-	{
-		if (rgb[i] < 0 || rgb[i] > 255)
+		if (str_isdigit(tab_rgb[i]) == -1)
+			return (-1);
+		rgb[i] = atoi_limit(tab_rgb[i], COLOR_MAX + 1);
+		if (rgb[i] == COLOR_MAX + 1)
 			return (-1);
 		i++;
 	}
@@ -68,7 +65,7 @@ void	p_ceiling(char *line, t_settings *cub_sets)
 		abort_prog("C identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_content(cub_sets) == -1)
-		abort_prog("C r,g,b (0 >= r/g/b <= 255)");
+		abort_prog("Usage : C r,g,b (with 0 >= r/g/b <= 255)");
 	cub_sets->b_ceiling = true;
 	free_char_p2p(cub_sets->elements);
 }
