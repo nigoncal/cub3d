@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/15 14:49:00 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 13:06:47 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	p_north_texture(char *line, t_settings *cub_sets)
 		return (-1);
 	cub_sets->north_texture_path = ft_strdup(cub_sets->elements[1]);
 	cub_sets->north = true;
-	free_char_p2p(cub_sets->elements);
+//	free_char_p2p(cub_sets->elements);
 	return (0);
 }

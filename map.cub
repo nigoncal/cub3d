@@ -7,7 +7,7 @@ EA ./srcs/textures/grass.xpm
 
 S ./srcs/textures/grass.xpm
 F 255,100,0
-C 225,30,256
+C 225,30,255
 
         1111111111111111111111111
         1000000000110000000000001

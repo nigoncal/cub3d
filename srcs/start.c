@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 17:36:20 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 13:49:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	{
 		dprintf(1, "cub_sets->map[c] = |%s|\n", cub_sets->map[c++]);
 	}
-//	free_struct(cub_sets);
+	wrdestroy();
 }
