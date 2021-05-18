@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_south_texture.c                                            :+:      :+:    :+:   */
+/*   p_south_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 13:07:32 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/05/18 17:03:47 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/18 17:12:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  *
  * celle-ci appelle right_file qui verifie - que l'idenfifiant est bien "SO"
  * 										   - que le format du fichier de texture est bien .xpm ou .png via la fonction format_check qui est dans ma libft
- * 										   - que le path soit bon, que ce ne soit pas un directory que l'on essaye d'ouvrir comme fichier et que le fichier soit ouvrable, grace a deux appels d'open, un avec flag O_DIRECTORY, l'autre avec O_RDOSLY
+ * 										   - que le path soit bon, que ce ne soit pas un directory que l'on essaye d'ouvrir comme fichier et que le fichier soit ouvrable, grace a deux appels d'open, un avec flag O_DIRECTORY, l'autre avec O_RDONLY
  *
  * a chaque fois s'il y a une erreur, 1 est renvoye, 0 si tout se passe bien
  * si tout s'est bien passe, le path est stocke dans cub_sets->south_texture_path et cub_sets->south est mis a true
@@ -35,7 +35,9 @@ static int	right_file(t_settings *cub_sets)
 	if (ft_strcmp(cub_sets->elements[0], "SO") != 0)
 		return (-1);
 	if ((format_check(cub_sets->elements[1], ".xpm")) +
-			(format_check(cub_sets->elements[1], ".png")) == -2) // - 2 veut dire que les deux formats ne correspondent pas (2 retours d'erreur). Si c'est -1 c'est ok car l'un deux match (-1 + 0).
+			(format_check(cub_sets->elements[1], ".png")) == -2) // - 2 veut
+		// dire que les deux formats ne correspondent pas (2 retours d'erreur).
+		// Si c'est -1 c'est ok car l'un d'eux match (-1 + 0).
 		return (-1);
 	fd = open(cub_sets->elements[1], O_DIRECTORY);
 	if (fd >= 0)
@@ -60,15 +62,14 @@ static int	right_amount(t_settings *cub_sets)
 	return (0);
 }
 
-int			p_south_texture(char *line, t_settings *cub_sets)
+void	p_south_texture(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->south == true)
-		return (-1);
+		abort_prog("SO (south) identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_amount(cub_sets) == -1)
-		return (-1);
+		abort_prog("Usage : SO ./path_without_spaces.xpm OR .png");
 	cub_sets->south_texture_path = ft_strdup(cub_sets->elements[1]);
 	cub_sets->south = true;
-//	free(cub_sets->elements);
-	return (0);
+//	free_char_p2p(cub_sets->elements);
 }

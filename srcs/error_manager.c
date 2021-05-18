@@ -6,13 +6,12 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/17 17:49:16 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 16:48:47 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_cub3d.h"
 
-// faire un bzero de toute ta structure
 // penses a free elements aussi, dans le parsing des textures (free_char_p2p)
 // > free le juste avant d'appeler abort_prog
 
@@ -51,24 +50,10 @@
 }*/
 
 void	abort_prog(char *error_msg)
-	// elle elle putstr
-	// elle en appelle une qui free cub_sets mais element par element, s'il s'agit de pointeurs
-	// et a la fin elle se free elle-mem, je veux dire la structure
-	// puis elle appelle une fonction qui free toute la partie graphique, les images
-	// a la fin tu exit(0);
 {
 	ft_putstr("Error\n");
-//	if (errno)
-//		perror("");
-//	else
-//	{
-		ft_putstr(error_msg);
-		write (1, "\n", 1);
-//	}
-//	if (line)
-//		wrfree(line);
+	ft_putstr(error_msg);
+	write (1, "\n", 1);
 	wrdestroy();
-//	free_graph(t_info *info);
-//	si appelee dans le main, line n'a pas encore ete malloc, donc fais un if
 	exit(1);
 }

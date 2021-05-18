@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:39:45 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 17:12:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static int	right_file(t_settings *cub_sets)
 	if (ft_strcmp(cub_sets->elements[0], "S") != 0)
 		return (-1);
 	if ((format_check(cub_sets->elements[1], ".xpm")) +
-			(format_check(cub_sets->elements[1], ".png")) == -2) // - 2 veut dire que les deux formats ne correspondent pas (2 retours d'erreur). Si c'est -1 c'est ok car l'un deux match (-1 + 0).
+			(format_check(cub_sets->elements[1], ".png")) == -2) // - 2 veut
+		// dire que les deux formats ne correspondent pas (2 retours d'erreur).
+		// Si c'est -1 c'est ok car l'un d'eux match (-1 + 0).
 		return (-1);
 	fd = open(cub_sets->elements[1], O_DIRECTORY);
 	if (fd >= 0)
@@ -60,15 +62,14 @@ static int	right_amount(t_settings *cub_sets)
 	return (0);
 }
 
-int			p_sprite_texture(char *line, t_settings *cub_sets)
+void	p_sprite_texture(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->sprite == true)
-		return (-1);
+		abort_prog("S (sprite) identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
 	if (right_amount(cub_sets) == -1)
-		return (-1);
+		abort_prog("Usage : S ./path_without_spaces.xpm OR .png");
 	cub_sets->sprite_texture_path = ft_strdup(cub_sets->elements[1]);
 	cub_sets->sprite = true;
-	free_char_p2p(cub_sets->elements);
-	return (0);
+//	free_char_p2p(cub_sets->elements);
 }

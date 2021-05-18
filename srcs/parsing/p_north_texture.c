@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 16:02:15 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 13:06:47 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 17:44:29 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
  * si tout s'est bien passe, le path est stocke dans cub_sets->north_texture_path et cub_sets->north est mis a true
 */
 
-static int	right_file(t_settings *cub_sets)
+static int	checking(t_settings *cub_sets)
 {
 	int	fd;
 
 	fd = 0;
-	if (ft_strcmp(cub_sets->elements[0], "NO") != 0)
-		return (-1);
-	if ((format_check(cub_sets->elements[1], ".xpm")) +
-			(format_check(cub_sets->elements[1], ".png")) == -2) // - 2 veut dire que les deux formats ne correspondent pas (2 retours d'erreur). Si c'est -1 c'est ok car l'un deux match (-1 + 0).
+	if (line_amount(cub_sets->elements) != 2
+		|| ft_strcmp(cub_sets->elements[0], "NO") != 0
+		|| ((format_check(cub_sets->elements[1], ".xpm"))
+		+ (format_check(cub_sets->elements[1], ".png")) == -2)) // - 2 veut
+		// dire que les deux formats ne correspondent pas (2 retours d'erreur).
+		// Si c'est -1 c'est ok car l'un d'eux match (-1 + 0).
 		return (-1);
 	fd = open(cub_sets->elements[1], O_DIRECTORY);
 	if (fd >= 0)
@@ -46,29 +48,13 @@ static int	right_file(t_settings *cub_sets)
 	return (0);
 }
 
-static int	right_amount(t_settings *cub_sets)
-{
-	int	i;
-
-	i = 0;
-	while (cub_sets->elements[i])
-		i++;
-	if (i != 2)
-		return (-1);
-	if (right_file(cub_sets) == -1)
-		return (-1);
-	return (0);
-}
-
-int	p_north_texture(char *line, t_settings *cub_sets)
+void	p_north_texture(char *line, t_settings *cub_sets)
 {
 	if (cub_sets->north == true)
-		return (-1);
+		abort_prog("NO (north) identifier is used more than once");
 	cub_sets->elements = ft_split(line, ' ');
-	if (right_amount(cub_sets) == -1)
-		return (-1);
+	if (checking(cub_sets) == -1)
+		abort_prog("Usage : NO ./path_without_spaces.xpm OR .png");
 	cub_sets->north_texture_path = ft_strdup(cub_sets->elements[1]);
 	cub_sets->north = true;
-//	free_char_p2p(cub_sets->elements);
-	return (0);
 }

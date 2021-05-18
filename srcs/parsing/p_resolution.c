@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/17 17:23:21 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 16:47:03 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,16 @@ static int	right_amount(t_settings *cub_sets)
 	i = 0;
 	while (cub_sets->elements[i])
 		i++;
-	if (i != 3)
+	if (i != 3 || ft_strcmp(cub_sets->elements[0], "R") != 0
+		|| right_content(cub_sets) == -1
+		|| cub_sets->width <= 0 || cub_sets->height <= 0)
 		return (-1);
-	if (ft_strcmp(cub_sets->elements[0], "R") != 0)
-		return (-1);
-	if (right_content(cub_sets) == -1)
-		return (-1);
-	if (cub_sets->width <= 0 || cub_sets->height <= 0)
-		return (-1);
+//	if (ft_strcmp(cub_sets->elements[0], "R") != 0)
+//		return (-1);
+//	if (right_content(cub_sets) == -1)
+//		return (-1);
+//	if (cub_sets->width <= 0 || cub_sets->height <= 0)
+//		return (-1);
 	return (0);
 }
 

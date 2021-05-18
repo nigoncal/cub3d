@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/17 16:07:48 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 17:10:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,11 @@ int				non_empty_line(char *line);
 void			parse_id(char *line, t_settings *cub_sets);
 void			p_resolution(char *line, t_settings *cub_sets);
 void			p_textures(char *line, t_settings *cub_sets);
-int				p_north_texture(char *line, t_settings *cub_sets);
-int				p_south_texture(char *line, t_settings *cub_sets);
-int				p_east_texture(char *line, t_settings *cub_sets);
-int				p_west_texture(char *line, t_settings *cub_sets);
-int				p_sprite_texture(char *line, t_settings *cub_sets);
+void			p_north_texture(char *line, t_settings *cub_sets);
+void			p_south_texture(char *line, t_settings *cub_sets);
+void			p_east_texture(char *line, t_settings *cub_sets);
+void			p_west_texture(char *line, t_settings *cub_sets);
+void			p_sprite_texture(char *line, t_settings *cub_sets);
 void			parse_map(char *line, t_settings *cub_sets);
 void			store_map(char *line, t_settings *cub_sets);
 int				square_map(t_settings *cub_sets);
