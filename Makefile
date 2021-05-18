@@ -31,7 +31,8 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_floor.c\
 						srcs/parsing/p_ceiling.c\
 						srcs/parsing/p_map.c\
-						srcs/parsing/store_map.c
+						srcs/parsing/store_map.c\
+						srcs/parsing/flood_fill.c
 #						srcs/tools.c\#
 # tu vas certainement rajouter des fichiers pour toute la partie graphique
 

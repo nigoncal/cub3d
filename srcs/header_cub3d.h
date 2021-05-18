@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   header_cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/16 13:45:29 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 15:06:41 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_CUB3D_H
 # define HEADER_CUB3D_H
 # define COLOR_MAX 255
+# define ERROR -1
+# define RAS 0
 // check tous les includes et vires si pas besoin
 # include "mlx/mlx.h"
 # include "libft/libft.h"
@@ -55,6 +57,9 @@ typedef struct	s_settings
 	bool	map_started;
 	bool	player;
 	bool	map_over;
+	char	start_orientation;
+	int		play_x;
+	int		play_y;
 	void	*mlx;
 	int		id_counter;
 	char	**elements;
@@ -112,6 +117,9 @@ typedef struct	s_settings
   void	*image; // MALLOC
 // MALLOC D'AUTRES CHOSES QUE NICO EST EN TRAIN DE CODER
 }				t_info;*/
+
+/* Ajout floodfill */
+int				find_player(t_settings *cub_sets);
 
 void			abort_prog(char *s);
 void			start(int fd, char **line, t_settings *cub_sets);

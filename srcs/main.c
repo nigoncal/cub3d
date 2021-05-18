@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 11:26:30 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 15:07:37 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ int	main(int argc, char **argv)
 	if (fd < 2)
 		abort_prog("Error while opening the .cub file");
 	start(fd, &line, cub_sets);
+	printf("nb de colonnes de map/ X : %zu\n", ft_strlen(cub_sets->map[0]));
+	if (find_player(cub_sets) == RAS)
+	{
+		printf("Pos X du player = %d\n", cub_sets->play_x);
+		printf("Pos Y du player = %d\n", cub_sets->play_y);
+		//printf("Si on regarde a cet emplacement de la map, on trouve '%c'\n", cub_sets->map[cub_sets->play_y][cub_sets->play_x]);
+		printf("Orientation de depart du player = %c\n", cub_sets->start_orientation);
+	}
 	close(fd);
 	return (0);
 }
