@@ -63,13 +63,26 @@ void	flood_fill(char **map, int x, int y, unsigned int c)
 	//map->b[y][x] = c;  // some buggy optimizers needed this line
 }
 
+void	find_player(t_settings *cub_sets)
+{
+	int	y;
+	int	x;
+	
+	y = 0;
+	x = 0;
+	while (cub_sets->map[y])
+	{
+
+	}
+}
+
+
+
 int	find_player(t_settings *cub_sets)
 {
-	bool	player_found;
 	int		x;
 	int		y;
 
-	player_found = 0;
 	y = 0;
 	while (cub_sets->map[y])
 	{
@@ -78,6 +91,7 @@ int	find_player(t_settings *cub_sets)
 		{
 			if (ft_strchr("NSEW", cub_sets->map[y][x]) != 0)
 			{
+				store_player()
 				if (player_found == 1)
 					return (ERROR);
 				player_found = 1;

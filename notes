@@ -1,4 +1,8 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!
+------------------------------modif de struct-----------------------------------
+width et height sont maintenant dans game
+--------------------------------------------------------------------------------
+
+!!!!!!!!!!!!!!!!!!!!!!!!!
 fonctions autorisees
 - open, close, read, write,
 PRINTF, malloc, free,       // PRINTF
@@ -133,3 +137,5 @@ virer tous les mains de test
 deplacer la libft a la racine du projet, donc modifier le Makefile
 
 si tu as le temps, prends north, que tu as opti et copies pour faire south etc.
+
+ta fonction square map n'est pas normee, elle est trop longue

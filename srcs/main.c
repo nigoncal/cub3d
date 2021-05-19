@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/11 11:26:30 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 11:53:25 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	int			fd;
 	char		*line;
-	t_settings	*cub_sets;
+	t_setup		*setup;
 
 	line = NULL;
 	cub_sets = wrmalloc(sizeof(*cub_sets));

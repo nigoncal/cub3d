@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 10:15:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 12:03:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,48 @@
 # include <unistd.h>
 # include <limits.h>
 
+typedef struct s_game
+{
+	t_settings	ok;
+	double		pos_x; //position x du joueur
+	double		pos_y; //position y du joueur
+	double		dir_x; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
+	double		dir_y; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
+	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		raydirX; //calcul de direction x du rayon
+	double		raydirY; //calcul de direction y du rayon
+	double		cameraX; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
+	int			mapX; // coordonée x du carré dans lequel est pos
+	int			mapY; // coordonnée y du carré dans lequel est pos
+	double		sidedistX; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
+	double		sidedistY; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
+	double		deltadistX; //distance que rayon parcours entre chaque point d'intersection vertical
+	double		deltadistY; //distance que le rayon parcours entre chaque point d'intersection horizontal
+	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
+	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
+	int			hit; // 1 si un mur a ete touche, 0 sinon
+	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
+	double		perpwalldist; // distance du joueur au mur
+	int			lineheight; //hauteur de la ligne a dessiner
+	int			drawstart; //position de debut ou il faut dessiner
+	int			drawend; //position de fin ou il faut dessiner
+	int			x; //permet de parcourir tous les rayons
+	double		moveSpeed;
+	double		rotSpeed;
+	int			color;
+	int			endian;
+	char		*buffer;
+	int			line_height;
+	int			line_lenght;
+	int			BPP;
+	int			width;
+	int			height;
+	void		*mlx;
+	void		*win;
+	void		*image;
+}				t_game;
+
 typedef union	u_color
 {
 	struct	s_chan
@@ -43,8 +85,9 @@ typedef union	u_color
 	uint32_t color;
 }				t_col;
 
-typedef struct	s_settings
+typedef struct	s_setup
 {
+	void	*mlx;
 	bool	screenshot;
 	bool	res;
 	bool	north;
@@ -55,13 +98,11 @@ typedef struct	s_settings
 	bool	b_floor;
 	bool	b_ceiling;
 	bool	map_started;
-	bool	player;
 	bool	map_over;
-	void	*mlx;
+	bool	b_player;
 	int		id_counter;
 	char	**elements;
-	int		width;
-	int		height;
+	t_game	game;
 	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
@@ -71,52 +112,7 @@ typedef struct	s_settings
 	t_col	c_color;
 	char	**map;
 	char	start_orientation;
-	int		play_x;
-	int		play_y;
-}				t_settings;
-
-/*typedef struct	s_info
-
-  t_settings ok;
-  double		posX; //position x du joueur
-  double		posY; //position y du joueur
-  double		dirX; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
-  double		dirY; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
-  double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-  double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-  double		raydirX; //calcul de direction x du rayon
-  double		raydirY; //calcul de direction y du rayon
-  double		cameraX; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
-  int			mapX; // coordonée x du carré dans lequel est pos
-  int			mapY; // coordonnée y du carré dans lequel est pos
-  double		sidedistX; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
-  double		sidedistY; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-  double		deltadistX; //distance que rayon parcours entre chaque point d'intersection vertical
-  double		deltadistY; //distance que le rayon parcours entre chaque point d'intersection horizontal
-  int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-  int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-  int			hit; // 1 si un mur a ete touche, 0 sinon
-  int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-  double		perpwalldist; // distance du joueur au mur
-  int			lineheight; //hauteur de la ligne a dessiner
-  int			drawstart; //position de debut ou il faut dessiner
-  int			drawend; //position de fin ou il faut dessiner
-  int			x; //permet de parcourir tous les rayons
-  double		moveSpeed;
-  double		rotSpeed;
-  int			color;
-  int			endian;
-  char		*buffer; // MALLOC
-  int 		lineHeight;
-  int			line_lenght;
-  int  		BPP;
-  int			height; //Hauteur
-  int 		width; //Largeur
-  void	*mlx; // MALLOC
-  void	*win; // MALLOC
-  void	*image; // MALLOC
-// MALLOC D'AUTRES CHOSES QUE NICO EST EN TRAIN DE CODER
-}				t_info;*/
+}				t_setup;
 
 int				find_player(t_settings *cub_sets); // ajout du floodfill
 void			abort_prog(char *s);
