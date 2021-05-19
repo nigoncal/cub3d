@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:19 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 16:47:03 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 16:00:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  * la fonction principale :
- * verifie que la ligne resolution n'a pas deja ete rencontree avec le bool cub_sets->res
+ * verifie que la ligne resolution n'a pas deja ete rencontree avec le bool setup->res
  * split en utilisant les espaces
  * appelle check_elements
  *
@@ -24,7 +24,7 @@
  * verifie que les deux autre elements sont bien des digits avec ft_isdigit
  * qu'ils sont superieurs a 0
  * appelle too_big_for_screen
- * passe le bool cub_sets->res a true si aucune erreur n'a ete rencontree
+ * passe le bool setup->res a true si aucune erreur n'a ete rencontree
  *
  * too_big_for_screen :
  * verifie si width et hieght sont superieurs a la taille de l'ecran et les bloque a la taille de l'ecran si c'est le cas
@@ -39,68 +39,68 @@
 // pour couleur, s'il a depasse la limite, tu dis faux
 //
 
-static void	screen_size(t_settings *cub_sets)
+static void	screen_size(t_setup *setup)
 {
 	int trigger;
 	int	screen_width;
 	int	screen_height;
 
-	trigger = mlx_get_screen_size(cub_sets->mlx, &screen_width, &screen_height);
-	cub_sets->width = atoi_limit(cub_sets->elements[1], screen_width + 1);
-	cub_sets->height = atoi_limit(cub_sets->elements[2], screen_height + 1);
-	if (cub_sets->width == screen_width + 1)
-		cub_sets->width = screen_width;
-	if (cub_sets->height == screen_height + 1)
-		cub_sets->height = screen_height;
+	trigger = mlx_get_screen_size(setup->mlx, &screen_width, &screen_height);
+	setup->game.width = atoi_limit(setup->elements[1], screen_width + 1);
+	setup->game.height = atoi_limit(setup->elements[2], screen_height + 1);
+	if (setup->game.width == screen_width + 1)
+		setup->game.width = screen_width;
+	if (setup->game.height == screen_height + 1)
+		setup->game.height = screen_height;
 }
 
-static int	right_content(t_settings *cub_sets)
+static int	right_content(t_setup *setup)
 {
 	int	i;
 	
 	i = 0;
-	while (cub_sets->elements[1][i])
+	while (setup->elements[1][i])
 	{
-		if (ft_isdigit(cub_sets->elements[1][i++]) == 0) // fais une fonction qui check la str entiere
+		if (ft_isdigit(setup->elements[1][i++]) == 0) // fais une fonction qui check la str entiere
 			return (-1);
 	}
 	i = 0;
-	while (cub_sets->elements[2][i])
+	while (setup->elements[2][i])
 	{
-		if (ft_isdigit(cub_sets->elements[2][i++]) == 0)
+		if (ft_isdigit(setup->elements[2][i++]) == 0)
 			return (-1);
 	}
-	screen_size(cub_sets);
+	screen_size(setup);
 	return (0);
 }
 
-static int	right_amount(t_settings *cub_sets)
+static int	right_amount(t_setup *setup)
 {
 	int	i;
 
 	i = 0;
-	while (cub_sets->elements[i])
+	while (setup->elements[i])
 		i++;
-	if (i != 3 || ft_strcmp(cub_sets->elements[0], "R") != 0
-		|| right_content(cub_sets) == -1
-		|| cub_sets->width <= 0 || cub_sets->height <= 0)
+	if (i != 3 || ft_strcmp(setup->elements[0], "R") != 0
+		|| right_content(setup) == -1
+		|| setup->game.width <= 0 || setup->game.height <= 0)
 		return (-1);
-//	if (ft_strcmp(cub_sets->elements[0], "R") != 0)
+//	if (ft_strcmp(setup->elements[0], "R") != 0)
 //		return (-1);
-//	if (right_content(cub_sets) == -1)
+//	if (right_content(setup) == -1)
 //		return (-1);
-//	if (cub_sets->width <= 0 || cub_sets->height <= 0)
+//	if (setup->width <= 0 || setup->height <= 0)
 //		return (-1);
 	return (0);
 }
 
-void	p_resolution(char *line, t_settings *cub_sets)
+void	p_resolution(char *line, t_setup *setup)
 {
-	if (cub_sets->res == true)
+	if (setup->res == true)
 		abort_prog("R identifier is used more than once");
-	cub_sets->elements = ft_split(line, ' ');
-	if (right_amount(cub_sets) == -1)
+	setup->elements = ft_split(line, ' ');
+	if (right_amount(setup) == -1)
 		abort_prog("Usage : R <width> <height> (both > 0)");
-	cub_sets->res = true;
-	free_char_p2p(cub_sets->elements);
+	setup->res = true;
+	free_char_p2p(setup->elements);
 }

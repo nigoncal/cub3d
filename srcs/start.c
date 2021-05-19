@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 09:54:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 16:07:58 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,52 +26,45 @@ int	non_empty_line(char *line)
 	return (0);
 }
 
-void	start(int fd, char **line, t_settings *cub_sets)
+void	start(int fd, char **line, t_setup *setup)
 {
-	cub_sets->mlx = malloc(sizeof(void));
-	if (cub_sets->mlx == NULL)
-		abort_prog("Failed to malloc cub_sets->mlx");
-	cub_sets->mlx = mlx_init();
+	setup->mlx = malloc(sizeof(void));
+	if (setup->mlx == NULL)
+		abort_prog("Failed to malloc setup->mlx");
+	setup->mlx = mlx_init();
 	while (get_next_line(fd, line))
 	{
-		if (cub_sets->id_counter < 8)
+		if (setup->id_counter < 8)
 		{
-			cub_sets->id_counter += non_empty_line(*line);
-			parse_id(*line, cub_sets);
+			setup->id_counter += non_empty_line(*line);
+			parse_id(*line, setup);
 		}
 		else
 		{
-			parse_map(*line, cub_sets);
+			parse_map(*line, setup);
 		}
 	}
-	if (square_map(cub_sets) == -1)
-		abort_prog("Failed to malloc cub_sets->map");
-	dprintf(1, "width = |%d|\n", cub_sets->width);
-	dprintf(1, "height = |%d|\n", cub_sets->height);
-	dprintf(1, "north = |%s|\n", cub_sets->north_texture_path);
-	dprintf(1, "south = |%s|\n", cub_sets->south_texture_path);
-	dprintf(1, "west = |%s|\n", cub_sets->west_texture_path);
-	dprintf(1, "east = |%s|\n", cub_sets->east_texture_path);
-	dprintf(1, "sprite = |%s|\n", cub_sets->sprite_texture_path);
-	dprintf(1, "f_color = |%x|\n", cub_sets->f_color.color);
-	dprintf(1, "f_color = |%d|\n", cub_sets->f_color.chan.red);
-	dprintf(1, "f_color = |%d|\n", cub_sets->f_color.chan.green);
-	dprintf(1, "f_color = |%d|\n", cub_sets->f_color.chan.blue);
-	dprintf(1, "c_color = |%x|\n", cub_sets->c_color.color);
-	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.red);
-	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.green);
-	dprintf(1, "c_color = |%d|\n", cub_sets->c_color.chan.blue);
+	if (square_map(setup) == -1)
+		abort_prog("Failed to malloc setup->map");
+	dprintf(1, "width = |%d|\n", setup->game.width);
+	dprintf(1, "height = |%d|\n", setup->game.height);
+	dprintf(1, "north = |%s|\n", setup->north_texture_path);
+	dprintf(1, "south = |%s|\n", setup->south_texture_path);
+	dprintf(1, "west = |%s|\n", setup->west_texture_path);
+	dprintf(1, "east = |%s|\n", setup->east_texture_path);
+	dprintf(1, "sprite = |%s|\n", setup->sprite_texture_path);
+	dprintf(1, "f_color = |%x|\n", setup->game.f_color.color);
+	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.red);
+	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.green);
+	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.blue);
+	dprintf(1, "c_color = |%x|\n", setup->game.c_color.color);
+	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.red);
+	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.green);
+	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.blue);
 	int c = 0;
-	while (cub_sets->map[c])
+	while (setup->map[c])
 	{
-		dprintf(1, "cub_sets->map[c] = |%s|\n", cub_sets->map[c++]);
-	}
-	if (find_player(cub_sets) == RAS)
-	{
-		printf("Pos X du player = %d\n", cub_sets->play_x);
-		printf("Pos Y du player = %d\n", cub_sets->play_y);
-		//printf("Si on regarde a cet emplacement de la map, on trouve '%c'\n", cub_sets->map[cub_sets->play_y][cub_sets->play_x]);
-		printf("Orientation de depart du player = %c\n", cub_sets->start_orientation);
+		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
 	}
 	wrdestroy();
 }

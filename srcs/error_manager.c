@@ -15,25 +15,25 @@
 // penses a free elements aussi, dans le parsing des textures (free_char_p2p)
 // > free le juste avant d'appeler abort_prog
 
-/*void	free_struct(t_settings *cub_sets) // a tester
+/*void	free_struct(t_setup *setup) // a tester
 {
-	if (cub_sets->mlx)
-		free(cub_sets->mlx);
-	if (cub_sets->elements)
-		free_char_p2p(cub_sets->elements);
-	if (cub_sets->north_texture_path)
-		free(cub_sets->north_texture_path);
-	if (cub_sets->south_texture_path)
-		free(cub_sets->south_texture_path);
-	if (cub_sets->east_texture_path)
-		free(cub_sets->east_texture_path);
-	if (cub_sets->west_texture_path)
-		free(cub_sets->west_texture_path);
-	if (cub_sets->sprite_texture_path)
-		free(cub_sets->sprite_texture_path);
-	if (cub_sets->map)
-		free_char_p2p(cub_sets->map);
-	free(cub_sets);
+	if (setup->mlx)
+		free(setup->mlx);
+	if (setup->elements)
+		free_char_p2p(setup->elements);
+	if (setup->north_texture_path)
+		free(setup->north_texture_path);
+	if (setup->south_texture_path)
+		free(setup->south_texture_path);
+	if (setup->east_texture_path)
+		free(setup->east_texture_path);
+	if (setup->west_texture_path)
+		free(setup->west_texture_path);
+	if (setup->sprite_texture_path)
+		free(setup->sprite_texture_path);
+	if (setup->map)
+		free_char_p2p(setup->map);
+	free(setup);
 }*/
 
 /*void	free_graph(t_info *info)

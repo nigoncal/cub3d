@@ -12,19 +12,19 @@
 
 #include "../header_cub3d.h"
 
-void		p_textures(char *line, t_settings *cub_sets)
+void		p_textures(char *line, t_setup *setup)
 {
 	if (*line == 'N')
-		p_north_texture(line, cub_sets);
+		p_north_texture(line, setup);
 	if (*line == 'S')
 	{
 		if (*line == 'S' && *(line + 1) == 'O')
-			p_south_texture(line, cub_sets);
+			p_south_texture(line, setup);
 		else
-			p_sprite_texture(line, cub_sets);
+			p_sprite_texture(line, setup);
 	}
 	if (*line == 'E')
-		p_east_texture(line, cub_sets);
+		p_east_texture(line, setup);
 	if (*line == 'W')
-		p_west_texture(line, cub_sets);
+		p_west_texture(line, setup);
 }

@@ -12,7 +12,7 @@
 
 #include "../header_cub3d.h"
 
-int	square_map(t_settings *cub_sets)
+int	square_map(t_setup *setup)
 {
 	char	**squared_map;
 	int		x;
@@ -21,18 +21,18 @@ int	square_map(t_settings *cub_sets)
 
 	i = 0;
 	j = 0;
-	squared_map = wrmalloc(sizeof(char *) * count_lines(cub_sets->map) + 1);
+	squared_map = wrmalloc(sizeof(char *) * count_lines(setup->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
-	x = longest_line(cub_sets->map);
-	while (cub_sets->map[i])
+	x = longest_line(setup->map);
+	while (setup->map[i])
 	{
 		squared_map[i] = wrmalloc(sizeof(char) * x + 1);
 		if (squared_map[i] == NULL)
 			return (-1);
-		while (cub_sets->map[i][j])
+		while (setup->map[i][j])
 		{
-			squared_map[i][j] = cub_sets->map[i][j];
+			squared_map[i][j] = setup->map[i][j];
 			j++;
 		}
 		while (j < x)
@@ -42,12 +42,12 @@ int	square_map(t_settings *cub_sets)
 		i++;
 	}
 	squared_map[i] = 0;
-	free_char_p2p(cub_sets->map);
-	cub_sets->map = squared_map;
+	free_char_p2p(setup->map);
+	setup->map = squared_map;
 	return (0);
 }
 
-static void	add_map_line(char *line, t_settings *cub_sets)
+static void	add_map_line(char *line, t_setup *setup)
 {
 	int		size;
 	int		i;
@@ -55,34 +55,34 @@ static void	add_map_line(char *line, t_settings *cub_sets)
 
 	size = 0;
 	i = 0;
-	while (cub_sets->map[size])
+	while (setup->map[size])
 		size++;
 	size++;
 	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
 	if (temp == NULL)
-		abort_prog("Failed to malloc cub_sets->map");
-	while (cub_sets->map[i])
+		abort_prog("Failed to malloc setup->map");
+	while (setup->map[i])
 	{
-		temp[i] = ft_strdup(cub_sets->map[i]);
+		temp[i] = ft_strdup(setup->map[i]);
 		i++;
 	}
 	temp[i] = ft_strdup(line);
 	temp[i + 1] = 0;
-	free_char_p2p(cub_sets->map);
-	cub_sets->map = temp;
+	free_char_p2p(setup->map);
+	setup->map = temp;
 
 }
 
-void	store_map(char *line, t_settings *cub_sets)
+void	store_map(char *line, t_setup *setup)
 {
-	if (cub_sets->map == NULL)
+	if (setup->map == NULL)
 	{
-		cub_sets->map = (char **)wrmalloc(sizeof(char *) + 1);
-		if (cub_sets->map == NULL)
-			abort_prog("Failed to malloc cub_sets->map");
-		cub_sets->map[0] = ft_strdup(line);
-		cub_sets->map[1] = 0;
+		setup->map = (char **)wrmalloc(sizeof(char *) + 1);
+		if (setup->map == NULL)
+			abort_prog("Failed to malloc setup->map");
+		setup->map[0] = ft_strdup(line);
+		setup->map[1] = 0;
 	}
 	else
-		add_map_line(line, cub_sets);
+		add_map_line(line, setup);
 }

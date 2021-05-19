@@ -65,22 +65,22 @@ static int	is_map(char *line)
 	return (0);
 }
 
-static void	continue_map(char *line, t_settings *cub_sets)
+static void	continue_map(char *line, t_setup *setup)
 {
 	int	error;
 
 	error = 0;
-	if (cub_sets->map_over == false)
+	if (setup->map_over == false)
 	{
 		if (non_empty_line(line) == 1)
 		{
 			if (is_map(line) == 0)
-				store_map(line, cub_sets);
+				store_map(line, setup);
 			else
 				error = -1;
 		}
 		else
-			cub_sets->map_over = true;
+			setup->map_over = true;
 	}
 	else
 		if (non_empty_line(line) == 1)
@@ -89,24 +89,24 @@ static void	continue_map(char *line, t_settings *cub_sets)
 		abort_prog("Nothing else should be after the map");
 }
 
-static void	start_map(char *line, t_settings *cub_sets)
+static void	start_map(char *line, t_setup *setup)
 {
 	if (non_empty_line(line) == 1)
 	{
 		if (is_map(line) == 0)
 		{
-			store_map(line, cub_sets);
-			cub_sets->map_started = true;
+			store_map(line, setup);
+			setup->map_started = true;
 		}
 		else
 			abort_prog("There should be only 8 identifier lines");
 	}
 }
 
-void	parse_map(char *line, t_settings *cub_sets)
+void	parse_map(char *line, t_setup *setup)
 {
-	if (cub_sets->map_started == true)
-		continue_map(line, cub_sets);
+	if (setup->map_started == true)
+		continue_map(line, setup);
 	else
-		start_map(line, cub_sets);
+		start_map(line, setup);
 }

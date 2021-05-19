@@ -12,20 +12,20 @@
 
 #include "../header_cub3d.h"
 
-void	parse_id(char *line, t_settings *cub_sets)
+void	parse_id(char *line, t_setup *setup)
 {
 	line = change_char(line, ' ', '\t');
 	line = change_char(line, ' ', '\v');
 	while (*line == ' ')
 		line++;
 	if (*line == 'R')
-		p_resolution(line, cub_sets);
+		p_resolution(line, setup);
 	else if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
-		p_textures(line, cub_sets);
+		p_textures(line, setup);
 	else if (*line == 'F')
-		p_floor(line, cub_sets);
+		p_floor(line, setup);
 	else if (*line == 'C')
-		p_ceiling(line, cub_sets);
+		p_ceiling(line, setup);
 	else if (*line == '\0')
 		return ;
 	else
