@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 12:03:10 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 14:02:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,21 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef struct s_game
+typedef struct	s_sprite
 {
-	t_settings	ok;
+	
+}				t_sprite
+
+typedef struct	s_textures
+{
+	char	*buffer;
+	char	*; // a renommer
+}				t_textures
+
+typedef struct	s_game
+{
+	t_col	f_color;
+	t_col	c_color;
 	double		pos_x; //position x du joueur
 	double		pos_y; //position y du joueur
 	double		dir_x; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
@@ -64,7 +76,7 @@ typedef struct s_game
 	int			endian;
 	char		*buffer;
 	int			line_height;
-	int			line_lenght;
+s	int			line_lenght;
 	int			BPP;
 	int			width;
 	int			height;
@@ -88,7 +100,6 @@ typedef union	u_color
 typedef struct	s_setup
 {
 	void	*mlx;
-	bool	screenshot;
 	bool	res;
 	bool	north;
 	bool	south;
@@ -102,16 +113,13 @@ typedef struct	s_setup
 	bool	b_player;
 	int		id_counter;
 	char	**elements;
-	t_game	game;
 	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
 	char	*sprite_texture_path;
-	t_col	f_color;
-	t_col	c_color;
 	char	**map;
-	char	start_orientation;
+	t_game	game;
 }				t_setup;
 
 int				find_player(t_settings *cub_sets); // ajout du floodfill
