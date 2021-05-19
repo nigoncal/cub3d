@@ -1,3 +1,6 @@
+#ifndef CUB3D_H
+# define CUB3D_H
+
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -10,11 +13,9 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
-#include "mlx/mlx.h"
+# include "mlx/mlx.h"
 
-
-
-typedef struct	s_settings
+typedef struct s_settings
 {
 	bool	screenshot;
 	bool	R;
@@ -28,7 +29,7 @@ typedef struct	s_settings
 	void	*mlx;
 	int		width;
 	int		height;
-  	char	*north_texture_path;
+	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
@@ -39,14 +40,13 @@ typedef struct	s_settings
 	int		ceiling_red;
 	int		ceiling_green;
 	int		ceiling_blue;
-	char		**map;
+	char	**map;
 	char	map_char[8];
-	
 }				t_settings;
 
-	typedef struct	s_info
+typedef struct s_info
 {
-	t_settings ok;
+	t_settings	ok;
 	double		posX; //position x du joueur
 	double		posY; //position y du joueur
 	double		dirX; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
@@ -76,20 +76,18 @@ typedef struct	s_settings
 	int			color;
 	int			endian;
 	char		*buffer;
-	int 		lineHeight;
+	int			line_height;
 	int			line_lenght;
-	int  		BPP;
-	int			height; //Hauteur
-	int 		width; //Largeur
-	void	*mlx;
-	void	*win;
-	void	*image;
+	int			BPP;
+	int			height;
+	int			width;
+	void		*mlx;
+	void		*win;
+	void		*image;
 }				t_info;
 
 typedef struct s_screen
 {
-
-	
 	int		pixel;
 	int		color;
 	char	*buffer; // contient toutes les nuances de pixels pour l'image
@@ -107,11 +105,11 @@ typedef struct s_screen
 }	t_screen;
 
 void	create_windows(t_info *info);
-void    put_square( int lenght, t_screen *sc);
+void	put_square(int lenght, t_screen *sc);
 void	create_mini_map(t_screen *sc);
 void	init(t_info *info);
-void    put_pixel(t_screen *screen);
-void 	get_map();
+void	put_pixel(t_screen *screen);
+void	get_map(void);
 void	verLine(t_info *info, int x, int y1, int y2, int color);
 int		key_hook(int keycode);
 int		main_loop(t_info *info);
@@ -123,3 +121,5 @@ void	raycast_cal(t_info *info);
 void	raycast_calc_dir(t_info *info);
 void	raycast_calc_delta(t_info *info);
 void	raycast_calc_pos(t_info *info);
+
+#endif

@@ -3,7 +3,7 @@
 # Names of files
 NAME		=	cub3d.a
 MLX			=	libmlx.dylib
-PGM			=	cub3D
+PGM			=	cub3d
 LIBFT		=	libft.a
 
 # Name directory
@@ -16,7 +16,7 @@ PATH_LIBFT	=	libft
 # List of sources
 SRCS		=	$(addprefix $(PATH_SRC)/, main.c minimap.c raycasting.c key_press.c get_map.c)
 OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
-INCS		=	cub3D.h
+INCS		=	cub3d.h
 
 # Commands of compilation
 COMP		=	clang
