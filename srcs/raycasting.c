@@ -141,5 +141,5 @@ void	raycast_calc_pos(t_info *info)
 		info->color = 0xFFFFFF;
 	//change color depending on wall orientation but it is fucked up
 	if (info->side == 1)
-		info->color = info->color / 2;
+		info->color = 0x00FF00;
 }
