@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 13:49:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 09:54:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ void	start(int fd, char **line, t_settings *cub_sets)
 	while (cub_sets->map[c])
 	{
 		dprintf(1, "cub_sets->map[c] = |%s|\n", cub_sets->map[c++]);
+	}
+	if (find_player(cub_sets) == RAS)
+	{
+		printf("Pos X du player = %d\n", cub_sets->play_x);
+		printf("Pos Y du player = %d\n", cub_sets->play_y);
+		//printf("Si on regarde a cet emplacement de la map, on trouve '%c'\n", cub_sets->map[cub_sets->play_y][cub_sets->play_x]);
+		printf("Orientation de depart du player = %c\n", cub_sets->start_orientation);
 	}
 	wrdestroy();
 }

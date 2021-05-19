@@ -6,13 +6,15 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 17:10:18 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 10:15:19 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_CUB3D_H
 # define HEADER_CUB3D_H
 # define COLOR_MAX 255
+# define ERROR -1
+# define RAS 0
 // check tous les includes et vires si pas besoin
 # include "mlx/mlx.h"
 # include "libft/libft.h"
@@ -68,6 +70,9 @@ typedef struct	s_settings
 	t_col	f_color;
 	t_col	c_color;
 	char	**map;
+	char	start_orientation;
+	int		play_x;
+	int		play_y;
 }				t_settings;
 
 /*typedef struct	s_info
@@ -113,6 +118,7 @@ typedef struct	s_settings
 // MALLOC D'AUTRES CHOSES QUE NICO EST EN TRAIN DE CODER
 }				t_info;*/
 
+int				find_player(t_settings *cub_sets); // ajout du floodfill
 void			abort_prog(char *s);
 void			start(int fd, char **line, t_settings *cub_sets);
 int				non_empty_line(char *line);

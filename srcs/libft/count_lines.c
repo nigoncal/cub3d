@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_amount.c                                      :+:      :+:    :+:   */
+/*   count_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 14:11:07 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/09 14:12:07 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/05/19 10:27:21 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/19 10:36:15 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	line_amount(char **tab)
+int	count_lines(char **tab)
 {
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return (0);
 	while (tab[i])
 		i++;
 	return (i);

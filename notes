@@ -131,3 +131,5 @@ remplacer les free par wrfree
 virer tous les mains de test
 
 deplacer la libft a la racine du projet, donc modifier le Makefile
+
+si tu as le temps, prends north, que tu as opti et copies pour faire south etc.

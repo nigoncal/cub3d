@@ -85,7 +85,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
 int				get_next_line(int fd, char **line);
 int				is_tab_digit(char **tab);
-int				line_amount(char **tab);
+int				count_lines(char **tab);
 int				longest_line(char **tab);
 int				str_isdigit(char *str);
 void			wrdestroy(void);

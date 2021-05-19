@@ -54,7 +54,7 @@ SRCS	=		atoi_limit.c\
 				get_next_line.c\
 		  		get_next_line_utils.c\
 				is_tab_digit.c\
-				line_amount.c\
+				count_lines.c\
 				longest_line.c\
 				str_isdigit.c\
 				wrmalloc.c

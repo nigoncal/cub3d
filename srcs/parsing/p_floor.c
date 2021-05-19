@@ -5,20 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 10:18:53 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/17 17:25:56 by sylducam         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   p_floor.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 10:18:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 10:25:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +20,6 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 	i = 0;
 	while (tab_rgb[i])
 	{
-		if (str_isdigit(tab_rgb[i]) == -1)
-			return (-1);
 		rgb[i] = atoi_limit(tab_rgb[i], COLOR_MAX + 1);
 		if (rgb[i] == COLOR_MAX + 1)
 			return (-1);
@@ -47,22 +33,14 @@ static int	store_rgb(char **tab_rgb, t_settings *cub_sets)
 
 static int	right_content(t_settings *cub_sets)
 {
-	int		i;
 	char	**tab_rgb;
 
-	i = 0;
 	tab_rgb = NULL;
-	while (cub_sets->elements[i])
-		i++;
-	if (i != 2)
-		return (-1);
-	i = 0;
-	if (ft_strcmp(cub_sets->elements[0], "F") != 0)
+	if (count_lines(cub_sets->elements) != 2
+		|| ft_strcmp(cub_sets->elements[0], "F") != 0)
 		return (-1);
 	tab_rgb = ft_split(cub_sets->elements[1], ',');
-	while (tab_rgb[i])
-		i++;
-	if (i != 3 || is_tab_digit(tab_rgb) == -1
+	if (count_lines(tab_rgb) != 3 || is_tab_digit(tab_rgb) == -1
 		|| store_rgb(tab_rgb, cub_sets) == -1)
 		return (-1);
 	return (0);

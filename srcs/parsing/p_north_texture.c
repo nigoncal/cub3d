@@ -32,7 +32,7 @@ static int	checking(t_settings *cub_sets)
 	int	fd;
 
 	fd = 0;
-	if (line_amount(cub_sets->elements) != 2
+	if (count_lines(cub_sets->elements) != 2
 		|| ft_strcmp(cub_sets->elements[0], "NO") != 0
 		|| ((format_check(cub_sets->elements[1], ".xpm"))
 		+ (format_check(cub_sets->elements[1], ".png")) == -2)) // - 2 veut

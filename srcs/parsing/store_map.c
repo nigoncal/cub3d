@@ -21,7 +21,7 @@ int	square_map(t_settings *cub_sets)
 
 	i = 0;
 	j = 0;
-	squared_map = wrmalloc(sizeof(char *) * line_amount(cub_sets->map) + 1);
+	squared_map = wrmalloc(sizeof(char *) * count_lines(cub_sets->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
 	x = longest_line(cub_sets->map);
