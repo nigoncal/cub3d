@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 16:05:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 17:26:56 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct	s_setup
 	char	*east_texture_path;
 	char	*sprite_texture_path;
 	char	**map;
+	char	player_dir;
 	t_game	game;
 //	t_textures	tabtexture[5]; // a revoir
 //	t_sprite	sprite;

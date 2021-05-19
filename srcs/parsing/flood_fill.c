@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 16:04:18 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 16:04:33 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 17:28:59 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	find_player(t_setup *setup)
 	x = 0;
 	while (setup->map[y])
 	{
-
+		
 	}
 }
