@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 17:26:56 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 14:04:12 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct	s_setup
 	bool	b_ceiling;
 	bool	map_started;
 	bool	map_over;
-	bool	b_player;
 	int		id_counter;
 	char	**elements;
 	char	*north_texture_path;
