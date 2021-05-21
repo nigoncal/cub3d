@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:36:44 by pmillet           #+#    #+#             */
-/*   Updated: 2021/05/17 16:37:10 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 14:46:42 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <string.h>
 # include "get_next_line.h"
 
 typedef struct s_list
@@ -29,7 +30,8 @@ typedef struct s_split_next
 	size_t	length;
 }	t_split_next;
 
-int				atoi_limit(const char *str, int limit);	
+int				atoi_limit(const char *str, int limit);
+int				bool_strchr(const char *s, char c);
 char			*change_char(char *s, char a, char b);
 int				format_check(char *file, char *format);
 int				free_char_p2p(char **str);

@@ -1,4 +1,5 @@
 SRCS	=		atoi_limit.c\
+				bool_strchr.c\
 				change_char.c\
 				format_check.c\
 				free_char_p2p.c\
