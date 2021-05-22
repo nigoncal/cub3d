@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/22 11:43:58 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/22 12:00:43 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/05/22 11:46:10 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/22 11:50:31 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
-
-void	check_map(t_setup *setup)
+void	check_map(char **map, int y, int x, char c)
 {
-	find_player(setup);
+	
 }

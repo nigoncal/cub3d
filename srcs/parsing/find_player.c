@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/22 11:08:22 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/22 12:02:00 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	store_player(int y, int x, t_setup *setup)
 	else
 	{
 		setup->player_dir = setup->map[y][x];
+		setup->flood_pos_x = x;
+		setup->flood_pos_y = y;
 		setup->game.pos_x = (float)x + 0.5;
 		setup->game.pos_y = (float)y + 0.5;
 		store_dir_xy(setup);
@@ -57,4 +59,6 @@ void	find_player(t_setup *setup)
 	}
 	if (setup->player_dir == 0)
 		abort_prog("No player found on the map");
+
+	flood_fill(setup->map, setup->flood_pos_y, setup->flood_post_x, 'o');
 }
