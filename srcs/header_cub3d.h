@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/21 16:51:19 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/22 09:24:45 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			p_ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 int				square_map(t_setup *setup);
+void			flood_fill(t_setup *setup);
 void			find_player(t_setup *setup);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);

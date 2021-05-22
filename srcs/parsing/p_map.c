@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/12 16:23:48 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/22 11:15:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	continue_map(char *line, t_setup *setup)
 		if (non_empty_line(line) == 1)
 			error = -1;
 	if (error == -1)
-		abort_prog("Nothing else should be after the map");
+		abort_prog("Only empty lines are allowed after the end of the map");
 }
 
 static void	start_map(char *line, t_setup *setup)
