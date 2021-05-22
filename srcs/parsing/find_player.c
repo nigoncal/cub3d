@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/22 12:55:02 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/22 18:47:20 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	store_player(int y, int x, t_setup *setup)
 	else
 	{
 		setup->player_dir = setup->map[y][x];
-		setup->flood_pos_x = x;
-		setup->flood_pos_y = y;
+		setup->flood_x = x;
+		setup->flood_y = y;
 		setup->game.pos_x = (float)x + 0.5;
 		setup->game.pos_y = (float)y + 0.5;
 		store_dir_xy(setup);
