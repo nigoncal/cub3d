@@ -1,3 +1,13 @@
+dans abort_prog, si tu recois "M", tu affiches une suite de phrases d'erreur
+decrivant les regles de la map :
+- closed by "1" characters
+- spaces are allowed outside the map but not inside
+- here's an example of right map :
+111111111111111111
+100000000000000001
+1000000120000N0001
+100021011000000001
+111111111111111111
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
