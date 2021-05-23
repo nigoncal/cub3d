@@ -32,6 +32,7 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/p_ceiling.c\
 						srcs/parsing/p_map.c\
 						srcs/parsing/store_map.c\
+						srcs/parsing/check_map.c\
 						srcs/parsing/flood_fill.c\
 						srcs/parsing/find_player.c
 # tu vas certainement rajouter des fichiers pour toute la partie graphique

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/22 18:45:58 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/23 17:29:53 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ typedef struct	s_setup
 	char	*sprite_texture_path;
 	char	**map;
 	char	player_dir;
-	int		flood_x;
-	int		floox_y;
+	int		x;
+	int		y;
 	t_game	game;
 //	t_textures	tabtexture[5]; // a revoir
 //	t_sprite	sprite;
@@ -140,7 +140,7 @@ void			p_ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 int				square_map(t_setup *setup);
-void			flood_fill(t_setup *setup);
+void			flood_fill(char **map, int y, int x);
 void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
 /*void			create_windows(t_info *info);
