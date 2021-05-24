@@ -6,11 +6,17 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 11:02:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 15:09:55 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
+
+static void	size_map(t_setup *setup)
+{
+	setup->map_y_size = count_lines(setup->map);
+	setup->map_x_size = longest_line(setup->map);
+}
 
 int	square_map(t_setup *setup)
 {
@@ -20,15 +26,20 @@ int	square_map(t_setup *setup)
 
 	i = 0;
 	j = 0;
-	squared_map = wrmalloc(sizeof(char *) * count_lines(setup->map) + 1);
+	size_map(setup);
+	squared_map = wrmalloc(sizeof(char *) * setup->map_y_size + 3);
 	if (squared_map == NULL)
 		return (-1);
-	setup->map_x_size = longest_line(setup->map);
 	while (setup->map[i])
 	{
-		squared_map[i] = wrmalloc(sizeof(char) * setup->map_x_size + 1);
+		squared_map[i] = wrmalloc(sizeof(char) * setup->map_x_size + 3);
 		if (squared_map[i] == NULL)
 			return (-1);
+		while (squared_map[0][j])
+			squared_map[0][j++] = ' ';
+		squared_map[0][j] = '\0';
+		j = 0;
+		squared_map[i][0] = ' ';
 		while (setup->map[i][j])
 		{
 			squared_map[i][j] = setup->map[i][j];
@@ -36,12 +47,16 @@ int	square_map(t_setup *setup)
 		}
 		while (j < setup->map_x_size)
 			squared_map[i][j++] = ' ';
-		squared_map[i][j] = '\0';
+		squared_map[i][j] = ' ';
+		squared_map[i][j + 1] = '\0';
 		j = 0;
 		i++;
 	}
+	while (squared_map[i - 1][j])
+		squared_map[i - 1][j++] = ' ';
+	squared_map[i - 1][j] = '\0';
 	squared_map[i] = 0;
-	free_char_p2p(setup->map);
+	free_char_p2p(setup->map); // attention a ca
 	setup->map = squared_map;
 	return (0);
 }

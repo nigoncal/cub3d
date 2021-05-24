@@ -9,8 +9,12 @@ decrivant les regles de la map :
 100021011000000001
 111111111111111111
 
+attention aux free_char_p2p que tu dois remplacer par des free
+
 Geres les int overflow dans ta map (si elle est plus large ou plus longue que 
 l'INT_MAX
+
+changer le nom de flood_fill_floor en flood_fill
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 fonctions autorisees
