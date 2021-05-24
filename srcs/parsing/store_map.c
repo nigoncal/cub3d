@@ -6,82 +6,33 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 15:09:55 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 17:29:53 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
 
-static void	size_map(t_setup *setup)
-{
-	setup->map_y_size = count_lines(setup->map);
-	setup->map_x_size = longest_line(setup->map);
-}
-
-int	square_map(t_setup *setup)
-{
-	char	**squared_map;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	size_map(setup);
-	squared_map = wrmalloc(sizeof(char *) * setup->map_y_size + 3);
-	if (squared_map == NULL)
-		return (-1);
-	while (setup->map[i])
-	{
-		squared_map[i] = wrmalloc(sizeof(char) * setup->map_x_size + 3);
-		if (squared_map[i] == NULL)
-			return (-1);
-		while (squared_map[0][j])
-			squared_map[0][j++] = ' ';
-		squared_map[0][j] = '\0';
-		j = 0;
-		squared_map[i][0] = ' ';
-		while (setup->map[i][j])
-		{
-			squared_map[i][j] = setup->map[i][j];
-			j++;
-		}
-		while (j < setup->map_x_size)
-			squared_map[i][j++] = ' ';
-		squared_map[i][j] = ' ';
-		squared_map[i][j + 1] = '\0';
-		j = 0;
-		i++;
-	}
-	while (squared_map[i - 1][j])
-		squared_map[i - 1][j++] = ' ';
-	squared_map[i - 1][j] = '\0';
-	squared_map[i] = 0;
-	free_char_p2p(setup->map); // attention a ca
-	setup->map = squared_map;
-	return (0);
-}
-
 static void	add_map_line(char *line, t_setup *setup)
 {
 	int		size;
-	int		i;
+	int		y;
 	char	**temp;
 
 	size = 0;
-	i = 0;
+	y = 0;
 	while (setup->map[size])
 		size++;
 	size++;
 	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
 	if (temp == NULL)
 		abort_prog("Failed to malloc setup->map");
-	while (setup->map[i])
+	while (setup->map[y])
 	{
-		temp[i] = ft_strdup(setup->map[i]);
-		i++;
+		temp[y] = ft_strdup(setup->map[y]);
+		y++;
 	}
-	temp[i] = ft_strdup(line);
-	temp[i + 1] = 0;
+	temp[y] = ft_strdup(line);
+	temp[y + 1] = 0;
 	free_char_p2p(setup->map);
 	setup->map = temp;
 
