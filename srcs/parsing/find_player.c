@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/23 17:26:51 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 11:08:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,22 @@ static void	store_player(int y, int x, t_setup *setup)
 
 void	find_player(t_setup *setup)
 {
-	int		y;
 	int		x;
 
-	y = 0;
 	x = 0;
-	while (setup->map[y])
+	while (setup->map[setup->map_y_size])
 	{
-		while (setup->map[y][x])
+		while (setup->map[setup->map_y_size][x])
 		{
-			if (bool_strchr("NSEW", setup->map[y][x]) != -1)
-				store_player(y, x, setup);
+			if (bool_strchr("NSEW", setup->map[setup->map_y_size][x]) != -1)
+				store_player(setup->map_y_size, x, setup);
 			x++;
 		}
-		y++;
+		setup->map_y_size++;
 		x = 0;
 	}
+
 	if (setup->player_dir == 0)
 		abort_prog("No player found on the map");
-
-	flood_fill(setup->map, setup->y, setup->x);
+	flood_fill_floor(setup->map, setup->y, setup->x, setup);
 }

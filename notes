@@ -9,6 +9,8 @@ decrivant les regles de la map :
 100021011000000001
 111111111111111111
 
+Geres les int overflow dans ta map (si elle est plus large ou plus longue que 
+l'INT_MAX
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 fonctions autorisees

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/14 16:06:35 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 11:02:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	square_map(t_setup *setup)
 {
 	char	**squared_map;
-	int		x;
 	int		i;
 	int		j;
 
@@ -24,10 +23,10 @@ int	square_map(t_setup *setup)
 	squared_map = wrmalloc(sizeof(char *) * count_lines(setup->map) + 1);
 	if (squared_map == NULL)
 		return (-1);
-	x = longest_line(setup->map);
+	setup->map_x_size = longest_line(setup->map);
 	while (setup->map[i])
 	{
-		squared_map[i] = wrmalloc(sizeof(char) * x + 1);
+		squared_map[i] = wrmalloc(sizeof(char) * setup->map_x_size + 1);
 		if (squared_map[i] == NULL)
 			return (-1);
 		while (setup->map[i][j])
@@ -35,7 +34,7 @@ int	square_map(t_setup *setup)
 			squared_map[i][j] = setup->map[i][j];
 			j++;
 		}
-		while (j < x)
+		while (j < setup->map_x_size)
 			squared_map[i][j++] = ' ';
 		squared_map[i][j] = '\0';
 		j = 0;
