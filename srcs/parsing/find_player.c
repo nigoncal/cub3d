@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 14:21:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 11:27:16 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,20 @@ static void	store_player(int y, int x, t_setup *setup)
 
 void	find_player(t_setup *setup)
 {
-	int		x;
+	int	y;
+	int	x;
 
+	y = 0;
 	x = 0;
-	while (setup->map[setup->map_y_size])
+	while (setup->map[y])
 	{
-		while (setup->map[setup->map_y_size][x])
+		while (setup->map[y][x])
 		{
-			if (bool_strchr("NSEW", setup->map[setup->map_y_size][x]) != -1)
-				store_player(setup->map_y_size, x, setup);
+			if (bool_strchr("NSEW", setup->map[y][x]) != -1)
+				store_player(y, x, setup);
 			x++;
 		}
-		setup->map_y_size++;
+		y++;
 		x = 0;
 	}
 
