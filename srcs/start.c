@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 18:02:44 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 15:05:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	non_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
+		if (i == 2147483647)
+			abort_prog("One of the line in you .cub file is too long");
 		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\v')
 			return (1);
 		i++;
@@ -41,6 +43,8 @@ void	start(int fd, char **line, t_setup *setup)
 		}
 		else
 		{
+			if (setup->id_counter == 2147483647)
+				abort_prog("Your map is too big");
 			parse_map(*line, setup);
 		}
 	}

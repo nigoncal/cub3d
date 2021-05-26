@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 17:29:53 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:54:47 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static void	add_map_line(char *line, t_setup *setup)
 	size = 0;
 	y = 0;
 	while (setup->map[size])
+	{
+		if (size == 2147483647 && setup->map[size])
+			abort_prog("Your map is too big");
 		size++;
+	}
 	size++;
 	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
 	if (temp == NULL)

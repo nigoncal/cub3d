@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 16:48:47 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 14:44:59 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,23 @@
 // penses a free elements aussi, dans le parsing des textures (free_char_p2p)
 // > free le juste avant d'appeler abort_prog
 
-/*void	free_struct(t_setup *setup) // a tester
+void	map_error(void)
 {
-	if (setup->mlx)
-		free(setup->mlx);
-	if (setup->elements)
-		free_char_p2p(setup->elements);
-	if (setup->north_texture_path)
-		free(setup->north_texture_path);
-	if (setup->south_texture_path)
-		free(setup->south_texture_path);
-	if (setup->east_texture_path)
-		free(setup->east_texture_path);
-	if (setup->west_texture_path)
-		free(setup->west_texture_path);
-	if (setup->sprite_texture_path)
-		free(setup->sprite_texture_path);
-	if (setup->map)
-		free_char_p2p(setup->map);
-	free(setup);
-}*/
-
-/*void	free_graph(t_info *info)
-{
-	if (info->buffer)
-		free(info->buffer);
-	if (info->mlx)
-		free(info->mlx);
-	if (info->win)
-		free(info->win);
-	if (info->image)
-		free(info->image);
-	free(info);
-}*/
+	ft_putstr("An error was spotted in your map\nRules of the map :\n");
+	ft_putstr("The only characters allowed are 0 for the floor, ");
+	ft_putstr("1 for the walls, 2 for the sprites, N/S/E/W for the player ");
+	ft_putstr("according to it's orientation and spaces.\n");
+	ft_putstr("The map has to be closed by walls and space characters are ");
+	ft_putstr("only allowed outside the map to shape it to your will.\n");
+}
 
 void	abort_prog(char *error_msg)
 {
 	ft_putstr("Error\n");
-	ft_putstr(error_msg);
+	if (*error_msg == 'M')
+		map_error();
+	else
+		ft_putstr(error_msg);
 	write (1, "\n", 1);
 	wrdestroy();
 	exit(1);
