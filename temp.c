@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:53:20 by yohlee            #+#    #+#             */
-/*   Updated: 2021/05/26 15:05:16 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 16:20:15 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	draw(t_info *info)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			info->img.data[y * width + x] = info->buf[y][x];
+			//info->img.data[(y * width) + (x * 4)] = info->buf[y][x];
+			info->img.data[y * info->img.size_l * 1 / 4 + x] = info->buf[y][x];
 		}
 	}
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
@@ -227,9 +228,9 @@ void	calc(t_info *info)
 					4 + recup->t.texx];*/
 
 			/* NOTRE VERSION */
-			if (y < height && x < width)
+			/*if (y < height && x < width)
 					info->img.data[y * info->img.size_l / 4 + x] =
-					info->texture[0][texY * info->img.size_l / 4 + texX];
+					info->texture[0][texY * info->img.size_l / 4 + texX];*/
 
 
 			/*if (y < height && x < width)
