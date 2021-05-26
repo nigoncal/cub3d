@@ -13,7 +13,7 @@ VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
 VLIBS				=	$(VLIBFT)libft.a\
 						$(VMLX)libmlx.dylib
 
-VLIBFT				=	srcs/libft/
+VLIBFT				=	libft/
 VMLX				=	srcs/mlx/
 VTEXTURES			=	srcs/textures/
 

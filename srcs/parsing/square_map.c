@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:18:02 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/24 18:52:17 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 17:17:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	size_map(t_setup *setup)
 	setup->map_x_size = longest_line(setup->map);
 }
 
-int	square_map(t_setup *setup)
+void	square_map(t_setup *setup)
 {
 	int		y;
 
@@ -67,17 +67,16 @@ int	square_map(t_setup *setup)
 	size_map(setup);
 	setup->squared_map = wrmalloc(sizeof(char *) * (setup->map_y_size + 3));
 	if (setup->squared_map == NULL)
-		return (-1);
+		abort_prog("Failed to malloc setup->map");
 	while (y < setup->map_y_size + 2)
 	{
 		setup->squared_map[y] = wrmalloc(sizeof(char) * (setup->map_x_size + 3));
 		if (setup->squared_map[y] == NULL)
-			return (-1);
+			abort_prog("Failed to malloc setup->map");
 		y++;
 	}
 	margin(setup);
 	fill_line(setup);
 	free_char_p2p(setup->map); // attention a ca
 	setup->map = setup->squared_map;
-	return (0);
 }

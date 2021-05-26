@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/25 11:27:00 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 17:19:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define RAS 0
 // check tous les includes et vires si pas besoin
 # include "mlx/mlx.h"
-# include "libft/libft.h"
+# include "../libft/libft.h"
 //# include "key_macros.h"
 # include <stdbool.h>
 # include <stdint.h>
@@ -142,7 +142,7 @@ void			p_floor(char *line, t_setup *setup);
 void			p_ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
-int				square_map(t_setup *setup);
+void			square_map(t_setup *setup);
 void			flood_fill(char **map, int y, int x, t_setup *setup);
 void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);

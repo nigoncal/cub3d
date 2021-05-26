@@ -1,24 +1,5 @@
 attention aux free_char_p2p que tu dois remplacer par des free
 
-Geres les int overflow dans ta map (si elle est plus large ou plus longue que 
-l'INT_MAX
-
-changer le type de square map from int to void et ajouter des abort_prog
-
-!!!!!!!!!!!!!!!!!!!!!!!!!
-fonctions autorisees
-- open, close, read, write,
-PRINTF, malloc, free,       // PRINTF
-PERROR, STRERROR, EXIT      // go check les man
-- Toutes les fonctions de   // "
-la lib math (-lm man man 3
-math)
-!!!!!!!!!!!!!!!!!!!!!!!!!!
-la fonction exit permet de terminer un programme, je pense qu'elle est utile pour fermer la fenetre du jeu lorsque l'on appuie sur echap
-atexit permet d'enregistrer des fonctions a appeler dans l'ordre inverse de leur enregistrement au moment de terminer le programme, via la fonction exit. Donc tu peux stack des fonctions qui free, par expmple, via atexit
-
-les fonctions error, tu as pris des notes dans ton cahier.
-
 prevoir un dossier pour tous les fichiers de le partie image/graphique
 
 ATTENTION

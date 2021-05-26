@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/26 15:05:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 17:17:30 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	start(int fd, char **line, t_setup *setup)
 			parse_map(*line, setup);
 		}
 	}
-	if (square_map(setup) == -1)
-		abort_prog("Failed to malloc setup->map");
+	square_map(setup);
 	dprintf(1, "width = |%d|\n", setup->game.width);
 	dprintf(1, "height = |%d|\n", setup->game.height);
 	dprintf(1, "north = |%s|\n", setup->north_texture_path);
@@ -78,6 +77,6 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_x = |%f|\n", setup->game.pos_x);
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
-		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);	
+		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
 	wrdestroy();
 }
