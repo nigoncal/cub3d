@@ -2,58 +2,12 @@ attention aux free_char_p2p que tu dois remplacer par des free
 
 prevoir un dossier pour tous les fichiers de le partie image/graphique
 
-ATTENTION
-Mon gnl ne fonctionne que quand le file que je teste est dans le meme dossier
-que les fichiers du gnl. Est-ce que ca peut poser probleme pour cub3d ?
-ca veut dire que le fichier .cub doit etre au meme endroit que l'executabe cub3d
-
------------------------------------------------------------------------------------------------
-POUR MARDI 19 AVRIL 2021
-
-Tu peux remettre tes if(fonction qui return un int)
-Ce qui est interdit dans la norme ce sont les ASSIGNATIONS dans les strucutres de controle
-Exemple : if((int = fonction())). La tu assignes l'int et tu verifies sa valeur, tout ca en meme temps dans une structure de controle
-DONC A PARTIR DE LA, REFAIS ENCORE RESOLUTION, TEXTURES, NORTH ET SOUTH pour remodif ca
-
 ----------------------------------Makefile-------------------------------------
-Regardes la deniere reponse de guhernan par rapport a lib et $(LAR)
-
-Fais en sorte
-				- que ca ne relink pas (nothing to bo done for 'all')
-				- que si tu touch un fichier dans n'importe lequel des projets
-				  dependances, ca reintegre les fichier touch en les refaisant
-				  en .o etc. etc. jusq'a avoir le resultat final. Testes bien
-				  ca dans tous tes projets dependances (lbft et mlx jusqu'ici)
-
-vires bien tous tes commentaires de ton Makefile (attention ils sont difficiles
-a voir)
-
-Verifies bien que tout ce qui est cree par ton Makefile est rm -rf aved fclean
-
-Est-ce que je garde le flag -g3 ?
--------------------------------------parsing de la map--------------------------
-
--------------------------------abort_prog---------------------------------------
-tu es en train de coder abort_prog
-ceci est une partie de ton entreprise de faire tout fonctionner pas a pas, poru ne plus tester les fonctions individuellement avec des main bricoles. Ton main est bon normalement, mais tu es en train d'en reduire les lignes en faisant ta fonction abort_prog
+dossier objects
 --------------------------------------------------------------------------------
 1 - free elements a la fin de chaque fichier particulier de parsing de ligne
-2 - tu es en train de traiter les whitespaces dans resolution puis dans texture
-penses a bien checker si tu les traites tous individuellement correctement dans le parsing global
-3 - finis ta fonction change_char DONE
-4 - pour ensuite finir north_texture.c
-
-Commences par les commentaires de texture.c
-
-1 - *line dans toutes les fonctions a partir de l'appel de parser dans cub3D.c et plus de int lines nulle part ni de count_lines
-2 - Decouper toutes les parties de ton parser dans des fichiers singulier
-3 - Faire le makefile bien comme il faut tu es en train d'essayer de faire un makefile en t'inspirant de celui de ton printf. Donc vas voir ton dernier commit de printf sur github
-4 - testes
-5 - fais les check d'erreur avec Mohammed
 
 free(line) a la fin de ton main
-close fd aussi
-
 
 ---valgrind--
 apparemment les
@@ -62,13 +16,9 @@ still reachable: 200 bytes in 6 blocks
 sont dus au mac, selon Arthur du bocal
 --------------
 
-vires le minilibx.tgz
-
 ecoutes tes notes vocales
 
 dans tes favoris cub3D tu as un github avec des idees de comment casser ton cub3d
-
-problemes de norme dans header_libft.h
 
 ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
 
@@ -117,8 +67,6 @@ remplacer les free par wrfree
 "" free de toute ta structure par le wrfree general
 
 virer tous les mains de test
-
-deplacer la libft a la racine du projet, donc modifier le Makefile
 
 si tu as le temps, prends north, que tu as opti et copies pour faire south etc.
 

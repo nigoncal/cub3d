@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/26 17:19:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 17:40:01 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef union	u_color
+typedef union u_color
 {
 	struct	s_chan
 	{
@@ -40,28 +40,28 @@ typedef union	u_color
 		uint8_t	green;
 		uint8_t	blue;
 	}		chan;
-	uint32_t color;
+	uint32_t	color;
 }				t_col;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	
 }				t_sprite;
 
-typedef struct	s_textures
+typedef struct s_textures
 {
 //	char	*buffer;
 //	char	*; // a renommer
 }				t_textures;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	t_col		f_color;
 	t_col		c_color;
-	double		pos_x; //position x du joueur
-	double		pos_y; //position y du joueur
-	double		dir_x; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
-	double		dir_y; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
 //	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 //	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 //	double		raydirX; //calcul de direction x du rayon
@@ -76,7 +76,7 @@ typedef struct	s_game
 //	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
 //	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
 //	int			hit; // 1 si un mur a ete touche, 0 sinon
-	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
+	int			side;
 	double		perpwalldist; // distance du joueur au mur
 //	int			lineheight; //hauteur de la ligne a dessiner
 //	int			drawstart; //position de debut ou il faut dessiner

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 15:56:23 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 17:35:53 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv)
 	t_setup		*setup;
 
 	line = NULL;
-//	init_structs(setup); 
 	setup = wrmalloc(sizeof(*setup));
 	if (setup == NULL)
 		abort_prog("Failed to malloc setup structure");
