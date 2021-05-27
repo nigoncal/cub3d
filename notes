@@ -9,13 +9,6 @@ dossier objects
 
 free(line) a la fin de ton main
 
----valgrind--
-apparemment les
-possibly lost: 48 bytes in 2 blocks
-still reachable: 200 bytes in 6 blocks
-sont dus au mac, selon Arthur du bocal
---------------
-
 ecoutes tes notes vocales
 
 dans tes favoris cub3D tu as un github avec des idees de comment casser ton cub3d
