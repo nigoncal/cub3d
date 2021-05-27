@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:36:44 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 16:19:59 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 09:39:36 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	p_ceiling(char *line, t_setup *setup)
 	if (right_content(setup) == -1)
 		abort_prog("Usage : C r,g,b (with 0 >= r/g/b <= 255)");
 	setup->b_ceiling = true;
-	wrfree(setup->elements); // avant c'etait un free_char_p2p, verifies bien
-							 // que ca a bien ete free, chaque element du tab
+	wrfree(setup->elements);
 }

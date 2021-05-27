@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/26 17:40:01 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 13:29:13 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ typedef struct s_game
 //	int			line_height;
 //	int			line_lenght;
 //	int			BPP;
-	int			width;
-	int			height;
 //	void		*win;
 //	void		*image;
 }				t_game;
@@ -98,12 +96,10 @@ typedef struct s_game
 typedef struct	s_setup
 {
 	void	*mlx;
-	bool	res;
 	bool	north;
 	bool	south;
 	bool	east;
 	bool	west;
-	bool	sprite;
 	bool	b_floor;
 	bool	b_ceiling;
 	bool	map_started;
@@ -114,11 +110,10 @@ typedef struct	s_setup
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
-	char	*sprite_texture_path;
 	char	**map;
 	char	**squared_map;
-	int		map_x_size;
-	int		map_y_size;
+	int		map_xsize;
+	int		map_ysize;
 	char	player_dir;
 	int		x;
 	int		y;

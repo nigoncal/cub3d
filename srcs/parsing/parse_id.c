@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:20:23 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/18 17:17:15 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 13:25:30 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	parse_id(char *line, t_setup *setup)
 	line = change_char(line, ' ', '\v');
 	while (*line == ' ')
 		line++;
-	if (*line == 'R')
-		p_resolution(line, setup);
 	else if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 		p_textures(line, setup);
 	else if (*line == 'F')
@@ -29,5 +27,5 @@ void	parse_id(char *line, t_setup *setup)
 	else if (*line == '\0')
 		return ;
 	else
-		abort_prog("Identifiers allowed and mandatory : R,NO,SO,WE,EA,S,F,C");
+		abort_prog("Identifiers allowed and mandatory : NO,SO,WE,EA,S,F,C");
 }

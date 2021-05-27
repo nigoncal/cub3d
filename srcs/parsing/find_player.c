@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/25 11:27:16 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 09:38:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	find_player(t_setup *setup)
 		y++;
 		x = 0;
 	}
-
 	if (setup->player_dir == 0)
 		abort_prog("No player found on the map");
 	flood_fill(setup->map, setup->y, setup->x, setup);

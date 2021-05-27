@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/26 17:17:30 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 13:26:51 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	start(int fd, char **line, t_setup *setup)
 	setup->mlx = mlx_init();
 	while (get_next_line(fd, line))
 	{
-		if (setup->id_counter < 8)
+		if (setup->id_counter < 6)
 		{
 			setup->id_counter += non_empty_line(*line);
 			parse_id(*line, setup);
@@ -64,8 +64,8 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.red);
 	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.green);
 	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.blue);
-	dprintf(1, "map_y_size = |%d|\n", setup->map_y_size);
-	dprintf(1, "map_x_size = |%d|\n", setup->map_x_size);
+	dprintf(1, "map_ysize = |%d|\n", setup->map_ysize);
+	dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);
 	int c = 0;
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);	

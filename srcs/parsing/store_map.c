@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/26 14:54:47 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/27 10:08:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	add_map_line(char *line, t_setup *setup)
 		size++;
 	}
 	size++;
-	temp = (char**)wrmalloc(sizeof(char*) * size + 1);
+	temp = (char **)wrmalloc(sizeof(char *) * size + 1);
 	if (temp == NULL)
 		abort_prog("Failed to malloc setup->map");
 	while (setup->map[y])
@@ -39,7 +39,6 @@ static void	add_map_line(char *line, t_setup *setup)
 	temp[y + 1] = 0;
 	free_char_p2p(setup->map);
 	setup->map = temp;
-
 }
 
 void	store_map(char *line, t_setup *setup)
