@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/27 13:29:13 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 10:38:41 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_game
 //	int			line_height;
 //	int			line_lenght;
 //	int			BPP;
+	int			width;
+	int			height;
 //	void		*win;
 //	void		*image;
 }				t_game;

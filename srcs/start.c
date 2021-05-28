@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/27 13:26:51 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 10:38:54 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	non_empty_line(char *line)
 void	start(int fd, char **line, t_setup *setup)
 {
 	setup->mlx = malloc(sizeof(void));
+	setup->game.width = 1280;
+	setup->game.height = 720;
 	if (setup->mlx == NULL)
 		abort_prog("Failed to malloc setup->mlx");
 	setup->mlx = mlx_init();
@@ -55,7 +57,6 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "south = |%s|\n", setup->south_texture_path);
 	dprintf(1, "west = |%s|\n", setup->west_texture_path);
 	dprintf(1, "east = |%s|\n", setup->east_texture_path);
-	dprintf(1, "sprite = |%s|\n", setup->sprite_texture_path);
 	dprintf(1, "f_color = |%x|\n", setup->game.f_color.color);
 	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.red);
 	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.green);

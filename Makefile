@@ -21,13 +21,11 @@ SRCS				=	srcs/main.c\
 						srcs/error_manager.c\
 						srcs/start.c\
 						srcs/parsing/parse_id.c\
-						srcs/parsing/p_resolution.c\
 						srcs/parsing/p_textures.c\
 						srcs/parsing/p_north_texture.c\
 						srcs/parsing/p_south_texture.c\
 						srcs/parsing/p_east_texture.c\
 						srcs/parsing/p_west_texture.c\
-						srcs/parsing/p_sprite_texture.c\
 						srcs/parsing/p_floor.c\
 						srcs/parsing/p_ceiling.c\
 						srcs/parsing/p_map.c\
