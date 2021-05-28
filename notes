@@ -13,8 +13,6 @@ ecoutes tes notes vocales
 
 dans tes favoris cub3D tu as un github avec des idees de comment casser ton cub3d
 
-ATTENTION AUX FICHIERS DE TESTS LAISSES DANS LE DOSSIER DE LA MINILIBX QUI NE DOIVENT PAS Y ETRE (compares avec la minilibx originelle)
-
 push ton cub3D sur ton propre git
 
 penses a checker les headers de tous tes fichiers, car travail en commun
@@ -37,32 +35,8 @@ l'utiliser ailleurs, elle ne permettra pas de faire fonctionner printf
 
 la partie bonus du Makefile de la libft n'est pas bien faite
 --------------------------------------------------------------------------------
--------------------------------gnl----------------------------------------------
-vires bien main.c, file, file2 et file3 de la libft quand tu auras norme ton gnl
-et bien teste qu'il fonctionnait
-vires la libft de ton gnl (repo de base de ton gnl, pas celui de cub3d)
-On prend le gnl de nigoncal, le miens, si j'ai le temps un jour je le normerai
-et integrerai a ma libft
-Pour l'instant je le repush dans l'etat
-ton gnl a ete modifie dans son dossier de base, repush le avec les modif faites
-dans cub3d. push ton gnl modifie (mis a la norme) et push le avec un main
---------------------------------------------------------------------------------
-
-changer tous les headers de touts les fichiers (header 42)
-
-norminette (y compris libft et get_next_line, tout tout tout)
 
 virer tous les dprintf
 
-free elements a la fin de ton programme lorsque tout a bien fonctionne
-
 remplacer les free par wrfree
 "" free de toute ta structure par le wrfree general
-
-virer tous les mains de test
-
-si tu as le temps, prends north, que tu as opti et copies pour faire south etc.
-
-ta fonction square map n'est pas normee, elle est trop longue
-
-normer wrmalloc
