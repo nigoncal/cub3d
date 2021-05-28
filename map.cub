@@ -1,4 +1,4 @@
-NO ./srcs/textures/grass.xpm
+NO ./srcs/textures/grass.png
 SO ./srcs/textures/grass.xpm
 WE ./srcs/textures/grass.xpm
 EA ./srcs/textures/grass.xpm
@@ -13,7 +13,7 @@ C 225,30,0
 
 
 
-      111
+      1111
      100001
     1000001
     1000001
