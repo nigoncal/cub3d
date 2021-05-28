@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 11:37:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 13:45:09 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef union u_color
+typedef union	u_color
 {
 	struct	s_chan
 	{
@@ -43,16 +43,24 @@ typedef union u_color
 	uint32_t	color;
 }				t_col;
 
-typedef struct s_sprite
+typedef struct	s_sprite
 {
 	
 }				t_sprite;
 
-typedef struct s_textures
+typedef struct	s_textures
 {
 //	char	*buffer;
 //	char	*; // a renommer
 }				t_textures;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_game
 {
@@ -91,6 +99,7 @@ typedef struct s_game
 //	int			BPP;
 	int			width;
 	int			height;
+	t_data		texture[4];
 //	void		*win;
 //	void		*image;
 }				t_game;
