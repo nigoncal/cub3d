@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/29 19:53:20 by yohlee            #+#    #+#             */
-/*   Updated: 2021/05/26 16:20:15 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2020/06/26 15:18:03 by yohlee            #+#    #+#             */
+/*   Updated: 2021/05/29 15:51:55 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #define texHeight 64
 #define mapWidth 9
 #define mapHeight 17
-#define width 1000
-#define height 1000
+#define width 1280
+#define height 720
 
 typedef struct	s_img
 {
@@ -55,17 +55,19 @@ typedef struct	s_info
 }				t_info;
 
 int	worldMap[mapWidth][mapHeight] =
-									{
-										{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-										{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-									};
+{
+									
+									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},								
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+			};
+
 
 void	draw(t_info *info)
 {
@@ -73,8 +75,7 @@ void	draw(t_info *info)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			//info->img.data[(y * width) + (x * 4)] = info->buf[y][x];
-			info->img.data[y * info->img.size_l * 1 / 4 + x] = info->buf[y][x];
+			info->img.data[y * width + x] = info->buf[y][x];
 		}
 	}
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
@@ -82,25 +83,12 @@ void	draw(t_info *info)
 
 void	calc(t_info *info)
 {
-	//FLOOR CASTING
-	for(int y = 0; y < height; y++)
+	int	x;
+
+	x = 0;
+	while (x < width)
 	{
-		int x = 0;
 
-		info->buf[y][x] = 0x000000;
-
-		while (x < width)
-		{
-
-			info->buf[y][x] = 0xC400DF;
-			x++;
-
-		}
-
-	}
-	//WALL CASTING
-	for(int x = 0; x < width; x++)
-	{
 		double cameraX = 2 * x / (double)width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
@@ -162,6 +150,7 @@ void	calc(t_info *info)
 			}
 			//Check if ray has hit a wall
 			if (worldMap[mapX][mapY] > 0) hit = 1;
+
 		}
 		if (side == 0)
 			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
@@ -176,11 +165,14 @@ void	calc(t_info *info)
 		if(drawStart < 0)
 			drawStart = 0;
 		int drawEnd = lineHeight / 2 + height / 2;
-		if(drawEnd >= height)
+		if(drawEnd >= height || drawEnd < 0)
 			drawEnd = height - 1;
 
+
+	
+
 		// texturing calculations
-		int texNum = worldMap[mapX][mapY] - 1;
+		int texNum = worldMap[mapX][mapY];
 
 		// calculate value of wallX
 		double wallX;
@@ -199,83 +191,32 @@ void	calc(t_info *info)
 
 		// How much to increase the texture coordinate perscreen pixel
 		double step = 1.0 * texHeight / lineHeight;
-
 		// Starting texture coordinate
 		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
-
 		for (int y = drawStart; y < drawEnd; y++)
 		{
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
-
 			int color = info->texture[texNum][texHeight * texY + texX];
-
 			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
 				color = (color >> 1) & 8355711;
-
 			info->buf[y][x] = color;
-
-
-			/* MODELE */
-			/*if (y < ry && x < recup->rx)
-
-			recup->data.addr[y * recup->data.line_length / 4 + x] =
-
-			recup->texture[recup->t.texdir].addr [recup->t.texy *
-					recup->texture[recup->t.texdir].line_length /
-					4 + recup->t.texx];*/
-
-			/* NOTRE VERSION */
-			/*if (y < height && x < width)
-					info->img.data[y * info->img.size_l / 4 + x] =
-					info->texture[0][texY * info->img.size_l / 4 + texX];*/
-
-
-			/*if (y < height && x < width)
-				info->img.data[y * info->img.size_l / 4 + x] = info->img.data[texY * texWidth / 4 + texX];*/
 		}
-
-		//FLOOR CASTING (vertical version, directly after drawing the vertical wall stripe for the current x)
-		double floorXWall, floorYWall; //x, y position of the floor texel at the bottom of the wall
-
-		//4 different wall directions possible
-		if(side == 0 && rayDirX > 0)
+			for(int y = 0; y < drawStart; y++)
 		{
-			floorXWall = mapX;
-			floorYWall = mapY + wallX;
+			info->buf[y][x] = 0x77b5fe;
 		}
-		else if(side == 0 && rayDirX < 0)
+		for(int y = drawEnd; y < height; y++)
 		{
-			floorXWall = mapX + 1.0;
-			floorYWall = mapY + wallX;
+			info->buf[y][x] = 0x808000;
 		}
-		else if(side == 1 && rayDirY > 0)
-		{
-			floorXWall = mapX + wallX;
-			floorYWall = mapY;
-		}
-		else
-		{
-			floorXWall = mapX + wallX;
-			floorYWall = mapY + 1.0;
-		}
-
-		double distWall, distPlayer, currentDist;
-
-		distWall = perpWallDist;
-		distPlayer = 0.0;
-
-		if (drawEnd < 0) drawEnd = height; //becomes < 0 when the integer overflows
-
-		//draw the floor from drawEnd to the bottom of the screen
-		for(int y = drawEnd + 1; y < height; y++)
-		{
-			info->buf[y][x] = 0x3E9B39;
-		}
+		
+		x++;
 	}
-}
+	}
+
 
 int	main_loop(t_info *info)
 {
@@ -347,22 +288,23 @@ void	load_texture(t_info *info)
 	t_img	img;
 
 	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-	/*load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
+	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
 	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
 	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
-	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);*/
-
+	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
+	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
+	load_image(info, info->texture[6], "textures/wood.xpm", &img);
+	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
 }
-
 
 int	main(void)
 {
 	t_info info;
 	info.mlx = mlx_init();
 
-	info.posX = 5.0;
-	info.posY = 5.0;
-	info.dirX = -1.0;
+	info.posX = 5;
+	info.posY = 5;
+	info.dirX = -1;
 	info.dirY = 0.0;
 	info.planeX = 0.0;
 	info.planeY = 0.66;
