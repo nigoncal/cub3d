@@ -1,3 +1,6 @@
+Tu es en train de debugger la ligne 86 de graph_textures.c. Pour cela tu es en 
+train de creer le tout en plus petit dans bazar_a_test/mlx
+
 attention aux free_char_p2p que tu dois remplacer par des free
 
 prevoir un dossier pour tous les fichiers de le partie image/graphique
