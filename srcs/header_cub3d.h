@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 16:13:45 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 16:45:25 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ typedef struct	s_setup
 	int		x;
 	int		y;
 	t_game	game;
-//	t_textures	tabtexture[5]; // a revoir
-//	t_sprite	sprite;
 }				t_setup;
 
 void			abort_prog(char *s);

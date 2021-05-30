@@ -6,11 +6,35 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:58:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 17:01:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 17:12:18 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_cub3d.h"
+
+void	xpm_texture_address(t_setup *setup)
+{
+	if (setup->north_format == 1)
+		setup->game.texture[0].addr = \
+		mlx_get_data_addr(setup->game.texture[0].img, \
+		&setup->game.texture[0].bits_per_pixel, \
+		&setup->game.texture[0].line_length, &setup->game.texture[0].endian);
+	if (setup->south_format == 1)
+		setup->game.texture[1].addr = \
+		mlx_get_data_addr(setup->game.texture[1].img, \
+		&setup->game.texture[1].bits_per_pixel, \
+		&setup->game.texture[1].line_length, &setup->game.texture[1].endian);
+	if (setup->east_format == 1)
+		setup->game.texture[2].addr = \
+		mlx_get_data_addr(setup->game.texture[2].img, \
+		&setup->game.texture[2].bits_per_pixel, \
+		&setup->game.texture[2].line_length, &setup->game.texture[2].endian);
+	if (setup->west_format == 1)
+		setup->game.texture[3].addr = \
+		mlx_get_data_addr(setup->game.texture[3].img, \
+		&setup->game.texture[3].bits_per_pixel, \
+		&setup->game.texture[3].line_length, &setup->game.texture[3].endian);
+}
 
 void	png_texture_address(t_setup *setup)
 {

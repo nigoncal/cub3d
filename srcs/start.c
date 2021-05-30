@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 10:38:54 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 17:17:14 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,36 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
+	dprintf(1, "north_format = |%d|\n", setup->north_format);
+	dprintf(1, "south_format = |%d|\n", setup->north_format);
+	dprintf(1, "east_format = |%d|\n", setup->north_format);
+	dprintf(1, "west_format = |%d|\n", setup->north_format);
+	dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
+	dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
+	dprintf(1, "setup->game.texture[0].bits_per_pixel = |%d|\n", setup->game.texture[0].bits_per_pixel);
+	dprintf(1, "setup->game.texture[0].line_length = |%d|\n", setup->game.texture[0].line_length);
+	dprintf(1, "setup->game.texture[0].endian = |%d|\n", setup->game.texture[0].endian);
+	dprintf(1, "setup->game.texture[0].width = |%d|\n", setup->game.texture[0].width);
+	dprintf(1, "setup->game.texture[0].height = |%d|\n", setup->game.texture[0].height);
+	dprintf(1, "setup->game.texture[1].img = |%p|\n", setup->game.texture[1].img);
+	dprintf(1, "setup->game.texture[1].addr = |%s|\n", setup->game.texture[1].addr);
+	dprintf(1, "setup->game.texture[1].bits_per_pixel = |%d|\n", setup->game.texture[1].bits_per_pixel);
+	dprintf(1, "setup->game.texture[1].line_length = |%d|\n", setup->game.texture[1].line_length);
+	dprintf(1, "setup->game.texture[1].endian = |%d|\n", setup->game.texture[1].endian);
+	dprintf(1, "setup->game.texture[1].width = |%d|\n", setup->game.texture[1].width);
+	dprintf(1, "setup->game.texture[2].height = |%d|\n", setup->game.texture[2].height);
+	dprintf(1, "setup->game.texture[2].img = |%p|\n", setup->game.texture[2].img);
+	dprintf(1, "setup->game.texture[2].addr = |%s|\n", setup->game.texture[2].addr);
+	dprintf(1, "setup->game.texture[2].bits_per_pixel = |%d|\n", setup->game.texture[2].bits_per_pixel);
+	dprintf(1, "setup->game.texture[2].line_length = |%d|\n", setup->game.texture[2].line_length);
+	dprintf(1, "setup->game.texture[2].endian = |%d|\n", setup->game.texture[2].endian);
+	dprintf(1, "setup->game.texture[2].width = |%d|\n", setup->game.texture[2].width);
+	dprintf(1, "setup->game.texture[2].height = |%d|\n", setup->game.texture[2].height);
+	dprintf(1, "setup->game.texture[3].img = |%p|\n", setup->game.texture[3].img);
+	dprintf(1, "setup->game.texture[3].addr = |%s|\n", setup->game.texture[3].addr);
+	dprintf(1, "setup->game.texture[3].bits_per_pixel = |%d|\n", setup->game.texture[3].bits_per_pixel);
+	dprintf(1, "setup->game.texture[3].line_length = |%d|\n", setup->game.texture[3].line_length);
+	dprintf(1, "setup->game.texture[3].endian = |%d|\n", setup->game.texture[3].endian);
+	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);
 	wrdestroy();
 }

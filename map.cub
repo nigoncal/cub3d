@@ -1,4 +1,4 @@
-NO ./srcs/textures/grass.png
+NO ./srcs/textures/stone.png
 SO ./srcs/textures/grass.xpm
 WE ./srcs/textures/grass.xpm
 EA ./srcs/textures/grass.xpm
