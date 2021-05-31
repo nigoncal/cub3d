@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:18:03 by yohlee            #+#    #+#             */
-/*   Updated: 2021/05/29 15:51:55 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 09:28:37 by pmillet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx/mlx.h"
-#include "key_macos.h"
+#include "key_macros.h"
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
@@ -81,6 +81,23 @@ void	draw(t_info *info)
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }
 
+void	tex_orientation(int *texDir, int *side, double rayDirX, double rayDirY, double perpWallDist, double *wallX, t_info *info)
+{
+	if (*side == 0 && rayDirX < 0) //NO
+		*texDir = 0;
+	if (*side == 0 && rayDirX >= 0) // S
+		*texDir = 1;
+	if (*side == 1 && rayDirY < 0) // WE
+		*texDir = 2;
+	if (*side == 1 && rayDirY >= 0) // EA
+		*texDir = 3;
+	if (*side == 0)
+		*wallX = info->posY + perpWallDist * rayDirY;
+	else
+		*wallX = info->posX + perpWallDist * rayDirX;
+	*wallX -= floor((*wallX)); // wallX = 15.3 devient wallX = 0.3
+}
+
 void	calc(t_info *info)
 {
 	int	x;
@@ -148,8 +165,8 @@ void	calc(t_info *info)
 				mapY += stepY;
 				side = 1;
 			}
-			//Check if ray has hit a wall
-			if (worldMap[mapX][mapY] > 0) hit = 1;
+			//Check in map if ray has hit a wall
+			if (worldMap[mapX][mapY] != 0) hit = 1;
 
 		}
 		if (side == 0)
@@ -171,8 +188,6 @@ void	calc(t_info *info)
 
 	
 
-		// texturing calculations
-		int texNum = worldMap[mapX][mapY];
 
 		// calculate value of wallX
 		double wallX;
@@ -181,6 +196,11 @@ void	calc(t_info *info)
 		else
 			wallX = info->posX + perpWallDist * rayDirX;
 		wallX -= floor(wallX);
+
+		// Choosing a texture in the texture tab
+		int texNum = worldMap[mapX][mapY];
+		int texDir;
+		tex_orientation(&texDir, &side, rayDirX, rayDirY, perpWallDist, &wallX, info);
 
 		// x coordinate on the texture
 		int texX = (int)(wallX * (double)texWidth);
@@ -198,7 +218,7 @@ void	calc(t_info *info)
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
-			int color = info->texture[texNum][texHeight * texY + texX];
+			int color = info->texture[texDir][texHeight * texY + texX];
 			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
 				color = (color >> 1) & 8355711;
@@ -208,7 +228,7 @@ void	calc(t_info *info)
 		{
 			info->buf[y][x] = 0x77b5fe;
 		}
-		for(int y = drawEnd; y < height; y++)
+		for (int y = drawEnd; y < height; y++)
 		{
 			info->buf[y][x] = 0x808000;
 		}
