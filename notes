@@ -1,3 +1,8 @@
+lis toute la page de la mlx, il faut que tu piges la mlx pour resoudre ton
+probleme sur setup->game.texture[0].addr = |'2|
+
+mv graph_textures.c into parsing
+
 possibilite de stocker les path de texture directement dans la structure
 de textures (texture[0][1][2][3]) pour faire un code plus opti dans
 graph_textures.c

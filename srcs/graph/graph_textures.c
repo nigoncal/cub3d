@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:58:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/31 14:44:17 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 16:41:34 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	png_texture(t_setup *setup)
 	if (setup->north_format == 1)
 		setup->game.texture[0].img = mlx_png_file_to_image(setup->mlx, \
 		setup->north_texture_path, &setup->game.texture[0].width, \
-		&setup->game.texture[0].height); // ici une erreur
+		&setup->game.texture[0].height);
 	if (setup->south_format == 1)
 		setup->game.texture[1].img = mlx_png_file_to_image(setup->mlx, \
 		setup->south_texture_path, &setup->game.texture[1].width, \
