@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:18:03 by yohlee            #+#    #+#             */
-/*   Updated: 2021/05/31 09:28:37 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 11:26:02 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,20 @@ int	worldMap[mapWidth][mapHeight] =
 
 void	draw(t_info *info)
 {
-	for (int y = 0; y < height; y++)
+
+	int x;
+	int y;
+		x = 0;
+		y = 0;
+	while (y < height)
 	{
-		for (int x = 0; x < width; x++)
+		while (x < width)
 		{
 			info->img.data[y * width + x] = info->buf[y][x];
+			x++;
 		}
+		x = 0;
+		y++;
 	}
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }
@@ -213,8 +221,10 @@ void	calc(t_info *info)
 		double step = 1.0 * texHeight / lineHeight;
 		// Starting texture coordinate
 		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
-		for (int y = drawStart; y < drawEnd; y++)
+		int y = drawStart;
+		while (y < drawEnd)
 		{
+			y++;
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
@@ -224,15 +234,19 @@ void	calc(t_info *info)
 				color = (color >> 1) & 8355711;
 			info->buf[y][x] = color;
 		}
-			for(int y = 0; y < drawStart; y++)
+		
+		y = 0;
+		while(y < drawStart)
 		{
 			info->buf[y][x] = 0x77b5fe;
+			y++;
 		}
-		for (int y = drawEnd; y < height; y++)
+		y = drawEnd;
+		while(y < height)
 		{
 			info->buf[y][x] = 0x808000;
+			y++;
 		}
-		
 		x++;
 	}
 	}
@@ -291,14 +305,21 @@ int	key_press(int key, t_info *info)
 
 void	load_image(t_info *info, int *texture, char *path, t_img *img)
 {
+	int y;
+	int x;
+		y = 0;
+		x = 0;
 	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
+	while (y < img->img_height)
 	{
-		for (int x = 0; x < img->img_width; x++)
+		while(x < img->img_width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			x++;
 		}
+		x = 0;
+		y++;
 	}
 	mlx_destroy_image(info->mlx, img->img);
 }
@@ -317,53 +338,67 @@ void	load_texture(t_info *info)
 	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
 }
 
-int	main(void)
+int    main(void)
 {
-	t_info info;
-	info.mlx = mlx_init();
+    t_info info;
+    info.mlx = mlx_init();
 
-	info.posX = 5;
-	info.posY = 5;
-	info.dirX = -1;
-	info.dirY = 0.0;
-	info.planeX = 0.0;
-	info.planeY = 0.66;
+    info.posX = 5;
+    info.posY = 5;
+    info.dirX = -1;
+    info.dirY = 0.0;
+    info.planeX = 0.0;
+    info.planeY = 0.66;
 
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			info.buf[i][j] = 0;
-		}
-	}
+    int j;
+    int i;
 
-	if (!(info.texture = (int **)malloc(sizeof(int *) * 8)))
-		return (-1);
-	for (int i = 0; i < 8; i++)
-	{
-		if (!(info.texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
-			return (-1);
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		for (int j = 0; j < texHeight * texWidth; j++)
-		{
-			info.texture[i][j] = 0;
-		}
-	}
+    i = 0;
+    while (i < height)
+    {
+        j = 0;
+        while (j < width)
+        {
+            info.buf[i][j] = 0;
+            j++;
+        }
+        i++;
+    }
 
-	load_texture(&info);
+    if (!(info.texture = (int **)malloc(sizeof(int *) * 8)))
+        return (-1);
+    i = 0;
+    while (i < 8)
+    {
+        if (!(info.texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
+            return (-1);
+        i++;
+    }
+    i = 0;
+    while (i < 8)
+    {
+        j = 0;
+        while (j < texHeight * texWidth)
+        {
+            info.texture[i][j] = 0;
+            j++;
+        }
+        i++;
+    }
 
-	info.moveSpeed = 0.05;
-	info.rotSpeed = 0.05;
-	
-	info.win = mlx_new_window(info.mlx, width, height, "mlx");
+    load_texture(&info);
 
-	info.img.img = mlx_new_image(info.mlx, width, height);
-	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
+    info.moveSpeed = 0.05;
+    info.rotSpeed = 0.05;
+    
+    info.win = mlx_new_window(info.mlx, width, height, "mlx");
 
-	mlx_loop_hook(info.mlx, &main_loop, &info);
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+    info.img.img = mlx_new_image(info.mlx, width, height);
+    info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
 
-	mlx_loop(info.mlx);
+    mlx_loop_hook(info.mlx, &main_loop, &info);
+    mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+
+    mlx_loop(info.mlx);
 }
+
