@@ -1,3 +1,9 @@
+possibilite de stocker les path de texture directement dans la structure
+de textures (texture[0][1][2][3]) pour faire un code plus opti dans
+graph_textures.c
+
+virer les p_
+
 Tu es en train de debugger la ligne 86 de graph_textures.c. Pour cela tu es en 
 train de creer le tout en plus petit dans bazar_a_test/mlx
 

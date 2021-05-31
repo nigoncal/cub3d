@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/30 17:17:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 14:41:12 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
+	graph_textures(setup);
 	dprintf(1, "north_format = |%d|\n", setup->north_format);
 	dprintf(1, "south_format = |%d|\n", setup->north_format);
 	dprintf(1, "east_format = |%d|\n", setup->north_format);
