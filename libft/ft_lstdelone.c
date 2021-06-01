@@ -6,7 +6,7 @@
 /*   By: pmillet <pmillet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 11:28:32 by pmillet           #+#    #+#             */
-/*   Updated: 2021/03/20 11:28:47 by pmillet          ###   ########lyon.fr   */
+/*   Updated: 2021/04/29 15:54:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (lst)
 	{
 		(*del)(lst->content);
-		free(lst);
+		wrfree(lst);
 	}
 }

@@ -1,79 +1,76 @@
-.PHONY: all clean fclean re
+NAME				=	libcub3d.a
+EXE					=	cub3d
+LIBFT				=	libft.a
+MLXDL				=	libmlx.dylib
 
-# Names of files
-NAME		=	cub3d.a
-MLX			=	libmlx.dylib
-PGM			=	cub3D
-LIBFT		=	libft.a
+LIBS				=	libft.a\
+						libmlx.dylib\
+						libcub3d.a
 
-# Name directory
-PATH_INC	=	includes
-PATH_SRC	=	srcs
-PATH_OBJ	=	objs
-PATH_MLX	=	mlx
-PATH_LIBFT	=	libft
+VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
+						$(VLIBFT) $(VMLX) $(VPARSING) $(VTEXTURES)
 
-# List of sources
-SRCS		=	$(addprefix $(PATH_SRC)/, main.c minimap.c raycasting.c key_press.c get_map.c)
-OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
-INCS		=	cub3D.h
+VLIBS				=	$(VLIBFT)libft.a\
+						$(VMLX)libmlx.dylib
 
-# Commands of compilation
-COMP		=	clang
-COMP_FLAG	=	-Wall -Werror -Wextra -g3
-COMP_ADD	=	-I$(PATH_INC)
+VLIBFT				=	libft/
+VMLX				=	srcs/mlx/
+VTEXTURES			=	srcs/textures/
 
-# Others Command
-RM			=	rm
+SRCS				=	srcs/main.c\
+						srcs/error_manager.c\
+						srcs/start.c\
+						srcs/parsing/parse_id.c\
+						srcs/parsing/p_textures.c\
+						srcs/parsing/p_north_texture.c\
+						srcs/parsing/p_south_texture.c\
+						srcs/parsing/p_east_texture.c\
+						srcs/parsing/p_west_texture.c\
+						srcs/parsing/p_floor.c\
+						srcs/parsing/p_ceiling.c\
+						srcs/parsing/p_map.c\
+						srcs/parsing/store_map.c\
+						srcs/parsing/square_map.c\
+						srcs/parsing/check_map.c\
+						srcs/parsing/flood_fill.c\
+						srcs/parsing/find_player.c\
+						srcs/graph/graph_textures.c
 
-# Color Code and template code
-_YELLOW		=	\033[33;1m
-_GREEN		=	\033[32;1m
-_RESET		=	\033[0m
-_INFO		=	[$(_YELLOW)INFO$(_RESET)]
-_SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
+OBJS				=	$(SRCS:.c=.o)
 
-# Wildcard rule
+H_CUB3D				=	srcs/header_cub3d.h
 
-$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
-	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
+COMP				=	clang -Wall -Wextra -Werror -g3
 
-# Rules
-all:
-	$(MAKE) init
-	$(MAKE) $(NAME)
-	@echo "$(_SUCCESS) Compilation done"
+RM					=	rm -rf
 
-init:	$(MLX)
-	$(shell mkdir -p $(PATH_OBJ))
+%.o			:	%.c $(H_CUB3D)
+				$(COMP) -I$(H_CUB3D) -c $< -o $@
 
-$(LIBFT) :
-	$(MAKE) -C ./$(PATH_LIBFT)
-	cp libft/libft.a ./$(LIBFT)
+all			:	libs $(NAME) $(EXE)	
 
-$(MLX): $(LIBFT)
-	$(MAKE) -C ./$(PATH_MLX)
-	cp ./$(PATH_MLX)/$(MLX) .
+libs		:	
+				$(MAKE) -C $(VLIBFT)
+				ln -sf $(VLIBFT)$(LIBFT) .
+				$(MAKE) -C $(VMLX)
+				ln -sf $(VMLX)$(MLXDL) .
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	$(COMP) $(COMP_FLAG) $(NAME) $(LIBFT) $(MLX) ./$(PATH_SRC)/main.c -o $(PGM)
+$(NAME)		:	$(OBJS)
+				ar rcs $(NAME) $(OBJS)
 
-clean:
-	$(RM) -rf $(PATH_OBJ)
+$(EXE)		:	$(OBJS) $(LIBS)
+				$(COMP) $(LIBS) -o $(EXE)
 
-fclean: clean
-	$(MAKE) clean -C ./$(PATH_MLX)
-	$(MAKE) fclean -C ./$(PATH_LIBFT)
-	$(RM) -rf $(PGM)
-	$(RM) -rf $(NAME)
-	$(RM) -rf $(MLX)
-	$(RM) -rf $(LIBFT)
-	$(RM) -rf ./$(PATH_MLX)/$(MLX)
-	$(RM) -rf ./$(PATH_MLX)/*.o
-	$(RM) -rf ./$(PATH_MLX)/*.swiftmodule
-	$(RM) -rf ./$(PATH_MLX)/*.swiftdoc
+clean		:
+				$(RM) $(OBJS)
+				$(MAKE) clean -C $(VLIBFT)
+				$(MAKE) clean -C $(VMLX)
 
-re: 
-	$(MAKE) fclean
-	$(MAKE) all
+fclean		:	
+				$(RM) $(OBJS) $(LIBS) $(EXE)
+				$(MAKE) fclean -C $(VLIBFT)
+				$(MAKE) clean -C $(VMLX)
+
+re			: 	fclean all
+
+.PHONY: all libs clean fclean re libraries

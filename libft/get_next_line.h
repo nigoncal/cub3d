@@ -3,35 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 13:30:05 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/04/25 14:33:27 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2020/02/14 23:13:06 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/11 13:08:32 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 4 
+# define BUFFER_SIZE 64
 
-# include <stdlib.h>
 # include <unistd.h>
-#include "libft.h"
+# include <string.h>
+# include <stdlib.h>
+# include <limits.h>
 
-int				get_next_line(int fd, char **line);
-char			*ft_strjoin_g(char const *s1, char const *s2, int *return_buff);
-char			*new_buffer(int fd, int *pos, int *start, int *return_buff);
-char			*s_tab(char *buffer, int pos, int start);
+size_t		ft_strlen_gnl(const char *s);
+int			find_nl(const char *s);
+size_t		ft_strlcpy_gnl(char *dest, const char *src, size_t dstsize);
+int			check_args(int fd);
+int			transfer_line(char **current, char **line);
+int			read_fd(int fd, char **current, char **line);
+int			get_next_line(int fd, char **line);
 
-typedef	struct	s_stat_var
-{
-	char		*buffer;
-	int			pos;
-	int			return_buff;
-}				t_stat_var;
-
-char			*join_buff(int start, int fd, t_stat_var *s);
-#endif
 #endif

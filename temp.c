@@ -54,7 +54,7 @@ typedef struct	s_info
 	double	rotSpeed;
 }				t_info;
 
-int	worldMap[mapWidth][mapHeight] =
+char	worldMap[mapWidth][mapHeight] =
 {
 									
 									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},								
@@ -66,7 +66,7 @@ int	worldMap[mapWidth][mapHeight] =
 									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-			};
+	};
 
 
 void	draw(t_info *info)
