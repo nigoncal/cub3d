@@ -29,7 +29,8 @@ int	main(int argc, char **argv)
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
 	start(fd, &line, setup);
-	//graph_main(setup);
+	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
+	graph_main(setup);
 	close(fd);
 	return (0);
 }

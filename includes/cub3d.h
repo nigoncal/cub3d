@@ -198,6 +198,7 @@ typedef struct	s_info
 	double	moveSpeed;
 	double	rotSpeed;
 }				t_info;
+/* end of part to be removed */
 
 /* GRAPHIC */
 

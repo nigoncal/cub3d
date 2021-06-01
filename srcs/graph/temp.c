@@ -111,7 +111,7 @@ void	tex_orientation(int *texDir, int *side, double rayDirX, double rayDirY, dou
 	*wallX -= floor((*wallX)); // wallX = 15.3 devient wallX = 0.3
 }
 
-void	calc(t_info *info)
+void	calc(t_info *info, t_setup *setup)
 {
 	int	x;
 
@@ -259,7 +259,7 @@ void	calc(t_info *info)
 
 int	main_loop(t_info *info, t_setup *setup)
 {
-	calc(info);
+	calc(info, setup);
 	draw(info, setup);
 	return (0);
 }
@@ -317,14 +317,14 @@ void	load_image(t_setup *setup, int tex_nb, int *texture, char *path/*, t_img *i
 
 	// changer car ici pn a une struct par texture PTDR
 	// old : img->img = mlx_xpm_file_to_image(setup->mlx, path, &img->img_width, &img->img_height);
-	setup->game.texture[tex_nb] = mlx_xpm_file_to_image(setup->mlx, path, &setup->game.texture[tex_nb].width, &setup->game.texture[tex_nb].height);
+	setup->game.texture[tex_nb].img = mlx_xpm_file_to_image(setup->mlx, path, &setup->game.texture[tex_nb].width, &setup->game.texture[tex_nb].height);
 	// old :img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 	&setup->game.texture[tex_nb].addr = (int *)mlx_get_data_addr(\
 	setup->game.texture[tex_nb], &setup->game.texture[tex_nb].bits_per_pixel, \
 	&setup->game.texture[tex_nb].line_length, &setup->game.texture[tex_nb].endian);
-	while (y < img->img_height)
+	while (y < setup->game.texture[tex_nb].height)
 	{
-		while(x < img->img_width)
+		while(x < setup->game.texture[tex_nb].width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
 			x++;
