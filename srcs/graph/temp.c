@@ -23,10 +23,10 @@
 #define texHeight 64
 #define mapWidth 9
 #define mapHeight 17
-#define width 1280
-#define height 720
+#define _width 1280
+#define _height 720
 
-typedef struct	s_img
+/*typedef struct	s_img
 {
 	void	*img;
 	int		*data;
@@ -36,7 +36,7 @@ typedef struct	s_img
 	int		endian;
 	int		img_width;
 	int		img_height;
-}				t_img;
+}				t_img;*/
 
 typedef struct	s_info
 {
@@ -48,9 +48,10 @@ typedef struct	s_info
 	double planeY;
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	//t_img	img;
 	//int		**buf;
-	int		buf[height][width];
+	// pas init comme ca mais en int **buf, et malloc + loin
+	int		buf[_height][_width];
 	int		**texture;
 	double	moveSpeed;
 	double	rotSpeed;
@@ -71,18 +72,20 @@ char	worldMap[mapWidth][mapHeight] =
 	};
 
 
-void	draw(t_info *info)
+void	draw(t_info *info, t_setup *setup)
 {
 
 	int x;
 	int y;
 		x = 0;
 		y = 0;
-	while (y < height)
+	while (y < _height)
 	{
-		while (x < width)
+		while (x < _width)
 		{
-			info->img.data[y * width + x] = info->buf[y][x];
+			// old ver : info->img.data[y * width + x] = info->buf[y][x];
+			// Where is img.data ? setup->texture[].addr ? wich texture to draw ?
+			info->img.data[y * setup->game.width + x] = info->buf[y][x];
 			x++;
 		}
 		x = 0;
@@ -244,7 +247,7 @@ void	calc(t_info *info)
 			y++;
 		}
 		y = drawEnd;
-		while(y < height)
+		while(y < _height)
 		{
 			info->buf[y][x] = 0x808000;
 			y++;
@@ -305,14 +308,20 @@ int	key_press(int key, t_info *info)
 	return (0);
 }
 
-void	load_image(t_info *info, int *texture, char *path, t_img *img)
+void	load_image(t_setup *setup, int tex_nb, int *texture, char *path/*, t_img *img*/)
 {
 	int y;
 	int x;
 		y = 0;
 		x = 0;
-	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+
+	// changer car ici pn a une struct par texture PTDR
+	// old : img->img = mlx_xpm_file_to_image(setup->mlx, path, &img->img_width, &img->img_height);
+	setup->game.texture[tex_nb] = mlx_xpm_file_to_image(setup->mlx, path, &setup->game.texture[tex_nb].width, &setup->game.texture[tex_nb].height);
+	// old :img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	&setup->game.texture[tex_nb].addr = (int *)mlx_get_data_addr(\
+	setup->game.texture[tex_nb], &setup->game.texture[tex_nb].bits_per_pixel, \
+	&setup->game.texture[tex_nb].line_length, &setup->game.texture[tex_nb].endian);
 	while (y < img->img_height)
 	{
 		while(x < img->img_width)
@@ -323,26 +332,27 @@ void	load_image(t_info *info, int *texture, char *path, t_img *img)
 		x = 0;
 		y++;
 	}
-	mlx_destroy_image(info->mlx, img->img);
+	mlx_destroy_image(setup->mlx, img->img);
 }
 
-void	load_texture(t_info *info)
+void	load_texture(t_info *info, t_setup *setup)
 {
-	t_img	img;
-
-	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
-	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
-	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
-	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
-	load_image(info, info->texture[6], "textures/wood.xpm", &img);
-	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
+	//t_img	img;
+	load_image(setup, 0, info->texture[0], "textures/eagle.xpm"/*, &img*/);
+	load_image(setup, 1, info->texture[1], "textures/redbrick.xpm"/*, &img*/);
+	load_image(setup, 2, info->texture[2], "textures/purplestone.xpm"/*, &img*/);
+	load_image(setup, 3, info->texture[3], "textures/greystone.xpm"/*, &img*/);
+	load_image(setup, 4, info->texture[4], "textures/bluestone.xpm"/*, &img*/);
+	load_image(setup, 5, info->texture[5], "textures/mossy.xpm"/*, &img*/);
+	printf("wesh\n");
+	load_image(setup, 6, info->texture[6], "textures/wood.xpm"/*, &img*/);
+	// CRASHES THERE
+	load_image(setup, 7, info->texture[7], "textures/colorstone.xpm"/*, &img*/);
 }
 
 int    graph_main(t_setup *setup)
 {
-    //t_info info;
+    t_info info;
     //info.mlx = mlx_init();
 	setup->mlx = mlx_init();
 
@@ -357,10 +367,10 @@ int    graph_main(t_setup *setup)
     int i;
 
     i = 0;
-    while (i < height)
+    while (i < _height)
     {
         j = 0;
-        while (j < width)
+        while (j < _width)
         {
             info.buf[i][j] = 0;
             j++;
@@ -389,20 +399,22 @@ int    graph_main(t_setup *setup)
         i++;
     }
 
-    load_texture(&info);
+	// CRASHES HERE !!!!!!!!!!!!!!!!!!!!
+    load_texture(&info, setup);
+	printf("pouetpouet\n");
 
     info.moveSpeed = 0.05;
     info.rotSpeed = 0.05;
     
-    info.win = mlx_new_window(info.mlx, width, height, "mlx");
+    info.win = mlx_new_window(setup->mlx, _width, _height, "mlx");
 
-    info.img.img = mlx_new_image(info.mlx, width, height);
+    info.img.img = mlx_new_image(setup->mlx, _width, _height);
+	printf("M D R\n");
     info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
 
-    mlx_loop_hook(info.mlx, &main_loop, &info);
+    mlx_loop_hook(setup->mlx, &main_loop, &info);
     mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-
-    mlx_loop(info.mlx);
+    mlx_loop(setup->mlx);
 	return (0);
 }
 

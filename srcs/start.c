@@ -86,6 +86,7 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "west_format = |%d|\n", setup->north_format);
 	dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
 	dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
+	//dprintf(1, "setup->game.texture[0].addr = |%d|\n", *setup->game.texture[0].addr);
 	dprintf(1, "setup->game.texture[0].bits_per_pixel = |%d|\n", setup->game.texture[0].bits_per_pixel);
 	dprintf(1, "setup->game.texture[0].line_length = |%d|\n", setup->game.texture[0].line_length);
 	dprintf(1, "setup->game.texture[0].endian = |%d|\n", setup->game.texture[0].endian);

@@ -43,26 +43,27 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-typedef struct	s_sprite
+/*typedef struct	s_sprite
 {
 	
-}				t_sprite;
+}				t_sprite;*/
 
-typedef struct	s_textures
+/*typedef struct	s_textures
 {
 //	char	*buffer;
 //	char	*; // a renommer
-}				t_textures;
+}				t_textures;*/
 
 typedef struct	s_data {
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	char	*addr; // *data
+	
+	int		line_length; //size_l
+	int		bits_per_pixel; // bpp
 	int		endian;
 	int		width;
-	int		height;
-}				t_data;
+	int		height; // img_height
+}				t_data; // t_img
 
 typedef struct s_game
 {
@@ -101,7 +102,7 @@ typedef struct s_game
 //	int			BPP;
 	int			width;
 	int			height;
-	t_data		texture[4];
+	t_data		texture[8];
 //	void		*win;
 	void		*image;
 }				t_game;
@@ -178,5 +179,6 @@ void			graph_textures(t_setup *setup);
 /* GRAPHIC */
 
 int				graph_main(t_setup *setup);
+void			draw(t_info *info, t_setup *setup);
 
 #endif
