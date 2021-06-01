@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 10:38:41 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 17:48:37 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef union u_color
+typedef union	u_color
 {
 	struct	s_chan
 	{
@@ -43,16 +43,26 @@ typedef union u_color
 	uint32_t	color;
 }				t_col;
 
-typedef struct s_sprite
+typedef struct	s_sprite
 {
 	
 }				t_sprite;
 
-typedef struct s_textures
+typedef struct	s_textures
 {
 //	char	*buffer;
 //	char	*; // a renommer
 }				t_textures;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_data;
 
 typedef struct s_game
 {
@@ -91,6 +101,7 @@ typedef struct s_game
 //	int			BPP;
 	int			width;
 	int			height;
+	t_data		texture[4];
 //	void		*win;
 //	void		*image;
 }				t_game;
@@ -98,6 +109,10 @@ typedef struct s_game
 typedef struct	s_setup
 {
 	void	*mlx;
+	int		north_format;
+	int		south_format;
+	int		east_format;
+	int		west_format;
 	bool	north;
 	bool	south;
 	bool	east;
@@ -120,8 +135,6 @@ typedef struct	s_setup
 	int		x;
 	int		y;
 	t_game	game;
-//	t_textures	tabtexture[5]; // a revoir
-//	t_sprite	sprite;
 }				t_setup;
 
 void			abort_prog(char *s);
@@ -143,6 +156,7 @@ void			square_map(t_setup *setup);
 void			flood_fill(char **map, int y, int x, t_setup *setup);
 void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
+void			graph_textures(t_setup *setup);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);

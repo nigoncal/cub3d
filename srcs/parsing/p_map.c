@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/22 11:15:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 11:07:10 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_map(char *line)
 	const char	*set;
 
 	i = 0;
-	set = " 102NSEW";
+	set = " 10NSEW";
 	while (line[i])
 	{
 		j = 0;
