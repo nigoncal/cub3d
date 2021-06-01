@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3d.h"
+#include "../includes/cub3d.h"
 
 int	non_empty_line(char *line)
 {

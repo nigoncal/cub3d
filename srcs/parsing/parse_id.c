@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	parse_id(char *line, t_setup *setup)
 {

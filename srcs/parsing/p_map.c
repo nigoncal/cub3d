@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../../includes/cub3d.h"
 
 //	1 - check ce qu'il y a a la ligne d'avant dans **map
 //	    Il peut y avoir : - rien (parsing de la map pas encore commence)

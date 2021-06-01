@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	check_map(t_setup *setup)
 {

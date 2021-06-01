@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	flood_fill(char **map, int y, int x, t_setup *setup)
 {
