@@ -176,6 +176,29 @@ void			graph_textures(t_setup *setup);
   void			raycast_calc_delta(t_info *info);
   void			raycast_calc_pos(t_info *info);*/
 
+/* to be removed */
+#define _width 1280
+#define _height 720
+
+typedef struct	s_info
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx;
+	void	*win;
+	//t_img	img;
+	//int		**buf;
+	// pas init comme ca mais en int **buf, et malloc + loin
+	int		buf[_height][_width];
+	int		**texture;
+	double	moveSpeed;
+	double	rotSpeed;
+}				t_info;
+
 /* GRAPHIC */
 
 int				graph_main(t_setup *setup);

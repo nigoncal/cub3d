@@ -38,7 +38,7 @@
 	int		img_height;
 }				t_img;*/
 
-typedef struct	s_info
+/*typedef struct	s_info
 {
 	double posX;
 	double posY;
@@ -55,7 +55,7 @@ typedef struct	s_info
 	int		**texture;
 	double	moveSpeed;
 	double	rotSpeed;
-}				t_info;
+}				t_info;*/
 
 char	worldMap[mapWidth][mapHeight] =
 {
@@ -116,10 +116,10 @@ void	calc(t_info *info)
 	int	x;
 
 	x = 0;
-	while (x < width)
+	while (x < setup->game.width)
 	{
 
-		double cameraX = 2 * x / (double)width - 1;
+		double cameraX = 2 * x / (double)setup->game.width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
 		
@@ -188,15 +188,15 @@ void	calc(t_info *info)
 			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
 
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(height / perpWallDist);
+		int lineHeight = (int)(setup->game.height / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + height / 2;
+		int drawStart = -lineHeight / 2 + setup->game.height / 2;
 		if(drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + height / 2;
-		if(drawEnd >= height || drawEnd < 0)
-			drawEnd = height - 1;
+		int drawEnd = lineHeight / 2 + setup->game.height / 2;
+		if(drawEnd >= setup->game.height || drawEnd < 0)
+			drawEnd = setup->game.height - 1;
 
 
 	
@@ -225,7 +225,7 @@ void	calc(t_info *info)
 		// How much to increase the texture coordinate perscreen pixel
 		double step = 1.0 * texHeight / lineHeight;
 		// Starting texture coordinate
-		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
+		double texPos = (drawStart - setup->game.height / 2 + lineHeight / 2) * step;
 		int y = drawStart;
 		while (y < drawEnd)
 		{
@@ -257,10 +257,10 @@ void	calc(t_info *info)
 	}
 
 
-int	main_loop(t_info *info)
+int	main_loop(t_info *info, t_setup *setup)
 {
 	calc(info);
-	draw(info);
+	draw(info, setup);
 	return (0);
 }
 
