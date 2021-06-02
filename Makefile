@@ -18,23 +18,23 @@ VMLX				=	srcs/mlx/
 VTEXTURES			=	srcs/textures/
 
 SRCS				=	srcs/main.c\
-						srcs/error_manager.c\
 						srcs/start.c\
+						srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
-						srcs/parsing/p_textures.c\
-						srcs/parsing/p_north_texture.c\
-						srcs/parsing/p_south_texture.c\
-						srcs/parsing/p_east_texture.c\
-						srcs/parsing/p_west_texture.c\
-						srcs/parsing/p_floor.c\
-						srcs/parsing/p_ceiling.c\
-						srcs/parsing/p_map.c\
-						srcs/parsing/store_map.c\
-						srcs/parsing/square_map.c\
-						srcs/parsing/check_map.c\
-						srcs/parsing/flood_fill.c\
-						srcs/parsing/find_player.c\
-						srcs/graph/graph_textures.c
+						srcs/parsing/textures/textures.c\
+						srcs/parsing/textures/north_texture.c\
+						srcs/parsing/textures/south_texture.c\
+						srcs/parsing/textures/east_texture.c\
+						srcs/parsing/textures/west_texture.c\
+						srcs/parsing/textures/store_textures.c\
+						srcs/parsing/colors/floor.c\
+						srcs/parsing/colors/ceiling.c\
+						srcs/parsing/map/parse_map.c\
+						srcs/parsing/map/store_map.c\
+						srcs/parsing/map/square_map.c\
+						srcs/parsing/map/check_map.c\
+						srcs/parsing/map/find_player.c\
+						srcs/parsing/map/flood_fill.c
 
 OBJS				=	$(SRCS:.c=.o)
 

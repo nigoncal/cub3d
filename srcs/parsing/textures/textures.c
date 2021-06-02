@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_textures.c                                       :+:      :+:    :+:   */
+/*   textures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,14 @@
 
 #include "../header_cub3d.h"
 
-void	p_textures(char *line, t_setup *setup)
+void	textures(char *line, t_setup *setup)
 {
 	if (*line == 'N')
-		p_north_texture(line, setup);
+		north_texture(line, setup);
 	if (*line == 'S')
-		p_south_texture(line, setup);
+		south_texture(line, setup);
 	if (*line == 'E')
-		p_east_texture(line, setup);
+		east_texture(line, setup);
 	if (*line == 'W')
-		p_west_texture(line, setup);
+		west_texture(line, setup);
 }

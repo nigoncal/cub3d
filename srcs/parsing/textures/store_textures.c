@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:58:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/31 16:41:34 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 13:24:02 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	png_texture(t_setup *setup)
 		&setup->game.texture[3].height);
 }
 
-void	graph_textures(t_setup *setup)
+void	store_textures(t_setup *setup)
 {
 	png_texture(setup);
 	xpm_texture(setup);

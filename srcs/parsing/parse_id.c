@@ -19,11 +19,11 @@ void	parse_id(char *line, t_setup *setup)
 	while (*line == ' ')
 		line++;
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
-		p_textures(line, setup);
+		textures(line, setup);
 	else if (*line == 'F')
-		p_floor(line, setup);
+		floor(line, setup);
 	else if (*line == 'C')
-		p_ceiling(line, setup);
+		ceiling(line, setup);
 	else if (*line == '\0')
 		return ;
 	else

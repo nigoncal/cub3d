@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/30 17:48:37 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/02 13:43:28 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,7 @@ typedef struct s_game
 typedef struct	s_setup
 {
 	void	*mlx;
-	int		north_format;
-	int		south_format;
-	int		east_format;
-	int		west_format;
+	int		texture_id;
 	bool	north;
 	bool	south;
 	bool	east;
@@ -123,7 +120,7 @@ typedef struct	s_setup
 	bool	map_over;
 	int		id_counter;
 	char	**elements;
-	char	*north_texture_path;
+//	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
@@ -141,15 +138,15 @@ void			abort_prog(char *s);
 void			start(int fd, char **line, t_setup *setup);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_setup *setup);
-void			p_resolution(char *line, t_setup *setup);
-void			p_textures(char *line, t_setup *setup);
-void			p_north_texture(char *line, t_setup *setup);
-void			p_south_texture(char *line, t_setup *setup);
-void			p_east_texture(char *line, t_setup *setup);
-void			p_west_texture(char *line, t_setup *setup);
-void			p_sprite_texture(char *line, t_setup *setup);
-void			p_floor(char *line, t_setup *setup);
-void			p_ceiling(char *line, t_setup *setup);
+void			resolution(char *line, t_setup *setup);
+void			textures(char *line, t_setup *setup);
+void			north_texture(char *line, t_setup *setup);
+void			south_texture(char *line, t_setup *setup);
+void			east_texture(char *line, t_setup *setup);
+void			west_texture(char *line, t_setup *setup);
+void			sprite_texture(char *line, t_setup *setup);
+void			floor(char *line, t_setup *setup);
+void			ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);

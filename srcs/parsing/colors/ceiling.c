@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_floor.c                                          :+:      :+:    :+:   */
+/*   ceiling.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/19 16:19:24 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/05/19 10:36:44 by sylducam          #+#    #+#             */
+/*   Updated: 2021/05/27 09:39:36 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	store_rgb(char **tab_rgb, t_setup *setup)
 			return (-1);
 		i++;
 	}
-	setup->game.f_color.chan.red = rgb[0];
-	setup->game.f_color.chan.green = rgb[1];
-	setup->game.f_color.chan.blue = rgb[2];
+	setup->game.c_color.chan.red = rgb[0];
+	setup->game.c_color.chan.green = rgb[1];
+	setup->game.c_color.chan.blue = rgb[2];
 	return (0);
 }
 
@@ -37,7 +37,7 @@ static int	right_content(t_setup *setup)
 
 	tab_rgb = NULL;
 	if (count_lines(setup->elements) != 2
-		|| ft_strcmp(setup->elements[0], "F") != 0)
+		|| ft_strcmp(setup->elements[0], "C") != 0)
 		return (-1);
 	tab_rgb = ft_split(setup->elements[1], ',');
 	if (count_lines(tab_rgb) != 3 || is_tab_digit(tab_rgb) == -1
@@ -46,13 +46,13 @@ static int	right_content(t_setup *setup)
 	return (0);
 }
 
-void	p_floor(char *line, t_setup *setup)
+void	ceiling(char *line, t_setup *setup)
 {
-	if (setup->b_floor == true)
-		abort_prog("F identifier is used more than once");
+	if (setup->b_ceiling == true)
+		abort_prog("C identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (right_content(setup) == -1)
-		abort_prog("Usage : F r,g,b (with 0 >= r/g/b <= 255)");
-	setup->b_floor = true;
+		abort_prog("Usage : C r,g,b (with 0 >= r/g/b <= 255)");
+	setup->b_ceiling = true;
 	wrfree(setup->elements);
 }
