@@ -12,8 +12,8 @@
 #define texHeight 64
 #define mapWidth 9
 #define mapHeight 17
-#define width 1280
-#define height 720
+#define _width 1280
+#define _height 720
 
 /*typedef struct s_img
 {
@@ -55,17 +55,20 @@ int worldMap[mapWidth][mapHeight] =
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
-void draw(t_info *info)
+
+void draw(t_info *info, t_setup *setup)
 {
 	int x;
 	int y;
 	x = 0;
 	y = 0;
-	while (y < height)
+	(void)setup;
+	//printf("\n\n\n%d", setup->game.height);
+	while (y < 720)
 	{
-		while (x < width)
+		while (x < _width)
 		{
-			info->img.data[y * width + x] = info->buf[y][x];
+			info->img.data[y * _width + x] = info->buf[y][x];
 			x++;
 		}
 		x = 0;
@@ -89,13 +92,15 @@ void tex_orientation(int *texDir, int *side, double rayDirX, double rayDirY, dou
 		*wallX = info->posX + perpWallDist * rayDirX;
 	*wallX -= floor((*wallX)); // wallX = 15.3 devient wallX = 0.3
 }
-void calc(t_info *info)
+void calc(t_info *info, t_setup *setup)
 {
+		//(void)setup;
+
 	int x;
 	x = 0;
-	while (x < width)
+	while (x < _width)
 	{
-		double cameraX = 2 * x / (double)width - 1;
+		double cameraX = 2 * x / (double)_width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
 		int mapX = (int)info->posX;
@@ -110,8 +115,10 @@ void calc(t_info *info)
 		//what direction to step in x or y-direction (either +1 or -1)
 		int stepX;
 		int stepY;
-		int hit = 0; //was there a wall hit?
-		int side;	 //was a NS or a EW wall hit?
+		int hit;//was there a wall hit?
+		int side;//was a NS or a EW wall hit?
+
+		hit = 0;
 		if (rayDirX < 0)
 		{
 			stepX = -1;
@@ -156,14 +163,14 @@ void calc(t_info *info)
 		else
 			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(height / perpWallDist);
+		int lineHeight = (int)(_height / perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + height / 2;
+		int drawStart = -lineHeight / 2 + _height / 2;
 		if (drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + height / 2;
-		if (drawEnd >= height || drawEnd < 0)
-			drawEnd = height - 1;
+		int drawEnd = lineHeight / 2 + _height / 2;
+		if (drawEnd >= _height || drawEnd < 0)
+			drawEnd = _height - 1;
 		// calculate value of wallX
 		double wallX;
 		if (side == 0)
@@ -174,7 +181,7 @@ void calc(t_info *info)
 		// Choosing a texture in the texture tab
 		//int texNum = worldMap[mapX][mapY];
 		int texDir;
-		tex_orientation(&texDir, &side, rayDirX, rayDirY, perpWallDist, &wallX, info);
+		tex_orientation(&texDir, &side, rayDirX, rayDirY, perpWallDist, &wallX, &setup->info);
 		// x coordinate on the texture
 		int texX = (int)(wallX * (double)texWidth);
 		if (side == 0 && rayDirX > 0)
@@ -184,7 +191,7 @@ void calc(t_info *info)
 		// How much to increase the texture coordinate perscreen pixel
 		double step = 1.0 * texHeight / lineHeight;
 		// Starting texture coordinate
-		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
+		double texPos = (drawStart - _height / 2 + lineHeight / 2) * step;
 		int y = drawStart;
 		while (y < drawEnd)
 		{
@@ -205,7 +212,7 @@ void calc(t_info *info)
 			y++;
 		}
 		y = drawEnd;
-		while (y < height)
+		while (y < _height)
 		{
 			info->buf[y][x] = 0x808000;
 			y++;
@@ -213,14 +220,16 @@ void calc(t_info *info)
 		x++;
 	}
 }
-int main_loop(t_info *info)
+int main_loop(t_setup *setup)
 {
-	calc(info);
-	draw(info);
+	//printf("\n\n\nDans main loop %d", setup->game.height);
+	calc(&setup->info, setup);
+	draw(&setup->info, setup);
 	return (0);
 }
-int key_press(int key, t_info *info)
+int key_press(int key, t_info *info, t_setup *setup)
 {
+	(void)setup;
 	if (key == K_W)
 	{
 		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
@@ -296,34 +305,36 @@ void load_texture(t_info *info)
 }
 int graph_main(t_setup *setup)
 {
-	(void)setup;
-	t_info info;
-	info.mlx = mlx_init();
-	info.posX = 5;
-	info.posY = 5;
-	info.dirX = -1;
-	info.dirY = 0.0;
-	info.planeX = 0.0;
-	info.planeY = 0.66;
+		//(void)setup;
+	//t_info info;
+	info->mlx = mlx_init();
+	/*remplacer ci dessous*/
+	info->posX = 5;
+	info->posY = 5;
+	info->dirX = -1;
+	info->dirY = 0.0;
+	info->planeX = 0.0;
+	info->planeY = 0.66;
 	int j;
 	int i;
 	i = 0;
-	while (i < height)
+	//printf("\nHeight = %d\n\n", _height);
+	while (i < _height)
 	{
 		j = 0;
-		while (j < width)
+		while (j < _width)
 		{
-			info.buf[i][j] = 0;
+			info->buf[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	if (!(info.texture = (int **)malloc(sizeof(int *) * 8)))
+	if (!(info->texture = (int **)malloc(sizeof(int *) * 8)))
 		return (-1);
 	i = 0;
 	while (i < 8)
 	{
-		if (!(info.texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
+		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
 			return (-1);
 		i++;
 	}
@@ -333,19 +344,34 @@ int graph_main(t_setup *setup)
 		j = 0;
 		while (j < texHeight * texWidth)
 		{
-			info.texture[i][j] = 0;
+			info->texture[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	load_texture(&info);
-	info.moveSpeed = 0.05;
-	info.rotSpeed = 0.05;
-	info.win = mlx_new_window(info.mlx, width, height, "mlx");
-	info.img.img = mlx_new_image(info.mlx, width, height);
-	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
-	mlx_loop_hook(info.mlx, &main_loop, &info);
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-	mlx_loop(info.mlx);
+	load_texture(&setup->info);
+	/*remplacer ci dessous*/
+	//setup->game.move_speed = 0.05;
+	//setup->game.rot_peed = 0.05;
+	info->moveSpeed = 0.05;
+	info->rotSpeed = 0.05;
+	info->win = mlx_new_window(info->mlx, _width, _height, "mlx");
+	info->img.img = mlx_new_image(info->mlx, _width, _height);
+	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
+	
+
+	/* main_loop n'arrive pas a toruver tout seul les args. Il faut les passer dans void *param !*/
+
+	mlx_loop_hook(info->mlx, &main_loop, &setup->info);
+
+	/* c'est la que ca fait chier, on envoie info a la mlx loop, donc il faut tout changer et lui envoyer setup sinon ca po marche */
+	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, &setup->info);
+	printf("pouet\n");
+	printf("\n\n\nOMG %d\n", setup->game.height);
+
+	/* Widht/height breaks somewhere there*/
+	mlx_loop(info->mlx);
+	printf("\n\n\nWESH %d\n", setup->game.height);
+	printf("plouf\n");
 	return (0);
 }

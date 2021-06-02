@@ -31,6 +31,40 @@
 # include <unistd.h>
 # include <limits.h>
 
+/* to be removed */
+
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
+
+typedef struct	s_info
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	//int		**buf;
+	// pas init comme ca mais en int **buf, et malloc + loin
+	int		buf[720][1280];
+	int		**texture;
+	double	moveSpeed;
+	double	rotSpeed;
+}				t_info;
+/* end of part to be removed */
+
 typedef union	u_color
 {
 	struct	s_chan
@@ -94,15 +128,15 @@ typedef struct s_game
 //	int			drawstart; //position de debut ou il faut dessiner
 //	int			drawend; //position de fin ou il faut dessiner
 //	int			x; //permet de parcourir tous les rayons
-//	double		moveSpeed;
-//	double		rotSpeed;
+	double		move_speed;
+	double		rot_speed;
 //	int			endian;
 //	char		*buffer;
 //	int			line_height;
 //	int			line_lenght;
 //	int			BPP;
-	int			width;
-	int			height;
+	 int	width;
+	 int	height;
 	t_data		texture[8];
 //	void		*win;
 	void		*image;
@@ -137,6 +171,7 @@ typedef struct	s_setup
 	int		x;
 	int		y;
 	t_game	game;
+	t_info	info;
 }				t_setup;
 
 void			abort_prog(char *s);
@@ -159,10 +194,11 @@ void			flood_fill(char **map, int y, int x, t_setup *setup);
 void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
 void			graph_textures(t_setup *setup);
+void			init(t_setup *setup);
+
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);
-  void			init(t_info *info);
   void			put_pixel(t_screen *screen);
   void			get_map();
   void			verLine(t_info *info, int x, int y1, int y2, int color);
@@ -177,45 +213,10 @@ void			graph_textures(t_setup *setup);
   void			raycast_calc_delta(t_info *info);
   void			raycast_calc_pos(t_info *info);*/
 
-/* to be removed */
-#define _width 1280
-#define _height 720
-
-typedef struct	s_img
-{
-	void	*img;
-	int		*data;
-
-	int		size_l;
-	int		bpp;
-	int		endian;
-	int		img_width;
-	int		img_height;
-}				t_img;
-
-typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	//int		**buf;
-	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[_height][_width];
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;
-/* end of part to be removed */
 
 /* GRAPHIC */
 
 int				graph_main(t_setup *setup);
-void			draw(t_info *info);
+void			draw(t_info *info, t_setup *setup);
 
 #endif
