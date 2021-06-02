@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static void	xpm_texture_address(t_setup *setup)
+/*static void	xpm_texture_address(t_setup *setup)
 {
 	if (setup->north_format == 2)
 		setup->game.texture[0].addr = \
@@ -98,12 +98,13 @@ static void	png_texture(t_setup *setup)
 		setup->game.texture[3].img = mlx_png_file_to_image(setup->mlx, \
 		setup->west_texture_path, &setup->game.texture[3].width, \
 		&setup->game.texture[3].height);
-}
+}*/
 
 void	graph_textures(t_setup *setup)
 {
-	png_texture(setup);
+	(void)setup;
+	/*png_texture(setup);
 	xpm_texture(setup);
 	png_texture_address(setup);
-	xpm_texture_address(setup);
+	xpm_texture_address(setup);*/
 }

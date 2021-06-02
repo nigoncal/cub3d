@@ -56,7 +56,8 @@ typedef union	u_color
 
 typedef struct	s_data {
 	void	*img;
-	char	*addr; // *data
+	//char	*addr; // *data
+	int		*addr; // *data
 	
 	int		line_length; //size_l
 	int		bits_per_pixel; // bpp
@@ -180,6 +181,18 @@ void			graph_textures(t_setup *setup);
 #define _width 1280
 #define _height 720
 
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
+
 typedef struct	s_info
 {
 	double posX;
@@ -190,7 +203,7 @@ typedef struct	s_info
 	double planeY;
 	void	*mlx;
 	void	*win;
-	//t_img	img;
+	t_img	img;
 	//int		**buf;
 	// pas init comme ca mais en int **buf, et malloc + loin
 	int		buf[_height][_width];
@@ -203,6 +216,6 @@ typedef struct	s_info
 /* GRAPHIC */
 
 int				graph_main(t_setup *setup);
-void			draw(t_info *info, t_setup *setup);
+void			draw(t_info *info);
 
 #endif
