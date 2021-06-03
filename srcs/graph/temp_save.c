@@ -268,18 +268,18 @@ int	key_press(int key, t_info *info)
 {
 	if (key == K_W)
 	{
-		if (!worldMap[(int)(info->posX + info->dirX * info.moveSpeed)][(int)(info->posY)])
-			info->posX += info->dirX * info.moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY + info->dirY * info.moveSpeed)])
-			info->posY += info->dirY * info.moveSpeed;
+		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
+			info->posX += info->dirX * info->moveSpeed;
+		if (!worldMap[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)])
+			info->posY += info->dirY * info->moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (!worldMap[(int)(info->posX - info->dirX * info.moveSpeed)][(int)(info->posY)])
-			info->posX -= info->dirX * info.moveSpeed;
-		if (!worldMap[(int)(info->posX)][(int)(info->posY - info->dirY * info.moveSpeed)])
-			info->posY -= info->dirY * info.moveSpeed;
+		if (!worldMap[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)])
+			info->posX -= info->dirX * info->moveSpeed;
+		if (!worldMap[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)])
+			info->posY -= info->dirY * info->moveSpeed;
 	}
 	//rotate to the right
 	if (key == K_D)

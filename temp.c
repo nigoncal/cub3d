@@ -388,7 +388,7 @@ int    main(void)
 
     load_texture(&info);
 
-    info->moveSpeed = 0.05;
+    info.moveSpeed = 0.05;
     info.rotSpeed = 0.05;
     
     info.win = mlx_new_window(info.mlx, width, height, "mlx");

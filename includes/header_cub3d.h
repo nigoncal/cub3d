@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef HEADER_CUB3D_H
+# define HEADER_CUB3D_H
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
 // check tous les includes et vires si pas besoin
-# include "../mlx/mlx.h"
+# include "mlx/mlx.h"
 # include "../libft/libft.h"
-# include "key_macos.h"
+//# include "key_macros.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
@@ -43,28 +43,26 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-/*typedef struct	s_sprite
+typedef struct	s_sprite
 {
 	
-}				t_sprite;*/
+}				t_sprite;
 
-/*typedef struct	s_textures
+typedef struct	s_textures
 {
 //	char	*buffer;
 //	char	*; // a renommer
-}				t_textures;*/
+}				t_textures;
 
 typedef struct	s_data {
 	void	*img;
-	//char	*addr; // *data
-	int		*addr; // *data
-	
-	int		line_length; //size_l
-	int		bits_per_pixel; // bpp
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
 	int		width;
-	int		height; // img_height
-}				t_data; // t_img
+	int		height;
+}				t_data;
 
 typedef struct s_game
 {
@@ -103,7 +101,7 @@ typedef struct s_game
 //	int			BPP;
 	int			width;
 	int			height;
-	t_data		texture[8];
+	t_data		texture[4];
 //	void		*win;
 	void		*image;
 }				t_game;
@@ -176,46 +174,5 @@ void			graph_textures(t_setup *setup);
   void			raycast_calc_dir(t_info *info);
   void			raycast_calc_delta(t_info *info);
   void			raycast_calc_pos(t_info *info);*/
-
-/* to be removed */
-#define _width 1280
-#define _height 720
-
-typedef struct	s_img
-{
-	void	*img;
-	int		*data;
-
-	int		size_l;
-	int		bpp;
-	int		endian;
-	int		img_width;
-	int		img_height;
-}				t_img;
-
-typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	//int		**buf;
-	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[_height][_width];
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;
-/* end of part to be removed */
-
-/* GRAPHIC */
-
-int				graph_main(t_setup *setup);
-void			draw(t_info *info);
 
 #endif

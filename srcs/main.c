@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	if (setup == NULL)
 		abort_prog("Failed to malloc setup structure");
 	ft_bzero(setup, sizeof(*setup));
-	init(setup);
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
 	fd = open(argv[1], O_RDONLY);
@@ -33,12 +32,5 @@ int	main(int argc, char **argv)
 	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
 	graph_main(setup);
 	close(fd);
-	wrdestroy();
 	return (0);
-}
-
-void	init(t_setup *setup)
-{
-	setup->game.width = 1280;
-	setup->game.height = 720;
 }

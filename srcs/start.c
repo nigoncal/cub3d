@@ -112,5 +112,5 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "setup->game.texture[3].line_length = |%d|\n", setup->game.texture[3].line_length);
 	dprintf(1, "setup->game.texture[3].endian = |%d|\n", setup->game.texture[3].endian);
 	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);
-	//wrdestroy();
+	wrdestroy();
 }
