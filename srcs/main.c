@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 		abort_prog("While opening the .cub file");
 	start(fd, &line, setup);
 	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
+	printf("hum ok\n");
 	graph_main(setup);
 	close(fd);
 	return (0);

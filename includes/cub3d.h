@@ -15,6 +15,11 @@
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
+#define WIN_WIDTH 1280
+#define WIN_HEIGHT 720
+#define MOVE_SPEED 0.05
+#define ROT_SPEED 0.05
+
 // check tous les includes et vires si pas besoin
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
@@ -30,6 +35,42 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
+
+/* to be removed */
+#define _width 1280
+#define _height 720
+
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
+
+typedef struct	s_info
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	//int		**buf;
+	// pas init comme ca mais en int **buf, et malloc + loin
+	int		buf[WIN_HEIGHT][WIN_WIDTH];
+	int		**texture;
+	double	moveSpeed;
+	double	rotSpeed;
+}				t_info;
+/* end of part to be removed */
 
 typedef union	u_color
 {
@@ -74,11 +115,11 @@ typedef struct s_game
 	double		pos_y;
 	double		dir_x;
 	double		dir_y;
-//	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-//	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-//	double		raydirX; //calcul de direction x du rayon
-//	double		raydirY; //calcul de direction y du rayon
-//	double		cameraX; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
+	double		planex; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		planey; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		raydirx; //calcul de direction x du rayon
+	double		raydiry; //calcul de direction y du rayon
+	double		camerax; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
 //	int			mapX; // coordonée x du carré dans lequel est pos
 //	int			mapY; // coordonnée y du carré dans lequel est pos
 //	double		sidedistX; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
@@ -103,7 +144,7 @@ typedef struct s_game
 //	int			BPP;
 	int			width;
 	int			height;
-	t_data		texture[8];
+	t_data		**texture;
 //	void		*win;
 	void		*image;
 }				t_game;
@@ -137,6 +178,7 @@ typedef struct	s_setup
 	int		x;
 	int		y;
 	t_game	game;
+	t_info	info;
 }				t_setup;
 
 void			abort_prog(char *s);
@@ -177,45 +219,10 @@ void			graph_textures(t_setup *setup);
   void			raycast_calc_delta(t_info *info);
   void			raycast_calc_pos(t_info *info);*/
 
-/* to be removed */
-#define _width 1280
-#define _height 720
-
-typedef struct	s_img
-{
-	void	*img;
-	int		*data;
-
-	int		size_l;
-	int		bpp;
-	int		endian;
-	int		img_width;
-	int		img_height;
-}				t_img;
-
-typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	//int		**buf;
-	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[_height][_width];
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;
-/* end of part to be removed */
 
 /* GRAPHIC */
 
 int				graph_main(t_setup *setup);
-void			draw(t_info *info);
+void			draw(t_setup *setup);
 
 #endif
