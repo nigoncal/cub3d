@@ -1,6 +1,7 @@
 lis toute la page de la mlx, il faut que tu piges la mlx pour resoudre ton
 probleme sur setup->game.texture[0].addr = |'2|
 
+
 error_manager into parsing
 
 dans srcs faire dossier config et y mettre les .cub
