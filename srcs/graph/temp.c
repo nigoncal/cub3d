@@ -1,7 +1,7 @@
 
 #include "../../includes/cub3d.h"
 //#include "mlx/mlx.h"
-//#include "key_macros.h"
+#include "../../includes/key_macos.h"
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
@@ -43,7 +43,7 @@ typedef struct s_info
 	double rotSpeed;
 } t_info;*/
 
-int worldMap[mapWidth][mapHeight] =
+/*int worldMap[mapWidth][mapHeight] =
 	{
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -54,7 +54,8 @@ int worldMap[mapWidth][mapHeight] =
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-};
+};*/
+
 void draw(t_setup *setup)
 {
 	int x;
@@ -71,24 +72,27 @@ void draw(t_setup *setup)
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(setup->info.mlx, setup->info.win, setup->info.img.img, 0, 0);
+	mlx_put_image_to_window(setup->mlx, setup->info.win, setup->info.img.img, 0, 0);
+	printf("Draw succeeded\n");
 }
-void tex_orientation(int *texDir, int *side, double rayDirX, double perpWallDist, double *wallX, t_setup *setup)
+
+void tex_orientation(int *texDir, int *side, double perpWallDist, double *wallX, t_setup *setup)
 {
-	if (*side == 0 && rayDirX < 0) //NO
+	if (*side == 0 && setup->game.raydirx < 0) //NO
 		*texDir = 0;
-	if (*side == 0 && rayDirX >= 0) // S
+	if (*side == 0 && setup->game.raydirx >= 0) // S
 		*texDir = 1;
 	if (*side == 1 && setup->game.raydiry < 0) // WE
 		*texDir = 2;
 	if (*side == 1 && setup->game.raydiry >= 0) // EA
 		*texDir = 3;
 	if (*side == 0)
-		*wallX = setup->info.posY + perpWallDist * setup->game.raydiry;
+		*wallX = setup->game.pos_x + perpWallDist * setup->game.raydiry;
 	else
-		*wallX = setup->info.posX + perpWallDist * rayDirX;
+		*wallX = setup->game.pos_y + perpWallDist * setup->game.raydirx;
 	*wallX -= floor((*wallX)); // wallX = 15.3 devient wallX = 0.3
 }
+
 void calc(t_setup *setup)
 {
 	int x;
@@ -148,9 +152,12 @@ void calc(t_setup *setup)
 				side = 1;
 			}
 			//Check in map if ray has hit a wall
-			if (worldMap[mapX][mapY] != 0)
+			//printf("Est ce que c'est la que ca segfault ?\n");
+			if (setup->map[mapX][mapY] != 0)
 				hit = 1;
+			printf("Ah bah non pas cette fois\n");
 		}
+		//printf("On est dans la boucle de clac hhuh\n");
 		if (side == 0)
 			perpWallDist = (mapX - setup->game.pos_x + (1 - stepX) / 2) / setup->game.raydirx;
 		else
@@ -174,7 +181,7 @@ void calc(t_setup *setup)
 		// Choosing a texture in the texture tab
 		//int texNum = worldMap[mapX][mapY];
 		int texDir;
-		tex_orientation(&texDir, &side, setup->game.raydirx, perpWallDist, &wallX, setup);
+		tex_orientation(&texDir, &side, perpWallDist, &wallX, setup);
 		// x coordinate on the texture
 		int texX = (int)(wallX * (double)texWidth);
 		if (side == 0 && setup->game.raydirx > 0)
@@ -192,6 +199,7 @@ void calc(t_setup *setup)
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
+			/* est-ce que ca pete pas ici ? */
 			int color = setup->info.texture[texDir][texHeight * texY + texX];
 			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
@@ -201,39 +209,45 @@ void calc(t_setup *setup)
 		y = 0;
 		while (y < drawStart)
 		{
-			setup->info.buf[y][x] = 0x77b5fe;
+			setup->info.buf[y][x] = /*setup->game.c_color.color*/0x77b5fe;
 			y++;
 		}
 		y = drawEnd;
 		while (y < WIN_HEIGHT)
 		{
-			setup->info.buf[y][x] = 0x808000;
+			setup->info.buf[y][x] = /*setup->game.f_color.color*/0x808000;
 			y++;
 		}
+		printf("une ligne claculee, YESSAI\n");
 		x++;
 	}
+	printf("c'est la fin de calc !\n");
 }
+
 int main_loop(t_setup *setup)
 {
+	printf("c'est la boucle\n");
 	calc(setup);
 	draw(setup);
+	printf("c'est la FIN de la boucle\n");
 	return (0);
 }
+
 int key_press(int key, t_setup *setup)
 {
 	if (key == K_W)
 	{
-		if (!worldMap[(int)(setup->game.pos_x + setup->game.dir_x * MOVE_SPEED)][(int)(setup->game.pos_y)])
+		if (!setup->map[(int)(setup->game.pos_x + setup->game.dir_x * MOVE_SPEED)][(int)(setup->game.pos_y)])
 			setup->game.pos_x += setup->game.dir_x * MOVE_SPEED;
-		if (!worldMap[(int)(setup->game.pos_x)][(int)(setup->game.pos_y + setup->game.dir_y * MOVE_SPEED)])
+		if (!setup->map[(int)(setup->game.pos_x)][(int)(setup->game.pos_y + setup->game.dir_y * MOVE_SPEED)])
 			setup->game.pos_y += setup->game.dir_y * MOVE_SPEED;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (!worldMap[(int)(setup->game.pos_x - setup->game.dir_x * MOVE_SPEED)][(int)(setup->game.pos_y)])
+		if (!setup->map[(int)(setup->game.pos_x - setup->game.dir_x * MOVE_SPEED)][(int)(setup->game.pos_y)])
 			setup->game.pos_x -= setup->game.dir_x * MOVE_SPEED;
-		if (!worldMap[(int)(setup->game.pos_x)][(int)(setup->game.pos_y - setup->game.dir_y * MOVE_SPEED)])
+		if (!setup->map[(int)(setup->game.pos_x)][(int)(setup->game.pos_y - setup->game.dir_y * MOVE_SPEED)])
 			setup->game.pos_y -= setup->game.dir_y * MOVE_SPEED;
 	}
 	//rotate to the right
@@ -262,14 +276,17 @@ int key_press(int key, t_setup *setup)
 		exit(0);
 	return (0);
 }
+
 void load_image(t_setup *setup, int *texture, char *path)
 {
 	int y;
 	int x;
 	y = 0;
 	x = 0;
-	setup->info.img.img = mlx_xpm_file_to_image(setup->info.mlx, path, &setup->info.img.img_width, &setup->info.img.img_height);
-	setup->info.img.data = (int *)mlx_get_data_addr(setup->info.img.img, &setup->info.img.bpp, &setup->info.img.size_l, &setup->info.img.endian);
+	
+	setup->info.img.img = mlx_xpm_file_to_image(&setup->mlx, path, &setup->info.img.img_width, &setup->info.img.img_height);
+	setup->info.img.data = (int *)mlx_get_data_addr(&setup->info.img.img, &setup->info.img.bpp, &setup->info.img.size_l, &setup->info.img.endian);
+	/* on copie l'image chargee dans le tab de textures */
 	while (y < setup->info.img.img_height)
 	{
 		while (x < setup->info.img.img_width)
@@ -280,8 +297,9 @@ void load_image(t_setup *setup, int *texture, char *path)
 		x = 0;
 		y++;
 	}
-	mlx_destroy_image(setup->info.mlx, setup->info.img.img);
+	mlx_destroy_image(setup->mlx, setup->info.img.img);
 }
+
 void load_texture(t_setup *setup)
 {
 	//t_img img;
@@ -294,20 +312,22 @@ void load_texture(t_setup *setup)
 	load_image(setup, setup->info.texture[6], "textures/wood.xpm");
 	load_image(setup, setup->info.texture[7], "textures/colorstone.xpm");
 }
+
 int graph_main(t_setup *setup)
 {
 	//t_info info;
-	printf("blip\n");
+	// Valeurs ci dessous = deja init dans le parsing
 	//setup->info.mlx = mlx_init();
-	setup->info.posX = 5;
-	setup->info.posY = 5;
-	setup->info.dirX = -1;
-	setup->info.dirY = 0.0;
-	setup->info.planeX = 0.0;
-	setup->info.planeY = 0.66;
+	//setup->game.posX = 5;
+	//setup->info.posY = 5;
+	//setup->info.dirX = -1;
+	//setup->info.dirY = 0.0;
+	//setup->info.planeX = 0.0;
+	//setup->info.planeY = 0.66;
 	int j;
 	int i;
 	i = 0;
+	/* bzero de notre buffer de fenetre setup->info.buf */
 	while (i < WIN_HEIGHT)
 	{
 		j = 0;
@@ -318,9 +338,12 @@ int graph_main(t_setup *setup)
 		}
 		i++;
 	}
+	/* on malloc de la place pour les textures */
 	if (!(setup->info.texture = (int **)malloc(sizeof(int *) * 8)))
 		return (-1);
 	i = 0;
+	/* si on met un printf la ca segfault pas au lancement (meme si l'affichage est pete)*/
+	//printf("blip\n");
 	while (i < 8)
 	{
 		if (!(setup->info.texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
@@ -328,6 +351,7 @@ int graph_main(t_setup *setup)
 		i++;
 	}
 	i = 0;
+	/* on bzero les textures */
 	while (i < 8)
 	{
 		j = 0;
@@ -345,7 +369,9 @@ int graph_main(t_setup *setup)
 	setup->info.img.img = mlx_new_image(setup->mlx, WIN_WIDTH, WIN_HEIGHT);
 	setup->info.img.data = (int *)mlx_get_data_addr(setup->info.img.img, &setup->info.img.bpp, &setup->info.img.size_l, &setup->info.img.endian);
 	mlx_loop_hook(setup->mlx, &main_loop, setup);
+	/* attention on ne peut passer qu'un seul arg a keypress !!! */
 	mlx_hook(setup->info.win, X_EVENT_KEY_PRESS, 0, &key_press, setup);
+	printf("blOp\n");
 	mlx_loop(setup->mlx);
 	return (0);
 }

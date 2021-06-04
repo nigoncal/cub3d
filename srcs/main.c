@@ -33,5 +33,6 @@ int	main(int argc, char **argv)
 	printf("hum ok\n");
 	graph_main(setup);
 	close(fd);
+	wrdestroy();
 	return (0);
 }

@@ -31,8 +31,8 @@ int	non_empty_line(char *line)
 void	start(int fd, char **line, t_setup *setup)
 {
 	setup->mlx = malloc(sizeof(void));
-	setup->game.width = 1280;
-	setup->game.height = 720;
+	//setup->game.width = 1280;
+	//setup->game.height = 720;
 	if (setup->mlx == NULL)
 		abort_prog("Failed to malloc setup->mlx");
 	setup->mlx = mlx_init();
@@ -51,6 +51,8 @@ void	start(int fd, char **line, t_setup *setup)
 		}
 	}
 	square_map(setup);
+
+
 	dprintf(1, "width = |%d|\n", setup->game.width);
 	dprintf(1, "height = |%d|\n", setup->game.height);
 	dprintf(1, "north = |%s|\n", setup->north_texture_path);
@@ -70,7 +72,12 @@ void	start(int fd, char **line, t_setup *setup)
 	int c = 0;
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);	
+	
+	
 	check_map(setup);
+
+
+
 	c = 0;
 	dprintf(1, "player_dir = |%c|\n", setup->player_dir);
 	dprintf(1, "dir_x = |%f|\n", setup->game.dir_x);
@@ -79,11 +86,15 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
-	graph_textures(setup);
+
+
+	//graph_textures(setup);
+
+
 	dprintf(1, "north_format = |%d|\n", setup->north_format);
-	dprintf(1, "south_format = |%d|\n", setup->north_format);
-	dprintf(1, "east_format = |%d|\n", setup->north_format);
-	dprintf(1, "west_format = |%d|\n", setup->north_format);
+	dprintf(1, "south_format = |%d|\n", setup->south_format);
+	dprintf(1, "east_format = |%d|\n", setup->east_format);
+	dprintf(1, "west_format = |%d|\n", setup->west_format);
 	//dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
 	//dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
 	//dprintf(1, "setup->game.texture[0].addr = |%d|\n", *setup->game.texture[0].addr);
@@ -112,5 +123,6 @@ void	start(int fd, char **line, t_setup *setup)
 	//dprintf(1, "setup->game.texture[3].line_length = |%d|\n", setup->game.texture[3]->line_length);
 	//dprintf(1, "setup->game.texture[3].endian = |%d|\n", setup->game.texture[3]->endian);
 	//dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3]->width);
-	wrdestroy();
+	/* mdr faut pas tout destroy avant le graphique Pauline ...*/
+	//wrdestroy();
 }
