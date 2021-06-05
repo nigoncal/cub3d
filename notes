@@ -1,4 +1,5 @@
-copy past north > all
+est-ce que le fait d'avoir deux dossiers nommes textures (1 dans config et
+l'autre dans parsing) pose un probleme de les VPATH du Makefile
 
 lis toute la page de la mlx, il faut que tu piges la mlx pour resoudre ton
 probleme sur setup->game.texture[0].addr = |'2|

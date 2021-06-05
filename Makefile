@@ -7,26 +7,31 @@ LIBS				=	libft.a\
 						libmlx.dylib\
 						libcub3d.a
 
-VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
-						$(VLIBFT) $(VMLX) $(VPARSING) $(VTEXTURES)
+VPATH				=	libft config textures srcs mlx graphic parsing\
+						parsing_textures colors map\
+						libraries $(VLIBFT) $(VSCRS) $(VMLX) $(VPARSING)\
+						$(VPARSING_TEXTURES) $(VCOLORS) $(VMAP)
 
 VLIBS				=	$(VLIBFT)libft.a\
 						$(VMLX)libmlx.dylib
 
 VLIBFT				=	libft/
 VMLX				=	srcs/mlx/
-VTEXTURES			=	srcs/textures/
+VPARSING			=	srcs/parsing/
+VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
+VCOLORS				=	srcs/parsing/colors/
+VMAP				=	srcs/parsing/map/
 
 SRCS				=	srcs/main.c\
 						srcs/start.c\
 						srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
-						srcs/parsing/textures/textures.c\
-						srcs/parsing/textures/north_texture.c\
-						srcs/parsing/textures/south_texture.c\
-						srcs/parsing/textures/east_texture.c\
-						srcs/parsing/textures/west_texture.c\
-						srcs/parsing/textures/store_textures.c\
+						srcs/parsing/parsing_textures/textures.c\
+						srcs/parsing/parsing_textures/north_texture.c\
+						srcs/parsing/parsing_textures/south_texture.c\
+						srcs/parsing/parsing_textures/east_texture.c\
+						srcs/parsing/parsing_textures/west_texture.c\
+						srcs/parsing/parsing_textures/store_textures.c\
 						srcs/parsing/colors/floor.c\
 						srcs/parsing/colors/ceiling.c\
 						srcs/parsing/map/parse_map.c\

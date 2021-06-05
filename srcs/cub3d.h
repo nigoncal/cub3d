@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 13:46:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 14:16:33 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,14 @@ typedef struct s_game
 typedef struct	s_setup
 {
 	void	*mlx;
-	int		texture_id;
 	bool	north;
 	bool	south;
 	bool	east;
 	bool	west;
+	int		north_format;
+	int		south_format;
+	int		east_format;
+	int		west_format;
 	bool	b_floor;
 	bool	b_ceiling;
 	bool	map_started;

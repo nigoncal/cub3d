@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:36:44 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/27 09:39:36 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 14:20:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static int	store_rgb(char **tab_rgb, t_setup *setup)
 {
