@@ -38,7 +38,7 @@ SRCS				=	srcs/main.c\
 
 OBJS				=	$(SRCS:.c=.o)
 
-H_CUB3D				=	srcs/header_cub3d.h
+H_CUB3D				=	srcs/cub3d.h
 
 COMP				=	clang -Wall -Wextra -Werror -g3
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../cub3d.h"
 
 void	parse_id(char *line, t_setup *setup)
 {
@@ -21,7 +21,7 @@ void	parse_id(char *line, t_setup *setup)
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 		textures(line, setup);
 	else if (*line == 'F')
-		floor(line, setup);
+		parse_floor(line, setup);
 	else if (*line == 'C')
 		ceiling(line, setup);
 	else if (*line == '\0')

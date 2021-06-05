@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../cub3d.h"
 
 static int	store_rgb(char **tab_rgb, t_setup *setup)
 {
@@ -46,7 +46,7 @@ static int	right_content(t_setup *setup)
 	return (0);
 }
 
-void	floor(char *line, t_setup *setup)
+void	parse_floor(char *line, t_setup *setup)
 {
 	if (setup->b_floor == true)
 		abort_prog("F identifier is used more than once");

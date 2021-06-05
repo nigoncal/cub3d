@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_cub3d.h                                     :+:      :+:    :+:   */
+/*   cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/02 13:43:28 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 13:46:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ typedef struct	s_textures
 //	char	*; // a renommer
 }				t_textures;
 
-typedef struct	s_data {
+typedef struct	s_data
+{
+	char	*path;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -145,7 +147,8 @@ void			south_texture(char *line, t_setup *setup);
 void			east_texture(char *line, t_setup *setup);
 void			west_texture(char *line, t_setup *setup);
 void			sprite_texture(char *line, t_setup *setup);
-void			floor(char *line, t_setup *setup);
+void			store_texture(t_setup *setup);
+void			parse_floor(char *line, t_setup *setup);
 void			ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
@@ -153,7 +156,6 @@ void			square_map(t_setup *setup);
 void			flood_fill(char **map, int y, int x, t_setup *setup);
 void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
-void			graph_textures(t_setup *setup);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);

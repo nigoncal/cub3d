@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/31 14:41:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 13:37:32 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_cub3d.h"
+#include "cub3d.h"
 
 int	non_empty_line(char *line)
 {
@@ -53,10 +53,10 @@ void	start(int fd, char **line, t_setup *setup)
 	square_map(setup);
 	dprintf(1, "width = |%d|\n", setup->game.width);
 	dprintf(1, "height = |%d|\n", setup->game.height);
-	dprintf(1, "north = |%s|\n", setup->north_texture_path);
-	dprintf(1, "south = |%s|\n", setup->south_texture_path);
-	dprintf(1, "west = |%s|\n", setup->west_texture_path);
-	dprintf(1, "east = |%s|\n", setup->east_texture_path);
+	dprintf(1, "north = |%s|\n", setup->game.texture[0].path);
+	dprintf(1, "north = |%s|\n", setup->game.texture[1].path);
+	dprintf(1, "north = |%s|\n", setup->game.texture[2].path);
+	dprintf(1, "north = |%s|\n", setup->game.texture[3].path);
 	dprintf(1, "f_color = |%x|\n", setup->game.f_color.color);
 	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.red);
 	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.green);
@@ -79,12 +79,7 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
-	graph_textures(setup);
-	dprintf(1, "north_format = |%d|\n", setup->north_format);
-	dprintf(1, "south_format = |%d|\n", setup->north_format);
-	dprintf(1, "east_format = |%d|\n", setup->north_format);
-	dprintf(1, "west_format = |%d|\n", setup->north_format);
-	dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
+/*	dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
 	dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
 	dprintf(1, "setup->game.texture[0].bits_per_pixel = |%d|\n", setup->game.texture[0].bits_per_pixel);
 	dprintf(1, "setup->game.texture[0].line_length = |%d|\n", setup->game.texture[0].line_length);
@@ -110,6 +105,6 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "setup->game.texture[3].bits_per_pixel = |%d|\n", setup->game.texture[3].bits_per_pixel);
 	dprintf(1, "setup->game.texture[3].line_length = |%d|\n", setup->game.texture[3].line_length);
 	dprintf(1, "setup->game.texture[3].endian = |%d|\n", setup->game.texture[3].endian);
-	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);
+	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);*/
 	wrdestroy();
 }

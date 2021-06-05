@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:49:51 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/27 13:29:04 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 13:45:15 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_cub3d.h"
+#include "../../cub3d.h"
 
 void	textures(char *line, t_setup *setup)
 {
