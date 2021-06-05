@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 09:41:34 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/02 13:43:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/05 11:24:15 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	checking(t_setup *setup)
 		|| ft_strcmp(setup->elements[0], "NO") != 0)
 		return (-1);
 	if (format_check(setup->elements[1], ".png") != -1)
-		setup->texture_id = 10;
+		setup->south_format = 1;
 	if (format_check(setup->elements[1], ".xpm") != -1)
-		setup->texture_id = 20;
-	if (setup->north_format == 0)
+		setup->south_format = 2;
+	if (setup->south_format == 0)
 		return (-1);
 	fd = open(setup->elements[1], O_DIRECTORY);
 	if (fd >= 0)
