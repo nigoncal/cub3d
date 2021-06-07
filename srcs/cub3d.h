@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/07 16:26:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 17:50:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ typedef struct	s_setup
 }				t_setup;
 
 void			abort_prog(char *s);
-void			start(int fd, char **line, t_setup *setup);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_setup *setup);
 void			resolution(char *line, t_setup *setup);

@@ -23,7 +23,6 @@ VCOLORS				=	srcs/parsing/colors/
 VMAP				=	srcs/parsing/map/
 
 SRCS				=	srcs/main.c\
-						srcs/start.c\
 						srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
 						srcs/parsing/parsing_textures/textures.c\

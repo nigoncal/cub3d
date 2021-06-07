@@ -1,4 +1,4 @@
-reverifies ce que donnenet tous des dprintf
+virer le mlx init du main, il est dans la partie graphique
 
 virer la gestion des .png si tu a le temps
 
