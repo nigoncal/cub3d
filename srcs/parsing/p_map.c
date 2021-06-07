@@ -65,22 +65,22 @@ static int	is_map(char *line)
 	return (0);
 }
 
-static void	continue_map(char *line, t_setup *setup)
+static void	continue_map(char *line, t_info *info)
 {
 	int	error;
 
 	error = 0;
-	if (setup->map_over == false)
+	if (info->map_over == false)
 	{
 		if (non_empty_line(line) == 1)
 		{
 			if (is_map(line) == 0)
-				store_map(line, setup);
+				store_map(line, info);
 			else
 				error = -1;
 		}
 		else
-			setup->map_over = true;
+			info->map_over = true;
 	}
 	else
 		if (non_empty_line(line) == 1)
@@ -89,24 +89,24 @@ static void	continue_map(char *line, t_setup *setup)
 		abort_prog("Only empty lines are allowed after the end of the map");
 }
 
-static void	start_map(char *line, t_setup *setup)
+static void	start_map(char *line, t_info *info)
 {
 	if (non_empty_line(line) == 1)
 	{
 		if (is_map(line) == 0)
 		{
-			store_map(line, setup);
-			setup->map_started = true;
+			store_map(line, info);
+			info->map_started = true;
 		}
 		else
 			abort_prog("There should be only 8 identifier lines");
 	}
 }
 
-void	parse_map(char *line, t_setup *setup)
+void	parse_map(char *line, t_info *info)
 {
-	if (setup->map_started == true)
-		continue_map(line, setup);
+	if (info->map_started == true)
+		continue_map(line, info);
 	else
-		start_map(line, setup);
+		start_map(line, info);
 }

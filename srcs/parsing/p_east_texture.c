@@ -12,36 +12,36 @@
 
 #include "../../includes/cub3d.h"
 
-static int	checking(t_setup *setup)
+static int	checking(t_info *info)
 {
 	int	fd;
 
 	fd = 0;
-	if (count_lines(setup->elements) != 2
-		|| ft_strcmp(setup->elements[0], "EA") != 0)
+	if (count_lines(info->elements) != 2
+		|| ft_strcmp(info->elements[0], "EA") != 0)
 		return (-1);
-	if (format_check(setup->elements[1], ".png") != -1)
-		setup->east_format = 1;
-	if (format_check(setup->elements[1], ".xpm") != -1)
-		setup->east_format = 2;
-	if (setup->east_format == 0)
+	if (format_check(info->elements[1], ".png") != -1)
+		info->east_format = 1;
+	if (format_check(info->elements[1], ".xpm") != -1)
+		info->east_format = 2;
+	if (info->east_format == 0)
 		return (-1);
-	fd = open(setup->elements[1], O_DIRECTORY);
+	fd = open(info->elements[1], O_DIRECTORY);
 	if (fd >= 0)
 		return (-1);
-	fd = open(setup->elements[1], O_RDONLY);
+	fd = open(info->elements[1], O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	return (0);
 }
 
-void	p_east_texture(char *line, t_setup *setup)
+void	p_east_texture(char *line, t_info *info)
 {
-	if (setup->east == true)
+	if (info->east == true)
 		abort_prog("EA (east) identifier is used more than once");
-	setup->elements = ft_split(line, ' ');
-	if (checking(setup) == -1)
+	info->elements = ft_split(line, ' ');
+	if (checking(info) == -1)
 		abort_prog("Usage : EA ./path_without_spaces.xpm OR .png");
-	setup->east_texture_path = ft_strdup(setup->elements[1]);
-	setup->east = true;
+	info->east_texture_path = ft_strdup(info->elements[1]);
+	info->east = true;
 }

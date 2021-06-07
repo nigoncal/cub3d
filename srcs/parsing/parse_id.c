@@ -12,18 +12,18 @@
 
 #include "../../includes/cub3d.h"
 
-void	parse_id(char *line, t_setup *setup)
+void	parse_id(char *line, t_info *info)
 {
 	line = change_char(line, ' ', '\t');
 	line = change_char(line, ' ', '\v');
 	while (*line == ' ')
 		line++;
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
-		p_textures(line, setup);
+		p_textures(line, info);
 	else if (*line == 'F')
-		p_floor(line, setup);
+		p_floor(line, info);
 	else if (*line == 'C')
-		p_ceiling(line, setup);
+		p_ceiling(line, info);
 	else if (*line == '\0')
 		return ;
 	else

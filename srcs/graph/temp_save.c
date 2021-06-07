@@ -72,7 +72,7 @@ char	worldMap[mapWidth][mapHeight] =
 	};
 
 
-void	draw(t_info *info, t_setup *setup)
+void	draw(t_info *info, t_info *info)
 {
 
 	int x;
@@ -84,8 +84,8 @@ void	draw(t_info *info, t_setup *setup)
 		while (x < _width)
 		{
 			// old ver : info->img.data[y * width + x] = info->buf[y][x];
-			// Where is img.data ? setup->texture[].addr ? wich texture to draw ?
-			info->img.data[y * setup->game.width + x] = info->buf[y][x];
+			// Where is img.data ? info->texture[].addr ? wich texture to draw ?
+			info->img.data[y * info->game.width + x] = info->buf[y][x];
 			x++;
 		}
 		x = 0;
@@ -111,15 +111,15 @@ void	tex_orientation(int *texDir, int *side, double rayDirX, double rayDirY, dou
 	*wallX -= floor((*wallX)); // wallX = 15.3 devient wallX = 0.3
 }
 
-void	calc(t_info *info, t_setup *setup)
+void	calc(t_info *info, t_info *info)
 {
 	int	x;
 
 	x = 0;
-	while (x < setup->game.width)
+	while (x < info->game.width)
 	{
 
-		double cameraX = 2 * x / (double)setup->game.width - 1;
+		double cameraX = 2 * x / (double)info->game.width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
 		
@@ -188,15 +188,15 @@ void	calc(t_info *info, t_setup *setup)
 			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
 
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(setup->game.height / perpWallDist);
+		int lineHeight = (int)(info->game.height / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + setup->game.height / 2;
+		int drawStart = -lineHeight / 2 + info->game.height / 2;
 		if(drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + setup->game.height / 2;
-		if(drawEnd >= setup->game.height || drawEnd < 0)
-			drawEnd = setup->game.height - 1;
+		int drawEnd = lineHeight / 2 + info->game.height / 2;
+		if(drawEnd >= info->game.height || drawEnd < 0)
+			drawEnd = info->game.height - 1;
 
 
 	
@@ -225,7 +225,7 @@ void	calc(t_info *info, t_setup *setup)
 		// How much to increase the texture coordinate perscreen pixel
 		double step = 1.0 * texHeight / lineHeight;
 		// Starting texture coordinate
-		double texPos = (drawStart - setup->game.height / 2 + lineHeight / 2) * step;
+		double texPos = (drawStart - info->game.height / 2 + lineHeight / 2) * step;
 		int y = drawStart;
 		while (y < drawEnd)
 		{
@@ -257,10 +257,10 @@ void	calc(t_info *info, t_setup *setup)
 	}
 
 
-int	main_loop(t_info *info, t_setup *setup)
+int	main_loop(t_info *info, t_info *info)
 {
-	calc(info, setup);
-	draw(info, setup);
+	calc(info, info);
+	draw(info, info);
 	return (0);
 }
 
@@ -329,7 +329,7 @@ while(x < img->img_width)
 mlx_destroy_image(info->mlx, img->img);
 }
 
-/*void	load_image(t_setup *setup, int tex_nb, int *texture, char *path, t_info *info)
+/*void	load_image(t_info *info, int tex_nb, int *texture, char *path, t_info *info)
 {
 	int y;
 	int x;
@@ -337,24 +337,24 @@ mlx_destroy_image(info->mlx, img->img);
 		x = 0;
 
 	// changer car ici pn a une struct par texture PTDR
-	// old : img->img = mlx_xpm_file_to_image(setup->mlx, path, &img->img_width, &img->img_height);
-	setup->game.texture[tex_nb].img = mlx_xpm_file_to_image(setup->mlx, path, &setup->game.texture[tex_nb].width, &setup->game.texture[tex_nb].height);
+	// old : img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
+	info->game.texture[tex_nb].img = mlx_xpm_file_to_image(info->mlx, path, &info->game.texture[tex_nb].width, &info->game.texture[tex_nb].height);
 	// old :img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	setup->game.texture[tex_nb].addr = (int *)mlx_get_data_addr(\
-	setup->game.texture[tex_nb].img, &setup->game.texture[tex_nb].bits_per_pixel, \
-	&setup->game.texture[tex_nb].line_length, &setup->game.texture[tex_nb].endian);
-	while (y < setup->game.texture[tex_nb].height)
+	info->game.texture[tex_nb].addr = (int *)mlx_get_data_addr(\
+	info->game.texture[tex_nb].img, &info->game.texture[tex_nb].bits_per_pixel, \
+	&info->game.texture[tex_nb].line_length, &info->game.texture[tex_nb].endian);
+	while (y < info->game.texture[tex_nb].height)
 	{
-		while(x < setup->game.texture[tex_nb].width)
+		while(x < info->game.texture[tex_nb].width)
 		{
 			// old ver : texture[img->img_width * y + x] = img->data[img->img_width * y + x];
-			texture[info->img.img_width * y + x] = setup->game.texture[tex_nb].addr[info->img.img_width * y + x];
+			texture[info->img.img_width * y + x] = info->game.texture[tex_nb].addr[info->img.img_width * y + x];
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_destroy_image(setup->mlx, setup->game.texture[tex_nb].img);
+	mlx_destroy_image(info->mlx, info->game.texture[tex_nb].img);
 }*/
 
 void	load_texture(t_info *info)
@@ -370,26 +370,26 @@ load_image(info, info->texture[6], "textures/wood.xpm", &img);
 load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
 }
 
-/*void	load_texture(t_info *info, t_setup *setup)
+/*void	load_texture(t_info *info, t_info *info)
 {
 	//t_img	img;
-	load_image(setup, 0, info->texture[0], "textures/eagle.xpm", info);
-	load_image(setup, 1, info->texture[1], "textures/redbrick.xpm", info);
-	load_image(setup, 2, info->texture[2], "textures/purplestone.xpm", info);
-	load_image(setup, 3, info->texture[3], "textures/greystone.xpm", info);
-	load_image(setup, 4, info->texture[4], "textures/bluestone.xpm", info);
-	load_image(setup, 5, info->texture[5], "textures/mossy.xpm", info);
+	load_image(info, 0, info->texture[0], "textures/eagle.xpm", info);
+	load_image(info, 1, info->texture[1], "textures/redbrick.xpm", info);
+	load_image(info, 2, info->texture[2], "textures/purplestone.xpm", info);
+	load_image(info, 3, info->texture[3], "textures/greystone.xpm", info);
+	load_image(info, 4, info->texture[4], "textures/bluestone.xpm", info);
+	load_image(info, 5, info->texture[5], "textures/mossy.xpm", info);
 	printf("wesh\n");
-	load_image(setup, 6, info->texture[6], "textures/wood.xpm", info);
+	load_image(info, 6, info->texture[6], "textures/wood.xpm", info);
 	// CRASHES THERE
-	load_image(setup, 7, info->texture[7], "textures/colorstone.xpm", info);
+	load_image(info, 7, info->texture[7], "textures/colorstone.xpm", info);
 }*/
 
-int    graph_main(t_setup *setup)
+int    graph_main(t_info *info)
 {
     t_info info;
     //info.mlx = mlx_init();
-	setup->mlx = mlx_init();
+	info->mlx = mlx_init();
 
     info.posX = 5;
     info.posY = 5;
@@ -441,15 +441,15 @@ int    graph_main(t_setup *setup)
     info.moveSpeed = 0.05;
     info.rotSpeed = 0.05;
     
-    info.win = mlx_new_window(setup->mlx, _width, _height, "mlx");
+    info.win = mlx_new_window(info->mlx, _width, _height, "mlx");
 
-    info.img.img = mlx_new_image(setup->mlx, _width, _height);
+    info.img.img = mlx_new_image(info->mlx, _width, _height);
 	printf("M D R\n");
     info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
 
-    mlx_loop_hook(setup->mlx, &main_loop, &info);
+    mlx_loop_hook(info->mlx, &main_loop, &info);
     mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
-    mlx_loop(setup->mlx);
+    mlx_loop(info->mlx);
 	return (0);
 }
 

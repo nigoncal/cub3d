@@ -14,25 +14,24 @@
 
 int	main(int argc, char **argv)
 {
+	t_info		*info;
 	int			fd;
 	char		*line;
-	t_setup		*setup;
 
 	line = NULL;
-	setup = wrmalloc(sizeof(*setup));
-	if (setup == NULL)
-		abort_prog("Failed to malloc setup structure");
-	ft_bzero(setup, sizeof(*setup));
+	info = wrmalloc(sizeof(*info));
+	if (info == NULL)
+		abort_prog("Failed to malloc info structure");
+	ft_bzero(info, sizeof(*info));
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
-	start(fd, &line, setup);
+	start(fd, &line, info);
 	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
-	printf("hum ok\n");
-	graph_main(setup);
-	close(fd);
+	graph_main(info);
 	wrdestroy();
+	close(fd);
 	return (0);
 }

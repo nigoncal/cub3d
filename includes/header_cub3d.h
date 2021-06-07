@@ -106,7 +106,7 @@ typedef struct s_game
 	void		*image;
 }				t_game;
 
-typedef struct	s_setup
+typedef struct	s_info
 {
 	void	*mlx;
 	int		north_format;
@@ -135,28 +135,28 @@ typedef struct	s_setup
 	int		x;
 	int		y;
 	t_game	game;
-}				t_setup;
+}				t_info;
 
 void			abort_prog(char *s);
-void			start(int fd, char **line, t_setup *setup);
+void			start(int fd, char **line, t_info *info);
 int				non_empty_line(char *line);
-void			parse_id(char *line, t_setup *setup);
-void			p_resolution(char *line, t_setup *setup);
-void			p_textures(char *line, t_setup *setup);
-void			p_north_texture(char *line, t_setup *setup);
-void			p_south_texture(char *line, t_setup *setup);
-void			p_east_texture(char *line, t_setup *setup);
-void			p_west_texture(char *line, t_setup *setup);
-void			p_sprite_texture(char *line, t_setup *setup);
-void			p_floor(char *line, t_setup *setup);
-void			p_ceiling(char *line, t_setup *setup);
-void			parse_map(char *line, t_setup *setup);
-void			store_map(char *line, t_setup *setup);
-void			square_map(t_setup *setup);
-void			flood_fill(char **map, int y, int x, t_setup *setup);
-void			find_player(t_setup *setup);
-void			check_map(t_setup *setup);
-void			graph_textures(t_setup *setup);
+void			parse_id(char *line, t_info *info);
+void			p_resolution(char *line, t_info *info);
+void			p_textures(char *line, t_info *info);
+void			p_north_texture(char *line, t_info *info);
+void			p_south_texture(char *line, t_info *info);
+void			p_east_texture(char *line, t_info *info);
+void			p_west_texture(char *line, t_info *info);
+void			p_sprite_texture(char *line, t_info *info);
+void			p_floor(char *line, t_info *info);
+void			p_ceiling(char *line, t_info *info);
+void			parse_map(char *line, t_info *info);
+void			store_map(char *line, t_info *info);
+void			square_map(t_info *info);
+void			flood_fill(char **map, int y, int x, t_info *info);
+void			find_player(t_info *info);
+void			check_map(t_info *info);
+void			graph_textures(t_info *info);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);
@@ -167,8 +167,8 @@ void			graph_textures(t_setup *setup);
   int				key_hook(int keycode);
   int				main_loop(t_info *info);
   int				key_press(int key, t_info *info);
-  void			add_line_map(char *line, t_setup *setup);
-  void			ft_map(char *line, t_setup *setup);
+  void			add_line_map(char *line, t_info *info);
+  void			ft_map(char *line, t_info *info);
   void			calc(t_info *info);
   void			raycast_cal(t_info *info);
   void			raycast_calc_dir(t_info *info);

@@ -15,11 +15,6 @@
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
-#define WIN_WIDTH 1280
-#define WIN_HEIGHT 720
-#define MOVE_SPEED 0.05
-#define ROT_SPEED 0.05
-
 // check tous les includes et vires si pas besoin
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
@@ -52,7 +47,7 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
-typedef struct	s_info
+/*typedef struct	s_info
 {
 	double posX;
 	double posY;
@@ -65,11 +60,11 @@ typedef struct	s_info
 	t_img	img;
 	//int		**buf;
 	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[WIN_HEIGHT][WIN_WIDTH];
+	int		buf[_height][_width];
 	int		**texture;
 	double	moveSpeed;
 	double	rotSpeed;
-}				t_info;
+}				t_info;*/
 /* end of part to be removed */
 
 typedef union	u_color
@@ -115,11 +110,11 @@ typedef struct s_game
 	double		pos_y;
 	double		dir_x;
 	double		dir_y;
-	double		planex; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double		planey; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-	double		raydirx; //calcul de direction x du rayon
-	double		raydiry; //calcul de direction y du rayon
-	double		camerax; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
+	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+//	double		raydirX; //calcul de direction x du rayon
+//	double		raydirY; //calcul de direction y du rayon
+//	double		cameraX; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
 //	int			mapX; // coordonée x du carré dans lequel est pos
 //	int			mapY; // coordonnée y du carré dans lequel est pos
 //	double		sidedistX; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
@@ -135,22 +130,22 @@ typedef struct s_game
 //	int			drawstart; //position de debut ou il faut dessiner
 //	int			drawend; //position de fin ou il faut dessiner
 //	int			x; //permet de parcourir tous les rayons
-//	double		moveSpeed;
-//	double		rotSpeed;
+	double		moveSpeed;
+	double		rotSpeed;
 //	int			endian;
-//	char		*buffer;
 //	int			line_height;
 //	int			line_lenght;
 //	int			BPP;
 	int			width;
 	int			height;
-	t_data		**texture;
-//	void		*win;
+	int			**texture;
+	int 		buf[720][1280];
 	void		*image;
 }				t_game;
 
-typedef struct	s_setup
+typedef struct	s_info
 {
+	void	*win;
 	void	*mlx;
 	int		north_format;
 	int		south_format;
@@ -177,30 +172,31 @@ typedef struct	s_setup
 	char	player_dir;
 	int		x;
 	int		y;
+	t_img	img;
 	t_game	game;
-	t_info	info;
-}				t_setup;
+}				t_info;
 
 void			abort_prog(char *s);
-void			start(int fd, char **line, t_setup *setup);
+void			start(int fd, char **line, t_info *info);
 int				non_empty_line(char *line);
-void			parse_id(char *line, t_setup *setup);
-void			p_resolution(char *line, t_setup *setup);
-void			p_textures(char *line, t_setup *setup);
-void			p_north_texture(char *line, t_setup *setup);
-void			p_south_texture(char *line, t_setup *setup);
-void			p_east_texture(char *line, t_setup *setup);
-void			p_west_texture(char *line, t_setup *setup);
-void			p_sprite_texture(char *line, t_setup *setup);
-void			p_floor(char *line, t_setup *setup);
-void			p_ceiling(char *line, t_setup *setup);
-void			parse_map(char *line, t_setup *setup);
-void			store_map(char *line, t_setup *setup);
-void			square_map(t_setup *setup);
-void			flood_fill(char **map, int y, int x, t_setup *setup);
-void			find_player(t_setup *setup);
-void			check_map(t_setup *setup);
-void			graph_textures(t_setup *setup);
+void			parse_id(char *line, t_info *info);
+void			p_resolution(char *line, t_info *info);
+void			p_textures(char *line, t_info *info);
+void			p_north_texture(char *line, t_info *info);
+void			p_south_texture(char *line, t_info *info);
+void			p_east_texture(char *line, t_info *info);
+void			p_west_texture(char *line, t_info *info);
+void			p_sprite_texture(char *line, t_info *info);
+void			p_floor(char *line, t_info *info);
+void			p_ceiling(char *line, t_info *info);
+void			parse_map(char *line, t_info *info);
+void			store_map(char *line, t_info *info);
+void			square_map(t_info *info);
+void			flood_fill(char **map, int y, int x, t_info *info);
+void			find_player(t_info *info);
+void			check_map(t_info *info);
+void			graph_textures(t_info *info);
+int				alloc_storage(t_info *info);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);
@@ -211,8 +207,8 @@ void			graph_textures(t_setup *setup);
   int				key_hook(int keycode);
   int				main_loop(t_info *info);
   int				key_press(int key, t_info *info);
-  void			add_line_map(char *line, t_setup *setup);
-  void			ft_map(char *line, t_setup *setup);
+  void			add_line_map(char *line, t_info *info);
+  void			ft_map(char *line, t_info *info);
   void			calc(t_info *info);
   void			raycast_cal(t_info *info);
   void			raycast_calc_dir(t_info *info);
@@ -222,7 +218,7 @@ void			graph_textures(t_setup *setup);
 
 /* GRAPHIC */
 
-int				graph_main(t_setup *setup);
-void			draw(t_setup *setup);
+int				graph_main(t_info *info);
+void			draw(t_info *info);
 
 #endif

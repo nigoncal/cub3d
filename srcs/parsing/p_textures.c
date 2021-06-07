@@ -12,14 +12,14 @@
 
 #include "../../includes/cub3d.h"
 
-void	p_textures(char *line, t_setup *setup)
+void	p_textures(char *line, t_info *info)
 {
 	if (*line == 'N')
-		p_north_texture(line, setup);
+		p_north_texture(line, info);
 	if (*line == 'S')
-		p_south_texture(line, setup);
+		p_south_texture(line, info);
 	if (*line == 'E')
-		p_east_texture(line, setup);
+		p_east_texture(line, info);
 	if (*line == 'W')
-		p_west_texture(line, setup);
+		p_west_texture(line, info);
 }

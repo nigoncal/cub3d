@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int	store_rgb(char **tab_rgb, t_setup *setup)
+static int	store_rgb(char **tab_rgb, t_info *info)
 {
 	int	i;
 	int	rgb[3];
@@ -25,34 +25,34 @@ static int	store_rgb(char **tab_rgb, t_setup *setup)
 			return (-1);
 		i++;
 	}
-	setup->game.c_color.chan.red = rgb[0];
-	setup->game.c_color.chan.green = rgb[1];
-	setup->game.c_color.chan.blue = rgb[2];
+	info->game.c_color.chan.red = rgb[0];
+	info->game.c_color.chan.green = rgb[1];
+	info->game.c_color.chan.blue = rgb[2];
 	return (0);
 }
 
-static int	right_content(t_setup *setup)
+static int	right_content(t_info *info)
 {
 	char	**tab_rgb;
 
 	tab_rgb = NULL;
-	if (count_lines(setup->elements) != 2
-		|| ft_strcmp(setup->elements[0], "C") != 0)
+	if (count_lines(info->elements) != 2
+		|| ft_strcmp(info->elements[0], "C") != 0)
 		return (-1);
-	tab_rgb = ft_split(setup->elements[1], ',');
+	tab_rgb = ft_split(info->elements[1], ',');
 	if (count_lines(tab_rgb) != 3 || is_tab_digit(tab_rgb) == -1
-		|| store_rgb(tab_rgb, setup) == -1)
+		|| store_rgb(tab_rgb, info) == -1)
 		return (-1);
 	return (0);
 }
 
-void	p_ceiling(char *line, t_setup *setup)
+void	p_ceiling(char *line, t_info *info)
 {
-	if (setup->b_ceiling == true)
+	if (info->b_ceiling == true)
 		abort_prog("C identifier is used more than once");
-	setup->elements = ft_split(line, ' ');
-	if (right_content(setup) == -1)
+	info->elements = ft_split(line, ' ');
+	if (right_content(info) == -1)
 		abort_prog("Usage : C r,g,b (with 0 >= r/g/b <= 255)");
-	setup->b_ceiling = true;
-	wrfree(setup->elements);
+	info->b_ceiling = true;
+	wrfree(info->elements);
 }

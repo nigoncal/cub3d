@@ -1,5 +1,5 @@
 
-void	draw(t_setup setup)
+void	draw(t_info info)
 {
 
 	int x;
@@ -10,7 +10,7 @@ void	draw(t_setup setup)
 	{
 		while (x < width)
 		{
-			setup->game.image = data[y * width + x] = info->buf[y][x];
+			info->game.image = data[y * width + x] = info->buf[y][x];
 			x++;
 		}
 		x = 0;
