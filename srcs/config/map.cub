@@ -1,7 +1,7 @@
-NO ./srcs/textures/stone.png
-SO ./srcs/textures/grass.xpm
-WE ./srcs/textures/grass.xpm
-EA ./srcs/textures/grass.xpm
+NO ./srcs/config/textures/eagle.xpm
+SO ./srcs/config/textures/eagle.xpm
+EA ./srcs/config/textures/eagle.xpm
+WE ./srcs/config/textures/eagle.xpm
 
 F 220,100,0
 C 225,30,0

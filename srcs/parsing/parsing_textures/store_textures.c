@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph_textures.c                                   :+:      :+:    :+:   */
+/*   store_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 15:58:38 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 14:05:56 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/06/07 15:48:28 by sylducam          #+#    #+#             */
+/*   Updated: 2021/06/07 15:59:40 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	xpm_texture_address(t_setup *setup)
 		&setup->game.texture[3].bits_per_pixel, \
 		&setup->game.texture[3].line_length, &setup->game.texture[3].endian);
 }
-
 static void	png_texture_address(t_setup *setup)
 {
 	if (setup->north_format == 1)
@@ -59,47 +58,44 @@ static void	png_texture_address(t_setup *setup)
 		&setup->game.texture[3].bits_per_pixel, \
 		&setup->game.texture[3].line_length, &setup->game.texture[3].endian);
 }
-
 static void	xpm_texture(t_setup *setup)
 {
 	if (setup->north_format == 2)
 		setup->game.texture[0].img = mlx_xpm_file_to_image(setup->mlx, \
-		setup->game.texture[0].path, &setup->game.texture[0].width, \
+		setup->north_texture_path, &setup->game.texture[0].width, \
 		&setup->game.texture[0].height);
 	if (setup->south_format == 2)
 		setup->game.texture[1].img = mlx_xpm_file_to_image(setup->mlx, \
-		setup->game.texture[1].path, &setup->game.texture[1].width, \
+		setup->south_texture_path, &setup->game.texture[1].width, \
 		&setup->game.texture[1].height);
 	if (setup->east_format == 2)
 		setup->game.texture[2].img = mlx_xpm_file_to_image(setup->mlx, \
-		setup->game.texture[2].path, &setup->game.texture[2].width, \
+		setup->east_texture_path, &setup->game.texture[2].width, \
 		&setup->game.texture[2].height);
 	if (setup->west_format == 2)
 		setup->game.texture[3].img = mlx_xpm_file_to_image(setup->mlx, \
 		setup->west_texture_path, &setup->game.texture[3].width, \
 		&setup->game.texture[3].height);
 }
-
 static void	png_texture(t_setup *setup)
 {
 	if (setup->north_format == 1)
 		setup->game.texture[0].img = mlx_png_file_to_image(setup->mlx, \
-		setup->game.texture[0].path, &setup->game.texture[0].width, \
+		setup->north_texture_path, &setup->game.texture[0].width, \
 		&setup->game.texture[0].height);
 	if (setup->south_format == 1)
 		setup->game.texture[1].img = mlx_png_file_to_image(setup->mlx, \
-		setup->game.texture[1].path, &setup->game.texture[1].width, \
+		setup->south_texture_path, &setup->game.texture[1].width, \
 		&setup->game.texture[1].height);
 	if (setup->east_format == 1)
 		setup->game.texture[2].img = mlx_png_file_to_image(setup->mlx, \
-		setup->game.texture[2].path, &setup->game.texture[2].width, \
+		setup->east_texture_path, &setup->game.texture[2].width, \
 		&setup->game.texture[2].height);
 	if (setup->west_format == 1)
 		setup->game.texture[3].img = mlx_png_file_to_image(setup->mlx, \
 		setup->west_texture_path, &setup->game.texture[3].width, \
 		&setup->game.texture[3].height);
 }
-
 void	store_textures(t_setup *setup)
 {
 	png_texture(setup);

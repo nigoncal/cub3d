@@ -1,9 +1,11 @@
-est-ce que le fait d'avoir deux dossiers nommes textures (1 dans config et
-l'autre dans parsing) pose un probleme de les VPATH du Makefile
+reverifies ce que donnenet tous des dprintf
+
+virer la gestion des .png si tu a le temps
+
+tester avec les textures que Nicolas et Pauline utilisent
 
 lis toute la page de la mlx, il faut que tu piges la mlx pour resoudre ton
 probleme sur setup->game.texture[0].addr = |'2|
-
 
 error_manager into parsing
 

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:18:02 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/27 10:07:10 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 16:33:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void	fill_line(t_setup *setup)
 		setup->squared_map[y_new][0] = ' ';
 		while (setup->map[y_old][x_old])
 			setup->squared_map[y_new][x_new++] = setup->map[y_old][x_old++];
-		setup->squared_map[y_new][x_new] = ' ';
-		setup->squared_map[y_new][x_new + 1] = '\0';
+		while (x_new < setup->map_xsize + 2)
+			setup->squared_map[y_new][x_new++] = ' ';
+		setup->squared_map[y_new][x_new] = '\0';
 		x_new = 1;
 		x_old = 0;
 		y_old++;

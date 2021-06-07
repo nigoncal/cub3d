@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 14:16:33 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 16:26:12 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct	s_textures
 
 typedef struct	s_data
 {
-	char	*path;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -125,7 +124,7 @@ typedef struct	s_setup
 	bool	map_over;
 	int		id_counter;
 	char	**elements;
-//	char	*north_texture_path;
+	char	*north_texture_path;
 	char	*south_texture_path;
 	char	*west_texture_path;
 	char	*east_texture_path;
@@ -150,7 +149,7 @@ void			south_texture(char *line, t_setup *setup);
 void			east_texture(char *line, t_setup *setup);
 void			west_texture(char *line, t_setup *setup);
 void			sprite_texture(char *line, t_setup *setup);
-void			store_texture(t_setup *setup);
+void			store_textures(t_setup *setup);
 void			parse_floor(char *line, t_setup *setup);
 void			ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);

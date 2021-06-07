@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 09:41:34 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 14:41:07 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 16:01:44 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	west_texture(char *line, t_setup *setup)
 	setup->elements = ft_split(line, ' ');
 	if (checking(setup) == -1)
 		abort_prog("Usage : WE ./path_without_spaces.xpm OR .png");
-	setup->game.texture[0].path = ft_strdup(setup->elements[1]);
-	store_texture(setup);
+	setup->west_texture_path = ft_strdup(setup->elements[1]);
+	store_textures(setup);
 	setup->west = true;
 }
