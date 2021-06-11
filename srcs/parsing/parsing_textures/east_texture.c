@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static int	checking(t_setup *setup)
 {

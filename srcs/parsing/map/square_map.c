@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static void	fill_line(t_setup *setup)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static void	add_map_line(char *line, t_setup *setup)
 {

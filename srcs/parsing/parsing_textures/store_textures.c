@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../../includes/cub3d.h"
 
 static void	xpm_texture_address(t_setup *setup)
 {

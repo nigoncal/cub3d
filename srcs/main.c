@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/07 17:55:50 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 11:07:24 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	non_empty_line(char *line)
 {
@@ -31,11 +31,11 @@ int	non_empty_line(char *line)
 static void	start(int fd, char **line, t_setup *setup)
 {
 	setup->mlx = malloc(sizeof(void));
-	setup->game.width = 1280;
-	setup->game.height = 720;
 	if (setup->mlx == NULL)
 		abort_prog("Failed to malloc setup->mlx");
 	setup->mlx = mlx_init();
+	setup->game.width = 1280;
+	setup->game.height = 720;
 	while (get_next_line(fd, line))
 	{
 		if (setup->id_counter < 6)

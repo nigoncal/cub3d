@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                     :+:      :+:    :+:   */
+/*   ../includes/cub3d.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/07 17:50:49 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 11:20:21 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define ERROR -1
 # define RAS 0
 // check tous les includes et vires si pas besoin
-# include "mlx/mlx.h"
+# include "../srcs/mlx/mlx.h"
 # include "../libft/libft.h"
 //# include "key_macros.h"
 # include <stdbool.h>
@@ -154,8 +154,6 @@ void			ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);
-void			flood_fill(char **map, int y, int x, t_setup *setup);
-void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);

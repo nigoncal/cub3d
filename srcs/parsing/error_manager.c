@@ -6,11 +6,11 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 13:43:35 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 11:15:16 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 // penses a free elements aussi, dans le parsing des textures (free_char_p2p)
 // > free le juste avant d'appeler abort_prog

@@ -36,9 +36,7 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/map/parse_map.c\
 						srcs/parsing/map/store_map.c\
 						srcs/parsing/map/square_map.c\
-						srcs/parsing/map/check_map.c\
-						srcs/parsing/map/find_player.c\
-						srcs/parsing/map/flood_fill.c
+						srcs/parsing/map/check_map.c
 
 OBJS				=	$(SRCS:.c=.o)
 
