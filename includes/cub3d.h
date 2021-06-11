@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/08 12:45:23 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 11:59:58 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define ERROR -1
 # define RAS 0
 // check tous les includes et vires si pas besoin
-# include "../mlx/mlx.h"
+# include "../srcs/mlx/mlx.h"
 # include "../libft/libft.h"
 # include "key_macos.h"
 # include <stdbool.h>
@@ -141,8 +141,8 @@ typedef struct s_game
 
 typedef struct	s_setup
 {
-	void	*win;
 	void	*mlx;
+	void	*win;
 	int		north_format;
 	int		south_format;
 	int		east_format;
@@ -176,20 +176,17 @@ void			abort_prog(char *s);
 void			start(int fd, char **line, t_setup *setup);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_setup *setup);
-void			p_resolution(char *line, t_setup *setup);
-void			p_textures(char *line, t_setup *setup);
-void			p_north_texture(char *line, t_setup *setup);
-void			p_south_texture(char *line, t_setup *setup);
-void			p_east_texture(char *line, t_setup *setup);
-void			p_west_texture(char *line, t_setup *setup);
-void			p_sprite_texture(char *line, t_setup *setup);
-void			p_floor(char *line, t_setup *setup);
-void			p_ceiling(char *line, t_setup *setup);
+void			resolution(char *line, t_setup *setup);
+void			textures(char *line, t_setup *setup);
+void			north_texture(char *line, t_setup *setup);
+void			south_texture(char *line, t_setup *setup);
+void			east_texture(char *line, t_setup *setup);
+void			west_texture(char *line, t_setup *setup);
+void			parse_floor(char *line, t_setup *setup);
+void			ceiling(char *line, t_setup *setup);
 void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);
-void			flood_fill(char **map, int y, int x, t_setup *setup);
-void			find_player(t_setup *setup);
 void			check_map(t_setup *setup);
 void			graph_textures(t_setup *setup);
 int				alloc_storage(t_setup *setup);
