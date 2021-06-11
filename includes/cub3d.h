@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/11 11:59:58 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 12:59:05 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ typedef struct	s_setup
 }				t_setup;
 
 void			abort_prog(char *s);
-void			start(int fd, char **line, t_setup *setup);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_setup *setup);
 void			resolution(char *line, t_setup *setup);
