@@ -34,12 +34,11 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/check_map.c\
 						srcs/parsing/flood_fill.c\
 						srcs/parsing/find_player.c\
-						srcs/graph/graph_textures.c\
-						srcs/graph/temp.c\
+						srcs/graphic/temp.c
 
 OBJS				=	$(SRCS:.c=.o)
 
-H_CUB3D				=	includes/cub3d.h
+H_CUB3D				=	srcs/header_cub3d.h
 
 COMP				=	clang -Wall -Wextra -Werror -g3
 

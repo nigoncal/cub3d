@@ -28,8 +28,9 @@ static void	fill_line(t_info *info)
 		info->squared_map[y_new][0] = ' ';
 		while (info->map[y_old][x_old])
 			info->squared_map[y_new][x_new++] = info->map[y_old][x_old++];
-		info->squared_map[y_new][x_new] = ' ';
-		info->squared_map[y_new][x_new + 1] = '\0';
+		while (x_new < info->map_xsize + 2)
+			info->squared_map[y_new][x_new++] = ' ';
+		info->squared_map[y_new][x_new] = '\0';
 		x_new = 1;
 		x_old = 0;
 		y_old++;

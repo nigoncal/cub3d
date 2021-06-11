@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_cub3d.h                                     :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/30 17:48:37 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 12:45:23 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ typedef union	u_color
 
 typedef struct	s_data {
 	void	*img;
-	//char	*addr; // *data
-	int		*addr; // *data
-	
+	char		*addr; // *data
 	int		line_length; //size_l
 	int		bits_per_pixel; // bpp
 	int		endian;
@@ -112,32 +110,30 @@ typedef struct s_game
 	double		dir_y;
 	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-//	double		raydirX; //calcul de direction x du rayon
-//	double		raydirY; //calcul de direction y du rayon
-//	double		cameraX; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
-//	int			mapX; // coordonée x du carré dans lequel est pos
-//	int			mapY; // coordonnée y du carré dans lequel est pos
-//	double		sidedistX; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
-//	double		sidedistY; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-//	double		deltadistX; //distance que rayon parcours entre chaque point d'intersection vertical
-//	double		deltadistY; //distance que le rayon parcours entre chaque point d'intersection horizontal
-//	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-//	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-//	int			hit; // 1 si un mur a ete touche, 0 sinon
+
+	double		raydir_x; //calcul de direction x du rayon
+	double		raydir_y; //calcul de direction y du rayon
+	double		camera_x; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
+	double		wall_x;
+	int			map_x; // coordonée x du carré dans lequel est pos
+	int			map_y; // coordonnée y du carré dans lequel est pos
+	double		sidedist_x; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
+	double		sidedist_y; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
+	double		deltadist_x; //distance que rayon parcours entre chaque point d'intersection vertical
+	double		deltadist_y; //distance que le rayon parcours entre chaque point d'intersection horizontal
+	int			step_x; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
+	int			step_y; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
+	int			hit; // 1 si un mur a ete touche, 0 sinon
 	int			side;
 	double		perpwalldist; // distance du joueur au mur
-//	int			lineheight; //hauteur de la ligne a dessiner
-//	int			drawstart; //position de debut ou il faut dessiner
-//	int			drawend; //position de fin ou il faut dessiner
-//	int			x; //permet de parcourir tous les rayons
-	double		moveSpeed;
-	double		rotSpeed;
-//	int			endian;
-//	int			line_height;
-//	int			line_lenght;
-//	int			BPP;
+	int			lineheight; //hauteur de la ligne a dessiner
+	int			drawstart; //position de debut ou il faut dessiner
+	int			drawend; //position de fin ou il faut dessiner
+	double		movespeed;
+	double		rotspeed;
 	int			width;
 	int			height;
+	int			texdir;
 	int			**texture;
 	int 		buf[720][1280];
 	void		*image;
@@ -197,6 +193,7 @@ void			find_player(t_info *info);
 void			check_map(t_info *info);
 void			graph_textures(t_info *info);
 int				alloc_storage(t_info *info);
+void			tex_orientation(t_info *info);
 /*void			create_windows(t_info *info);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);
@@ -220,5 +217,7 @@ int				alloc_storage(t_info *info);
 
 int				graph_main(t_info *info);
 void			draw(t_info *info);
+void			init_buf(t_info *info);
+void			dda(t_info *info);
 
 #endif

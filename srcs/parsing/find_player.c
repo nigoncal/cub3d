@@ -59,6 +59,5 @@ void	find_player(t_info *info)
 	}
 	if (info->player_dir == 0)
 		abort_prog("No player found on the map");
-	//	char **temp = info->map;
-	//flood_fill(temp, info->y, info->x, info);
+	flood_fill(info->map, info->y, info->x, info);
 }
