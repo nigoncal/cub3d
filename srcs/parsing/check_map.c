@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void	check_map(t_info *info)
+void	check_map(t_setup *setup)
 {
-	find_player(info);
+	find_player(setup);
 }

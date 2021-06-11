@@ -14,7 +14,7 @@
 #define height 720
 
 
-void draw(t_info *info)
+void draw(t_setup *setup)
 {
 	int x;
 	int y;
@@ -25,31 +25,31 @@ void draw(t_info *info)
 	{
 		while (x < width)
 		{
-			info->img.data[y * width + x] = info->game.buf[y][x];
+			setup->img.data[y * width + x] = setup->game.buf[y][x];
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
+	mlx_put_image_to_window(setup->mlx, setup->win, setup->img.img, 0, 0);
 }
-void tex_orientation(t_info *info)
+void tex_orientation(t_setup *setup)
 {
-	if (info->game.side == 0 && info->game.raydir_x < 0) //NO
-		info->game.texdir = 0;
-	if (info->game.side == 0 && info->game.raydir_x >= 0) // S
-		info->game.texdir = 1;
-	if (info->game.side == 1 && info->game.raydir_y < 0) // WE
-		info->game.texdir = 2;
-	if (info->game.side == 1 && info->game.raydir_y >= 0) // EA
-		info->game.texdir = 3;
-	if (info->game.side == 0)
-		info->game.wall_x = info->game.pos_y + info->game.perpwalldist * info->game.raydir_y;
+	if (setup->game.side == 0 && setup->game.raydir_x < 0) //NO
+		setup->game.texdir = 0;
+	if (setup->game.side == 0 && setup->game.raydir_x >= 0) // S
+		setup->game.texdir = 1;
+	if (setup->game.side == 1 && setup->game.raydir_y < 0) // WE
+		setup->game.texdir = 2;
+	if (setup->game.side == 1 && setup->game.raydir_y >= 0) // EA
+		setup->game.texdir = 3;
+	if (setup->game.side == 0)
+		setup->game.wall_x = setup->game.pos_y + setup->game.perpwalldist * setup->game.raydir_y;
 	else
-		info->game.wall_x = info->game.pos_x + info->game.perpwalldist * info->game.raydir_x;
-	info->game.wall_x -= floor((info->game.wall_x)); // info->game.wall_x = 15.3 devient info->game.wall_x = 0.3
+		setup->game.wall_x = setup->game.pos_x + setup->game.perpwalldist * setup->game.raydir_x;
+	setup->game.wall_x -= floor((setup->game.wall_x)); // setup->game.wall_x = 15.3 devient setup->game.wall_x = 0.3
 }
-void calc(t_info *info)
+void calc(t_setup *setup)
 {
 	int x;
 	int y;
@@ -57,174 +57,174 @@ void calc(t_info *info)
 	x = 0;
 	while (x < width)
 	{
-		info->game.camera_x = 2 * x / (double)width - 1;
-		info->game.raydir_x = info->game.dir_x + info->game.planeX * info->game.camera_x;
-		info->game.raydir_y = info->game.dir_y + info->game.planeY * info->game.camera_x;
+		setup->game.camera_x = 2 * x / (double)width - 1;
+		setup->game.raydir_x = setup->game.dir_x + setup->game.planeX * setup->game.camera_x;
+		setup->game.raydir_y = setup->game.dir_y + setup->game.planeY * setup->game.camera_x;
 
-		info->game.map_x = (int)info->game.pos_x;
-		info->game.map_y = (int)info->game.pos_y;
+		setup->game.map_x = (int)setup->game.pos_x;
+		setup->game.map_y = (int)setup->game.pos_y;
 
-		 info->game.deltadist_x = fabs(1 / info->game.raydir_x);
-		 info->game.deltadist_y = fabs(1 / info->game.raydir_y);
+		 setup->game.deltadist_x = fabs(1 / setup->game.raydir_x);
+		 setup->game.deltadist_y = fabs(1 / setup->game.raydir_y);
 
-		info->game.hit = 0; //was there a wall hit?
-		if (info->game.raydir_x < 0)
+		setup->game.hit = 0; //was there a wall hit?
+		if (setup->game.raydir_x < 0)
 		{
-			info->game.step_x = -1;
-			info->game.sidedist_x = (info->game.pos_x - info->game.map_x) * info->game.deltadist_x;
+			setup->game.step_x = -1;
+			setup->game.sidedist_x = (setup->game.pos_x - setup->game.map_x) * setup->game.deltadist_x;
 		}
 		else
 		{
-			info->game.step_x = 1;
-			info->game.sidedist_x = (info->game.map_x + 1.0 - info->game.pos_x) * info->game.deltadist_x;
+			setup->game.step_x = 1;
+			setup->game.sidedist_x = (setup->game.map_x + 1.0 - setup->game.pos_x) * setup->game.deltadist_x;
 		}
-		if (info->game.raydir_y < 0)
+		if (setup->game.raydir_y < 0)
 		{
-			info->game.step_y = -1;
-			info->game.sidedist_y = (info->game.pos_y - info->game.map_y) * info->game.deltadist_y;
+			setup->game.step_y = -1;
+			setup->game.sidedist_y = (setup->game.pos_y - setup->game.map_y) * setup->game.deltadist_y;
 		}
 		else
 		{
-			info->game.step_y = 1;
-			info->game.sidedist_y = (info->game.map_y + 1.0 - info->game.pos_y) * info->game.deltadist_y;
+			setup->game.step_y = 1;
+			setup->game.sidedist_y = (setup->game.map_y + 1.0 - setup->game.pos_y) * setup->game.deltadist_y;
 		}
-		while (info->game.hit == 0)
+		while (setup->game.hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (info->game.sidedist_x < info->game.sidedist_y)
+			if (setup->game.sidedist_x < setup->game.sidedist_y)
 			{
-				info->game.sidedist_x += info->game.deltadist_x;
-				info->game.map_x += info->game.step_x;
-				info->game.side = 0;
+				setup->game.sidedist_x += setup->game.deltadist_x;
+				setup->game.map_x += setup->game.step_x;
+				setup->game.side = 0;
 			}
 			else
 			{
-				info->game.sidedist_y += info->game.deltadist_y;
-				info->game.map_y += info->game.step_y;
-				info->game.side = 1;
+				setup->game.sidedist_y += setup->game.deltadist_y;
+				setup->game.map_y += setup->game.step_y;
+				setup->game.side = 1;
 			}
-			//Check in map if ray has info->game.hit a wall
-			if (info->map[info->game.map_y][info->game.map_x] != 'V')
-				info->game.hit = 1;
+			//Check in map if ray has setup->game.hit a wall
+			if (setup->map[setup->game.map_y][setup->game.map_x] != 'V')
+				setup->game.hit = 1;
 		}
-		if (info->game.side == 0)
-			info->game.perpwalldist = (info->game.map_x - info->game.pos_x + (1 - info->game.step_x) / 2) / info->game.raydir_x;
+		if (setup->game.side == 0)
+			setup->game.perpwalldist = (setup->game.map_x - setup->game.pos_x + (1 - setup->game.step_x) / 2) / setup->game.raydir_x;
 		else
-			info->game.perpwalldist = (info->game.map_y - info->game.pos_y + (1 - info->game.step_y) / 2) / info->game.raydir_y;
+			setup->game.perpwalldist = (setup->game.map_y - setup->game.pos_y + (1 - setup->game.step_y) / 2) / setup->game.raydir_y;
 		//Calculate height of line to draw on screen
-		info->game.lineheight = (int)(height / info->game.perpwalldist);
-		info->game.drawstart = -info->game.lineheight / 2 + height / 2;
-		if (info->game.drawstart < 0)
-			info->game.drawstart = 0;
-		//int drawEnd = info->game.lineheight / 2 + height / 2;
-		 info->game.drawend = info->game.lineheight / 2 + height / 2;
-		if (info->game.drawend >= height || info->game.drawend < 0)
-			info->game.drawend = height - 1;
-		// calculate value of info->game.wall_x
-		if (info->game.side == 0)
-			info->game.wall_x = info->game.pos_y + info->game.perpwalldist * info->game.raydir_y;
+		setup->game.lineheight = (int)(height / setup->game.perpwalldist);
+		setup->game.drawstart = -setup->game.lineheight / 2 + height / 2;
+		if (setup->game.drawstart < 0)
+			setup->game.drawstart = 0;
+		//int drawEnd = setup->game.lineheight / 2 + height / 2;
+		 setup->game.drawend = setup->game.lineheight / 2 + height / 2;
+		if (setup->game.drawend >= height || setup->game.drawend < 0)
+			setup->game.drawend = height - 1;
+		// calculate value of setup->game.wall_x
+		if (setup->game.side == 0)
+			setup->game.wall_x = setup->game.pos_y + setup->game.perpwalldist * setup->game.raydir_y;
 		else
-			info->game.wall_x = info->game.pos_x + info->game.perpwalldist * info->game.raydir_x;
-		info->game.wall_x -= floor(info->game.wall_x);
+			setup->game.wall_x = setup->game.pos_x + setup->game.perpwalldist * setup->game.raydir_x;
+		setup->game.wall_x -= floor(setup->game.wall_x);
 		// Choosing a texture in the texture tab
-		tex_orientation(info);
+		tex_orientation(setup);
 		// x coordinate on the texture
-		int texX = (int)(info->game.wall_x * (double)texWidth);
-		if (info->game.side == 0 && info->game.raydir_x > 0)
+		int texX = (int)(setup->game.wall_x * (double)texWidth);
+		if (setup->game.side == 0 && setup->game.raydir_x > 0)
 			texX = texWidth - texX - 1;
-		if (info->game.side == 1 && info->game.raydir_y < 0)
+		if (setup->game.side == 1 && setup->game.raydir_y < 0)
 			texX = texWidth - texX - 1;
 		// How much to increase the texture coordinate perscreen pixel
-		double step = 1.0 * texHeight / info->game.lineheight;
+		double step = 1.0 * texHeight / setup->game.lineheight;
 		// Starting texture coordinate
-		double texPos = (info->game.drawstart - height / 2 + info->game.lineheight / 2) * step;
-		y = info->game.drawstart;
-		while (y < info->game.drawend)
+		double texPos = (setup->game.drawstart - height / 2 + setup->game.lineheight / 2) * step;
+		y = setup->game.drawstart;
+		while (y < setup->game.drawend)
 		{
 			y++;
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
-			int color = info->game.texture[info->game.texdir][texHeight * texY + texX];
+			int color = setup->game.texture[setup->game.texdir][texHeight * texY + texX];
 			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if (info->game.side == 1)
+			if (setup->game.side == 1)
 				color = (color >> 1) & 8355711;
-			info->game.buf[y][x] = color;
+			setup->game.buf[y][x] = color;
 		}
 		y = 0;
-		while (y < info->game.drawstart)
+		while (y < setup->game.drawstart)
 		{
-			info->game.buf[y][x] = 0x77b5fe;
+			setup->game.buf[y][x] = 0x77b5fe;
 			y++;
 		}
-		y = info->game.drawend;
+		y = setup->game.drawend;
 		while (y < height)
 		{
-			info->game.buf[y][x] = 0x808000;
+			setup->game.buf[y][x] = 0x808000;
 			y++;
 		}
 		x++;
 	}
 }
-int main_loop(t_info *info)
+int main_loop(t_setup *setup)
 {
-	calc(info);
-	draw(info);
+	calc(setup);
+	draw(setup);
 	return (0);
 }
 
 
-int key_press(int key, t_info *info)
+int key_press(int key, t_setup *setup)
 {
 	if (key == K_W)
 	{
-		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)] == '0')
-			info->game.pos_y += info->game.dir_y * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == '0')
-			info->game.pos_x += info->game.dir_x * info->game.movespeed;
+		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_y + setup->game.dir_y * setup->game.movespeed)] == '0')
+			setup->game.pos_y += setup->game.dir_y * setup->game.movespeed;
+		if (setup->map[(int)(setup->game.pos_x + setup->game.dir_x * setup->game.movespeed)][(int)(setup->game.pos_y)] == '0')
+			setup->game.pos_x += setup->game.dir_x * setup->game.movespeed;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)] == '0')
-			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == '0')
-			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
+		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x - setup->game.dir_x * setup->game.movespeed)] == '0')
+			setup->game.pos_x -= setup->game.dir_x * setup->game.movespeed;
+		if (setup->map[(int)(setup->game.pos_y - setup->game.dir_y * setup->game.movespeed)][(int)(setup->game.pos_x)] == '0')
+			setup->game.pos_y -= setup->game.dir_y * setup->game.movespeed;
 	}
 	//rotate to the right
 	if (key == K_D)
 	{
 		//both camera direction and camera plane must be rotated
-		double oldDirX = info->game.dir_x;
-		info->game.dir_x = info->game.dir_x * cos(-info->game.rotspeed) - info->game.dir_y * sin(-info->game.rotspeed);
-		info->game.dir_y = oldDirX * sin(-info->game.rotspeed) + info->game.dir_y * cos(-info->game.rotspeed);
-		double oldPlaneX = info->game.planeX;
-		info->game.planeX = info->game.planeX * cos(-info->game.rotspeed) - info->game.planeY * sin(-info->game.rotspeed);
-		info->game.planeY = oldPlaneX * sin(-info->game.rotspeed) + info->game.planeY * cos(-info->game.rotspeed);
+		double oldDirX = setup->game.dir_x;
+		setup->game.dir_x = setup->game.dir_x * cos(-setup->game.rotspeed) - setup->game.dir_y * sin(-setup->game.rotspeed);
+		setup->game.dir_y = oldDirX * sin(-setup->game.rotspeed) + setup->game.dir_y * cos(-setup->game.rotspeed);
+		double oldPlaneX = setup->game.planeX;
+		setup->game.planeX = setup->game.planeX * cos(-setup->game.rotspeed) - setup->game.planeY * sin(-setup->game.rotspeed);
+		setup->game.planeY = oldPlaneX * sin(-setup->game.rotspeed) + setup->game.planeY * cos(-setup->game.rotspeed);
 	}
 	//rotate to the left
 	if (key == K_A)
 	{
 		//both camera direction and camera plane must be rotated
-		double oldDirX = info->game.dir_x;
-		info->game.dir_x = info->game.dir_x * cos(info->game.rotspeed) - info->game.dir_y * sin(info->game.rotspeed);
-		info->game.dir_y = oldDirX * sin(info->game.rotspeed) + info->game.dir_y * cos(info->game.rotspeed);
-		double oldPlaneX = info->game.planeX;
-		info->game.planeX = info->game.planeX * cos(info->game.rotspeed) - info->game.planeY * sin(info->game.rotspeed);
-		info->game.planeY = oldPlaneX * sin(info->game.rotspeed) + info->game.planeY * cos(info->game.rotspeed);
+		double oldDirX = setup->game.dir_x;
+		setup->game.dir_x = setup->game.dir_x * cos(setup->game.rotspeed) - setup->game.dir_y * sin(setup->game.rotspeed);
+		setup->game.dir_y = oldDirX * sin(setup->game.rotspeed) + setup->game.dir_y * cos(setup->game.rotspeed);
+		double oldPlaneX = setup->game.planeX;
+		setup->game.planeX = setup->game.planeX * cos(setup->game.rotspeed) - setup->game.planeY * sin(setup->game.rotspeed);
+		setup->game.planeY = oldPlaneX * sin(setup->game.rotspeed) + setup->game.planeY * cos(setup->game.rotspeed);
 	}
 	if (key == K_ESC)
 		exit(0);
 	return (0);
 }
 
-void load_image(t_info *info, int *texture, char *path, t_img *img_)
+void load_image(t_setup *setup, int *texture, char *path, t_img *img_)
 {
 	int y;
 	int x;
 	y = 0;
 	x = 0;
-	img_->img = mlx_xpm_file_to_image(info->mlx, path, &img_->img_width, &img_->img_height);
+	img_->img = mlx_xpm_file_to_image(setup->mlx, path, &img_->img_width, &img_->img_height);
 	img_->data = (int *)mlx_get_data_addr(img_->img, &img_->bpp, &img_->size_l, &img_->endian);
 	while (y < img_->img_height)
 	{
@@ -236,45 +236,45 @@ void load_image(t_info *info, int *texture, char *path, t_img *img_)
 		x = 0;
 		y++;
 	}
-	mlx_destroy_image(info->mlx, img_->img);
+	mlx_destroy_image(setup->mlx, img_->img);
 }
-void load_texture(t_info *info)
+void load_texture(t_setup *setup)
 {
 	t_img img;
-	load_image(info, info->game.texture[0], "textures/eagle.xpm", &img);
-	load_image(info, info->game.texture[1], "textures/redbrick.xpm", &img);
-	load_image(info, info->game.texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->game.texture[3], "textures/greystone.xpm", &img);
+	load_image(setup, setup->game.texture[0], "textures/eagle.xpm", &img);
+	load_image(setup, setup->game.texture[1], "textures/redbrick.xpm", &img);
+	load_image(setup, setup->game.texture[2], "textures/purplestone.xpm", &img);
+	load_image(setup, setup->game.texture[3], "textures/greystone.xpm", &img);
 }
-int graph_main(t_info *info)
+int graph_main(t_setup *setup)
 {
-	//t_info info;
-	info->mlx = mlx_init();
-	info->game.dir_x = -1;
-	info->game.dir_y = 0.0;
-	info->game.planeX = 0.0;
-	info->game.planeY = 0.66;
-	info->game.movespeed = 0.05;
-	info->game.rotspeed = 0.05;
+	//t_setup setup;
+	setup->mlx = mlx_init();
+	setup->game.dir_x = -1;
+	setup->game.dir_y = 0.0;
+	setup->game.planeX = 0.0;
+	setup->game.planeY = 0.66;
+	setup->game.movespeed = 0.05;
+	setup->game.rotspeed = 0.05;
 
 
 
-	if(!(alloc_storage(info)))
+	if(!(alloc_storage(setup)))
 		return(0);
-	load_texture(info);
+	load_texture(setup);
 
-	info->win = mlx_new_window(info->mlx, width, height, "mlx");
+	setup->win = mlx_new_window(setup->mlx, width, height, "mlx");
 
-	info->img.img = mlx_new_image(info->mlx, width, height);
-	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
+	setup->img.img = mlx_new_image(setup->mlx, width, height);
+	setup->img.data = (int *)mlx_get_data_addr(setup->img.img, &setup->img.bpp, &setup->img.size_l, &setup->img.endian);
 
-	mlx_loop_hook(info->mlx, &main_loop, info);
-	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
-	mlx_loop(info->mlx);
+	mlx_loop_hook(setup->mlx, &main_loop, setup);
+	mlx_hook(setup->win, X_EVENT_KEY_PRESS, 0, &key_press, setup);
+	mlx_loop(setup->mlx);
 	return (0);
 }
 
-int		alloc_storage(t_info *info)
+int		alloc_storage(t_setup *setup)
 {
 	int j;
 	int i;
@@ -285,18 +285,18 @@ int		alloc_storage(t_info *info)
 		j = 0;
 		while (j < width)
 		{
-			info->game.buf[i][j] = 0;
+			setup->game.buf[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
 
-	if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
+	if (!(setup->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
        		 return (-1);
 	i = 0;
 	while (i < 4)
 	{
-		if (!(info->game.texture[i] = (int *)wrmalloc(sizeof(int) * (texHeight * texWidth))))
+		if (!(setup->game.texture[i] = (int *)wrmalloc(sizeof(int) * (texHeight * texWidth))))
 			return (-1);
 		i++;
 	}
@@ -306,17 +306,17 @@ int		alloc_storage(t_info *info)
 		j = 0;
 		while (j < texHeight * texWidth)
 		{
-			info->game.texture[i][j] = 0;
+			setup->game.texture[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	init_buf(info);
+	init_buf(setup);
 	return(1);
 }
 
 
-void	init_buf(t_info *info)
+void	init_buf(t_setup *setup)
 {
 	int j;
 	int i;
@@ -327,7 +327,7 @@ void	init_buf(t_info *info)
 		j = 0;
 		while (j < width)
 		{
-			info->game.buf[i][j] = 0;
+			setup->game.buf[i][j] = 0;
 			j++;
 		}
 		i++;
