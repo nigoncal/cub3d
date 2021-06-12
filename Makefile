@@ -7,38 +7,44 @@ LIBS				=	libft.a\
 						libmlx.dylib\
 						libcub3d.a
 
-VPATH				=	srcs parsing libft mlx textures libraries $(VSCRS)\
-						$(VLIBFT) $(VMLX) $(VPARSING) $(VTEXTURES)
+VPATH				=	libft config textures srcs mlx parsing\
+						parsing_textures colors map graphic engine\
+						libraries $(VLIBFT) $(VSCRS) $(VMLX) $(VPARSING)\
+						$(VPARSING_TEXTURES) $(VCOLORS) $(VMAP)
 
 VLIBS				=	$(VLIBFT)libft.a\
 						$(VMLX)libmlx.dylib
 
 VLIBFT				=	libft/
 VMLX				=	srcs/mlx/
-VTEXTURES			=	srcs/textures/
+VPARSING			=	srcs/parsing/
+VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
+VCOLORS				=	srcs/parsing/colors/
+VMAP				=	srcs/parsing/map/
 
 SRCS				=	srcs/main.c\
-						srcs/error_manager.c\
-						srcs/start.c\
+						srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
-						srcs/parsing/p_textures.c\
-						srcs/parsing/p_north_texture.c\
-						srcs/parsing/p_south_texture.c\
-						srcs/parsing/p_east_texture.c\
-						srcs/parsing/p_west_texture.c\
-						srcs/parsing/p_floor.c\
-						srcs/parsing/p_ceiling.c\
-						srcs/parsing/p_map.c\
-						srcs/parsing/store_map.c\
-						srcs/parsing/square_map.c\
-						srcs/parsing/check_map.c\
-						srcs/parsing/flood_fill.c\
-						srcs/parsing/find_player.c\
-						srcs/graphic/temp.c
+						srcs/parsing/parsing_textures/textures.c\
+						srcs/parsing/parsing_textures/north_texture.c\
+						srcs/parsing/parsing_textures/south_texture.c\
+						srcs/parsing/parsing_textures/east_texture.c\
+						srcs/parsing/parsing_textures/west_texture.c\
+						srcs/parsing/parsing_textures/store_textures.c\
+						srcs/parsing/colors/floor.c\
+						srcs/parsing/colors/ceiling.c\
+						srcs/parsing/map/parse_map.c\
+						srcs/parsing/map/store_map.c\
+						srcs/parsing/map/square_map.c\
+						srcs/parsing/map/check_map.c\
+						srcs/graphic/temp.c\
+						srcs/graphic/engine/dda.c\
+						srcs/graphic/engine/raycast.c\
+						srcs/graphic/engine/raycast_utils.c
 
 OBJS				=	$(SRCS:.c=.o)
 
-H_CUB3D				=	srcs/header_cub3d.h
+H_CUB3D				=	srcs/cub3d.h
 
 COMP				=	clang -Wall -Wextra -Werror -g3
 

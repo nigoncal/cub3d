@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/11 12:59:05 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/12 12:52:26 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,6 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
-/*typedef struct	s_setup
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	//int		**buf;
-	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[_height][_width];
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_setup;*/
-/* end of part to be removed */
-
 typedef union	u_color
 {
 	struct	s_chan
@@ -79,20 +59,9 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-/*typedef struct	s_sprite
-{
-	
-}				t_sprite;*/
-
-/*typedef struct	s_textures
-{
-//	char	*buffer;
-//	char	*; // a renommer
-}				t_textures;*/
-
 typedef struct	s_data {
 	void	*img;
-	char		*addr; // *data
+	char	*addr; // *data
 	int		line_length; //size_l
 	int		bits_per_pixel; // bpp
 	int		endian;
@@ -134,9 +103,10 @@ typedef struct s_game
 	int			width;
 	int			height;
 	int			texdir;
-	int			**texture;
+	int			**texture_buff;
 	int 		buf[720][1280];
 	void		*image;
+	t_data		texture[4];
 }				t_game;
 
 typedef struct	s_setup
@@ -168,7 +138,6 @@ typedef struct	s_setup
 	char	player_dir;
 	int		x;
 	int		y;
-	t_img	img;
 	t_game	game;
 }				t_setup;
 
