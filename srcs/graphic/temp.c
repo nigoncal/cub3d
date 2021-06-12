@@ -104,7 +104,7 @@ void calc(t_info *info)
 				info->game.side = 1;
 			}
 			//Check in map if ray has info->game.hit a wall
-			if (info->map[info->game.map_y][info->game.map_x] != 'V')
+			if (info->map[info->game.map_y][info->game.map_x] == '1')
 				info->game.hit = 1;
 		}
 		if (info->game.side == 0)
@@ -176,19 +176,35 @@ int main_loop(t_info *info)
 
 int key_press(int key, t_info *info)
 {
+	/* version iciamyplant, mouvements segfaultent
 	if (key == K_W)
 	{
-		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)] == '0')
-			info->game.pos_y += info->game.dir_y * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == '0')
+		if (info->map[(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == 'V')
 			info->game.pos_x += info->game.dir_x * info->game.movespeed;
+		if (info->map[(int)(info->game.pos_x)][(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)] == 'V')
+			info->game.pos_y += info->game.dir_y * info->game.movespeed;
 	}
 	//move backwards if no wall behind you
 	if (key == K_S)
 	{
-		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)] == '0')
+		if (info->map[(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == 'V')
 			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == '0')
+		if (info->map[(int)(info->game.pos_x)][(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)] == 'V')
+			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
+	}*/
+	if (key == K_W)
+	{
+		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)] == 'V')
+			info->game.pos_x += info->game.dir_x * info->game.movespeed;
+		if (info->map[(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
+			info->game.pos_y += info->game.dir_y * info->game.movespeed;
+	}
+	//move backwards if no wall behind you
+	if (key == K_S)
+	{
+		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)] == 'V')
+			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
+		if (info->map[(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
 	}
 	//rotate to the right
