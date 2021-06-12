@@ -15,10 +15,22 @@
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
+
+#define X_EVENT_KEY_PRESS 2
+#define X_EVENT_KEY_EXIT 17
+
+# define ROTATE_RIGHT		0
+# define ROTATE_LEFT		2
+# define MOVE_W				13
+# define MOVE_S				1
+
+# define EXIT_ESC			53
+
+
+
 // check tous les includes et vires si pas besoin
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
-# include "key_macos.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
@@ -30,10 +42,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
-
-/* to be removed */
-#define _width 1280
-#define _height 720
 
 typedef struct	s_img
 {
@@ -47,25 +55,6 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
-/*typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	//int		**buf;
-	// pas init comme ca mais en int **buf, et malloc + loin
-	int		buf[_height][_width];
-	int		**texture;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;*/
-/* end of part to be removed */
 
 typedef union	u_color
 {
@@ -79,16 +68,6 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-/*typedef struct	s_sprite
-{
-	
-}				t_sprite;*/
-
-/*typedef struct	s_textures
-{
-//	char	*buffer;
-//	char	*; // a renommer
-}				t_textures;*/
 
 typedef struct	s_data {
 	void	*img;
@@ -135,6 +114,11 @@ typedef struct s_game
 	int			height;
 	int			texdir;
 	int			**texture;
+	int			color;
+	int 		tex_y;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
 	int 		buf[720][1280];
 	void		*image;
 }				t_game;

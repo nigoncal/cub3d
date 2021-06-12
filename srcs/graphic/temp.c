@@ -1,17 +1,11 @@
-
 #include "../../includes/cub3d.h"
-//#include "mlx/mlx.h"
-//#include "key_macros.h"
-#include <math.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define X_EVENT_KEY_PRESS 2
-#define X_EVENT_KEY_EXIT 17
+
+
 #define texWidth 64
 #define texHeight 64
 #define width 1280
 #define height 720
+
 
 
 void draw(t_info *info)
@@ -129,27 +123,27 @@ void calc(t_info *info)
 		// Choosing a texture in the texture tab
 		tex_orientation(info);
 		// x coordinate on the texture
-		int texX = (int)(info->game.wall_x * (double)texWidth);
+		info->game.tex_x = (int)(info->game.wall_x * (double)texWidth);
 		if (info->game.side == 0 && info->game.raydir_x > 0)
-			texX = texWidth - texX - 1;
+			info->game.tex_x = texWidth - info->game.tex_x - 1;
 		if (info->game.side == 1 && info->game.raydir_y < 0)
-			texX = texWidth - texX - 1;
+			info->game.tex_x = texWidth - info->game.tex_x - 1;
 		// How much to increase the texture coordinate perscreen pixel
-		double step = 1.0 * texHeight / info->game.lineheight;
+		info->game.step = 1.0 * texHeight / info->game.lineheight;
 		// Starting texture coordinate
-		double texPos = (info->game.drawstart - height / 2 + info->game.lineheight / 2) * step;
+		info->game.tex_pos = (info->game.drawstart - height / 2 + info->game.lineheight / 2) * info->game.step;
 		y = info->game.drawstart;
 		while (y < info->game.drawend)
 		{
 			y++;
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-			int texY = (int)texPos & (texHeight - 1);
-			texPos += step;
-			int color = info->game.texture[info->game.texdir][texHeight * texY + texX];
-			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			 info->game.tex_y = (int)info->game.tex_pos & (texHeight - 1);
+			info->game.tex_pos += info->game.step;
+			info->game.color = info->game.texture[info->game.texdir][texHeight * info->game.tex_y + info->game.tex_x];
+		// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (info->game.side == 1)
-				color = (color >> 1) & 8355711;
-			info->game.buf[y][x] = color;
+				info->game.color = (info->game.color >> 1) & 8355711;
+			info->game.buf[y][x] = info->game.color;
 		}
 		y = 0;
 		while (y < info->game.drawstart)
@@ -176,23 +170,8 @@ int main_loop(t_info *info)
 
 int key_press(int key, t_info *info)
 {
-	/* version iciamyplant, mouvements segfaultent
-	if (key == K_W)
-	{
-		if (info->map[(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == 'V')
-			info->game.pos_x += info->game.dir_x * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_x)][(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)] == 'V')
-			info->game.pos_y += info->game.dir_y * info->game.movespeed;
-	}
-	//move backwards if no wall behind you
-	if (key == K_S)
-	{
-		if (info->map[(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_y)] == 'V')
-			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
-		if (info->map[(int)(info->game.pos_x)][(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)] == 'V')
-			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
-	}*/
-	if (key == K_W)
+
+	if (key == MOVE_W)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)] == 'V')
 			info->game.pos_x += info->game.dir_x * info->game.movespeed;
@@ -200,15 +179,15 @@ int key_press(int key, t_info *info)
 			info->game.pos_y += info->game.dir_y * info->game.movespeed;
 	}
 	//move backwards if no wall behind you
-	if (key == K_S)
+	if (key == MOVE_S)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)] == 'V')
 			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
 		if (info->map[(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
 	}
-	//rotate to the right
-	if (key == K_D)
+	//rotate to the left
+	if (key == ROTATE_LEFT)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->game.dir_x;
@@ -218,8 +197,8 @@ int key_press(int key, t_info *info)
 		info->game.planeX = info->game.planeX * cos(-info->game.rotspeed) - info->game.planeY * sin(-info->game.rotspeed);
 		info->game.planeY = oldPlaneX * sin(-info->game.rotspeed) + info->game.planeY * cos(-info->game.rotspeed);
 	}
-	//rotate to the left
-	if (key == K_A)
+	//rotate to the right
+	if (key == ROTATE_RIGHT)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->game.dir_x;
@@ -229,7 +208,7 @@ int key_press(int key, t_info *info)
 		info->game.planeX = info->game.planeX * cos(info->game.rotspeed) - info->game.planeY * sin(info->game.rotspeed);
 		info->game.planeY = oldPlaneX * sin(info->game.rotspeed) + info->game.planeY * cos(info->game.rotspeed);
 	}
-	if (key == K_ESC)
+	if (key == EXIT_ESC)
 		exit(0);
 	return (0);
 }
@@ -272,8 +251,6 @@ int graph_main(t_info *info)
 	info->game.planeY = 0.66;
 	info->game.movespeed = 0.05;
 	info->game.rotspeed = 0.05;
-
-
 
 	if(!(alloc_storage(info)))
 		return(0);
