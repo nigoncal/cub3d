@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/08 12:45:23 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/13 12:56:08 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef union	u_color
 
 
 typedef struct	s_data {
-	void	*img;
+	void		*img;
 	char		*addr; // *data
 	int		line_length; //size_l
 	int		bits_per_pixel; // bpp

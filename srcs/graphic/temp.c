@@ -48,6 +48,7 @@ void calc(t_info *info)
 	int x;
 	int y;
 
+
 	x = 0;
 	while (x < width)
 	{
@@ -175,6 +176,7 @@ int key_press(int key, t_info *info)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x + info->game.dir_x * info->game.movespeed)] == 'V')
 			info->game.pos_x += info->game.dir_x * info->game.movespeed;
+	
 		if (info->map[(int)(info->game.pos_y + info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y += info->game.dir_y * info->game.movespeed;
 	}
@@ -183,6 +185,7 @@ int key_press(int key, t_info *info)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_x * info->game.movespeed)] == 'V')
 			info->game.pos_x -= info->game.dir_x * info->game.movespeed;
+	
 		if (info->map[(int)(info->game.pos_y - info->game.dir_y * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
 	}
@@ -213,37 +216,42 @@ int key_press(int key, t_info *info)
 	return (0);
 }
 
-void load_image(t_info *info, int *texture, char *path, t_img *img_)
+void load_image(t_info *info, int *texture, char *path)
 {
 	int y;
 	int x;
 	y = 0;
 	x = 0;
-	img_->img = mlx_xpm_file_to_image(info->mlx, path, &img_->img_width, &img_->img_height);
-	img_->data = (int *)mlx_get_data_addr(img_->img, &img_->bpp, &img_->size_l, &img_->endian);
-	while (y < img_->img_height)
+	info->img.img = mlx_xpm_file_to_image(info->mlx, path, &info->img.img_width, &info->img.img_height);
+	
+	if(info->game.texture[0] == NULL)
 	{
-		while (x < img_->img_width)
+		dprintf(1, "salut\n");
+		alloc_storage(info);
+	}
+		
+	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
+	while (y < info->img.img_height)
+	{
+		while (x < info->img.img_width)
 		{
-			texture[img_->img_width * y + x] = img_->data[img_->img_width * y + x];
+			texture[info->img.img_width * y + x] = info->img.data[info->img.img_width * y + x];
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_destroy_image(info->mlx, img_->img);
+	mlx_destroy_image(info->mlx, info->img.img);
 }
 void load_texture(t_info *info)
 {
-	t_img img;
-	load_image(info, info->game.texture[0], "textures/eagle.xpm", &img);
-	load_image(info, info->game.texture[1], "textures/redbrick.xpm", &img);
-	load_image(info, info->game.texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->game.texture[3], "textures/greystone.xpm", &img);
+	load_image(info, info->game.texture[0], info->north_texture_path);
+	load_image(info, info->game.texture[1], info->south_texture_path);
+	load_image(info, info->game.texture[2], info->west_texture_path);
+	load_image(info, info->game.texture[3], info->east_texture_path);
 }
 int graph_main(t_info *info)
 {
-	//t_info info;
 	info->mlx = mlx_init();
 	info->game.dir_x = -1;
 	info->game.dir_y = 0.0;
@@ -252,8 +260,11 @@ int graph_main(t_info *info)
 	info->game.movespeed = 0.05;
 	info->game.rotspeed = 0.05;
 
-	if(!(alloc_storage(info)))
-		return(0);
+		if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
+       		 return (-1);
+			info->game.texture[0] = NULL;
+					
+	alloc_storage(info);
 	load_texture(info);
 
 	info->win = mlx_new_window(info->mlx, width, height, "mlx");
@@ -284,9 +295,11 @@ int		alloc_storage(t_info *info)
 		i++;
 	}
 
-	if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
-       		 return (-1);
+
 	i = 0;
+/*	if(info->img.img_height == 0)
+		return(-1);*/
+				
 	while (i < 4)
 	{
 		if (!(info->game.texture[i] = (int *)wrmalloc(sizeof(int) * (texHeight * texWidth))))
