@@ -19,8 +19,10 @@
 #define X_EVENT_KEY_PRESS 2
 #define X_EVENT_KEY_EXIT 17
 
-# define ROTATE_RIGHT		0
-# define ROTATE_LEFT		2
+# define ROTATE_LEFT		123
+# define ROTATE_RIGHT		124
+# define MOVE_L				0
+# define MOVE_R				2
 # define MOVE_W				13
 # define MOVE_S				1
 

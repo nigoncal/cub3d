@@ -14,14 +14,32 @@
 
 static void	store_dir_xy(t_info *info)
 {
+	/* TESTED :
+	WEST = 
+	dir_x = |-1.000000|
+	dir_y = |0.000000|*/
+	// OLD :
+	/*if (info->player_dir == 'N') // OUEST
+		info->game.dir_x = -1;
+	if (info->player_dir == 'S') // EST
+		info->game.dir_x = 1;
+	if (info->player_dir == 'E') // NORD
+		info->game.dir_y = 1;
+	if (info->player_dir == 'W') // SUD
+		info->game.dir_y = -1;*/
 	if (info->player_dir == 'N')
-		info->game.dir_y = 0.66;
+	{
+		info->game.dir_y = 1;
+		info->game.planeX = 0.66;
+	}
 	if (info->player_dir == 'S')
-		info->game.dir_y = -0.66;
+	{
+		info->game.dir_y = 1;
+	}
 	if (info->player_dir == 'E')
-		info->game.dir_x = 0.66;
+		info->game.dir_x = -1;
 	if (info->player_dir == 'W')
-		info->game.dir_x = -0.66;
+		info->game.dir_x = 1;
 }
 
 static void	store_player(int y, int x, t_info *info)
