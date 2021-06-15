@@ -193,10 +193,16 @@ int key_press(int key, t_info *info)
 	if (key == MOVE_D)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
-			info->game.pos_x += info->game.dir_y * info->game.movespeed;
-	
+		{
+			if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x + info->game.dir_y * info->game.movespeed)] == 'V')
+				info->game.pos_x += info->game.dir_y * info->game.movespeed;
+		}
 		if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
+		{
+			if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_x * info->game.movespeed;
+		}
+
 	}
 	//move to the left
 	if (key == MOVE_A)
@@ -271,10 +277,10 @@ void load_texture(t_info *info)
 int graph_main(t_info *info)
 {
 	info->mlx = mlx_init();
-	//info->game.dir_x = -1;
-	//info->game.dir_y = 0.0;
-	//info->game.planeY = 0.0;
-	//info->game.planeX = 0.66;
+	info->game.dir_x = -1;
+	info->game.dir_y = 0.0;
+	info->game.planeX = 0.0;
+	info->game.planeY = 0.66;
 	info->game.movespeed = 0.05;
 	info->game.rotspeed = 0.05;
 
@@ -289,8 +295,9 @@ int graph_main(t_info *info)
 
 	info->img.img = mlx_new_image(info->mlx, width, height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
-
+	//loops all the time when there's no event
 	mlx_loop_hook(info->mlx, &main_loop, info);
+	//triggered by an event : here, whenever a key is pressed ?
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
 	mlx_loop(info->mlx);
 	return (0);
