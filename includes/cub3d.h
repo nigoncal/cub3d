@@ -21,8 +21,8 @@
 
 # define ROTATE_LEFT		123
 # define ROTATE_RIGHT		124
-# define MOVE_L				0
-# define MOVE_R				2
+# define MOVE_A				0
+# define MOVE_D				2
 # define MOVE_W				13
 # define MOVE_S				1
 

@@ -190,7 +190,7 @@ int key_press(int key, t_info *info)
 			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
 	}
 	//move to the right
-	if (key == MOVE_R)
+	if (key == MOVE_D)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
 			info->game.pos_x += info->game.dir_y * info->game.movespeed;
@@ -199,7 +199,7 @@ int key_press(int key, t_info *info)
 			info->game.pos_y -= info->game.dir_x * info->game.movespeed;
 	}
 	//move to the left
-	if (key == MOVE_L)
+	if (key == MOVE_A)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
 			info->game.pos_x -= info->game.dir_y * info->game.movespeed;
