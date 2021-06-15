@@ -289,7 +289,7 @@ int graph_main(t_info *info)
 	info->game.rotspeed = 0.05;
 
 		if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
-       		 return (-1);
+       		 return (-1); // abort_prog
 			info->game.texture[0] = NULL;
 					
 	alloc_storage(info);
