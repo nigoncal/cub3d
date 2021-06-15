@@ -29,6 +29,7 @@ void draw(t_info *info)
 }
 void tex_orientation(t_info *info)
 {
+	//printf("%s\n", info->map[0]);
 	if (info->game.side == 0 && info->game.raydir_x < 0) //NO => WE
 		info->game.texdir = 2;
 	if (info->game.side == 0 && info->game.raydir_x >= 0) // S => EA
@@ -63,6 +64,7 @@ void calc(t_info *info)
 		 info->game.deltadist_y = fabs(1 / info->game.raydir_y);
 
 		info->game.hit = 0; //was there a wall hit?
+
 		if (info->game.raydir_x < 0)
 		{
 			info->game.step_x = -1;
@@ -86,7 +88,7 @@ void calc(t_info *info)
 		while (info->game.hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (info->game.sidedist_x < info->game.sidedist_y)
+			if (info->game.sidedist_x <= info->game.sidedist_y)
 			{
 				info->game.sidedist_x += info->game.deltadist_x;
 				info->game.map_x += info->game.step_x;
@@ -99,15 +101,19 @@ void calc(t_info *info)
 				info->game.side = 1;
 			}
 			//Check in map if ray has info->game.hit a wall
-			if (info->map[info->game.map_y][info->game.map_x] == '1')
+			if (info->map[info->game.map_y][info->game.map_x] != 'V')
 				info->game.hit = 1;
 		}
+	
 		if (info->game.side == 0)
 			info->game.perpwalldist = (info->game.map_x - info->game.pos_x + (1 - info->game.step_x) / 2) / info->game.raydir_x;
 		else
 			info->game.perpwalldist = (info->game.map_y - info->game.pos_y + (1 - info->game.step_y) / 2) / info->game.raydir_y;
+	
 		//Calculate height of line to draw on screen
+	
 		info->game.lineheight = (int)(height / info->game.perpwalldist);
+	
 		info->game.drawstart = -info->game.lineheight / 2 + height / 2;
 		if (info->game.drawstart < 0)
 			info->game.drawstart = 0;
@@ -116,6 +122,9 @@ void calc(t_info *info)
 		if (info->game.drawend >= height || info->game.drawend < 0)
 			info->game.drawend = height - 1;
 		// calculate value of info->game.wall_x
+		
+		
+		
 		if (info->game.side == 0)
 			info->game.wall_x = info->game.pos_y + info->game.perpwalldist * info->game.raydir_y;
 		else
@@ -199,7 +208,7 @@ int key_press(int key, t_info *info)
 		}
 		if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 		{
-			if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
+		if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_x * info->game.movespeed;
 		}
 
@@ -277,12 +286,14 @@ void load_texture(t_info *info)
 int graph_main(t_info *info)
 {
 	info->mlx = mlx_init();
-	info->game.dir_x = -1;
-	info->game.dir_y = 0.0;
-	info->game.planeX = 0.0;
-	info->game.planeY = 0.66;
+	info->game.dir_x = 0;
+	info->game.dir_y = -1;
+	info->game.planeX = 0.66;
+	info->game.planeY = 0;
 	info->game.movespeed = 0.05;
 	info->game.rotspeed = 0.05;
+	info->game.map_x = 0;
+	info->game.map_y = 0;
 
 		if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
        		 return (-1);

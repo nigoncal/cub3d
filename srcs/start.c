@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/11 10:08:13 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 16:22:47 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	start(int fd, char **line, t_info *info)
 	dprintf(1, "dir_y = |%f|\n", info->game.dir_y);
 	dprintf(1, "pos_x = |%f|\n", info->game.pos_x);
 	dprintf(1, "pos_y = |%f|\n", info->game.pos_y);
-	/*while (info->map[c])
-		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);*/
+	while (info->map[c])
+		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);
 //	graph_textures(info);
 	/*dprintf(1, "north_format = |%d|\n", info->north_format);
 	dprintf(1, "south_format = |%d|\n", info->north_format);

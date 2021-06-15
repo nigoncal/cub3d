@@ -40,7 +40,7 @@ OBJS				=	$(SRCS:.c=.o)
 
 H_CUB3D				=	srcs/header_cub3d.h
 
-COMP				=	clang -Wall -Wextra -Werror -g3
+COMP				=	clang -Wall -Wextra -Werror -g3 -fsanitize=address
 
 RM					=	rm -rf
 
