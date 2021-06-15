@@ -53,7 +53,7 @@ RM					=	rm -rf
 %.o			:	%.c $(H_CUB3D)
 				$(COMP) -I$(H_CUB3D) -c $< -o $@
 
-all			:	libs $(NAME) $(EXE)	
+all			:	libs $(NAME) $(EXE)
 
 libs		:	
 				$(MAKE) -C $(VLIBFT)
