@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_map.c                                            :+:      :+:    :+:   */
+/*   map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 //	1 - check ce qu'il y a a la ligne d'avant dans **map
 //	    Il peut y avoir : - rien (parsing de la map pas encore commence)
 //	    				  - Une ligne de map
-//	2 - Sauvegarde l'information (map ou rien, dans un bool)
+//	2 - Sauvegarde l'setuprmation (map ou rien, dans un bool)
 //	3 - Deux comportements a partir de la :
 //		- Si la map a commence, si je rencontre autre chose que de la map,
 //		cela veut dire que la map est terminee
@@ -65,22 +65,22 @@ static int	is_map(char *line)
 	return (0);
 }
 
-static void	continue_map(char *line, t_info *info)
+static void	continue_map(char *line, t_setup *setup)
 {
 	int	error;
 
 	error = 0;
-	if (info->map_over == false)
+	if (setup->map_over == false)
 	{
 		if (non_empty_line(line) == 1)
 		{
 			if (is_map(line) == 0)
-				store_map(line, info);
+				store_map(line, setup);
 			else
 				error = -1;
 		}
 		else
-			info->map_over = true;
+			setup->map_over = true;
 	}
 	else
 		if (non_empty_line(line) == 1)
@@ -89,24 +89,24 @@ static void	continue_map(char *line, t_info *info)
 		abort_prog("Only empty lines are allowed after the end of the map");
 }
 
-static void	start_map(char *line, t_info *info)
+static void	start_map(char *line, t_setup *setup)
 {
 	if (non_empty_line(line) == 1)
 	{
 		if (is_map(line) == 0)
 		{
-			store_map(line, info);
-			info->map_started = true;
+			store_map(line, setup);
+			setup->map_started = true;
 		}
 		else
 			abort_prog("There should be only 8 identifier lines");
 	}
 }
 
-void	parse_map(char *line, t_info *info)
+void	parse_map(char *line, t_setup *setup)
 {
-	if (info->map_started == true)
-		continue_map(line, info);
+	if (setup->map_started == true)
+		continue_map(line, setup);
 	else
-		start_map(line, info);
+		start_map(line, setup);
 }

@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/13 12:56:08 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 09:47:49 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_game
 	void		*image;
 }				t_game;
 
-typedef struct	s_info
+typedef struct	s_setup
 {
 	void	*win;
 	void	*mlx;
@@ -156,54 +156,49 @@ typedef struct	s_info
 	int		y;
 	t_img	img;
 	t_game	game;
-}				t_info;
+}				t_setup;
 
 void			abort_prog(char *s);
-void			start(int fd, char **line, t_info *info);
 int				non_empty_line(char *line);
-void			parse_id(char *line, t_info *info);
-void			p_resolution(char *line, t_info *info);
-void			p_textures(char *line, t_info *info);
-void			p_north_texture(char *line, t_info *info);
-void			p_south_texture(char *line, t_info *info);
-void			p_east_texture(char *line, t_info *info);
-void			p_west_texture(char *line, t_info *info);
-void			p_sprite_texture(char *line, t_info *info);
-void			p_floor(char *line, t_info *info);
-void			p_ceiling(char *line, t_info *info);
-void			parse_map(char *line, t_info *info);
-void			store_map(char *line, t_info *info);
-void			square_map(t_info *info);
-void			flood_fill(char **map, int y, int x, t_info *info);
-void			find_player(t_info *info);
-void			check_map(t_info *info);
-void			graph_textures(t_info *info);
-int				alloc_storage(t_info *info);
-void			tex_orientation(t_info *info);
-/*void			create_windows(t_info *info);
+void			parse_id(char *line, t_setup *setup);
+void			textures(char *line, t_setup *setup);
+void			north_texture(char *line, t_setup *setup);
+void			south_texture(char *line, t_setup *setup);
+void			east_texture(char *line, t_setup *setup);
+void			west_texture(char *line, t_setup *setup);
+void			parse_floor(char *line, t_setup *setup);
+void			ceiling(char *line, t_setup *setup);
+void			parse_map(char *line, t_setup *setup);
+void			store_map(char *line, t_setup *setup);
+void			square_map(t_setup *setup);
+void			check_map(t_setup *setup);
+void			graph_textures(t_setup *setup);
+int				alloc_storage(t_setup *setup);
+void			tex_orientation(t_setup *setup);
+/*void			create_windows(t_setup *setup);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);
-  void			init(t_info *info);
+  void			init(t_setup *setup);
   void			put_pixel(t_screen *screen);
   void			get_map();
-  void			verLine(t_info *info, int x, int y1, int y2, int color);
+  void			verLine(t_setup *setup, int x, int y1, int y2, int color);
   int				key_hook(int keycode);
-  int				main_loop(t_info *info);
-  int				key_press(int key, t_info *info);
-  void			add_line_map(char *line, t_info *info);
-  void			ft_map(char *line, t_info *info);
-  void			calc(t_info *info);
-  void			raycast_cal(t_info *info);
-  void			raycast_calc_dir(t_info *info);
-  void			raycast_calc_delta(t_info *info);
-  void			raycast_calc_pos(t_info *info);*/
+  int				main_loop(t_setup *setup);
+  int				key_press(int key, t_setup *setup);
+  void			add_line_map(char *line, t_setup *setup);
+  void			ft_map(char *line, t_setup *setup);
+  void			calc(t_setup *setup);
+  void			raycast_cal(t_setup *setup);
+  void			raycast_calc_dir(t_setup *setup);
+  void			raycast_calc_delta(t_setup *setup);
+  void			raycast_calc_pos(t_setup *setup);*/
 
 
 /* GRAPHIC */
 
-int				graph_main(t_info *info);
-void			draw(t_info *info);
-void			init_buf(t_info *info);
-void			dda(t_info *info);
+int				graph_main(t_setup *setup);
+void			draw(t_setup *setup);
+void			init_buf(t_setup *setup);
+void			dda(t_setup *setup);
 
 #endif

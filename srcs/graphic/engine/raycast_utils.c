@@ -12,25 +12,25 @@
 
 #include"../../../includes/cub3d.h"
 
-void	dda(t_info *info)
+void	dda(t_setup *setup)
 {
-		while (info->game.hit == 0)
+		while (setup->game.hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if (info->game.sidedist_x < info->game.sidedist_y)
+			if (setup->game.sidedist_x < setup->game.sidedist_y)
 			{
-				info->game.sidedist_x += info->game.deltadist_x;
-				info->game.map_x += info->game.step_x;
-				info->game.side = 0;
+				setup->game.sidedist_x += setup->game.deltadist_x;
+				setup->game.map_x += setup->game.step_x;
+				setup->game.side = 0;
 			}
 			else
 			{
-				info->game.sidedist_y += info->game.deltadist_y;
-				info->game.map_y += info->game.step_y;
-				info->game.side = 1;
+				setup->game.sidedist_y += setup->game.deltadist_y;
+				setup->game.map_y += setup->game.step_y;
+				setup->game.side = 1;
 			}
-			//Check in map if ray has info->game.hit a wall
-			if (info->map[info->game.map_y][info->game.map_x] != 'V')
-				info->game.hit = 1;
+			//Check in map if ray has setup->game.hit a wall
+			if (setup->map[setup->game.map_y][setup->game.map_x] != 'V')
+				setup->game.hit = 1;
 		}
 }

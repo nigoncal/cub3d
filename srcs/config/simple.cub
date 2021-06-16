@@ -1,0 +1,10 @@
+NO ./srcs/config/textures/eagle.xpm
+SO ./srcs/config/textures/purplestone.xpm
+WE ./srcs/config/textures/mossy.xpm
+EA ./srcs/config/textures/redbrick.xpm
+
+F 220,100,0
+C 225,30,0
+11111111
+1E010001
+11111111
