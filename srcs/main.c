@@ -25,6 +25,10 @@ int	main(int argc, char **argv)
 	ft_bzero(info, sizeof(*info));
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
+	/* check first is arg isn't a DIRECTORY */
+	fd = open(argv[1], O_DIRECTORY);
+	if (fd != -1)
+		abort_prog("Invalid .cub : yours is a directory.");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
