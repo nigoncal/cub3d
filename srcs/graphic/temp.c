@@ -259,13 +259,13 @@ void load_image(t_setup *setup, int *texture, char *path)
 	y = 0;
 	x = 0;
 	setup->img.img = mlx_xpm_file_to_image(setup->mlx, path, &setup->img.img_width, &setup->img.img_height);
-	
+	if (setup->img.img_width != 64 || setup->img.img_height != 64)
+		abort_prog("Only non-empty, 64x64 .xpm textures are supported.");
 	if(setup->game.texture[0] == NULL)
 	{
 		dprintf(1, "salut\n");
 		alloc_storage(setup);
 	}
-		
 	setup->img.data = (int *)mlx_get_data_addr(setup->img.img, &setup->img.bpp, &setup->img.size_l, &setup->img.endian);
 	while (y < setup->img.img_height)
 	{
@@ -279,13 +279,15 @@ void load_image(t_setup *setup, int *texture, char *path)
 	}
 	mlx_destroy_image(setup->mlx, setup->img.img);
 }
-void load_texture(t_setup *setup)
+
+void	load_texture(t_setup *setup)
 {
 	load_image(setup, setup->game.texture[0], setup->north_texture_path);
 	load_image(setup, setup->game.texture[1], setup->south_texture_path);
 	load_image(setup, setup->game.texture[2], setup->west_texture_path);
 	load_image(setup, setup->game.texture[3], setup->east_texture_path);
 }
+
 int graph_main(t_setup *setup)
 {
 	setup->mlx = mlx_init();
