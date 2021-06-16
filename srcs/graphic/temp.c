@@ -29,15 +29,19 @@ void draw(t_info *info)
 }
 void tex_orientation(t_info *info)
 {
+<<<<<<< HEAD
 	//printf("%s\n", info->map[0]);
 	if (info->game.side == 0 && info->game.raydir_x < 0) //NO => WE
-		info->game.texdir = 2;
-	if (info->game.side == 0 && info->game.raydir_x >= 0) // S => EA
-		info->game.texdir = 3;
-	if (info->game.side == 1 && info->game.raydir_y < 0) // WE => S
-		info->game.texdir = 1;
-	if (info->game.side == 1 && info->game.raydir_y >= 0) // EA => NO
+=======
+	if (info->game.side == 0 && info->game.raydir_x < 0)
 		info->game.texdir = 0;
+	if (info->game.side == 0 && info->game.raydir_x >= 0)
+		info->game.texdir = 1;
+	if (info->game.side == 1 && info->game.raydir_y < 0)
+>>>>>>> bf7f2234b6e9244f7dd575e1efc62baf153ea54c
+		info->game.texdir = 2;
+	if (info->game.side == 1 && info->game.raydir_y >= 0)
+		info->game.texdir = 3;
 	if (info->game.side == 0)
 		info->game.wall_x = info->game.pos_y + info->game.perpwalldist * info->game.raydir_y;
 	else
@@ -208,19 +212,28 @@ int key_press(int key, t_info *info)
 		}
 		if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 		{
+<<<<<<< HEAD
 		if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
 			info->game.pos_y -= info->game.dir_x * info->game.movespeed;
+=======
+			if (info->map[(int)(info->game.pos_y - info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
+				info->game.pos_y -= info->game.dir_x * info->game.movespeed;
+>>>>>>> bf7f2234b6e9244f7dd575e1efc62baf153ea54c
 		}
-
 	}
 	//move to the left
 	if (key == MOVE_D)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
-			info->game.pos_x -= info->game.dir_y * info->game.movespeed;
-	
+		{
+			if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
+				info->game.pos_x -= info->game.dir_y * info->game.movespeed;
+		}
 		if (info->map[(int)(info->game.pos_y + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
-			info->game.pos_y += info->game.dir_x * info->game.movespeed;
+		{
+			if (info->map[(int)(info->game.pos_y + info->game.dir_x * info->game.movespeed)][(int)(info->game.pos_x)] == 'V')
+				info->game.pos_y += info->game.dir_x * info->game.movespeed;
+		}
 	}
 	//rotate to the right
 	if (key == ROTATE_LEFT)
@@ -286,17 +299,24 @@ void load_texture(t_info *info)
 int graph_main(t_info *info)
 {
 	info->mlx = mlx_init();
+<<<<<<< HEAD
 	info->game.dir_x = 0;
 	info->game.dir_y = -1;
 	info->game.planeX = 0.66;
 	info->game.planeY = 0;
+=======
+	//info->game.dir_x = -1;
+	//info->game.dir_y = 0.0;
+	//info->game.planeX = 0.0;
+	//info->game.planeY = 0.66;
+>>>>>>> bf7f2234b6e9244f7dd575e1efc62baf153ea54c
 	info->game.movespeed = 0.05;
 	info->game.rotspeed = 0.05;
 	info->game.map_x = 0;
 	info->game.map_y = 0;
 
 		if (!(info->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
-       		 return (-1);
+       		 return (-1); // abort_prog
 			info->game.texture[0] = NULL;
 					
 	alloc_storage(info);

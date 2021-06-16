@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:46:42 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/13 11:11:13 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 13:56:15 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,34 @@ static void	store_dir_xy(t_info *info)
 	dir_x = |-1.000000|
 	dir_y = |0.000000|*/
 	// OLD :
-	/*if (info->player_dir == 'N') // OUEST
+	/*if (info->player_dir == 'N')
 		info->game.dir_x = -1;
-	if (info->player_dir == 'S') // EST
+	if (info->player_dir == 'S')
 		info->game.dir_x = 1;
-	if (info->player_dir == 'E') // NORD
+	if (info->player_dir == 'E')
 		info->game.dir_y = 1;
-	if (info->player_dir == 'W') // SUD
+	if (info->player_dir == 'W')
 		info->game.dir_y = -1;*/
 	if (info->player_dir == 'N')
+	{
+		info->game.dir_x = -1;
+		info->game.planeY = 0.66;
+	}
+	if (info->player_dir == 'S')
+	{
+		info->game.dir_x = 1;
+		info->game.planeY = -0.66;
+	}
+	if (info->player_dir == 'E')
 	{
 		info->game.dir_y = 1;
 		info->game.planeX = 0.66;
 	}
-	if (info->player_dir == 'S')
-	{
-		info->game.dir_y = 1;
-	}
-	if (info->player_dir == 'E')
-		info->game.dir_x = -1;
 	if (info->player_dir == 'W')
-		info->game.dir_x = 1;
+	{
+		info->game.dir_y = -1;
+		info->game.planeX = -0.66;
+	}
 }
 
 static void	store_player(int y, int x, t_info *info)

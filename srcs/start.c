@@ -6,7 +6,11 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:27:03 by sylducam          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/15 16:22:47 by nigoncal         ###   ########lyon.fr   */
+=======
+/*   Updated: 2021/06/15 16:02:40 by sylducam         ###   ########lyon.fr   */
+>>>>>>> bf7f2234b6e9244f7dd575e1efc62baf153ea54c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +48,33 @@ void	start(int fd, char **line, t_info *info)
 			parse_map(*line, info);
 		}
 	}
-	square_map(info);
-	/*dprintf(1, "width = |%d|\n", info->game.width);
-	dprintf(1, "height = |%d|\n", info->game.height);
-	dprintf(1, "north = |%s|\n", info->north_texture_path);
-	dprintf(1, "south = |%s|\n", info->south_texture_path);
-	dprintf(1, "west = |%s|\n", info->west_texture_path);
-	dprintf(1, "east = |%s|\n", info->east_texture_path);
-	dprintf(1, "f_color = |%x|\n", info->game.f_color.color);
-	dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.red);
-	dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.green);
-	dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.blue);
-	dprintf(1, "c_color = |%x|\n", info->game.c_color.color);
-	dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.red);
-	dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.green);
-	dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.blue);
-	dprintf(1, "map_ysize = |%d|\n", info->map_ysize);
-	dprintf(1, "map_xsize = |%d|\n", info->map_xsize);*/
+	if (info->id_counter == 2147483647)
+		abort_prog("Your map is too big");
+	parse_map(*line, info);
+	dprintf(1, "line = |%s\n|", *line);
 	int c = 0;
-/*	while (info->map[c])
-		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);	*/
+	while (info->map[c])
+		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);
+	square_map(info);
+	c = 0;
+	/*dprintf(1, "width = |%d|\n", info->game.width);
+	  dprintf(1, "height = |%d|\n", info->game.height);
+	  dprintf(1, "north = |%s|\n", info->north_texture_path);
+	  dprintf(1, "south = |%s|\n", info->south_texture_path);
+	  dprintf(1, "west = |%s|\n", info->west_texture_path);
+	  dprintf(1, "east = |%s|\n", info->east_texture_path);
+	  dprintf(1, "f_color = |%x|\n", info->game.f_color.color);
+	  dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.red);
+	  dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.green);
+	  dprintf(1, "f_color = |%d|\n", info->game.f_color.chan.blue);
+	  dprintf(1, "c_color = |%x|\n", info->game.c_color.color);
+	  dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.red);
+	  dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.green);
+	  dprintf(1, "c_color = |%d|\n", info->game.c_color.chan.blue);
+	  dprintf(1, "map_ysize = |%d|\n", info->map_ysize);
+	  dprintf(1, "map_xsize = |%d|\n", info->map_xsize);*/
+	while (info->map[c])
+		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);
 	check_map(info);
 	c = 0;
 	dprintf(1, "player_dir = |%c|\n", info->player_dir);
@@ -71,14 +82,20 @@ void	start(int fd, char **line, t_info *info)
 	dprintf(1, "dir_y = |%f|\n", info->game.dir_y);
 	dprintf(1, "pos_x = |%f|\n", info->game.pos_x);
 	dprintf(1, "pos_y = |%f|\n", info->game.pos_y);
+<<<<<<< HEAD
 	while (info->map[c])
 		dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);
 //	graph_textures(info);
+=======
+	/*while (info->map[c])
+	  dprintf(1, "info->map[c] = |%s|\n", info->map[c++]);*/
+	//	graph_textures(info);
+>>>>>>> bf7f2234b6e9244f7dd575e1efc62baf153ea54c
 	/*dprintf(1, "north_format = |%d|\n", info->north_format);
-	dprintf(1, "south_format = |%d|\n", info->north_format);
-	dprintf(1, "east_format = |%d|\n", info->north_format);
-	dprintf(1, "west_format = |%d|\n", info->north_format);
-	dprintf(1, "info->game.texture[0].img = |%p|\n", info->game.texture[0].img);
+	  dprintf(1, "south_format = |%d|\n", info->north_format);
+	  dprintf(1, "east_format = |%d|\n", info->north_format);
+	  dprintf(1, "west_format = |%d|\n", info->north_format);
+	  dprintf(1, "info->game.texture[0].img = |%p|\n", info->game.texture[0].img);
 	//dprintf(1, "info->game.texture[0].addr = |%s|\n", info->game.texture[0].addr);
 	//dprintf(1, "info->game.texture[0].addr = |%d|\n", *info->game.texture[0].addr);
 	dprintf(1, "info->game.texture[0].bits_per_pixel = |%d|\n", info->game.texture[0].bits_per_pixel);
@@ -106,5 +123,5 @@ void	start(int fd, char **line, t_info *info)
 	dprintf(1, "info->game.texture[3].line_length = |%d|\n", info->game.texture[3].line_length);
 	dprintf(1, "info->game.texture[3].endian = |%d|\n", info->game.texture[3].endian);
 	dprintf(1, "info->game.texture[3].width = |%d|\n", info->game.texture[3].width);*/
-	
+
 }
