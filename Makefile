@@ -22,8 +22,7 @@ VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
 VCOLORS				=	srcs/parsing/colors/
 VMAP				=	srcs/parsing/map/
 
-SRCS				=	srcs/main.c\
-						srcs/parsing/error_manager.c\
+SRCS				=	srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
 						srcs/parsing/parsing_textures/textures.c\
 						srcs/parsing/parsing_textures/north_texture.c\
@@ -38,16 +37,16 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/map/check_map.c\
 						srcs/graphic/temp.c
 
-OBJS				=	$(SRCS:%.c=%.o)
+OBJS				=	$(SRCS:srcs/%.c=objs/%.o)
 
-H_CUB3D				=	srcs/cub3d.h
+H_CUB3D				=	includes/cub3d.h
 
-COMP				=	clang -Wall -Wextra -Werror -g3
+COMP				=	clang -Wall -Wextra -Werror -g3 -Iincludes
 
 RM					=	rm -rf
 
-%.o					:	%.c $(H_CUB3D)
-						$(COMP) -I$(H_CUB3D) -c $< -o $@
+objs/%.o			:	srcs/%.c $(H_CUB3D)
+						$(COMP) -c $< -o $@
 
 all					:	libs $(NAME) $(EXE)	
 
@@ -61,7 +60,7 @@ $(NAME)				:	$(OBJS)
 						ar rcs $(NAME) $(OBJS)
 
 $(EXE)				:	$(OBJS) $(LIBS)
-						$(COMP) $(LIBS) -o $(EXE)
+						$(COMP) $(LIBS) srcs/main.c -o $(EXE)
 
 clean				:
 						$(RM) $(OBJS)
