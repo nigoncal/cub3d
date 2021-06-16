@@ -183,24 +183,37 @@ int key_press(int key, t_setup *setup)
 	if (key == MOVE_W)
 	{
 		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x + setup->game.dir_x * setup->game.movespeed)] == 'V')
-			setup->game.pos_x += setup->game.dir_x * setup->game.movespeed;
+		{
+			if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x + setup->game.dir_x * setup->game.movespeed)] == 'V')
+				setup->game.pos_x += setup->game.dir_x * setup->game.movespeed;
+		}	
 	
 		if (setup->map[(int)(setup->game.pos_y + setup->game.dir_y * setup->game.movespeed)][(int)(setup->game.pos_x)] == 'V')
-			setup->game.pos_y += setup->game.dir_y * setup->game.movespeed;
+		{
+			if (setup->map[(int)(setup->game.pos_y + setup->game.dir_y * setup->game.movespeed)][(int)(setup->game.pos_x)] == 'V')
+				setup->game.pos_y += setup->game.dir_y * setup->game.movespeed;
+		}	
+		
 	}
 	//move backwards if no wall behind you
 	if (key == MOVE_S)
 	{
 		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x - setup->game.dir_x * setup->game.movespeed)] == 'V')
-			setup->game.pos_x -= setup->game.dir_x * setup->game.movespeed;
+		{
+			if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x - setup->game.dir_x * setup->game.movespeed)] == 'V')
+				setup->game.pos_x -= setup->game.dir_x * setup->game.movespeed;
+		}	
 	
 		if (setup->map[(int)(setup->game.pos_y - setup->game.dir_y * setup->game.movespeed)][(int)(setup->game.pos_x)] == 'V')
-			setup->game.pos_y -= setup->game.dir_y * setup->game.movespeed;
+		{
+			if (setup->map[(int)(setup->game.pos_y - setup->game.dir_y * setup->game.movespeed)][(int)(setup->game.pos_x)] == 'V')
+				setup->game.pos_y -= setup->game.dir_y * setup->game.movespeed;
+		}	
 	}
 	//move to the right
-	if (key == MOVE_A)
+	if (key == MOVE_D)
 	{
-		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x - setup->game.dir_y * setup->game.movespeed)] == 'V')
+		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x + setup->game.dir_y * setup->game.movespeed)] == 'V')
 		{
 			if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x + setup->game.dir_y * setup->game.movespeed)] == 'V')
 				setup->game.pos_x += setup->game.dir_y * setup->game.movespeed;
@@ -212,7 +225,7 @@ int key_press(int key, t_setup *setup)
 		}
 	}
 	//move to the left
-	if (key == MOVE_D)
+	if (key == MOVE_A)
 	{
 		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x - setup->game.dir_y * setup->game.movespeed)] == 'V')
 		{
