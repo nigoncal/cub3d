@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 09:40:56 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 11:10:57 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ void	start(int fd, char **line, t_setup *setup)
 	if (setup->id_counter == 2147483647)
 		abort_prog("Your map is too big");
 	parse_map(*line, setup);
+	if (setup->id_counter != 6 || !setup->map)
+		abort_prog("Something is missing in your .cub file");
 	dprintf(1, "line = |%s\n|", *line);
 	int c = 0;
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
 	square_map(setup);
 	c = 0;
-	/*dprintf(1, "width = |%d|\n", setup->game.width);
+	dprintf(1, "width = |%d|\n", setup->game.width);
 	  dprintf(1, "height = |%d|\n", setup->game.height);
 	  dprintf(1, "north = |%s|\n", setup->north_texture_path);
 	  dprintf(1, "south = |%s|\n", setup->south_texture_path);
@@ -68,7 +70,7 @@ void	start(int fd, char **line, t_setup *setup)
 	  dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.green);
 	  dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.blue);
 	  dprintf(1, "map_ysize = |%d|\n", setup->map_ysize);
-	  dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);*/
+	  dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
 	check_map(setup);
@@ -80,7 +82,6 @@ void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
-//	graph_textures(setup);
 	/*dprintf(1, "north_format = |%d|\n", setup->north_format);
 	  dprintf(1, "south_format = |%d|\n", setup->north_format);
 	  dprintf(1, "east_format = |%d|\n", setup->north_format);

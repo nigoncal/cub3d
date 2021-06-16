@@ -22,7 +22,8 @@ VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
 VCOLORS				=	srcs/parsing/colors/
 VMAP				=	srcs/parsing/map/
 
-SRCS				=	srcs/parsing/error_manager.c\
+SRCS				=	srcs/main.c\
+						srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
 						srcs/parsing/parsing_textures/textures.c\
 						srcs/parsing/parsing_textures/north_texture.c\
@@ -60,7 +61,7 @@ $(NAME)				:	$(OBJS)
 						ar rcs $(NAME) $(OBJS)
 
 $(EXE)				:	$(OBJS) $(LIBS)
-						$(COMP) $(LIBS) srcs/main.c -o $(EXE)
+						$(COMP) $(LIBS) -o $(EXE)
 
 clean				:
 						$(RM) $(OBJS)
