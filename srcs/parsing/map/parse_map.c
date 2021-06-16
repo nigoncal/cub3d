@@ -77,16 +77,15 @@ static void	continue_map(char *line, t_setup *setup)
 			if (is_map(line) == 0)
 				store_map(line, setup);
 			else
-				error = -1;
+				abort_prog("Forbidden character found in map. Allowed in map : \
+N/S/E/W, 0, 1");
 		}
 		else
 			setup->map_over = true;
 	}
 	else
 		if (non_empty_line(line) == 1)
-			error = -1;
-	if (error == -1)
-		abort_prog("Only empty lines are allowed after the end of the map");
+			abort_prog("Only empty lines are allowed after the end of the map");
 }
 
 static void	start_map(char *line, t_setup *setup)
