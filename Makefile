@@ -22,8 +22,7 @@ VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
 VCOLORS				=	srcs/parsing/colors/
 VMAP				=	srcs/parsing/map/
 
-SRCS				=	srcs/main.c\
-						srcs/parsing/error_manager.c\
+SRCS				=	srcs/parsing/error_manager.c\
 						srcs/parsing/parse_id.c\
 						srcs/parsing/parsing_textures/textures.c\
 						srcs/parsing/parsing_textures/north_texture.c\
@@ -38,7 +37,7 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/map/check_map.c\
 						srcs/graphic/temp.c
 
-OBJS				=	$(SRCS:.c=.o)
+OBJS				=	$(SRCS:%.c=%.o)
 
 H_CUB3D				=	srcs/cub3d.h
 
@@ -46,33 +45,33 @@ COMP				=	clang -Wall -Wextra -Werror -g3
 
 RM					=	rm -rf
 
-%.o			:	%.c $(H_CUB3D)
-				$(COMP) -I$(H_CUB3D) -c $< -o $@
+%.o					:	%.c $(H_CUB3D)
+						$(COMP) -I$(H_CUB3D) -c $< -o $@
 
-all			:	libs $(NAME) $(EXE)	
+all					:	libs $(NAME) $(EXE)	
 
-libs		:	
-				$(MAKE) -C $(VLIBFT)
-				ln -sf $(VLIBFT)$(LIBFT) .
-				$(MAKE) -C $(VMLX)
-				ln -sf $(VMLX)$(MLXDL) .
+libs				:	
+						$(MAKE) -C $(VLIBFT)
+						ln -sf $(VLIBFT)$(LIBFT) .
+						$(MAKE) -C $(VMLX)
+						ln -sf $(VMLX)$(MLXDL) .
 
-$(NAME)		:	$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+$(NAME)				:	$(OBJS)
+						ar rcs $(NAME) $(OBJS)
 
-$(EXE)		:	$(OBJS) $(LIBS)
-				$(COMP) $(LIBS) -o $(EXE)
+$(EXE)				:	$(OBJS) $(LIBS)
+						$(COMP) $(LIBS) srcs/main.c -o $(EXE)
 
-clean		:
-				$(RM) $(OBJS)
-				$(MAKE) clean -C $(VLIBFT)
-				$(MAKE) clean -C $(VMLX)
+clean				:
+						$(RM) $(OBJS)
+						$(MAKE) clean -C $(VLIBFT)
+						$(MAKE) clean -C $(VMLX)
 
-fclean		:	
-				$(RM) $(OBJS) $(LIBS) $(EXE)
-				$(MAKE) fclean -C $(VLIBFT)
-				$(MAKE) clean -C $(VMLX)
+fclean				:	
+						$(RM) $(OBJS) $(LIBS) $(EXE)
+						$(MAKE) fclean -C $(VLIBFT)
+						$(MAKE) clean -C $(VMLX)
 
-re			: 	fclean all
+re					: 	fclean all
 
 .PHONY: all libs clean fclean re libraries
