@@ -199,7 +199,7 @@ int key_press(int key, t_info *info)
 			info->game.pos_y -= info->game.dir_y * info->game.movespeed;
 	}
 	//move to the right
-	if (key == MOVE_D)
+	if (key == MOVE_A)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
 		{
@@ -214,7 +214,7 @@ int key_press(int key, t_info *info)
 
 	}
 	//move to the left
-	if (key == MOVE_A)
+	if (key == MOVE_D)
 	{
 		if (info->map[(int)(info->game.pos_y)][(int)(info->game.pos_x - info->game.dir_y * info->game.movespeed)] == 'V')
 			info->game.pos_x -= info->game.dir_y * info->game.movespeed;
@@ -223,7 +223,7 @@ int key_press(int key, t_info *info)
 			info->game.pos_y += info->game.dir_x * info->game.movespeed;
 	}
 	//rotate to the right
-	if (key == ROTATE_RIGHT)
+	if (key == ROTATE_LEFT)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->game.dir_x;
@@ -234,7 +234,7 @@ int key_press(int key, t_info *info)
 		info->game.planeY = oldPlaneX * sin(-info->game.rotspeed) + info->game.planeY * cos(-info->game.rotspeed);
 	}
 	//rotate to the left
-	if (key == ROTATE_LEFT)
+	if (key == ROTATE_RIGHT)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->game.dir_x;
