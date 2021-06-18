@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/12 12:52:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/18 15:35:38 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,24 @@
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
+
+
+
+# define ROTATE_LEFT		123
+# define ROTATE_RIGHT		124
+# define MOVE_A				0
+# define MOVE_D				2
+# define MOVE_W				13
+# define MOVE_S				1
+# define MAJ				12
+
+# define EXIT_ESC			53
+
+
+
 // check tous les includes et vires si pas besoin
-# include "../srcs/mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include "../libft/libft.h"
-# include "key_macos.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
@@ -30,10 +44,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
-
-/* to be removed */
-#define _width 1280
-#define _height 720
 
 typedef struct	s_img
 {
@@ -47,6 +57,7 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
+
 typedef union	u_color
 {
 	struct	s_chan
@@ -59,9 +70,10 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
+
 typedef struct	s_data {
-	void	*img;
-	char	*addr; // *data
+	void		*img;
+	char		*addr; // *data
 	int		line_length; //size_l
 	int		bits_per_pixel; // bpp
 	int		endian;
@@ -98,21 +110,35 @@ typedef struct s_game
 	int			lineheight; //hauteur de la ligne a dessiner
 	int			drawstart; //position de debut ou il faut dessiner
 	int			drawend; //position de fin ou il faut dessiner
-	double		movespeed;
-	double		rotspeed;
+	 double		movespeed;
+	 double		rotspeed;
 	int			width;
 	int			height;
 	int			texdir;
-	int			**texture_buff;
+	int			**texture;
+	int			color;
+	int 		tex_y;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
 	int 		buf[720][1280];
 	void		*image;
-	t_data		texture[4];
 }				t_game;
+typedef struct	s_key {
+	int	forward;
+	int back;
+	int left;
+	int right;
+	int	rotate_left;
+	int	rotate_right;
+	int sprint;
+	int	count_key;
+}				t_key;
 
 typedef struct	s_setup
 {
-	void	*mlx;
 	void	*win;
+	void	*mlx;
 	int		north_format;
 	int		south_format;
 	int		east_format;
@@ -136,15 +162,20 @@ typedef struct	s_setup
 	int		map_xsize;
 	int		map_ysize;
 	char	player_dir;
+	int		width;
+	int		height;
 	int		x;
 	int		y;
+	t_img	img;
 	t_game	game;
+	t_key	key;
 }				t_setup;
+
+
 
 void			abort_prog(char *s);
 int				non_empty_line(char *line);
 void			parse_id(char *line, t_setup *setup);
-void			resolution(char *line, t_setup *setup);
 void			textures(char *line, t_setup *setup);
 void			north_texture(char *line, t_setup *setup);
 void			south_texture(char *line, t_setup *setup);
@@ -159,6 +190,17 @@ void			check_map(t_setup *setup);
 void			graph_textures(t_setup *setup);
 int				alloc_storage(t_setup *setup);
 void			tex_orientation(t_setup *setup);
+int				key_relese(int key, t_setup *setup);
+void			ray_dir(t_setup *setup);
+void			detect_case(t_setup *setup);
+void			ray_len(t_setup *setup);
+void			dda_algo(t_setup *setup);
+void 			fisheye(t_setup *setup);
+int	    		key_release(int key, t_setup *setup);
+int    key_press_mouvement(int key, t_setup *setup);
+int key_press_rotate(int key, t_setup *setup);
+
+
 /*void			create_windows(t_setup *setup);
   void			put_square( int lenght, t_screen *sc);
   void			create_mini_map(t_screen *sc);

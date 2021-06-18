@@ -27,5 +27,6 @@ void	parse_id(char *line, t_setup *setup)
 	else if (*line == '\0')
 		return ;
 	else
-		abort_prog("Identifiers allowed and mandatory : NO,SO,WE,EA,S,F,C");
+		abort_prog("Identifiers allowed and mandatory : NO,SO,WE,EA,S,F,C. \
+Note that they need to be all BEFORE the map.");
 }

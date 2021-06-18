@@ -6,18 +6,24 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:18:03 by yohlee            #+#    #+#             */
-/*   Updated: 2021/05/31 11:26:02 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 13:23:36 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx/mlx.h"
-#include "key_macros.h"
+//#include "key_macros.h"
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
+# define ROTATE_LEFT		123
+# define ROTATE_RIGHT		124
+# define K_A				0
+# define K_D				2
+# define K_W				13
+# define K_S				1
 #define texWidth 64
 #define texHeight 64
 #define mapWidth 9
@@ -57,10 +63,10 @@ typedef struct	s_setup
 char	worldMap[mapWidth][mapHeight] =
 {
 									
-									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},								
-									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+									{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},								
+									{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
+									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
 									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 									{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -174,7 +180,7 @@ void	calc(t_setup *setup)
 				side = 1;
 			}
 			//Check in map if ray has hit a wall
-			if (worldMap[mapX][mapY] != 0) 
+			if (worldMap[mapX][mapY] != 0)
 					hit = 1;
 
 		}
@@ -299,8 +305,8 @@ int	key_press(int key, t_setup *setup)
 		setup->planeX = setup->planeX * cos(setup->rotSpeed) - setup->planeY * sin(setup->rotSpeed);
 		setup->planeY = oldPlaneX * sin(setup->rotSpeed) + setup->planeY * cos(setup->rotSpeed);
 	}
-	if (key == K_ESC)
-		exit(0);
+	/*if (key == K_ESC)
+		exit(0);*/
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/11 11:50:55 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 11:40:47 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,8 @@ int	non_empty_line(char *line)
 	return (0);
 }
 
-static void	start(int fd, char **line, t_setup *setup)
+void	start(int fd, char **line, t_setup *setup)
 {
-	setup->mlx = malloc(sizeof(void));
-	if (setup->mlx == NULL)
-		abort_prog("Failed to malloc setup->mlx");
-	setup->mlx = mlx_init();
-	setup->game.width = 1280;
-	setup->game.height = 720;
 	while (get_next_line(fd, line))
 	{
 		if (setup->id_counter < 6)
@@ -50,26 +44,35 @@ static void	start(int fd, char **line, t_setup *setup)
 			parse_map(*line, setup);
 		}
 	}
-	square_map(setup);
-	dprintf(1, "width = |%d|\n", setup->game.width);
-	dprintf(1, "height = |%d|\n", setup->game.height);
-	dprintf(1, "north = |%s|\n", setup->north_texture_path);
-	dprintf(1, "south = |%s|\n", setup->south_texture_path);
-	dprintf(1, "east = |%s|\n", setup->east_texture_path);
-	dprintf(1, "west = |%s|\n", setup->west_texture_path);
-	dprintf(1, "f_color = |%x|\n", setup->game.f_color.color);
-	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.red);
-	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.green);
-	dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.blue);
-	dprintf(1, "c_color = |%x|\n", setup->game.c_color.color);
-	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.red);
-	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.green);
-	dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.blue);
-	dprintf(1, "map_ysize = |%d|\n", setup->map_ysize);
-	dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);
+	if (setup->id_counter == 2147483647)
+		abort_prog("Your map is too big");
+	parse_map(*line, setup);
+	if (!setup->map)
+		abort_prog("The map is missing in your .cub file");
+	dprintf(1, "line = |%s\n|", *line);
 	int c = 0;
 	while (setup->map[c])
-		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);	
+		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
+	square_map(setup);
+	c = 0;
+	dprintf(1, "width = |%d|\n", setup->game.width);
+	  dprintf(1, "height = |%d|\n", setup->game.height);
+	  dprintf(1, "north = |%s|\n", setup->north_texture_path);
+	  dprintf(1, "south = |%s|\n", setup->south_texture_path);
+	  dprintf(1, "west = |%s|\n", setup->west_texture_path);
+	  dprintf(1, "east = |%s|\n", setup->east_texture_path);
+	  dprintf(1, "f_color = |%x|\n", setup->game.f_color.color);
+	  dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.red);
+	  dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.green);
+	  dprintf(1, "f_color = |%d|\n", setup->game.f_color.chan.blue);
+	  dprintf(1, "c_color = |%x|\n", setup->game.c_color.color);
+	  dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.red);
+	  dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.green);
+	  dprintf(1, "c_color = |%d|\n", setup->game.c_color.chan.blue);
+	  dprintf(1, "map_ysize = |%d|\n", setup->map_ysize);
+	  dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);
+	while (setup->map[c])
+		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
 	check_map(setup);
 	c = 0;
 	dprintf(1, "player_dir = |%c|\n", setup->player_dir);
@@ -79,41 +82,46 @@ static void	start(int fd, char **line, t_setup *setup)
 	dprintf(1, "pos_y = |%f|\n", setup->game.pos_y);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
-	dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
-	dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
+	/*dprintf(1, "north_format = |%d|\n", setup->north_format);
+	  dprintf(1, "south_format = |%d|\n", setup->north_format);
+	  dprintf(1, "east_format = |%d|\n", setup->north_format);
+	  dprintf(1, "west_format = |%d|\n", setup->north_format);
+	  dprintf(1, "setup->game.texture[0].img = |%p|\n", setup->game.texture[0].img);
+	//dprintf(1, "setup->game.texture[0].addr = |%s|\n", setup->game.texture[0].addr);
+	//dprintf(1, "setup->game.texture[0].addr = |%d|\n", *setup->game.texture[0].addr);
 	dprintf(1, "setup->game.texture[0].bits_per_pixel = |%d|\n", setup->game.texture[0].bits_per_pixel);
 	dprintf(1, "setup->game.texture[0].line_length = |%d|\n", setup->game.texture[0].line_length);
 	dprintf(1, "setup->game.texture[0].endian = |%d|\n", setup->game.texture[0].endian);
 	dprintf(1, "setup->game.texture[0].width = |%d|\n", setup->game.texture[0].width);
 	dprintf(1, "setup->game.texture[0].height = |%d|\n", setup->game.texture[0].height);
 	dprintf(1, "setup->game.texture[1].img = |%p|\n", setup->game.texture[1].img);
-	dprintf(1, "setup->game.texture[1].addr = |%s|\n", setup->game.texture[1].addr);
+	//dprintf(1, "setup->game.texture[1].addr = |%s|\n", setup->game.texture[1].addr);
 	dprintf(1, "setup->game.texture[1].bits_per_pixel = |%d|\n", setup->game.texture[1].bits_per_pixel);
 	dprintf(1, "setup->game.texture[1].line_length = |%d|\n", setup->game.texture[1].line_length);
 	dprintf(1, "setup->game.texture[1].endian = |%d|\n", setup->game.texture[1].endian);
 	dprintf(1, "setup->game.texture[1].width = |%d|\n", setup->game.texture[1].width);
 	dprintf(1, "setup->game.texture[2].height = |%d|\n", setup->game.texture[2].height);
 	dprintf(1, "setup->game.texture[2].img = |%p|\n", setup->game.texture[2].img);
-	dprintf(1, "setup->game.texture[2].addr = |%s|\n", setup->game.texture[2].addr);
+	//dprintf(1, "setup->game.texture[2].addr = |%s|\n", setup->game.texture[2].addr);
 	dprintf(1, "setup->game.texture[2].bits_per_pixel = |%d|\n", setup->game.texture[2].bits_per_pixel);
 	dprintf(1, "setup->game.texture[2].line_length = |%d|\n", setup->game.texture[2].line_length);
 	dprintf(1, "setup->game.texture[2].endian = |%d|\n", setup->game.texture[2].endian);
 	dprintf(1, "setup->game.texture[2].width = |%d|\n", setup->game.texture[2].width);
 	dprintf(1, "setup->game.texture[2].height = |%d|\n", setup->game.texture[2].height);
 	dprintf(1, "setup->game.texture[3].img = |%p|\n", setup->game.texture[3].img);
-	dprintf(1, "setup->game.texture[3].addr = |%s|\n", setup->game.texture[3].addr);
+	//dprintf(1, "setup->game.texture[3].addr = |%s|\n", setup->game.texture[3].addr);
 	dprintf(1, "setup->game.texture[3].bits_per_pixel = |%d|\n", setup->game.texture[3].bits_per_pixel);
 	dprintf(1, "setup->game.texture[3].line_length = |%d|\n", setup->game.texture[3].line_length);
 	dprintf(1, "setup->game.texture[3].endian = |%d|\n", setup->game.texture[3].endian);
-	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);
-	dprintf(1, "setup->game.texture[3].height = |%d|\n", setup->game.texture[2].height);
+	dprintf(1, "setup->game.texture[3].width = |%d|\n", setup->game.texture[3].width);*/
+
 }
 
 int	main(int argc, char **argv)
 {
+	t_setup		*setup;
 	int			fd;
 	char		*line;
-	t_setup		*setup;
 
 	line = NULL;
 	setup = wrmalloc(sizeof(*setup));
@@ -122,10 +130,15 @@ int	main(int argc, char **argv)
 	ft_bzero(setup, sizeof(*setup));
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
+	/* check first is arg isn't a DIRECTORY */
+	fd = open(argv[1], O_DIRECTORY);
+	if (fd != -1)
+		abort_prog("Invalid .cub : yours is a directory.");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
 	start(fd, &line, setup);
+	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
 	graph_main(setup);
 	wrdestroy();
 	close(fd);

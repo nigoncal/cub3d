@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/05/28 11:07:10 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 11:10:20 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //	1 - check ce qu'il y a a la ligne d'avant dans **map
 //	    Il peut y avoir : - rien (parsing de la map pas encore commence)
 //	    				  - Une ligne de map
-//	2 - Sauvegarde l'information (map ou rien, dans un bool)
+//	2 - Sauvegarde l'setuprmation (map ou rien, dans un bool)
 //	3 - Deux comportements a partir de la :
 //		- Si la map a commence, si je rencontre autre chose que de la map,
 //		cela veut dire que la map est terminee
@@ -77,16 +77,15 @@ static void	continue_map(char *line, t_setup *setup)
 			if (is_map(line) == 0)
 				store_map(line, setup);
 			else
-				error = -1;
+				abort_prog("Forbidden character found in map. Allowed in map : \
+N/S/E/W, 0, 1");
 		}
 		else
 			setup->map_over = true;
 	}
 	else
 		if (non_empty_line(line) == 1)
-			error = -1;
-	if (error == -1)
-		abort_prog("Only empty lines are allowed after the end of the map");
+			abort_prog("Only empty lines are allowed after the end of the map");
 }
 
 static void	start_map(char *line, t_setup *setup)

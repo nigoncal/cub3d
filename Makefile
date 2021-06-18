@@ -30,7 +30,6 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/parsing_textures/south_texture.c\
 						srcs/parsing/parsing_textures/east_texture.c\
 						srcs/parsing/parsing_textures/west_texture.c\
-						srcs/parsing/parsing_textures/store_textures.c\
 						srcs/parsing/colors/floor.c\
 						srcs/parsing/colors/ceiling.c\
 						srcs/parsing/map/parse_map.c\
@@ -38,11 +37,13 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/map/square_map.c\
 						srcs/parsing/map/check_map.c\
 						srcs/graphic/temp.c\
-						srcs/graphic/engine/dda.c\
-						srcs/graphic/engine/raycast.c\
-						srcs/graphic/engine/raycast_utils.c
+						srcs/graphic/dda.c\
+						srcs/graphic/step.c\
+						srcs/graphic/draw_color.c\
+						srcs/graphic/key.c\
+						srcs/graphic/init_raycast.c
 
-OBJS				=	$(SRCS:.c=.o)
+OBJS				=	$(SRCS:%.c=%.o)
 
 H_CUB3D				=	srcs/cub3d.h
 
@@ -50,33 +51,33 @@ COMP				=	clang -Wall -Wextra -Werror -g3
 
 RM					=	rm -rf
 
-%.o			:	%.c $(H_CUB3D)
-				$(COMP) -I$(H_CUB3D) -c $< -o $@
+%.o					:	%.c $(H_CUB3D)
+						$(COMP) -I$(H_CUB3D) -c $< -o $@
 
-all			:	libs $(NAME) $(EXE)
+all					:	libs $(NAME) $(EXE)	
 
-libs		:	
-				$(MAKE) -C $(VLIBFT)
-				ln -sf $(VLIBFT)$(LIBFT) .
-				$(MAKE) -C $(VMLX)
-				ln -sf $(VMLX)$(MLXDL) .
+libs				:	
+						$(MAKE) -C $(VLIBFT)
+						ln -sf $(VLIBFT)$(LIBFT) .
+						$(MAKE) -C $(VMLX)
+						ln -sf $(VMLX)$(MLXDL) .
 
-$(NAME)		:	$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+$(NAME)				:	$(OBJS)
+						ar rcs $(NAME) $(OBJS)
 
-$(EXE)		:	$(OBJS) $(LIBS)
-				$(COMP) $(LIBS) -o $(EXE)
+$(EXE)				:	$(OBJS) $(LIBS)
+						$(COMP) $(LIBS) -o $(EXE)
 
-clean		:
-				$(RM) $(OBJS)
-				$(MAKE) clean -C $(VLIBFT)
-				$(MAKE) clean -C $(VMLX)
+clean				:
+						$(RM) $(OBJS)
+						$(MAKE) clean -C $(VLIBFT)
+						$(MAKE) clean -C $(VMLX)
 
-fclean		:	
-				$(RM) $(OBJS) $(LIBS) $(EXE)
-				$(MAKE) fclean -C $(VLIBFT)
-				$(MAKE) clean -C $(VMLX)
+fclean				:	
+						$(RM) $(OBJS) $(LIBS) $(EXE)
+						$(MAKE) fclean -C $(VLIBFT)
+						$(MAKE) clean -C $(VMLX)
 
-re			: 	fclean all
+re					: 	fclean all
 
 .PHONY: all libs clean fclean re libraries

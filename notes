@@ -1,13 +1,15 @@
-virer le mlx init du main, il est dans la partie graphique
+changer tous les t_setup et setup en t_setup et setup
 
-virer la gestion des .png si tu as le temps
+possibilite de stocker les path de texture directement dans la structure
+de textures (texture[0][1][2][3]) pour faire un code plus opti dans
+graph_textures.c
 
-tester avec les textures que Nicolas et Pauline utilisent
+virer les p_
 
-lis toute la page de la mlx, il faut que tu piges la mlx pour resoudre ton
-probleme sur setup->game.texture[0].addr = |'2|
+Tu es en train de debugger la ligne 86 de graph_textures.c. Pour cela tu es en 
+train de creer le tout en plus petit dans bazar_a_test/mlx
 
-attention aux free_char_p2p que tu dois remplacer par des wrfree ?
+attention aux free_char_p2p que tu dois remplacer par des free
 
 prevoir un dossier pour tous les fichiers de le partie image/graphique
 
