@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 11:40:47 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 12:19:43 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	main(int argc, char **argv)
 		abort_prog("While opening the .cub file");
 	start(fd, &line, setup);
 	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
-	graph_main(setup);
+	start_engine(setup);
 	wrdestroy();
 	close(fd);
 	return (0);

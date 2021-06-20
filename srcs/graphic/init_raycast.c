@@ -4,8 +4,8 @@
 	void	ray_dir(t_setup *setup)
 	{
 		setup->game.camera_x = 2 * setup->x / (double)setup->width - 1;
-		setup->game.raydir_x = setup->game.dir_x + setup->game.planeX * setup->game.camera_x;
-		setup->game.raydir_y = setup->game.dir_y + setup->game.planeY * setup->game.camera_x;
+		setup->game.raydir_x = setup->game.dir_x + setup->game.plane_x * setup->game.camera_x;
+		setup->game.raydir_y = setup->game.dir_y + setup->game.plane_y * setup->game.camera_x;
 	}
 
 	void	detect_case(t_setup *setup)

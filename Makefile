@@ -36,11 +36,13 @@ SRCS				=	srcs/main.c\
 						srcs/parsing/map/store_map.c\
 						srcs/parsing/map/square_map.c\
 						srcs/parsing/map/check_map.c\
-						srcs/graphic/temp.c\
+						srcs/graphic/start_engine.c\
 						srcs/graphic/dda.c\
 						srcs/graphic/step.c\
 						srcs/graphic/draw_color.c\
 						srcs/graphic/key.c\
+						srcs/graphic/texture.c\
+						srcs/graphic/key_draw.c\
 						srcs/graphic/init_raycast.c
 
 OBJS				=	$(SRCS:%.c=%.o)
