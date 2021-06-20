@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   south_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 09:52:57 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 09:58:01 by sylducam         ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2021/06/20 16:50:51 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../../includes/cub3d.h"
 

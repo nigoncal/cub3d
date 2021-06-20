@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 12:44:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/11 11:20:12 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 15:20:16 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,25 @@ void	flood_fill(char **map, int y, int x, t_setup *setup)
 static void	store_dir_xy(t_setup *setup)
 {
 	if (setup->player_dir == 'N')
-		setup->game.dir_y = 0.66;
+	{
+		setup->game.dir_y = -1;
+		setup->game.plane_x = 0.66;
+	}
 	if (setup->player_dir == 'S')
-		setup->game.dir_y = -0.66;
+	{
+		setup->game.dir_y = 1;
+		setup->game.plane_x = -0.66;
+	}
 	if (setup->player_dir == 'E')
-		setup->game.dir_x = 0.66;
+	{
+		setup->game.dir_x = 1;
+		setup->game.plane_y = 0.66;
+	}
 	if (setup->player_dir == 'W')
-		setup->game.dir_x = -0.66;
+	{
+		setup->game.dir_x = -1;
+		setup->game.plane_y = -0.66;
+	}
 }
 
 static void	store_player(int y, int x, t_setup *setup)

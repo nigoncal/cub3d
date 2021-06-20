@@ -25,9 +25,9 @@ static int	store_rgb(char **tab_rgb, t_setup *setup)
 			return (-1);
 		i++;
 	}
-	setup->game.f_color.chan.red = rgb[0];
+	setup->game.f_color.chan.red = rgb[2];
 	setup->game.f_color.chan.green = rgb[1];
-	setup->game.f_color.chan.blue = rgb[2];
+	setup->game.f_color.chan.blue = rgb[0];
 	return (0);
 }
 

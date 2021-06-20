@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 09:47:49 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 17:51:27 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 # define ERROR -1
 # define RAS 0
 
-#define X_EVENT_KEY_PRESS 2
-#define X_EVENT_KEY_EXIT 17
+
 
 # define ROTATE_LEFT		123
 # define ROTATE_RIGHT		124
-# define MOVE_A				2
-# define MOVE_D				0
+# define MOVE_A				0
+# define MOVE_D				2
 # define MOVE_W				13
 # define MOVE_S				1
+# define MAJ				12
 
 # define EXIT_ESC			53
 
@@ -49,7 +49,6 @@ typedef struct	s_img
 {
 	void	*img;
 	int		*data;
-
 	int		size_l;
 	int		bpp;
 	int		endian;
@@ -62,7 +61,6 @@ typedef union	u_color
 {
 	struct	s_chan
 	{
-		uint8_t	alpha;
 		uint8_t	red;
 		uint8_t	green;
 		uint8_t	blue;
@@ -70,16 +68,6 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-
-typedef struct	s_data {
-	void		*img;
-	char		*addr; // *data
-	int		line_length; //size_l
-	int		bits_per_pixel; // bpp
-	int		endian;
-	int		width;
-	int		height; // img_height
-}				t_data; // t_img
 
 typedef struct s_game
 {
@@ -89,8 +77,8 @@ typedef struct s_game
 	double		pos_y;
 	double		dir_x;
 	double		dir_y;
-	double		planeX; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double		planeY; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		plane_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		plane_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 
 	double		raydir_x; //calcul de direction x du rayon
 	double		raydir_y; //calcul de direction y du rayon
@@ -110,8 +98,8 @@ typedef struct s_game
 	int			lineheight; //hauteur de la ligne a dessiner
 	int			drawstart; //position de debut ou il faut dessiner
 	int			drawend; //position de fin ou il faut dessiner
-	double		movespeed;
-	double		rotspeed;
+	 double		movespeed;
+	 double		rotspeed;
 	int			width;
 	int			height;
 	int			texdir;
@@ -124,6 +112,17 @@ typedef struct s_game
 	int 		buf[720][1280];
 	void		*image;
 }				t_game;
+
+typedef struct	s_key {
+	int	forward;
+	int back;
+	int left;
+	int right;
+	int	rotate_left;
+	int	rotate_right;
+	int sprint;
+	int	count_key;
+}				t_key;
 
 typedef struct	s_setup
 {
@@ -152,11 +151,16 @@ typedef struct	s_setup
 	int		map_xsize;
 	int		map_ysize;
 	char	player_dir;
+	int		width;
+	int		height;
 	int		x;
 	int		y;
 	t_img	img;
 	t_game	game;
+	t_key	key;
 }				t_setup;
+
+/* PARSING */
 
 void			abort_prog(char *s);
 int				non_empty_line(char *line);
@@ -172,33 +176,42 @@ void			parse_map(char *line, t_setup *setup);
 void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);
 void			check_map(t_setup *setup);
-void			graph_textures(t_setup *setup);
-int				alloc_storage(t_setup *setup);
-void			tex_orientation(t_setup *setup);
-/*void			create_windows(t_setup *setup);
-  void			put_square( int lenght, t_screen *sc);
-  void			create_mini_map(t_screen *sc);
-  void			init(t_setup *setup);
-  void			put_pixel(t_screen *screen);
-  void			get_map();
-  void			verLine(t_setup *setup, int x, int y1, int y2, int color);
-  int				key_hook(int keycode);
-  int				main_loop(t_setup *setup);
-  int				key_press(int key, t_setup *setup);
-  void			add_line_map(char *line, t_setup *setup);
-  void			ft_map(char *line, t_setup *setup);
-  void			calc(t_setup *setup);
-  void			raycast_cal(t_setup *setup);
-  void			raycast_calc_dir(t_setup *setup);
-  void			raycast_calc_delta(t_setup *setup);
-  void			raycast_calc_pos(t_setup *setup);*/
+
+
+
 
 
 /* GRAPHIC */
 
-int				graph_main(t_setup *setup);
-void			draw(t_setup *setup);
-void			init_buf(t_setup *setup);
 void			dda(t_setup *setup);
+void 			fill_stripe(t_setup *setup);
+void 			height_wall(t_setup *setup);
+void			ray_dir(t_setup *setup);
+void			detect_case(t_setup *setup);
+void			ray_len(t_setup *setup);
+void			dda_algo(t_setup *setup);
+void 			fisheye(t_setup *setup);
+int		    	key_release(int key, t_setup *setup);
+int				key_press_mouvement(int key, t_setup *setup);
+void			key_draw_rotate(t_setup *setup);
+int				key_press(t_setup *setup);
+int				start_engine(t_setup *setup);
+void			init_buf(t_setup *setup);
+int				alloc_storage(t_setup *setup);
+void			tex_orientation(t_setup *setup);
+void			load_texture(t_setup *setup);
+void			graph_textures(t_setup *setup);
+void 			draw_texture(t_setup *setup);
+void 			draw_celling_floor(t_setup *setup);
+void			draw(t_setup *setup);
+void			draw_rotate_right(t_setup *setup);
+void			draw_rotate_left(t_setup *setup);
+void 			draw_forward_back(t_setup *setup);
+void			draw_left_right(t_setup *setup);
+void			calcul_raycast(t_setup *setup);
+void			calcul_texture(t_setup *setup);
+void 			calc_step_x(t_setup *setup);
+void 			calc_step_y(t_setup *setup);
+
 
 #endif

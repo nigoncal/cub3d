@@ -1,3 +1,17 @@
+ERASE       		=    \033[2K\r
+GREY        		=    \033[30m
+RED            		=    \033[31m
+GREEN        		=    \033[32m
+YELLOW        		=    \033[33m
+BLUE        		=    \033[34m
+PINK        		=    \033[35m
+CYAN        		=    \033[36m
+WHITE       		=    \033[37m
+BOLD       			=    \033[1m
+UNDER       		=    \033[4m
+SUR					=    \033[7m
+END					=    \033[0m
+
 NAME				=	libcub3d.a
 EXE					=	cub3d
 LIBFT				=	libft.a
@@ -7,71 +21,87 @@ LIBS				=	libft.a\
 						libmlx.dylib\
 						libcub3d.a
 
-VPATH				=	libft config textures srcs mlx parsing\
-						parsing_textures colors map graphic engine\
-						libraries $(VLIBFT) $(VSCRS) $(VMLX) $(VPARSING)\
-						$(VPARSING_TEXTURES) $(VCOLORS) $(VMAP)
-
-VLIBS				=	$(VLIBFT)libft.a\
-						$(VMLX)libmlx.dylib
-
 VLIBFT				=	libft/
 VMLX				=	srcs/mlx/
-VPARSING			=	srcs/parsing/
-VPARSING_TEXTURES	=	srcs/parsing/parsing_textures/
-VCOLORS				=	srcs/parsing/colors/
-VMAP				=	srcs/parsing/map/
 
-SRCS				=	srcs/parsing/error_manager.c\
-						srcs/parsing/parse_id.c\
-						srcs/parsing/parsing_textures/textures.c\
-						srcs/parsing/parsing_textures/north_texture.c\
-						srcs/parsing/parsing_textures/south_texture.c\
-						srcs/parsing/parsing_textures/east_texture.c\
-						srcs/parsing/parsing_textures/west_texture.c\
-						srcs/parsing/colors/floor.c\
-						srcs/parsing/colors/ceiling.c\
-						srcs/parsing/map/parse_map.c\
-						srcs/parsing/map/store_map.c\
-						srcs/parsing/map/square_map.c\
-						srcs/parsing/map/check_map.c\
-						srcs/graphic/temp.c
+SRCS_PATH			=	srcs
+SRCS_FILE			=	main.c										\
+						parsing/error_manager.c						\
+						parsing/parse_id.c							\
+						parsing/parsing_textures/textures.c			\
+						parsing/parsing_textures/north_texture.c	\
+						parsing/parsing_textures/south_texture.c	\
+						parsing/parsing_textures/east_texture.c		\
+						parsing/parsing_textures/west_texture.c		\
+						parsing/colors/floor.c						\
+						parsing/colors/ceiling.c					\
+						parsing/map/parse_map.c						\
+						parsing/map/store_map.c						\
+						parsing/map/square_map.c					\
+						parsing/map/check_map.c						\
+						graphic/start_engine.c						\
+						graphic/dda.c								\
+						graphic/step.c								\
+						graphic/draw_color.c						\
+						graphic/key.c								\
+						graphic/texture.c							\
+						graphic/key_draw.c							\
+						graphic/init_raycast.c
+SRCS				=	$(addprefix $(SRCS_PATH)/, $(SRCS_FILE))
 
-OBJS				=	$(SRCS:srcs/%.c=objs/%.o)
+DIR					=	parsing						\
+						parsing/parsing_textures	\
+						parsing/colors				\
+						parsing/map					\
+						graphic						
 
-H_CUB3D				=	includes/cub3d.h
+OBJ_PATH			=	.obj
+OBJS_FILES			=	$(SRCS_FILE:%.c=%.o)
+OBJS				=	$(addprefix $(OBJ_PATH)/, $(OBJS_FILES))
 
-COMP				=	clang -Wall -Wextra -Werror -g3 -Iincludes
+INC_PATH			=	includes
+INC					=	$(INC_PATH)/cub3d.h
+
+COMP				=	clang -Wall -Wextra -Werror
 
 RM					=	rm -rf
 
-objs/%.o			:	srcs/%.c $(H_CUB3D)
-						$(COMP) -c $< -o $@
+$(OBJ_PATH)/%.o		:	$(SRCS_PATH)/%.c $(INC)
+						@mkdir -p $(OBJ_PATH) $(addprefix $(OBJ_PATH)/, $(DIR))
+						@$(COMP) -I$(INC_PATH) -c $< -o $@
+						@printf "$(ERASE)$(YELLOW)$<$(END)"
 
 all					:	libs $(NAME) $(EXE)	
 
 libs				:	
-						$(MAKE) -C $(VLIBFT)
-						ln -sf $(VLIBFT)$(LIBFT) .
-						$(MAKE) -C $(VMLX)
-						ln -sf $(VMLX)$(MLXDL) .
+						@$(MAKE) -C $(VLIBFT)
+						@ln -sf $(VLIBFT)$(LIBFT) .
+						@$(MAKE) -C $(VMLX)
+						@ln -sf $(VMLX)$(MLXDL) .
 
 $(NAME)				:	$(OBJS)
-						ar rcs $(NAME) $(OBJS)
+						@ar rcs $(NAME) $(OBJS)
+						@printf "$(ERASE)$(GREEN)$(NAME)\t-->\tCREATE\n$(END)"
 
 $(EXE)				:	$(OBJS) $(LIBS)
-						$(COMP) $(LIBS) srcs/main.c -o $(EXE)
+						@$(COMP) $(LIBS) -o $(EXE) -I$(INC_PATH)
+						@printf "$(ERASE)$(GREEN)$(EXE)\t\t-->\tCREATE\n$(END)"
 
 clean				:
-						$(RM) $(OBJS)
-						$(MAKE) clean -C $(VLIBFT)
-						$(MAKE) clean -C $(VMLX)
+						@$(RM) $(OBJ_PATH)
+						@$(MAKE) clean -C $(VLIBFT)
+						@$(MAKE) clean -C $(VMLX)
 
-fclean				:	
-						$(RM) $(OBJS) $(LIBS) $(EXE)
-						$(MAKE) fclean -C $(VLIBFT)
-						$(MAKE) clean -C $(VMLX)
+fclean				:	clean
+						@$(RM) $(LIBS) $(EXE)
+						@$(MAKE) fclean -C $(VLIBFT)
+						@$(MAKE) clean -C $(VMLX)
 
 re					: 	fclean all
 
-.PHONY: all libs clean fclean re libraries
+norm				:	
+						@printf "$(RED)"
+						@(norminette $(SRCS) $(INC) | grep "Error") || printf "$(BOLD)$(GREEN)Norminette $(EXE)\t[OK]\n"
+						@printf "$(END)"
+
+.PHONY: all libs clean fclean re libraries norm

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   draw_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 16:51:15 by pmillet           #+#    #+#             */
-/*   Updated: 2021/06/20 16:50:43 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2021/06/18 11:58:14 by nigoncal          #+#    #+#             */
+/*   Updated: 2021/06/20 17:49:05 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "../../includes/cub3d.h"
 
-size_t	ft_strlen(const char *s)
+void	draw_celling_floor(t_setup *setup)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i])
+	while (i < setup->game.drawstart)
 	{
+		setup->game.buf[i][setup->x] = setup->game.c_color.color;
 		i++;
 	}
-	return (i);
+	i = setup->game.drawend;
+	while (i < setup->height)
+	{
+		setup->game.buf[i][setup->x] = setup->game.f_color.color;
+		i++;
+	}
 }
