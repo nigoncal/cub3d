@@ -6,7 +6,7 @@
 /*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:03:46 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 11:43:39 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/21 13:09:46 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,11 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split2(const char *s, char **sentence, char c)
 {
 	int		i;
 	int		j;
-	char	**sentence;
 
-	if (s == NULL)
-		return (NULL);
-	sentence = (char **)wrmalloc(sizeof(char *) * ((count_words(s, c) + 1)));
-	if (sentence == NULL)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (s[i])
@@ -88,5 +82,18 @@ char	**ft_split(char const *s, char c)
 		i++;
 	}
 	sentence[j] = NULL;
+	return (sentence);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**sentence;
+
+	if (s == NULL)
+		return (NULL);
+	sentence = (char **)wrmalloc(sizeof(char *) * ((count_words(s, c) + 1)));
+	if (sentence == NULL)
+		return (NULL);
+	sentence = ft_split2(s, sentence, c);
 	return (sentence);
 }
