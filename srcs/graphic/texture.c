@@ -20,7 +20,7 @@
 	setup->game.step = 1.0 * texHeight / setup->game.lineheight;
 	// Starting texture coordinate
 	setup->game.tex_pos = (setup->game.drawstart - setup->height / 2 + setup->game.lineheight / 2) * setup->game.step;
-	y = setup->game.drawstart;
+	y = setup->game.drawstart - 1;
 	while (y < setup->game.drawend)
 	{
 		y++;

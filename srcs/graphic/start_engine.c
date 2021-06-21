@@ -15,7 +15,7 @@ void draw(t_setup *setup)
 	y = 0;
 	while (y < setup->height)
 	{
-		while (x < setup->width)
+		while (x <= setup->width)
 		{
 			setup->img.data[y * setup->width + x] = setup->game.buf[y][x];
 			x++;
@@ -23,6 +23,7 @@ void draw(t_setup *setup)
 		x = 0;
 		y++;
 	}
+	//mlx_destroy_image(setup->mlx, setup->img.img);
 	mlx_put_image_to_window(setup->mlx, setup->win, setup->img.img, 0, 0);
 }
 

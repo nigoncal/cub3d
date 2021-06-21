@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:18:43 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/20 17:51:48 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 14:37:11 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int 	key_press_mouvement(int key, t_setup *setup)
 	if (key == ROTATE_RIGHT)
 		setup->key.rotate_right = 1;
 	if (key == EXIT_ESC)
+	{
+		wrdestroy();
 		exit(0);
+	}
     return(0);
 }
 
