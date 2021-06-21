@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:36:44 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 14:20:26 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 13:25:31 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ceiling(char *line, t_setup *setup)
 		abort_prog("C identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (setup->elements == NULL)
-		abort_prog("Failed to malloc setup->elements");	
+		abort_prog("Failed to malloc setup->elements");
 	if (right_content(setup) == -1)
 		abort_prog("Usage : C r,g,b (with 0 >= r/g/b <= 255)");
 	setup->b_ceiling = true;

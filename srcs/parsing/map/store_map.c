@@ -6,7 +6,7 @@
 /*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 12:54:59 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/21 13:28:33 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	tab_cpy(t_setup *setup, char **temp)
 {
-	int y;
+	int	y;
+
 	y = 0;
 	while (setup->map[y])
 	{

@@ -6,7 +6,7 @@
 /*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 11:18:48 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/05 14:20:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 13:24:43 by sylducam         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	parse_floor(char *line, t_setup *setup)
 		abort_prog("F identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (setup->elements == NULL)
-		abort_prog("Failed to malloc setup->elements");	
+		abort_prog("Failed to malloc setup->elements");
 	if (right_content(setup) == -1)
 		abort_prog("Usage : F r,g,b (with 0 >= r/g/b <= 255)");
 	setup->b_floor = true;
