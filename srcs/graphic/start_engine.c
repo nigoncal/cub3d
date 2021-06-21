@@ -68,8 +68,7 @@ int start_engine(t_setup *setup)
 	setup->width = 1280;
 	setup->height = 720;
 		if (!(setup->game.texture = (int **)wrmalloc(sizeof(int *) * 4)))
-       		 return (-1); // abort_prog
-			setup->game.texture[0] = NULL;
+       		 return (-1); // abort_progs
 					
 	alloc_storage(setup);
 	load_texture(setup);

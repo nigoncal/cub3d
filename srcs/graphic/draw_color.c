@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 11:58:14 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/20 17:49:05 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 09:11:02 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_celling_floor(t_setup *setup)
 		i++;
 	}
 	i = setup->game.drawend;
-	while (i < setup->height)
+	while (i < setup->height - 1)
 	{
 		setup->game.buf[i][setup->x] = setup->game.f_color.color;
 		i++;

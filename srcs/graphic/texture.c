@@ -59,7 +59,7 @@
 	    y = 0;
 	    x = 0;
 	    setup->img.img = mlx_xpm_file_to_image(setup->mlx, path, &setup->img.img_width, &setup->img.img_height);
-	    if (setup->img.img_width != 64 || setup->img.img_height != 64)
+	    if (setup->img.img_width != 64 || setup->img.img_height != 64 || setup->img.img == NULL)
 	    	abort_prog("Only non-empty, 64x64 .xpm textures are supported.");
 	    if(setup->game.texture[0] == NULL)
 	    	alloc_storage(setup);
