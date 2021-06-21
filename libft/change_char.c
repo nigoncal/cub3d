@@ -21,6 +21,8 @@ char	*change_char(char *str, char in, char out)
 	if (!str || !*str || !in || !out)
 		return (str);
 	changed_str = ft_strdup(str);
+	if (changed_str == NULL)
+		return (str);
 	while (changed_str[i])
 	{
 		if (changed_str[i] == out)

@@ -38,5 +38,7 @@ void	west_texture(char *line, t_setup *setup)
 	if (checking(setup) == -1)
 		abort_prog("Usage : WE ./path_without_spaces.xpm OR .png");
 	setup->west_texture_path = ft_strdup(setup->elements[1]);
+	if (setup->west_texture_path == NULL)
+		abort_prog("Failed to malloc setup->west_texture_path");
 	setup->west = true;
 }

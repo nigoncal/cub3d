@@ -38,5 +38,7 @@ void	east_texture(char *line, t_setup *setup)
 	if (checking(setup) == -1)
 		abort_prog("Usage : EA ./path_without_spaces.xpm OR .png");
 	setup->east_texture_path = ft_strdup(setup->elements[1]);
+	if (setup->east_texture_path == NULL)
+		abort_prog("Failed to malloc setup->east_texture_path");
 	setup->east = true;
 }

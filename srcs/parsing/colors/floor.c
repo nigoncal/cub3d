@@ -40,6 +40,8 @@ static int	right_content(t_setup *setup)
 		|| ft_strcmp(setup->elements[0], "F") != 0)
 		return (-1);
 	tab_rgb = ft_split(setup->elements[1], ',');
+	if (tab_rgb == NULL)
+		abort_prog("Failed to malloc tab_rgb");
 	if (count_lines(tab_rgb) != 3 || is_tab_digit(tab_rgb) == -1
 		|| store_rgb(tab_rgb, setup) == -1)
 		return (-1);
@@ -51,6 +53,8 @@ void	parse_floor(char *line, t_setup *setup)
 	if (setup->b_floor == true)
 		abort_prog("F identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
+	if (setup->elements == NULL)
+		abort_prog("Failed to malloc setup->elements");	
 	if (right_content(setup) == -1)
 		abort_prog("Usage : F r,g,b (with 0 >= r/g/b <= 255)");
 	setup->b_floor = true;

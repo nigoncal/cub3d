@@ -3,32 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/20 12:19:43 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 11:45:23 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	non_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (i == 2147483647)
-			abort_prog("One of the line in you .cub file is too long");
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\v')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	start(int fd, char **line, t_setup *setup)
+void	start_parsing(int fd, char **line, t_setup *setup)
 {
 	while (get_next_line(fd, line))
 	{
@@ -49,11 +33,17 @@ void	start(int fd, char **line, t_setup *setup)
 	parse_map(*line, setup);
 	if (!setup->map)
 		abort_prog("The map is missing in your .cub file");
+
 	dprintf(1, "line = |%s\n|", *line);
 	int c = 0;
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
+
+
 	square_map(setup);
+
+
+
 	c = 0;
 	dprintf(1, "width = |%d|\n", setup->game.width);
 	  dprintf(1, "height = |%d|\n", setup->game.height);
@@ -73,7 +63,13 @@ void	start(int fd, char **line, t_setup *setup)
 	  dprintf(1, "map_xsize = |%d|\n", setup->map_xsize);
 	while (setup->map[c])
 		dprintf(1, "setup->map[c] = |%s|\n", setup->map[c++]);
+
+
 	check_map(setup);
+
+
+
+
 	c = 0;
 	dprintf(1, "player_dir = |%c|\n", setup->player_dir);
 	dprintf(1, "dir_x = |%f|\n", setup->game.dir_x);
@@ -130,15 +126,13 @@ int	main(int argc, char **argv)
 	ft_bzero(setup, sizeof(*setup));
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
-	/* check first is arg isn't a DIRECTORY */
 	fd = open(argv[1], O_DIRECTORY);
 	if (fd != -1)
 		abort_prog("Invalid .cub : yours is a directory.");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
-	start(fd, &line, setup);
-	/* commenter la ligne suivante pour travailler tranquillement sur le parsing */
+	start_parsing(fd, &line, setup);
 	start_engine(setup);
 	wrdestroy();
 	close(fd);

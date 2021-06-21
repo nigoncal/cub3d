@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:24:08 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 09:11:28 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 12:54:59 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+static int	tab_cpy(t_setup *setup, char **temp)
+{
+	int y;
+	y = 0;
+	while (setup->map[y])
+	{
+		temp[y] = ft_strdup(setup->map[y]);
+		if (temp[y] == NULL)
+			abort_prog("Failed to malloc setup->map[y]");
+		y++;
+	}
+	return (y);
+}
 
 static void	add_map_line(char *line, t_setup *setup)
 {
@@ -30,12 +44,10 @@ static void	add_map_line(char *line, t_setup *setup)
 	temp = (char **)wrmalloc(sizeof(char *) * size + 1);
 	if (temp == NULL)
 		abort_prog("Failed to malloc setup->map");
-	while (setup->map[y])
-	{
-		temp[y] = ft_strdup(setup->map[y]);
-		y++;
-	}
+	y = tab_cpy(setup, temp);
 	temp[y] = ft_strdup(line);
+	if (temp[y] == NULL)
+		abort_prog("Failed to malloc setup->map[y]");
 	temp[y + 1] = 0;
 	free_char_p2p(setup->map);
 	setup->map = temp;
@@ -49,6 +61,8 @@ void	store_map(char *line, t_setup *setup)
 		if (setup->map == NULL)
 			abort_prog("Failed to malloc setup->map");
 		setup->map[0] = ft_strdup(line);
+		if (setup->map[0] == NULL)
+			abort_prog("Failed to malloc setup->map[0]");
 		setup->map[1] = 0;
 	}
 	else

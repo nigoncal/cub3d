@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   south_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2021/06/20 16:50:51 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2021/06/21 10:54:15 by pmillet           #+#    #+#             */
+/*   Updated: 2021/06/21 10:54:18 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../includes/cub3d.h"
 
@@ -39,5 +38,7 @@ void	south_texture(char *line, t_setup *setup)
 	if (checking(setup) == -1)
 		abort_prog("Usage : SO ./path_without_spaces.xpm OR .png");
 	setup->south_texture_path = ft_strdup(setup->elements[1]);
+	if (setup->south_texture_path == NULL)
+		abort_prog("Failed to malloc setup->south_texture_path");
 	setup->south = true;
 }

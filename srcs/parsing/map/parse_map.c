@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                            :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 13:06:01 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 11:10:20 by sylducam         ###   ########lyon.fr   */
+/*   Created: 2021/06/21 11:46:12 by pmillet           #+#    #+#             */
+/*   Updated: 2021/06/21 11:46:16 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@
 //		b) Je rencontre une ligne vide, je skip et je continue
 //		c) Je rencontre de la map, je commence a fill **map et je set le bool
 //		de map a true
+
+int	non_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (i == 2147483647)
+			abort_prog("One of the line in you .cub file is too long");
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\v')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 static int	is_map(char *line)
 {

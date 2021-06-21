@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:03:46 by sylducam          #+#    #+#             */
-/*   Updated: 2021/04/30 16:38:43 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 11:43:39 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	**ft_split(char const *s, char c)
 		if (s[i] != c)
 		{
 			sentence[j] = strdup_split(s + i, count_char(s + i, c));
+			if (sentence[j] == NULL)
+				return (NULL);
 			j++;
 			while (s[i] && s[i] != c)
 				i++;
