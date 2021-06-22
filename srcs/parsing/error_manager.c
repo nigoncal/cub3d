@@ -6,14 +6,11 @@
 /*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 08:46:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 14:36:34 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/22 11:16:10 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// penses a free elements aussi, dans le parsing des textures (free_char_p2p)
-// > free le juste avant d'appeler abort_prog
 
 void	map_error(void)
 {
