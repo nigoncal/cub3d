@@ -1,7 +1,7 @@
-NO ./srcs/config/textures/eagle.xpm
-SO ./srcs/config/textures/purplestone.xpm
-WE ./srcs/config/textures/mossy.xpm
-EA ./srcs/config/textures/redbrick.xpm
+NO ./srcs/config/textures/bricks.xpm
+SO ./srcs/config/textures/farmland_moist.xpm
+WE ./srcs/config/textures/grass_block_side.xpm
+EA ./srcs/config/textures/bricks.xpm
 
 F 220,100,0
 C 225,30,0

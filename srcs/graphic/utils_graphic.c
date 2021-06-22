@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 09:47:48 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/22 10:49:57 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 11:58:13 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ int	key_press(t_setup *setup)
 	return (0);
 }
 
-int	alloc_storage(t_setup *setup)
+void	alloc_storage(t_setup *setup)
 {
 	int		j;
 	int		i;
 
 	i = 0;
+	setup->game.texture = wrmalloc(sizeof(int *) * 4);
+	if (setup->game.texture == NULL)
+		abort_prog("erreur malloc");
 	while (i < 4)
 	{
 		setup->game.texture[i] = (int *)wrmalloc(sizeof(int) * (64 * 64));
@@ -45,7 +48,6 @@ int	alloc_storage(t_setup *setup)
 		}
 		i++;
 	}
-	return (1);
 }
 
 int	exit_skip(void)

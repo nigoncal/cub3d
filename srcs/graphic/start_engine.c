@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:24:26 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/22 10:41:22 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 13:26:42 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ int	start_engine(t_setup *setup)
 {
 	setup->mlx = mlx_init();
 	init_value(setup);
-	setup->game.texture = wrmalloc(sizeof(int *) * 4);
-	if (setup->game.texture == NULL)
-		abort_prog("erreur malloc");
 	alloc_storage(setup);
 	load_texture(setup);
-	setup->win = mlx_new_window(setup->mlx, setup->width, setup->height, "mlx");
+	setup->win = mlx_new_window(setup->mlx, setup->width, setup->height, \
+	"cub3d");
+	if (setup->win == NULL)
+		abort_prog("erreur init windows");
 	setup->img.img = mlx_new_image(setup->mlx, setup->width, setup->height);
+	if (setup->img.img == NULL)
+		abort_prog("erreur init img");
 	setup->img.data = (int *)mlx_get_data_addr(setup->img.img, &setup->img.bpp \
 	, &setup->img.size_l, &setup->img.endian);
+	if (setup->img.data == NULL)
+		abort_prog("erreur init data");
 	mlx_hook(setup->win, 2, 0, &key_press_mouvement, setup);
 	mlx_loop_hook(setup->mlx, &main_loop, setup);
 	mlx_hook(setup->win, 3, 0, &key_release, setup);

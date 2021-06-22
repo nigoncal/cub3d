@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:17:28 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 14:37:07 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/22 11:48:32 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ void	start_parsing(int fd, char **line, t_setup *setup)
 
 int	main(int argc, char **argv)
 {
-	t_setup		*setup;
+	t_setup		setup;
 	int			fd;
 	char		*line;
 
 	line = NULL;
-	setup = wrmalloc(sizeof(*setup));
-	if (setup == NULL)
-		abort_prog("Failed to malloc setup structure");
-	ft_bzero(setup, sizeof(*setup));
+	ft_bzero(&setup, sizeof(setup));
 	if (argc != 2 || (format_check(argv[1], ".cub")) == -1)
 		abort_prog("Launch the program as follows\n./cub3d file.cub");
 	fd = open(argv[1], O_DIRECTORY);
@@ -56,8 +53,8 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 2)
 		abort_prog("While opening the .cub file");
-	start_parsing(fd, &line, setup);
-	start_engine(setup);
+	start_parsing(fd, &line, &setup);
+	start_engine(&setup);
 	wrdestroy();
 	close(fd);
 	return (0);

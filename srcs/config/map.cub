@@ -1,7 +1,7 @@
-NO ./srcs/config/textures/eagle.xpm
-SO ./srcs/config/textures/purplestone.xpm
-WE ./srcs/config/textures/eagle.xpm
-EA ./srcs/config/textures/redbrick.xpm
+NO ./srcs/config/textures/bricks.xpm
+SO ./srcs/config/textures/bricks.xpm
+WE ./srcs/config/textures/grass_block_side.xpm
+EA ./srcs/config/textures/acacia_planks_n.xpm
 
 F 66,233,245
 C 203,66,245

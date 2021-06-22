@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/22 10:55:45 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 11:58:41 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void			key_draw_rotate(t_setup *setup);
 int				key_press(t_setup *setup);
 int				start_engine(t_setup *setup);
 void			init_buf(t_setup *setup);
-int				alloc_storage(t_setup *setup);
+void			alloc_storage(t_setup *setup);
 void			tex_orientation(t_setup *setup);
 void			load_texture(t_setup *setup);
 void			graph_textures(t_setup *setup);
