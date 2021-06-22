@@ -79,6 +79,7 @@ int start_engine(t_setup *setup)
 	mlx_hook(setup->win, 2, 0, &key_press_mouvement, setup);
 	mlx_loop_hook(setup->mlx, &main_loop, setup);
 	mlx_hook(setup->win, 3, 0, &key_release, setup);
+	mlx_hook(setup->win, 17, 1L << 17, &exit_skip, setup);
 	mlx_loop(setup->mlx);
 	return (0);
 }
@@ -147,4 +148,10 @@ void	calcul_texture(t_setup *setup)
 {
 		draw_texture(setup);
 		draw_celling_floor(setup);
+}
+
+int exit_skip()
+{
+	exit(0);
+	return(0);
 }

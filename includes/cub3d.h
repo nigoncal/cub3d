@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/21 14:51:40 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/22 08:58:25 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ void			calcul_raycast(t_setup *setup);
 void			calcul_texture(t_setup *setup);
 void 			calc_step_x(t_setup *setup);
 void 			calc_step_y(t_setup *setup);
+int				exit_skip();
+
 
 
 #endif
