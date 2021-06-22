@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   west_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:53:53 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 09:58:14 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 09:42:00 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	west_texture(char *line, t_setup *setup)
 		abort_prog("WE (west) identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (checking(setup) == -1)
-		abort_prog("Usage : WE ./path_without_spaces.xpm OR .png");
+		abort_prog("Usage : WE ./path_without_spaces.xpm");
 	setup->west_texture_path = ft_strdup(setup->elements[1]);
 	if (setup->west_texture_path == NULL)
 		abort_prog("Failed to malloc setup->west_texture_path");

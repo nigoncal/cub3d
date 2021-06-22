@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/22 08:58:25 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 10:55:45 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # define COLOR_MAX 255
 # define ERROR -1
 # define RAS 0
-
-
 
 # define ROTATE_LEFT		123
 # define ROTATE_RIGHT		124
@@ -27,9 +25,6 @@
 # define MAJ				12
 # define EXIT_ESC			53
 
-
-
-// check tous les includes et vires si pas besoin
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 # include <stdbool.h>
@@ -44,7 +39,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	int		*data;
@@ -55,8 +50,7 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
-
-typedef union	u_color
+typedef union u_color
 {
 	struct	s_chan
 	{
@@ -67,7 +61,6 @@ typedef union	u_color
 	uint32_t	color;
 }				t_col;
 
-
 typedef struct s_game
 {
 	t_col		f_color;
@@ -76,54 +69,54 @@ typedef struct s_game
 	double		pos_y;
 	double		dir_x;
 	double		dir_y;
-	double		plane_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double		plane_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		plane_x;
+	double		plane_y;
 
-	double		raydir_x; //calcul de direction x du rayon
-	double		raydir_y; //calcul de direction y du rayon
-	double		camera_x; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
+	double		raydir_x;
+	double		raydir_y;
+	double		camera_x;
 	double		wall_x;
-	int			map_x; // coordonée x du carré dans lequel est pos
-	int			map_y; // coordonnée y du carré dans lequel est pos
-	double		sidedist_x; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
-	double		sidedist_y; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-	double		deltadist_x; //distance que rayon parcours entre chaque point d'intersection vertical
-	double		deltadist_y; //distance que le rayon parcours entre chaque point d'intersection horizontal
-	int			step_x; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-	int			step_y; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-	int			hit; // 1 si un mur a ete touche, 0 sinon
+	int			map_x;
+	int			map_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
 	int			side;
-	double		perpwalldist; // distance du joueur au mur
-	int			lineheight; //hauteur de la ligne a dessiner
-	int			drawstart; //position de debut ou il faut dessiner
-	int			drawend; //position de fin ou il faut dessiner
-	 double		movespeed;
-	 double		rotspeed;
+	double		perpwalldist;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	double		movespeed;
+	double		rotspeed;
 	int			width;
 	int			height;
 	int			texdir;
 	int			**texture;
 	int			color;
-	int 		tex_y;
+	int			tex_y;
 	int			tex_x;
 	double		step;
 	double		tex_pos;
-	int 		buf[720][1280];
+	int			buf[720][1280];
 	void		*image;
 }				t_game;
 
-typedef struct	s_key {
+typedef struct s_key {
 	int	forward;
-	int back;
-	int left;
-	int right;
+	int	back;
+	int	left;
+	int	right;
 	int	rotate_left;
 	int	rotate_right;
-	int sprint;
+	int	sprint;
 	int	count_key;
 }				t_key;
 
-typedef struct	s_setup
+typedef struct s_setup
 {
 	void	*win;
 	void	*mlx;
@@ -176,21 +169,17 @@ void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);
 void			check_map(t_setup *setup);
 
-
-
-
-
 /* GRAPHIC */
 
 void			dda(t_setup *setup);
-void 			fill_stripe(t_setup *setup);
-void 			height_wall(t_setup *setup);
+void			fill_stripe(t_setup *setup);
+void			height_wall(t_setup *setup);
 void			ray_dir(t_setup *setup);
 void			detect_case(t_setup *setup);
 void			ray_len(t_setup *setup);
 void			dda_algo(t_setup *setup);
-void 			fisheye(t_setup *setup);
-int		    	key_release(int key, t_setup *setup);
+void			fisheye(t_setup *setup);
+int				key_release(int key, t_setup *setup);
 int				key_press_mouvement(int key, t_setup *setup);
 void			key_draw_rotate(t_setup *setup);
 int				key_press(t_setup *setup);
@@ -200,19 +189,19 @@ int				alloc_storage(t_setup *setup);
 void			tex_orientation(t_setup *setup);
 void			load_texture(t_setup *setup);
 void			graph_textures(t_setup *setup);
-void 			draw_texture(t_setup *setup);
-void 			draw_celling_floor(t_setup *setup);
+void			draw_texture(t_setup *setup);
+void			draw_celling_floor(t_setup *setup);
 void			draw(t_setup *setup);
 void			draw_rotate_right(t_setup *setup);
 void			draw_rotate_left(t_setup *setup);
-void 			draw_forward_back(t_setup *setup);
+void			draw_forward_back(t_setup *setup);
 void			draw_left_right(t_setup *setup);
 void			calcul_raycast(t_setup *setup);
 void			calcul_texture(t_setup *setup);
-void 			calc_step_x(t_setup *setup);
-void 			calc_step_y(t_setup *setup);
-int				exit_skip();
-
-
+void			calc_step_x(t_setup *setup);
+void			calc_step_y(t_setup *setup);
+int				exit_skip(void);
+void			init_value(t_setup *setup);
+void			draw_to_buff(t_setup *setup);
 
 #endif

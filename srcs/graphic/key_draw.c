@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 15:48:06 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/20 18:00:22 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 09:17:40 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	draw_rotate_left(t_setup *setup)
 {
-		double olddir_x;
-		double oldplane_x;
+	double	olddir_x;
+	double	oldplane_x;
 
 	if (setup->key.rotate_left == 1)
 	{
-
 		olddir_x = setup->game.dir_x;
 		setup->game.dir_x = setup->game.dir_x * cos(-setup->game.rotspeed) \
 		- setup->game.dir_y * sin(-setup->game.rotspeed);
@@ -35,12 +34,11 @@ void	draw_rotate_left(t_setup *setup)
 
 void	draw_rotate_right(t_setup *setup)
 {
-		double	olddir_x;
-		double	oldplane_x;
-		
+	double	olddir_x;
+	double	oldplane_x;
+
 	if (setup->key.rotate_right == 1)
 	{
-
 		olddir_x = setup->game.dir_x;
 		setup->game.dir_x = setup->game.dir_x * cos(setup->game.rotspeed) \
 		- setup->game.dir_y * sin(setup->game.rotspeed);
@@ -61,8 +59,8 @@ void	draw_forward_back(t_setup *setup)
 		if (setup->map[(int)(setup->game.pos_y)][(int)(setup->game.pos_x \
 					+ setup->game.dir_x * setup->game.movespeed)] == 'V')
 			setup->game.pos_x += setup->game.dir_x * setup->game.movespeed;
-		if (setup->map[(int)(setup->game.pos_y + setup->game.dir_y * setup->game.movespeed)] \
-				[(int)(setup->game.pos_x)] == 'V')
+		if (setup->map[(int)(setup->game.pos_y + setup->game.dir_y * \
+			setup->game.movespeed)][(int)(setup->game.pos_x)] == 'V')
 			setup->game.pos_y += setup->game.dir_y * setup->game.movespeed;
 	}
 	if (setup->key.back == 1)

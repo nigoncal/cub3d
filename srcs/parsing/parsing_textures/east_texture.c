@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   east_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylducam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:53:36 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/16 09:58:08 by sylducam         ###   ########lyon.fr   */
+/*   Updated: 2021/06/22 09:41:43 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	east_texture(char *line, t_setup *setup)
 		abort_prog("EA (east) identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (checking(setup) == -1)
-		abort_prog("Usage : EA ./path_without_spaces.xpm OR .png");
+		abort_prog("Usage : EA ./path_without_spaces.xpm");
 	setup->east_texture_path = ft_strdup(setup->elements[1]);
 	if (setup->east_texture_path == NULL)
 		abort_prog("Failed to malloc setup->east_texture_path");

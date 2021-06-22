@@ -36,7 +36,7 @@ void	north_texture(char *line, t_setup *setup)
 		abort_prog("NO (north) identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (checking(setup) == -1)
-		abort_prog("Usage : NO ./path_without_spaces.xpm OR .png");
+		abort_prog("Usage : NO ./path_without_spaces.xpm");
 	setup->north_texture_path = ft_strdup(setup->elements[1]);
 	if (setup->north_texture_path == NULL)
 		abort_prog("Failed to malloc setup->north_texture_path");

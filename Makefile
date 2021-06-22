@@ -46,7 +46,9 @@ SRCS_FILE			=	main.c										\
 						graphic/key.c								\
 						graphic/texture.c							\
 						graphic/key_draw.c							\
-						graphic/init_raycast.c
+						graphic/init_raycast.c						\
+						graphic/utils_graphic.c
+						
 SRCS				=	$(addprefix $(SRCS_PATH)/, $(SRCS_FILE))
 
 DIR					=	parsing						\

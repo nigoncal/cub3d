@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   south_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 10:54:15 by pmillet           #+#    #+#             */
-/*   Updated: 2021/06/21 10:54:18 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/22 09:41:57 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	south_texture(char *line, t_setup *setup)
 		abort_prog("SO (south) identifier is used more than once");
 	setup->elements = ft_split(line, ' ');
 	if (checking(setup) == -1)
-		abort_prog("Usage : SO ./path_without_spaces.xpm OR .png");
+		abort_prog("Usage : SO ./path_without_spaces.xpm");
 	setup->south_texture_path = ft_strdup(setup->elements[1]);
 	if (setup->south_texture_path == NULL)
 		abort_prog("Failed to malloc setup->south_texture_path");
