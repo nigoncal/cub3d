@@ -13,7 +13,7 @@ SUR					=    \033[7m
 END					=    \033[0m
 
 NAME				=	libcub3d.a
-EXE					=	cub3d
+EXE					=	cub3D
 LIBFT				=	libft.a
 MLXDL				=	libmlx.dylib
 
