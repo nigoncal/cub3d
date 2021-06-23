@@ -6,7 +6,7 @@
 /*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:46:12 by pmillet           #+#    #+#             */
-/*   Updated: 2021/06/23 08:33:52 by pmillet          ###   ########.fr       */
+/*   Updated: 2021/06/23 10:28:53 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,11 @@ N/S/E/W, 0, 1");
 		else
 			setup->map_over = true;
 	}
-	else
-		if (non_empty_line(line, fd) == 1)
-		{
-			close(fd);
-			abort_prog("Only empty lines are allowed after the end of the map");
-		}
+	else if (non_empty_line(line, fd) == 1)
+	{
+		close(fd);
+		abort_prog("Only empty lines are allowed after the end of the map");
+	}
 }
 
 static void	start_map(char *line, t_setup *setup, int fd)
