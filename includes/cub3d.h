@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 11:00:12 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/22 11:58:41 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2021/06/23 08:23:11 by pmillet           #+#    #+#             */
+/*   Updated: 2021/06/23 08:30:49 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_game
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-
 	double		raydir_x;
 	double		raydir_y;
 	double		camera_x;
@@ -105,7 +104,8 @@ typedef struct s_game
 	void		*image;
 }				t_game;
 
-typedef struct s_key {
+typedef struct s_key
+{
 	int	forward;
 	int	back;
 	int	left;
@@ -155,8 +155,8 @@ typedef struct s_setup
 /* PARSING */
 
 void			abort_prog(char *s);
-int				non_empty_line(char *line);
-void			parse_id(char *line, t_setup *setup);
+int				non_empty_line(char *line, int fd);
+void			parse_id(char *line, t_setup *setup, int fd);
 void			textures(char *line, t_setup *setup);
 void			north_texture(char *line, t_setup *setup);
 void			south_texture(char *line, t_setup *setup);
@@ -164,7 +164,7 @@ void			east_texture(char *line, t_setup *setup);
 void			west_texture(char *line, t_setup *setup);
 void			parse_floor(char *line, t_setup *setup);
 void			ceiling(char *line, t_setup *setup);
-void			parse_map(char *line, t_setup *setup);
+void			parse_map(char *line, t_setup *setup, int fd);
 void			store_map(char *line, t_setup *setup);
 void			square_map(t_setup *setup);
 void			check_map(t_setup *setup);

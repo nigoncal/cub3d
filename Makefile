@@ -22,7 +22,7 @@ LIBS				=	libft.a\
 						libcub3d.a
 
 VLIBFT				=	libft/
-VMLX				=	srcs/mlx/
+VMLX				=	mlx/
 
 SRCS_PATH			=	srcs
 SRCS_FILE			=	main.c										\

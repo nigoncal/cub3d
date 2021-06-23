@@ -23,10 +23,17 @@ static int	checking(t_setup *setup)
 		return (-1);
 	fd = open(setup->elements[1], O_DIRECTORY);
 	if (fd >= 0)
+	{
+		close(fd);
 		abort_prog("One of your textures is a directory, not a real .xpm");
+	}
 	fd = open(setup->elements[1], O_RDONLY);
 	if (fd < 0)
+	{
+		close(fd);
 		return (-1);
+	}
+	close(fd);
 	return (0);
 }
 

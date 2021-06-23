@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   west_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:53:53 by sylducam          #+#    #+#             */
-/*   Updated: 2021/06/22 09:42:00 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/06/23 08:43:40 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,17 @@ static int	checking(t_setup *setup)
 		return (-1);
 	fd = open(setup->elements[1], O_DIRECTORY);
 	if (fd >= 0)
+	{
+		close(fd);
 		abort_prog("One of your textures is a directory, not a real .xpm");
+	}
 	fd = open(setup->elements[1], O_RDONLY);
 	if (fd < 0)
+	{
+		close(fd);
 		return (-1);
+	}
+	close(fd);
 	return (0);
 }
 

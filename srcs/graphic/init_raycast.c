@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/20 15:33:47 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/20 15:34:25 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2021/06/23 08:12:23 by pmillet           #+#    #+#             */
+/*   Updated: 2021/06/23 08:12:26 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_graphic.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmillet <milletp.pro@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 09:47:48 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/06/22 11:58:13 by nigoncal         ###   ########lyon.fr   */
+/*   Created: 2021/06/23 08:14:00 by pmillet           #+#    #+#             */
+/*   Updated: 2021/06/23 08:14:03 by pmillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
